@@ -8,6 +8,7 @@ import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Resume from "./components/Resume";
 import Contact from "./components/Contact";
+import { toast, ToastContainer } from "react-toastify";
 
 export default function Portfolio() {
   const [darkMode, setDarkMode] = useState(false);
@@ -53,6 +54,7 @@ export default function Portfolio() {
           </section>
         </main>
       </AnimatePresence>
+      <ToastContainer />
     </div>
   );
 }

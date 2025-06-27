@@ -12,6 +12,7 @@ import {
   Linkedin,
   Twitter,
 } from "lucide-react";
+import { toast } from "react-toastify";
 
 export default function Contact() {
   const ref = useRef(null);
@@ -40,18 +41,14 @@ export default function Contact() {
       });
 
       if (response.ok) {
-        alert("Mensaje enviado con éxito. ¡Gracias por contactarme!");
+        toast.success("Message sent successfully!");
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
-        alert(
-          "Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo."
-        );
+        toast.error("Something went wrong. Please try again later.");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert(
-        "Hubo un error de conexión. Por favor, inténtalo de nuevo más tarde."
-      );
+      toast.error("Something went wrong. Please try again later.");
     }
   };
 
