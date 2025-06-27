@@ -23,14 +23,14 @@ export default function Projects() {
         "OpenStreetMap",
         "Socket.io",
       ],
-      githubUrl: "https://github.com/tu-usuario/ecommerce-platform",
+      githubUrl: "https://github.com/Jhojan-Jimenez/WheelUS-Front",
       liveUrl: "https://wheel-us-front.vercel.app/rides",
       date: "2024",
     },
     {
       title: "MortShop",
       description:
-        "Aplicación de gestión de tareas con funcionalidades de colaboración en tiempo real y notificaciones.",
+        "MortShop is a e-commerce platform, modern and high-performance, built with Next.js, Django, and PostgreSQL.",
       image: "/projects/MortShopProductsPage.png",
       technologies: [
         "NextJS",
@@ -39,18 +39,18 @@ export default function Projects() {
         "Django-REST",
         "PostgreSQL",
       ],
-      githubUrl: "https://github.com/tu-usuario/task-manager",
-      liveUrl: "https://tu-task-manager.vercel.app",
+      githubUrl: "https://github.com/Jhojan-Jimenez/Front-Shop",
+      liveUrl: "https://github.com/Jhojan-Jimenez/Front-Shop",
       date: "2024",
     },
     {
-      title: "Weather Dashboard",
+      title: "Vaccine recommender",
       description:
-        "Dashboard del clima con pronósticos detallados, mapas interactivos y alertas meteorológicas.",
-      image: "/placeholder.svg?height=300&width=400",
-      technologies: ["Vue.js", "Chart.js", "OpenWeather API", "TailwindCSS"],
-      githubUrl: "https://github.com/tu-usuario/weather-dashboard",
-      liveUrl: "https://tu-weather-app.vercel.app",
+        "This website, recommends vaccines for children and adults and indicates whether they are provided by the PAI.",
+      image: "/projects/VaccineRecommender.png",
+      technologies: ["NodeJS", "ReactJS", "TailwindCSS", "Python", "Firebase"],
+      githubUrl: "https://github.com/Jhojan-Jimenez",
+      liveUrl: "https://vax-topaz.vercel.app",
       date: "2023",
     },
   ];
@@ -189,7 +189,7 @@ export default function Projects() {
                     className="w-full h-48 object-cover"
                   />
                 </motion.div>
-                <motion.div
+                {/* <motion.div
                   className="absolute top-4 right-4 flex space-x-2"
                   initial={{ opacity: 0, scale: 0 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -198,7 +198,7 @@ export default function Projects() {
                   <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-full p-2">
                     <Calendar className="w-4 h-4 text-gray-600 dark:text-gray-400" />
                   </div>
-                </motion.div>
+                </motion.div> */}
               </div>
 
               <div className="p-6">

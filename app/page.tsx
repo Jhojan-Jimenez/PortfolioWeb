@@ -48,7 +48,7 @@ export default function Portfolio() {
           <section className="bg-gradient-to-b from-background to-secondaryBackground">
             <Resume />
           </section>
-          <section className="bg-gradient-to-b from-secondaryBackground to-background">
+          <section className="bg-gradient-to-b from-secondaryBackground to-background pb-20">
             <Contact />
           </section>
         </main>

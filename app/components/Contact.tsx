@@ -24,24 +24,25 @@ export default function Contact() {
     message: "",
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log("Sending form data:", formData);
-
     try {
-      const response = await fetch("/", {
+      const response = await fetch("https://formspree.io/f/xzzgyber", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString(),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
       });
 
       if (response.ok) {
-        console.log("Form submitted successfully!");
         alert("Mensaje enviado con éxito. ¡Gracias por contactarme!");
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
-        console.error("Form submission failed.");
         alert(
           "Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo."
         );
@@ -153,7 +154,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 px-4 pb-60">
+    <section id="contact" className="py-20 px-4">
       <div className="container mx-auto max-w-6xl" ref={ref}>
         <motion.div
           className="text-center mb-16"
@@ -278,10 +279,8 @@ export default function Contact() {
               className="space-y-6"
               name="contact"
               method="POST"
-              data-netlify="true"
             >
-              {/* ¡AÑADE ESTE CAMPO OCULTO JUSTO DESPUÉS DEL TAG <form>! */}
-              <input type="hidden" name="form-name" value="contact" />
+              <input type="text" name="_gotcha" style={{ display: "none" }} />
 
               <motion.div
                 variants={itemVariants}

@@ -81,7 +81,7 @@ export default function Skills() {
   const iconVariants = {
     hover: {
       scale: 1.2,
-      rotate: 360,
+      rotate: 180,
       transition: {
         type: "spring" as "spring",
         stiffness: 400,

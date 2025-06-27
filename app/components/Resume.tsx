@@ -62,11 +62,11 @@ export default function Resume() {
   const iconVariants = {
     hover: {
       scale: 1.2,
-      rotate: 360,
+      rotate: 0,
+      x: [0, -5, 5, -5, 5, 0],
       transition: {
-        type: "spring" as "spring",
-        stiffness: 400,
-        damping: 10,
+        duration: 0.6,
+        ease: "easeInOut",
       },
     },
   };
@@ -188,10 +188,10 @@ export default function Resume() {
                 variants={buttonVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all duration-300"
+                className="flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all duration-300  flex-1 "
               >
                 <Download className="w-5 h-5 mr-2" />
-                Descargar CV
+                Download
               </motion.button>
               <motion.button
                 onClick={() => handlePreview("cv")}
@@ -201,7 +201,7 @@ export default function Resume() {
                 className="flex items-center justify-center px-6 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white rounded-lg font-medium transition-all duration-300"
               >
                 <Eye className="w-5 h-5 mr-2" />
-                Vista Previa
+                Preview
               </motion.button>
             </motion.div>
           </motion.div>
@@ -274,10 +274,10 @@ export default function Resume() {
                 variants={buttonVariants}
                 whileHover="hover"
                 whileTap="tap"
-                className="flex items-center justify-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-all duration-300"
+                className="flex items-center justify-center px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-all duration-300 flex-1"
               >
                 <Download className="w-5 h-5 mr-2" />
-                Descargar Resume
+                Download
               </motion.button>
               <motion.button
                 onClick={() => handlePreview("resume")}
@@ -287,7 +287,7 @@ export default function Resume() {
                 className="flex items-center justify-center px-6 py-3 border-2 border-green-600 text-green-600 dark:text-green-400 hover:bg-green-600 hover:text-white rounded-lg font-medium transition-all duration-300"
               >
                 <Eye className="w-5 h-5 mr-2" />
-                Vista Previa
+                Preview
               </motion.button>
             </motion.div>
           </motion.div>
@@ -305,7 +305,7 @@ export default function Resume() {
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
             transition={{ delay: 1.1 }}
           >
-            ¿Necesitas una versión específica o tienes alguna pregunta?
+            Do you need a specific version or have any questions?
           </motion.p>
           <motion.button
             onClick={() => {
@@ -316,7 +316,7 @@ export default function Resume() {
             whileTap="tap"
             className="px-8 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-lg font-medium transition-colors duration-300"
           >
-            Contáctame
+            Contact Me
           </motion.button>
         </motion.div>
       </div>
