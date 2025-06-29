@@ -9,88 +9,152 @@ import {
   MapPin,
   Mail,
   Phone,
+  Eye,
 } from "lucide-react";
 
 const Experience = () => {
   const experience = [
     {
-      title: "Senior Full Stack Developer",
-      company: "TechCorp Solutions",
-      location: "Madrid, España",
-      period: "2022 - Presente",
-      description:
-        "Lidero el desarrollo de aplicaciones web escalables usando React, Next.js y Node.js. Gestiono un equipo de 4 desarrolladores y superviso la arquitectura de sistemas.",
+      title: "Backend Developer",
+      company: "GovLab",
+      location: "Remote",
+      period: "May 2025 – Present",
+      description: (
+        <>
+          Developed and maintained scalable RESTful APIs using &nbsp;
+          <strong className="text-foreground font-semibold">FastAPI</strong> and
+          &nbsp;
+          <strong className="text-foreground font-semibold">Pydantic</strong>.
+          Managed &nbsp;
+          <strong className="text-foreground font-semibold">MySQL</strong>&nbsp;
+          databases and migrations with &nbsp;
+          <strong className="text-foreground font-semibold">Alembic</strong>,
+          integrated messaging services, and implemented automated deployments
+          through &nbsp;
+          <strong className="text-foreground font-semibold">Railway</strong>.
+        </>
+      ),
       achievements: [
-        "Reduje el tiempo de carga de la aplicación principal en un 40%",
-        "Implementé arquitectura de microservicios que mejoró la escalabilidad",
-        "Mentoré a 3 desarrolladores junior hasta convertirse en mid-level",
+        <>
+          Developed endpoints with robust validation and documentation using
+          &nbsp;
+          <strong className="text-foreground font-semibold">FastAPI</strong>.
+        </>,
+        <>
+          Performed unit and end-to-end testing with &nbsp;
+          <strong className="text-foreground font-semibold">PyTest</strong>
+          &nbsp;and &nbsp;
+          <strong className="text-foreground font-semibold">Postman</strong>.
+        </>,
+        <>
+          Integrated &nbsp;
+          <strong className="text-foreground font-semibold">AWS S3</strong>
+          &nbsp; for secure file storage.
+        </>,
+        "Managed technical documentation to support development and maintenance.",
       ],
     },
     {
-      title: "Full Stack Developer",
-      company: "Digital Innovations",
-      location: "Barcelona, España",
-      period: "2020 - 2022",
-      description:
-        "Desarrollé aplicaciones web completas desde el frontend hasta el backend, trabajando principalmente con React, Python y PostgreSQL.",
+      title: "Web Developer & Information Manager",
+      company: "UCTS Innovation Center",
+      location: "On-site",
+      period: "January 2025 – June 2025",
+      description: (
+        <>
+          Developed a&nbsp;
+          <strong className="text-foreground font-semibold">
+            vaccine recommendation algorithm
+          </strong>
+          &nbsp; based on public data sources. Designed and updated the
+          institutional&nbsp;
+          <strong className="text-foreground font-semibold">website</strong>
+          &nbsp; to improve access to information. Collaborated continuously
+          with multidisciplinary teams to support project goals.
+        </>
+      ),
       achievements: [
-        "Desarrollé 5+ aplicaciones web desde cero",
-        "Integré sistemas de pago con Stripe y PayPal",
-        "Implementé tests automatizados que redujeron bugs en un 30%",
+        <>
+          Developed a&nbsp;
+          <strong className="text-foreground font-semibold">
+            vaccine recommendation algorithm
+          </strong>
+          &nbsp; integrating public datasets.
+        </>,
+        <>
+          Designed and updated the institutional&nbsp;
+          <strong className="text-foreground font-semibold">website</strong>
+          &nbsp; to enhance usability.
+        </>,
+        "Collaborated consistently with multidisciplinary teams to drive project success.",
       ],
     },
     {
-      title: "Frontend Developer",
-      company: "StartupHub",
-      location: "Valencia, España",
-      period: "2018 - 2020",
-      description:
-        "Especializado en desarrollo frontend con React y Vue.js, creando interfaces de usuario intuitivas y responsive.",
+      title: "Web Developer",
+      company: "TurboCupones",
+      location: "Remote",
+      period: "June 2024 – September 2024",
+      description: (
+        <>
+          Built secure RESTful APIs using &nbsp;
+          <strong className="text-foreground font-semibold">
+            Django REST Framework
+          </strong>
+          &nbsp; and implemented advanced authentication with &nbsp;
+          <strong className="text-foreground font-semibold">JWT</strong>.
+          Developed frontend features with &nbsp;
+          <strong className="text-foreground font-semibold">Next.js</strong> and
+          contributed to quality assurance through unit and functional testing.
+        </>
+      ),
       achievements: [
-        "Mejoré la experiencia de usuario resultando en 25% más conversiones",
-        "Desarrollé una librería de componentes reutilizables",
-        "Implementé PWA que aumentó la retención de usuarios",
+        <>
+          Created APIs with advanced filtering, pagination, and &nbsp;
+          <strong className="text-foreground font-semibold">
+            JWT authentication
+          </strong>
+          .
+        </>,
+        <>
+          Developed dynamic frontend interfaces with &nbsp;
+          <strong className="text-foreground font-semibold">Next.js</strong>.
+        </>,
+        <>
+          Performed unit and functional testing with &nbsp;
+          <strong className="text-foreground font-semibold">PyTest</strong>.
+        </>,
+        <>
+          Worked within agile workflows using &nbsp;
+          <strong className="text-foreground font-semibold">Scrum</strong>
+          &nbsp;and &nbsp;
+          <strong className="text-foreground font-semibold">Trello</strong>.
+        </>,
       ],
     },
   ];
 
   const education = [
     {
-      degree: "Máster en Desarrollo Web Full Stack",
-      institution: "Universidad Politécnica de Madrid",
-      location: "Madrid, España",
-      period: "2017 - 2018",
+      degree: "Bachelor's Degree in Computer Engineering (in progress)",
+      institution: "Universidad de La Sabana",
+      location: "Chía, Colombia",
+      period: "2022 - Present",
       description:
-        "Especialización en tecnologías web modernas, arquitectura de software y metodologías ágiles.",
-    },
-    {
-      degree: "Ingeniería Informática",
-      institution: "Universidad de Valencia",
-      location: "Valencia, España",
-      period: "2013 - 2017",
-      description:
-        "Grado en Ingeniería Informática con especialización en Ingeniería del Software.",
+        "Currently pursuing a degree in Computer Engineering with a focus on web development, software architecture, and data systems.",
     },
   ];
 
   const certifications = [
     {
-      name: "AWS Certified Solutions Architect",
+      name: "AWS Cloud Practitioner Essentials",
       issuer: "Amazon Web Services",
-      date: "2023",
-      link: "https://aws.amazon.com/certification/",
+      date: "2025",
+      link: "https://aws.amazon.com/training/",
     },
     {
-      name: "Google Cloud Professional Developer",
-      issuer: "Google Cloud",
-      date: "2022",
-      link: "https://cloud.google.com/certification/",
-    },
-    {
-      name: "React Advanced Patterns",
-      issuer: "Meta",
-      date: "2021",
-      link: "https://developers.facebook.com/academy/",
+      name: "Python for Everybody",
+      issuer: "Coursera - University of Michigan",
+      date: "2024",
+      link: "https://www.coursera.org/specializations/python",
     },
   ];
 
@@ -114,6 +178,44 @@ const Experience = () => {
       },
     },
   };
+  const buttonVariants = {
+    hover: {
+      scale: 1.05,
+      transition: {
+        type: "spring" as "spring",
+        stiffness: 400,
+        damping: 10,
+      },
+    },
+    tap: {
+      scale: 0.95,
+    },
+  };
+
+  const handleDownload = (type: "cv" | "resume") => {
+    const fileName =
+      type === "cv"
+        ? "resume/Jhojan_Jimenez_CV.pdf"
+        : "resume/Jhojan_Jimenez_Resume.docx";
+    const fileUrl = `/${fileName}`;
+
+    const link = document.createElement("a");
+    link.href = fileUrl;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handlePreview = (type: "cv" | "resume") => {
+    const fileName =
+      type === "cv"
+        ? "resume/Jhojan_Jimenez_CV.pdf"
+        : "resume/Jhojan_Jimenez_Resume.pdf";
+    const fileUrl = `/${fileName}`;
+
+    window.open(fileUrl, "_blank");
+  };
 
   return (
     <section id="resume" className="py-20">
@@ -126,31 +228,64 @@ const Experience = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-            Mi Trayectoria Profesional
+            My Professional Background
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Descarga mi CV completo o explora mi experiencia profesional y
-            formación académica
+            Download my complete CV / Resume or explore my professional
+            experience and academic background.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="/cv-juan-perez-es.pdf"
-              download
-              className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all duration-300 hover:scale-105"
-            >
-              <Download size={20} className="mr-2" />
-              Descargar CV (ES)
-            </a>
+            <div className="flex items-stretch justify-center mt-6 border-2 border-blue-600 rounded-lg overflow-hidden">
+              {/* Botón de Descargar CV (relleno + texto) */}
+              <motion.button
+                onClick={() => handleDownload("cv")}
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                className="flex items-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium transition-all duration-300"
+              >
+                <Download className="w-5 h-5" />
+                Download CV (ES)
+              </motion.button>
 
-            <a
-              href="/resume-juan-perez-en.pdf"
-              download
-              className="inline-flex items-center px-6 py-3 border border-border rounded-lg font-medium hover:bg-accent transition-all duration-300 hover:scale-105"
-            >
-              <FileText size={20} className="mr-2" />
-              Download Resume (EN)
-            </a>
+              {/* Botón de Previsualizar CV (solo icono) */}
+              <motion.button
+                onClick={() => handlePreview("cv")}
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                aria-label="Preview CV"
+                className="flex items-center justify-center px-4 py-3 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white transition-all duration-300 border-l-2 border-blue-600"
+              >
+                <Eye className="w-5 h-5 mr-2" /> Preview
+              </motion.button>
+            </div>
+            <div className="flex items-stretch justify-center mt-6 border-2 border-green-600 rounded-lg overflow-hidden">
+              {/* Botón de Descargar CV (relleno + texto) */}
+              <motion.button
+                onClick={() => handleDownload("resume")}
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                className="flex items-center gap-2 px-5 py-3 bg-green-600 hover:bg-green-700 text-white font-medium transition-all duration-300"
+              >
+                <Download className="w-5 h-5" />
+                Download Resume (EN)
+              </motion.button>
+
+              {/* Botón de Previsualizar CV (solo icono) */}
+              <motion.button
+                onClick={() => handlePreview("resume")}
+                variants={buttonVariants}
+                whileHover="hover"
+                whileTap="tap"
+                aria-label="Preview CV"
+                className="flex items-center justify-center px-4 py-3 border-green-600 text-green-600 dark:text-green-400 hover:bg-green-600 transition-all duration-300 border-l-2 "
+              >
+                <Eye className="w-5 h-5 mr-2" /> Preview
+              </motion.button>
+            </div>
           </div>
         </motion.div>
 
@@ -165,7 +300,7 @@ const Experience = () => {
             >
               <h3 className="text-2xl font-semibold text-foreground mb-8 flex items-center">
                 <Calendar size={24} className="mr-2 text-primary" />
-                Experiencia Profesional
+                Professional Experience
               </h3>
 
               <div className="space-y-8">
@@ -201,7 +336,7 @@ const Experience = () => {
 
                     <div className="space-y-2">
                       <h5 className="font-medium text-foreground">
-                        Logros principales:
+                        Key Achievements
                       </h5>
                       <ul className="space-y-1">
                         {job.achievements.map((achievement, achIndex) => (
@@ -209,7 +344,7 @@ const Experience = () => {
                             key={achIndex}
                             className="text-muted-foreground text-sm flex items-start"
                           >
-                            <span className="text-primary mr-2 mt-1">•</span>
+                            <span className="text-primary mr-2 ">•</span>
                             {achievement}
                           </li>
                         ))}
@@ -232,7 +367,7 @@ const Experience = () => {
             >
               <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center">
                 <FileText size={24} className="mr-2 text-primary" />
-                Formación
+                Education
               </h3>
 
               <div className="space-y-6">
@@ -261,7 +396,7 @@ const Experience = () => {
             </motion.div>
 
             {/* Certifications */}
-            <motion.div
+            {/* <motion.div
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
@@ -269,7 +404,7 @@ const Experience = () => {
             >
               <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center">
                 <ExternalLink size={24} className="mr-2 text-primary" />
-                Certificaciones
+                Certifications
               </h3>
 
               <div className="space-y-4">
@@ -304,34 +439,7 @@ const Experience = () => {
                   </motion.div>
                 ))}
               </div>
-            </motion.div>
-
-            {/* Contact Info Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="bg-gradient-to-br from-primary/10 to-purple-500/10 rounded-lg p-6 border border-border"
-            >
-              <h3 className="text-lg font-semibold text-foreground mb-4">
-                Información de Contacto
-              </h3>
-              <div className="space-y-3">
-                <div className="flex items-center text-muted-foreground">
-                  <Mail size={16} className="mr-3 text-primary" />
-                  <span className="text-sm">juan@example.com</span>
-                </div>
-                <div className="flex items-center text-muted-foreground">
-                  <Phone size={16} className="mr-3 text-primary" />
-                  <span className="text-sm">+34 600 123 456</span>
-                </div>
-                <div className="flex items-center text-muted-foreground">
-                  <MapPin size={16} className="mr-3 text-primary" />
-                  <span className="text-sm">Madrid, España</span>
-                </div>
-              </div>
-            </motion.div>
+            </motion.div> */}
           </div>
         </div>
       </div>

@@ -24,7 +24,7 @@ export default function Projects() {
         "Socket.io",
       ],
       githubUrl: "https://github.com/Jhojan-Jimenez/WheelUS-Front",
-      liveUrl: "https://wheel-us-front.vercel.app/rides",
+      liveUrl: "https://wheelus.jhojan.cloud",
       date: "2024",
     },
     {
@@ -40,7 +40,7 @@ export default function Projects() {
         "PostgreSQL",
       ],
       githubUrl: "https://github.com/Jhojan-Jimenez/Front-Shop",
-      liveUrl: "https://github.com/Jhojan-Jimenez/Front-Shop",
+      liveUrl: "https://mortshop.jhojan.cloud",
       date: "2024",
     },
     {
@@ -50,7 +50,7 @@ export default function Projects() {
       image: "/projects/VaccineRecommender.png",
       technologies: ["NodeJS", "ReactJS", "TailwindCSS", "Python", "Firebase"],
       githubUrl: "https://github.com/Jhojan-Jimenez",
-      liveUrl: "https://vax-topaz.vercel.app",
+      liveUrl: "https://vatly.jhojan.cloud",
       date: "2023",
     },
   ];

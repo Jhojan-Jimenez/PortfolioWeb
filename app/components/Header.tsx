@@ -51,10 +51,10 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
         <div className="flex items-center justify-between">
           <div
             className="
-  text-2xl font-extrabold tracking-tight 
-  bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
-  bg-clip-text text-transparent
-"
+              text-2xl font-extrabold tracking-tight 
+              bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
+              bg-clip-text text-transparent
+            "
           >
             Portfolio
           </div>

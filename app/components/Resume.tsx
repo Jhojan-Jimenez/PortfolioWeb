@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, easeInOut } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Download, FileText, Eye } from "lucide-react";
 import { utilScrollToSection } from "@/lib/utils";
@@ -70,7 +70,7 @@ export default function Resume() {
       x: [0, -5, 5, -5, 5, 0],
       transition: {
         duration: 0.6,
-        ease: easeInOut,
+        ease: "easeInOut" as "easeInOut",
       },
     },
   };
