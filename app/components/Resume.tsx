@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, easeInOut } from "framer-motion";
 import { useRef } from "react";
 import { Download, FileText, Eye } from "lucide-react";
 import { utilScrollToSection } from "@/lib/utils";
@@ -11,7 +11,9 @@ export default function Resume() {
 
   const handleDownload = (type: "cv" | "resume") => {
     const fileName =
-      type === "cv" ? "resume/Jhojan_Jimenez_CV.pdf" : "Resume_Tu_Nombre.pdf";
+      type === "cv"
+        ? "resume/Jhojan_Jimenez_CV.pdf"
+        : "resume/Jhojan_Jimenez_Resume.docx";
     const fileUrl = `/${fileName}`;
 
     const link = document.createElement("a");
@@ -24,7 +26,9 @@ export default function Resume() {
 
   const handlePreview = (type: "cv" | "resume") => {
     const fileName =
-      type === "cv" ? "resume/Jhojan_Jimenez_CV.pdf" : "Resume_Tu_Nombre.pdf";
+      type === "cv"
+        ? "resume/Jhojan_Jimenez_CV.pdf"
+        : "resume/Jhojan_Jimenez_Resume.pdf";
     const fileUrl = `/${fileName}`;
 
     window.open(fileUrl, "_blank");
@@ -66,7 +70,7 @@ export default function Resume() {
       x: [0, -5, 5, -5, 5, 0],
       transition: {
         duration: 0.6,
-        ease: "easeInOut",
+        ease: easeInOut,
       },
     },
   };

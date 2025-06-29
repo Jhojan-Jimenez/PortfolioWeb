@@ -9,9 +9,10 @@ import Projects from "./components/Projects";
 import Resume from "./components/Resume";
 import Contact from "./components/Contact";
 import { toast, ToastContainer } from "react-toastify";
+import Experience from "./components/Experience";
 
 export default function Portfolio() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     const isDark = localStorage.getItem("darkMode") === "true";
@@ -49,6 +50,7 @@ export default function Portfolio() {
           <section className="bg-gradient-to-b from-background to-secondaryBackground">
             <Resume />
           </section>
+          {/* <Experience /> */}
           <section className="bg-gradient-to-b from-secondaryBackground to-background pb-20">
             <Contact />
           </section>

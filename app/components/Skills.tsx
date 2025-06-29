@@ -62,7 +62,7 @@ export default function Skills() {
 
   const cardVariants = {
     hidden: {
-      y: 60,
+      y: -60,
       opacity: 0,
       scale: 0.8,
     },

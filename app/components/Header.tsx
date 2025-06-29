@@ -49,7 +49,13 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
     <header className="fixed top-0 left-0 right-0 z-50 bg-trasparent backdrop-blur-md border-b border-gray-200 dark:border-gray-700 transition-all duration-300">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <div className="text-2xl font-bold text-gray-900 dark:text-white">
+          <div
+            className="
+  text-2xl font-extrabold tracking-tight 
+  bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 
+  bg-clip-text text-transparent
+"
+          >
             Portfolio
           </div>
 
@@ -61,11 +67,11 @@ export default function Header({ darkMode, toggleDarkMode }: HeaderProps) {
                 onClick={() => scrollToSection(item.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`text-sm font-medium transition-colors duration-200 hover:text-blue-600 dark:hover:text-blue-400 ${
+                className={`text-md font-medium transition-colors duration-200 hover:text-blue-600 dark:hover:text-blue-400 ${
                   activeSection === item.id
                     ? "text-blue-600 dark:text-blue-400"
                     : "text-gray-700 dark:text-gray-300"
-                }`}
+                }  `}
               >
                 {item.label}
               </motion.button>
