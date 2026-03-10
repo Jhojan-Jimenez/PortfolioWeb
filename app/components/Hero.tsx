@@ -145,7 +145,7 @@ export default function Hero() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 0.5 }}
               >
-                Full Stack Developer
+                Software Engineer | Backend & FullStack
               </motion.span>
             </motion.h2>
           </motion.div>
@@ -160,10 +160,11 @@ export default function Hero() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2, duration: 0.8 }}
             >
-              I'm a passionate web developer focused on building innovative
-              digital experiences. I specialize in technologies like React,
-              Node.js, and Django, and I'm always exploring new areas like AI
-              and machine learning.
+              Backend & FullStack developer with 1+ year of production
+              experience. Specialized in REST APIs, AI architectures, and
+              process automation — delivering real solutions in proptech,
+              government tech, and public health. 1st place at Sabana Hack
+              2025.
             </motion.p>
           </motion.div>
 

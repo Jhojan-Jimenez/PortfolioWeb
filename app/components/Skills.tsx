@@ -6,9 +6,8 @@ import {
   Code,
   Database,
   Globe,
-  Smartphone,
   Server,
-  Palette,
+  Brain,
 } from "lucide-react";
 
 export default function Skills() {
@@ -26,26 +25,33 @@ export default function Skills() {
       title: "Backend",
       icon: Server,
       skills: [
-        "Node.js",
-        "Express",
         "Python",
+        "FastAPI",
         "Django",
+        "Node.js",
+        "TypeScript",
+        "Express",
         "REST APIs",
-        "GraphQL",
       ],
       color: "from-green-500 to-emerald-500",
     },
     {
       title: "Databases",
       icon: Database,
-      skills: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Firebase"],
+      skills: ["MySQL", "PostgreSQL", "Firebase", "MongoDB", "Vector Storage"],
       color: "from-purple-500 to-pink-500",
     },
     {
       title: "DevOps",
       icon: Code,
-      skills: ["Docker", "AWS", "Vercel", "Git", "GitHub Actions"],
-      color: "from-gray-500 to-slate-500",
+      skills: ["Docker", "CI/CD", "AWS S3", "Railway", "GitHub Actions", "Git"],
+      color: "from-orange-500 to-amber-500",
+    },
+    {
+      title: "AI & Automation",
+      icon: Brain,
+      skills: ["OpenAI API", "RAG", "n8n", "Embeddings", "Twilio", "SendGrid"],
+      color: "from-violet-500 to-purple-500",
     },
   ];
 
@@ -142,7 +148,7 @@ export default function Skills() {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4"
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}

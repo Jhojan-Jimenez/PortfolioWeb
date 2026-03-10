@@ -4,54 +4,111 @@ import { motion } from "framer-motion";
 import {
   Download,
   FileText,
-  ExternalLink,
   Calendar,
   MapPin,
-  Mail,
-  Phone,
   Eye,
 } from "lucide-react";
 
 const Experience = () => {
+  const highlights = [
+    {
+      icon: "🏆",
+      title: "1st place · Sabana Hack 2025",
+      description:
+        "Real-time alert system with AI for Cruz Roja Colombiana — built in 24 hours at Universidad de La Sabana.",
+      borderColor: "border-amber-400/60",
+      hoverShadow: "hover:shadow-amber-500/20",
+      bgGlow: "bg-amber-500/5",
+    },
+    {
+      icon: "⚙️",
+      title: "Live automations in production",
+      description:
+        "Pipelines with n8n + WhatsApp Business, autonomous deployment with Docker & CI/CD.",
+      borderColor: "border-teal-400/60",
+      hoverShadow: "hover:shadow-teal-500/20",
+      bgGlow: "bg-teal-500/5",
+    },
+  ];
+
   const experience = [
     {
-      title: "Backend Developer",
-      company: "GovLab",
+      title: "FullStack Developer",
+      company: "Blurealty",
       location: "Remote",
-      period: "May 2025 – Present",
+      period: "July 2025 – Present",
       description: (
         <>
-          Developed and maintained scalable RESTful APIs using &nbsp;
-          <strong className="text-foreground font-semibold">FastAPI</strong> and
-          &nbsp;
-          <strong className="text-foreground font-semibold">Pydantic</strong>.
-          Managed &nbsp;
-          <strong className="text-foreground font-semibold">MySQL</strong>&nbsp;
-          databases and migrations with &nbsp;
-          <strong className="text-foreground font-semibold">Alembic</strong>,
-          integrated messaging services, and implemented automated deployments
-          through &nbsp;
-          <strong className="text-foreground font-semibold">Railway</strong>.
+          Developed full-stack features using{" "}
+          <strong className="text-foreground font-semibold">React</strong>,{" "}
+          <strong className="text-foreground font-semibold">Express</strong>,
+          and{" "}
+          <strong className="text-foreground font-semibold">Firebase</strong>.
+          Designed a multi-role AI agent and led frontend performance and
+          accessibility improvements.
         </>
       ),
       achievements: [
         <>
-          Developed endpoints with robust validation and documentation using
-          &nbsp;
-          <strong className="text-foreground font-semibold">FastAPI</strong>.
+          Designed multi-role AI agent (Q&A, Knowledge Base, automated
+          interviews) using{" "}
+          <strong className="text-foreground font-semibold">OpenAI</strong>,{" "}
+          <strong className="text-foreground font-semibold">RAG</strong>, and
+          Vector Storage for semantic document retrieval.
         </>,
         <>
-          Performed unit and end-to-end testing with &nbsp;
-          <strong className="text-foreground font-semibold">PyTest</strong>
-          &nbsp;and &nbsp;
-          <strong className="text-foreground font-semibold">Postman</strong>.
+          Improved web accessibility from{" "}
+          <strong className="text-foreground font-semibold">
+            3.4 → 9.2 (Wave)
+          </strong>{" "}
+          across multiple pages implementing ADA standards.
         </>,
         <>
-          Integrated &nbsp;
-          <strong className="text-foreground font-semibold">AWS S3</strong>
-          &nbsp; for secure file storage.
+          Migrated backend to{" "}
+          <strong className="text-foreground font-semibold">TypeScript</strong>,
+          reducing runtime errors and improving codebase maintainability.
         </>,
-        "Managed technical documentation to support development and maintenance.",
+        "Integrated external APIs to automate critical business flows, reducing manual intervention.",
+        "Implemented event tracking and A/B experiments for data-driven product decisions.",
+      ],
+    },
+    {
+      title: "Backend Developer",
+      company: "GovLab",
+      location: "Remote",
+      period: "February 2025 – July 2025",
+      description: (
+        <>
+          Built RESTful APIs with{" "}
+          <strong className="text-foreground font-semibold">FastAPI</strong> and{" "}
+          <strong className="text-foreground font-semibold">Pydantic</strong>.
+          Developed information systems for agricultural and educational clients,
+          integrating cloud storage and messaging services.
+        </>
+      ),
+      achievements: [
+        <>
+          Developed information system for{" "}
+          <strong className="text-foreground font-semibold">Corpohass</strong>,
+          centralizing avocado production, harvesting, and planting metrics for
+          operational decision-making.
+        </>,
+        "Built multi-institutional educational forms platform with comparative data analysis.",
+        <>
+          REST APIs with{" "}
+          <strong className="text-foreground font-semibold">
+            FastAPI + Pydantic
+          </strong>
+          , Alembic migrations,{" "}
+          <strong className="text-foreground font-semibold">AWS S3</strong>{" "}
+          storage, and Railway deployment.
+        </>,
+        <>
+          Integrated{" "}
+          <strong className="text-foreground font-semibold">Twilio</strong> and{" "}
+          <strong className="text-foreground font-semibold">SendGrid</strong>{" "}
+          for business communications automation.
+        </>,
       ],
     },
     {
@@ -61,72 +118,60 @@ const Experience = () => {
       period: "January 2025 – June 2025",
       description: (
         <>
-          Developed a&nbsp;
+          Developed a{" "}
           <strong className="text-foreground font-semibold">
-            vaccine recommendation algorithm
-          </strong>
-          &nbsp; based on public data sources. Designed and updated the
-          institutional&nbsp;
-          <strong className="text-foreground font-semibold">website</strong>
-          &nbsp; to improve access to information. Collaborated continuously
-          with multidisciplinary teams to support project goals.
+            vaccine recommendation engine
+          </strong>{" "}
+          in Node.js. Redesigned the institutional website and coordinated with
+          health and technology teams.
         </>
       ),
       achievements: [
         <>
-          Developed a&nbsp;
-          <strong className="text-foreground font-semibold">
-            vaccine recommendation algorithm
-          </strong>
-          &nbsp; integrating public datasets.
+          Built vaccine recommendation engine in{" "}
+          <strong className="text-foreground font-semibold">Node.js</strong>{" "}
+          using matrix logic over PAI data (age, diseases, special cases) for
+          personalized recommendations.
         </>,
-        <>
-          Designed and updated the institutional&nbsp;
-          <strong className="text-foreground font-semibold">website</strong>
-          &nbsp; to enhance usability.
-        </>,
-        "Collaborated consistently with multidisciplinary teams to drive project success.",
+        "Redesigned the institutional website, improving content structure and digital presence.",
+        "Coordinated with health and tech teams to align technical requirements with PAI protocols.",
       ],
     },
     {
       title: "Web Developer",
       company: "TurboCupones",
       location: "Remote",
-      period: "June 2024 – September 2024",
+      period: "June 2024 – October 2024",
       description: (
         <>
-          Built secure RESTful APIs using &nbsp;
+          Built production APIs with{" "}
           <strong className="text-foreground font-semibold">
             Django REST Framework
-          </strong>
-          &nbsp; and implemented advanced authentication with &nbsp;
-          <strong className="text-foreground font-semibold">JWT</strong>.
-          Developed frontend features with &nbsp;
-          <strong className="text-foreground font-semibold">Next.js</strong> and
-          contributed to quality assurance through unit and functional testing.
+          </strong>{" "}
+          and{" "}
+          <strong className="text-foreground font-semibold">JWT</strong> for a
+          platform with thousands of users. Developed frontend features with
+          Next.js.
         </>
       ),
       achievements: [
         <>
-          Created APIs with advanced filtering, pagination, and &nbsp;
+          Built 2 production APIs with{" "}
           <strong className="text-foreground font-semibold">
-            JWT authentication
-          </strong>
-          .
+            Django REST + JWT
+          </strong>{" "}
+          for a platform with thousands of users, with pagination and advanced
+          filters.
         </>,
         <>
-          Developed dynamic frontend interfaces with &nbsp;
-          <strong className="text-foreground font-semibold">Next.js</strong>.
+          Developed frontend interfaces with{" "}
+          <strong className="text-foreground font-semibold">Next.js</strong>{" "}
+          consuming the system APIs.
         </>,
         <>
-          Performed unit and functional testing with &nbsp;
-          <strong className="text-foreground font-semibold">PyTest</strong>.
-        </>,
-        <>
-          Worked within agile workflows using &nbsp;
-          <strong className="text-foreground font-semibold">Scrum</strong>
-          &nbsp;and &nbsp;
-          <strong className="text-foreground font-semibold">Trello</strong>.
+          Collaborated with a team of 4 developers under{" "}
+          <strong className="text-foreground font-semibold">Scrum</strong>{" "}
+          methodology.
         </>,
       ],
     },
@@ -134,27 +179,12 @@ const Experience = () => {
 
   const education = [
     {
-      degree: "Bachelor's Degree in Computer Engineering (in progress)",
+      degree: "Bachelor's Degree in Computer Engineering",
       institution: "Universidad de La Sabana",
       location: "Chía, Colombia",
-      period: "2022 - Present",
+      period: "2022 – 2026",
       description:
-        "Currently pursuing a degree in Computer Engineering with a focus on web development, software architecture, and data systems.",
-    },
-  ];
-
-  const certifications = [
-    {
-      name: "AWS Cloud Practitioner Essentials",
-      issuer: "Amazon Web Services",
-      date: "2025",
-      link: "https://aws.amazon.com/training/",
-    },
-    {
-      name: "Python for Everybody",
-      issuer: "Coursera - University of Michigan",
-      date: "2024",
-      link: "https://www.coursera.org/specializations/python",
+        "Pursuing a degree in Computer Engineering with focus on web development, software architecture, and data systems.",
     },
   ];
 
@@ -178,6 +208,7 @@ const Experience = () => {
       },
     },
   };
+
   const buttonVariants = {
     hover: {
       scale: 1.05,
@@ -193,27 +224,28 @@ const Experience = () => {
   };
 
   const handleDownload = (type: "cv" | "resume") => {
-    const fileName =
+    const fileUrl =
       type === "cv"
-        ? "resume/Jhojan_Jimenez_CV.pdf"
-        : "resume/Jhojan_Jimenez_Resume.docx";
-    const fileUrl = `/${fileName}`;
+        ? "/resume/Jhojan_Jimenez_CV.pdf"
+        : "/resume/Jhojan_Jimenez_Resume_EN.docx";
+    const downloadName =
+      type === "cv"
+        ? "Jhojan_Jimenez_CV.pdf"
+        : "Jhojan_Jimenez_Resume_EN.docx";
 
     const link = document.createElement("a");
     link.href = fileUrl;
-    link.download = fileName;
+    link.download = downloadName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
   const handlePreview = (type: "cv" | "resume") => {
-    const fileName =
+    const fileUrl =
       type === "cv"
-        ? "resume/Jhojan_Jimenez_CV.pdf"
-        : "resume/Jhojan_Jimenez_Resume.pdf";
-    const fileUrl = `/${fileName}`;
-
+        ? "/resume/Jhojan_Jimenez_CV.pdf"
+        : "/resume/Jhojan_Jimenez_Resume_EN.pdf";
     window.open(fileUrl, "_blank");
   };
 
@@ -237,7 +269,6 @@ const Experience = () => {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <div className="flex items-stretch justify-center mt-6 border-2 border-blue-600 rounded-lg overflow-hidden">
-              {/* Botón de Descargar CV (relleno + texto) */}
               <motion.button
                 onClick={() => handleDownload("cv")}
                 variants={buttonVariants}
@@ -248,8 +279,6 @@ const Experience = () => {
                 <Download className="w-5 h-5" />
                 Download CV (ES)
               </motion.button>
-
-              {/* Botón de Previsualizar CV (solo icono) */}
               <motion.button
                 onClick={() => handlePreview("cv")}
                 variants={buttonVariants}
@@ -262,7 +291,6 @@ const Experience = () => {
               </motion.button>
             </div>
             <div className="flex items-stretch justify-center mt-6 border-2 border-green-600 rounded-lg overflow-hidden">
-              {/* Botón de Descargar CV (relleno + texto) */}
               <motion.button
                 onClick={() => handleDownload("resume")}
                 variants={buttonVariants}
@@ -273,20 +301,43 @@ const Experience = () => {
                 <Download className="w-5 h-5" />
                 Download Resume (EN)
               </motion.button>
-
-              {/* Botón de Previsualizar CV (solo icono) */}
               <motion.button
                 onClick={() => handlePreview("resume")}
                 variants={buttonVariants}
                 whileHover="hover"
                 whileTap="tap"
-                aria-label="Preview CV"
-                className="flex items-center justify-center px-4 py-3 border-green-600 text-green-600 dark:text-green-400 hover:bg-green-600 transition-all duration-300 border-l-2 "
+                aria-label="Preview Resume"
+                className="flex items-center justify-center px-4 py-3 border-green-600 text-green-600 dark:text-green-400 hover:bg-green-600 hover:text-white transition-all duration-300 border-l-2"
               >
                 <Eye className="w-5 h-5 mr-2" /> Preview
               </motion.button>
             </div>
           </div>
+        </motion.div>
+
+        {/* Highlights */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12"
+        >
+          {highlights.map((item, index) => (
+            <motion.div
+              key={index}
+              whileHover={{ y: -4, transition: { type: "spring", stiffness: 300 } }}
+              className={`${item.bgGlow} rounded-xl p-5 border-2 ${item.borderColor} shadow-md ${item.hoverShadow} hover:shadow-lg transition-all duration-300 flex items-start gap-4`}
+            >
+              <span className="text-2xl mt-0.5">{item.icon}</span>
+              <div>
+                <h4 className="font-bold text-foreground mb-1">{item.title}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -344,7 +395,7 @@ const Experience = () => {
                             key={achIndex}
                             className="text-muted-foreground text-sm flex items-start"
                           >
-                            <span className="text-primary mr-2 ">•</span>
+                            <span className="text-primary mr-2">•</span>
                             {achievement}
                           </li>
                         ))}
@@ -356,9 +407,8 @@ const Experience = () => {
             </motion.div>
           </div>
 
-          {/* Education & Certifications */}
+          {/* Education */}
           <div className="space-y-8">
-            {/* Education */}
             <motion.div
               variants={containerVariants}
               initial="hidden"
@@ -394,52 +444,6 @@ const Experience = () => {
                 ))}
               </div>
             </motion.div>
-
-            {/* Certifications */}
-            {/* <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <h3 className="text-2xl font-semibold text-foreground mb-6 flex items-center">
-                <ExternalLink size={24} className="mr-2 text-primary" />
-                Certifications
-              </h3>
-
-              <div className="space-y-4">
-                {certifications.map((cert, index) => (
-                  <motion.div
-                    key={index}
-                    variants={itemVariants}
-                    className="bg-card rounded-lg p-4 shadow-md border border-border hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-foreground mb-1">
-                          {cert.name}
-                        </h4>
-                        <div className="text-primary font-medium text-sm mb-1">
-                          {cert.issuer}
-                        </div>
-                        <div className="text-muted-foreground text-xs">
-                          {cert.date}
-                        </div>
-                      </div>
-                      <a
-                        href={cert.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-2 rounded-lg hover:bg-accent transition-colors"
-                        aria-label="Ver certificación"
-                      >
-                        <ExternalLink size={16} />
-                      </a>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div> */}
           </div>
         </div>
       </div>

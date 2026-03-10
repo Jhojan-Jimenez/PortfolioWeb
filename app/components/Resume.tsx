@@ -13,7 +13,7 @@ export default function Resume() {
     const fileName =
       type === "cv"
         ? "resume/Jhojan_Jimenez_CV.pdf"
-        : "resume/Jhojan_Jimenez_Resume.docx";
+        : "resume/Jhojan_Jimenez_Resume_EN.docx";
     const fileUrl = `/${fileName}`;
 
     const link = document.createElement("a");
@@ -28,7 +28,7 @@ export default function Resume() {
     const fileName =
       type === "cv"
         ? "resume/Jhojan_Jimenez_CV.pdf"
-        : "resume/Jhojan_Jimenez_Resume.pdf";
+        : "resume/Jhojan_Jimenez_Resume_EN.pdf";
     const fileUrl = `/${fileName}`;
 
     window.open(fileUrl, "_blank");
