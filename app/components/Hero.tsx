@@ -145,7 +145,7 @@ export default function Hero() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1, duration: 0.5 }}
               >
-                Software Engineer | Backend & FullStack
+                Software Engineer | Backend & Cloud Architecture
               </motion.span>
             </motion.h2>
           </motion.div>
@@ -160,11 +160,11 @@ export default function Hero() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.2, duration: 0.8 }}
             >
-              Backend & FullStack developer with 1+ year of production
-              experience. Specialized in REST APIs, AI architectures, and
-              process automation — delivering real solutions in proptech,
-              government tech, and public health. 1st place at Sabana Hack
-              2025.
+              Software Engineer specializing in Backend, Cloud Architecture,
+              and Distributed Systems with strong Full Stack delivery. 2+ years
+              of production experience with Python, Node.js/NestJS, cloud
+              services (AWS/GCP), async workflows, and multi-agent AI
+              architectures. 1st place at Sabana Hack 2025.
             </motion.p>
           </motion.div>
 

@@ -6,14 +6,14 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Jhojan - Portfolio",
+  title: "Jhojan Jimenez - Software Engineer | Backend & Cloud Architecture",
   description:
     "Portfolio profesional de desarrollador Full Stack especializado en React, Next.js y tecnologías modernas como Express / FastAPI / Django.",
   keywords:
-    "desarrollador, full stack, react, nextjs, portfolio, programador, python, django, express, fastapi, javascript, typescript",
+    "backend engineer, software engineer, cloud architecture, python, fastapi, django, nodejs, nestjs, aws, gcp, docker, postgresql, alembic, microservices, jhojan jimenez",
   authors: [{ name: "Jhojan Jimenez" }],
   openGraph: {
-    title: "Jhojan - Portfolio",
+    title: "Jhojan Jimenez - Software Engineer | Backend & Cloud Architecture",
     description: "Portfolio profesional de desarrollador Full Stack",
     type: "website",
   },
@@ -25,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <body className={inter.className}>{children}</body>
     </html>
   );

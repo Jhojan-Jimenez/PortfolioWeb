@@ -29,6 +29,7 @@ export default function Skills() {
         "FastAPI",
         "Django",
         "Node.js",
+        "NestJS",
         "TypeScript",
         "Express",
         "REST APIs",
@@ -38,13 +39,13 @@ export default function Skills() {
     {
       title: "Databases",
       icon: Database,
-      skills: ["MySQL", "PostgreSQL", "Firebase", "MongoDB", "Vector Storage"],
+      skills: ["PostgreSQL", "MySQL", "Firebase", "MongoDB", "Vector Storage", "Alembic"],
       color: "from-purple-500 to-pink-500",
     },
     {
       title: "DevOps",
       icon: Code,
-      skills: ["Docker", "CI/CD", "AWS S3", "Railway", "GitHub Actions", "Git"],
+      skills: ["AWS", "GCP", "Docker", "CI/CD", "Railway", "GitHub Actions", "Git"],
       color: "from-orange-500 to-amber-500",
     },
     {

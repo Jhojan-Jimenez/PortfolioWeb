@@ -33,19 +33,16 @@ const Experience = () => {
 
   const experience = [
     {
-      title: "FullStack Developer",
+      title: "Backend & Cloud Developer",
       company: "Blurealty",
       location: "Remote",
       period: "July 2025 – Present",
       description: (
         <>
-          Developed full-stack features using{" "}
-          <strong className="text-foreground font-semibold">React</strong>,{" "}
-          <strong className="text-foreground font-semibold">Express</strong>,
-          and{" "}
-          <strong className="text-foreground font-semibold">Firebase</strong>.
-          Designed a multi-role AI agent and led frontend performance and
-          accessibility improvements.
+          Engineered backend services and cloud deployment on{" "}
+          <strong className="text-foreground font-semibold">GCP</strong> for a
+          high-demand proptech platform, combining async workflows, relational
+          databases, and multi-agent AI architectures.
         </>
       ),
       achievements: [
@@ -58,15 +55,18 @@ const Experience = () => {
         </>,
         <>
           Improved web accessibility from{" "}
-          <strong className="text-foreground font-semibold">
-            3.4 → 9.2 (Wave)
-          </strong>{" "}
+          <strong className="text-foreground font-semibold">3.4 → 9.2 (Wave)</strong>{" "}
           across multiple pages implementing ADA standards.
         </>,
         <>
-          Migrated backend to{" "}
-          <strong className="text-foreground font-semibold">TypeScript</strong>,
-          reducing runtime errors and improving codebase maintainability.
+          Deployed and maintained backend services on{" "}
+          <strong className="text-foreground font-semibold">GCP (Cloud Run, Cloud SQL)</strong>{" "}
+          using Docker and automated CI/CD pipelines in GitHub Actions.
+        </>,
+        <>
+          Designed relational database schema in{" "}
+          <strong className="text-foreground font-semibold">PostgreSQL</strong>,{" "}
+          managing migrations with Alembic and optimizing queries for high concurrency.
         </>,
         "Integrated external APIs to automate critical business flows, reducing manual intervention.",
         "Implemented event tracking and A/B experiments for data-driven product decisions.",
@@ -184,7 +184,7 @@ const Experience = () => {
       location: "Chía, Colombia",
       period: "2022 – 2026",
       description:
-        "Pursuing a degree in Computer Engineering with focus on web development, software architecture, and data systems.",
+        "GPA: 4.4 / 5.0. Emphasis on Software Architecture. Active participation in the Engineering Representative Group and academic tutoring. Initial development of WheelUS mobility platform.",
     },
   ];
 
@@ -395,8 +395,8 @@ const Experience = () => {
                             key={achIndex}
                             className="text-muted-foreground text-sm flex items-start"
                           >
-                            <span className="text-primary mr-2">•</span>
-                            {achievement}
+                            <span className="text-primary mr-2 shrink-0 select-none">•</span>
+                            <span className="leading-relaxed">{achievement}</span>
                           </li>
                         ))}
                       </ul>
