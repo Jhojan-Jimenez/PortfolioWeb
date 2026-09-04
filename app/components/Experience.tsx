@@ -226,12 +226,12 @@ const Experience = () => {
   const handleDownload = (type: "cv" | "resume") => {
     const fileUrl =
       type === "cv"
-        ? "/resume/Jhojan_Jimenez_CV.pdf"
-        : "/resume/Jhojan_Jimenez_Resume_EN.docx";
+        ? "/resume/Jhojan_JimenezCV.pdf"
+        : "/resume/Jhojan_Jimenez_Resume.pdf";
     const downloadName =
       type === "cv"
-        ? "Jhojan_Jimenez_CV.pdf"
-        : "Jhojan_Jimenez_Resume_EN.docx";
+        ? "Jhojan_JimenezCV.pdf"
+        : "Jhojan_Jimenez_Resume.pdf";
 
     const link = document.createElement("a");
     link.href = fileUrl;
@@ -244,8 +244,8 @@ const Experience = () => {
   const handlePreview = (type: "cv" | "resume") => {
     const fileUrl =
       type === "cv"
-        ? "/resume/Jhojan_Jimenez_CV.pdf"
-        : "/resume/Jhojan_Jimenez_Resume_EN.pdf";
+        ? "/resume/Jhojan_JimenezCV.pdf"
+        : "/resume/Jhojan_Jimenez_Resume.pdf";
     window.open(fileUrl, "_blank");
   };
 
