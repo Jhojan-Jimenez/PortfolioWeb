@@ -11,47 +11,73 @@ export default function Projects() {
 
   const projects = [
     {
-      title: "WheelUS",
+      title: "WheelUS — Real-Time Mobility",
       description:
-        "WheelUS is an innovative university transport platform designed to connect students via a booking and trip creation system.",
+        "Regulated university ride-sharing platform connecting the Universidad de La Sabana community. Implements WebSocket trip synchronization, OpenStreetMap geospatial routing, and race-condition-safe seat booking.",
       image: "/projects/WheelUSCreateRidePage.png",
       technologies: [
+        "Node.js",
+        "Express",
+        "Socket.io",
         "Next.js",
         "TypeScript",
-        "Express",
         "Firebase",
         "OpenStreetMap",
-        "Socket.io",
       ],
       githubUrl: "https://github.com/Jhojan-Jimenez/WheelUS-Front",
       liveUrl: "https://wheelus.jhojan.cloud",
       date: "2024",
     },
     {
-      title: "MortShop",
+      title: "MortShop — E-Commerce & Payments",
       description:
-        "MortShop is a e-commerce platform, modern and high-performance, built with Next.js, Django, and PostgreSQL.",
+        "Transactional e-commerce backend and frontend built with Django REST Framework and PostgreSQL. Features transactional integrity, Stripe webhook integration with idempotent handling, Twilio SMS alerts, and RBAC.",
       image: "/projects/MortShopProductsPage.png",
       technologies: [
-        "NextJS",
-        "TypeScript",
-        "Django",
-        "Django-REST",
+        "Django REST",
         "PostgreSQL",
+        "Next.js",
+        "TypeScript",
+        "Stripe",
+        "Twilio",
       ],
       githubUrl: "https://github.com/Jhojan-Jimenez/Front-Shop",
       liveUrl: "https://mortshop.jhojan.cloud",
       date: "2024",
     },
     {
-      title: "Vaccine recommender",
+      title: "Vaccine Recommender — CDSS",
       description:
-        "This website, recommends vaccines for children and adults and indicates whether they are provided by the PAI.",
+        "Clinical Decision Support System (CDSS) built in Node.js for immunization management. Features a deterministic rule-matrix engine evaluating official PAI clinical protocols with 100% reproducible decision logs.",
       image: "/projects/VaccineRecommender.png",
-      technologies: ["NodeJS", "ReactJS", "TailwindCSS", "Python", "Firebase"],
+      technologies: [
+        "Node.js",
+        "React",
+        "Python",
+        "Data Analysis",
+        "TailwindCSS",
+        "Firebase",
+      ],
       githubUrl: "https://github.com/Jhojan-Jimenez",
       liveUrl: "https://vatly.jhojan.cloud",
       date: "2023",
+    },
+    {
+      title: "Mercedes-AMG GT3 — 3D Product Experience",
+      description:
+        "High-performance interactive 3D WebGL showcase built with Next.js, Three.js, and React Three Fiber. Features scroll-driven dynamic camera transitions, real-time physically-based rendering (PBR materials), dynamic paint customizer with synchronized atmospheric underglow, and responsive telemetry HUD.",
+      image: "/projects/3DCarPage.png",
+      technologies: [
+        "Three.js",
+        "React Three Fiber",
+        "Next.js",
+        "TypeScript",
+        "WebGL",
+        "TailwindCSS",
+      ],
+      githubUrl: "",
+      liveUrl: "https://productexperience.vercel.app/",
+      date: "2025",
     },
   ];
 
@@ -157,8 +183,7 @@ export default function Projects() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            A selection of projects that showcase my skills and experience in
-            development.
+            Selection of projects demonstrating architecture, real-time distributed systems, transactional APIs, and creative engineering.
           </motion.p>
         </motion.div>
 
@@ -218,7 +243,7 @@ export default function Projects() {
                       </motion.div>
 
                       <motion.p
-                        className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3"
+                        className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-4 text-sm leading-relaxed"
                         initial={{ opacity: 0 }}
                         animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                         transition={{ delay: index * 0.1 + 0.7 }}
@@ -257,18 +282,20 @@ export default function Projects() {
                         }
                         transition={{ delay: index * 0.1 + 0.9 }}
                       >
-                        <motion.a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          variants={buttonVariants}
-                          whileHover="hover"
-                          whileTap="tap"
-                          className="flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 text-sm font-medium"
-                        >
-                          <Github className="w-4 h-4 mr-2" />
-                          Code
-                        </motion.a>
+                        {project.githubUrl && (
+                          <motion.a
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            variants={buttonVariants}
+                            whileHover="hover"
+                            whileTap="tap"
+                            className="flex items-center px-4 py-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 text-sm font-medium"
+                          >
+                            <Github className="w-4 h-4 mr-2" />
+                            Code
+                          </motion.a>
+                        )}
                         {project.liveUrl && (
                           <motion.a
                             href={project.liveUrl}
