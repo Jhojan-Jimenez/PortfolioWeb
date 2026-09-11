@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "Gazu — Cloud-Native Headless Commerce Platform",
+    "output": "public/diagrams/gazu-architecture.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "traffic-flow",
+        "label": "Storefront & API Traffic",
+        "focus": ["clients", "traefik", "storefront", "api_core", "postgres"],
+        "note": "Customer traffic arriving at Traefik Ingress, SSR rendering in Next.js 15, and GraphQL execution against PostgreSQL."
+      },
+      {
+        "id": "async-and-data",
+        "label": "Async Jobs & Persistence",
+        "focus": ["api_core", "worker", "redis", "postgres"],
+        "note": "Decoupled async worker queue and caching layer isolating high-traffic transactions."
+      },
+      {
+        "id": "gitops-delivery",
+        "label": "GitOps & Delivery Pipeline",
+        "focus": ["gitlab", "argocd", "storefront", "api_core"],
+        "note": "Automated multi-arch CI/CD and declarative continuous deployment with ArgoCD."
+      },
+      {
+        "id": "telemetry-traces",
+        "label": "Observability & Telemetry",
+        "focus": ["storefront", "telemetry", "api_core", "monitoring"],
+        "note": "Adblock-resilient PostHog ingestion and OpenTelemetry distributed tracing."
+      }
+    ]
+  },
+  "components": [
+    { "id": "clients", "type": "external", "label": "Shoppers & Admins", "sublabel": "Web Browser / Mobile", "pos": [40, 280], "size": [130, 60] },
+    { "id": "traefik", "type": "cloud", "label": "Traefik Ingress", "sublabel": "TLS :443", "tag": "cert-manager", "pos": [250, 280], "size": [130, 60] },
+    { "id": "storefront", "type": "frontend", "label": "Next.js 15 Pods", "sublabel": "SSR Storefront :3000", "tag": "2 Replicas", "pos": [480, 280], "size": [140, 60] },
+    { "id": "api_core", "type": "backend", "label": "NestJS Core", "sublabel": "GraphQL :3001", "tag": "Shop & Admin", "pos": [720, 280], "size": [140, 60] },
+    { "id": "postgres", "type": "database", "label": "PostgreSQL 16", "sublabel": "Primary DB :5432", "brand": "postgresql", "pos": [960, 280], "size": [130, 60] },
+    { "id": "telemetry", "type": "external", "label": "PostHog Analytics", "sublabel": "Proxy /ingest", "tag": "Adblock-Immune", "pos": [480, 110], "size": [140, 60] },
+    { "id": "monitoring", "type": "external", "label": "Grafana & Prom", "sublabel": "OTLP Metrics & Traces", "brand": "grafana", "pos": [720, 110], "size": [140, 60] },
+    { "id": "gitlab", "type": "external", "label": "GitLab CI/CD", "sublabel": "Multi-arch ARM64", "brand": "gitlab", "tag": "Buildx (~120MB)", "pos": [250, 450], "size": [130, 60] },
+    { "id": "argocd", "type": "cloud", "label": "ArgoCD", "sublabel": "GitOps Controller", "brand": "argo", "tag": "Auto-Sync", "pos": [480, 450], "size": [140, 60] },
+    { "id": "worker", "type": "backend", "label": "Async Worker", "sublabel": "BullMQ Processor", "tag": "Job Queue", "pos": [720, 450], "size": [140, 60] },
+    { "id": "redis", "type": "database", "label": "Redis Cluster", "sublabel": "Queue & Cache :6379", "brand": "redis", "pos": [960, 450], "size": [130, 60] }
+  ],
+  "boundaries": [
+    { "kind": "region", "label": "Oracle Cloud (OCI ARM64) · k3s Kubernetes Cluster", "wraps": ["traefik", "storefront", "api_core", "worker", "postgres", "redis", "argocd"], "pad": 24 }
+  ],
+  "connections": [
+    { "id": "clients-traefik", "from": "clients", "to": "traefik", "label": "HTTPS", "variant": "emphasis" },
+    { "id": "traefik-storefront", "from": "traefik", "to": "storefront", "label": "HTTP routing" },
+    { "id": "storefront-api", "from": "storefront", "to": "api_core", "label": "GraphQL", "variant": "emphasis" },
+    { "id": "storefront-telemetry", "from": "storefront", "to": "telemetry", "label": "/ingest proxy", "variant": "dashed", "fromSide": "top", "toSide": "bottom" },
+    { "id": "api-postgres", "from": "api_core", "to": "postgres", "label": "SQL" },
+    { "id": "api-monitoring", "from": "api_core", "to": "monitoring", "label": "OTLP gRPC", "variant": "dashed", "fromSide": "top", "toSide": "bottom" },
+    { "id": "api-worker", "from": "api_core", "to": "worker", "label": "dispatch", "variant": "dashed", "fromSide": "bottom", "toSide": "top", "labelDy": 24 },
+    { "id": "worker-redis", "from": "worker", "to": "redis", "label": "BullMQ" },
+    { "id": "gitlab-argocd", "from": "gitlab", "to": "argocd", "label": "git push", "variant": "dashed" },
+    { "id": "argocd-storefront", "from": "argocd", "to": "storefront", "label": "sync state", "variant": "emphasis", "fromSide": "top", "toSide": "bottom" }
+  ],
+  "cards": [
+    { "dot": "cyan", "title": "Edge & Ingress", "items": ["Traefik Ingress Controller with automated Let's Encrypt TLS (cert-manager)", "Next.js reverse-proxy rewrite routing client telemetry through /ingest"] },
+    { "dot": "emerald", "title": "Decoupled Workloads", "items": ["Next.js 15 App Router storefront isolated in dedicated Kubernetes pods (2 replicas)", "NestJS transactional core handling GraphQL /shop-api and /admin-api", "Asynchronous BullMQ worker draining heavy background tasks"] },
+    { "dot": "violet", "title": "GitOps & Persistence", "items": ["GitLab CI multi-stage build producing optimized ~120MB ARM64 container images", "ArgoCD declarative pull-based reconciliation eliminating SSH credentials", "PostgreSQL 16 transactional store alongside in-memory Redis cluster"] }
+  ]
+}

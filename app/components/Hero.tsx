@@ -1,11 +1,16 @@
 "use client";
 
-import { utilScrollToSection } from "@/lib/utils";
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, MapPin } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { utilScrollToSection } from "@/lib/utils";
+import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { useLanguage } from "@/app/context/LanguageContext";
+import { TRANSLATIONS } from "@/lib/i18n/translations";
 
 export default function Hero() {
+  const { language } = useLanguage();
+  const t = TRANSLATIONS[language].hero;
+
   const socialLinks = [
     {
       icon: Github,
@@ -17,7 +22,11 @@ export default function Hero() {
       href: "https://www.linkedin.com/in/jhojan-jimenez-dev/",
       label: "LinkedIn",
     },
-    { icon: Mail, href: "mailto:jhojanjimene@gmail.com", label: "Email" },
+    {
+      icon: Mail,
+      href: "mailto:jhojanjimene@gmail.com",
+      label: "Email",
+    },
   ];
 
   const containerVariants = {
@@ -25,8 +34,8 @@ export default function Hero() {
     visible: {
       opacity: 1,
       transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2,
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
       },
     },
   };
@@ -39,199 +48,131 @@ export default function Hero() {
       transition: {
         type: "spring" as const,
         stiffness: 100,
-      },
-    },
-  };
-
-  const avatarVariants = {
-    hidden: { scale: 0, rotate: -180 },
-    visible: {
-      scale: 1,
-      rotate: 0,
-      transition: {
-        type: "spring" as "spring",
-        stiffness: 260,
-        damping: 20,
-        delay: 0.1,
+        damping: 15,
       },
     },
   };
 
   const socialVariants = {
-    hidden: { scale: 0 },
+    hidden: { scale: 0.8, opacity: 0 },
     visible: {
       scale: 1,
-      transition: {
-        type: "spring" as "spring",
-        stiffness: 400,
-        damping: 10,
-      },
-    },
-    hover: {
-      scale: 1.2,
-      rotate: 360,
-      transition: {
-        type: "spring" as "spring",
-        stiffness: 400,
-        damping: 10,
-      },
-    },
-  };
-
-  const buttonVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
       opacity: 1,
       transition: {
-        type: "spring" as "spring",
-        stiffness: 100,
+        type: "spring" as const,
+        stiffness: 260,
+        damping: 18,
       },
-    },
-    hover: {
-      scale: 1.05,
-      transition: {
-        type: "spring" as "spring",
-        stiffness: 400,
-        damping: 10,
-      },
-    },
-    tap: {
-      scale: 0.95,
     },
   };
 
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center px-4 pt-20"
+      className="min-h-screen flex items-center justify-center px-4 pt-28 pb-20 text-center"
     >
-      <div className="container mx-auto max-w-4xl text-center">
+      <div className="container mx-auto max-w-3xl">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
+          className="flex flex-col items-center"
         >
-          <motion.div variants={itemVariants} className="mb-8">
+          {/* Circular Avatar */}
+          <motion.div variants={itemVariants} className="mb-6">
             <motion.div
-              variants={avatarVariants}
-              className="w-48 h-48 mx-auto my-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 overflow-hidden relative"
-              whileHover={{
-                scale: 1.1,
-                boxShadow: "0 0 25px rgba(59, 130, 246, 0.5)",
-              }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              className="w-40 h-40 sm:w-48 sm:h-48 mx-auto rounded-full bg-gradient-to-r from-blue-500 to-purple-600 p-1 shadow-2xl overflow-hidden relative"
             >
-              <Image
-                src="/Me.jpeg"
-                alt="Jhojan's Photo"
-                fill
-                className="object-cover rounded-full"
-              />
-            </motion.div>
-
-            <motion.h1
-              variants={itemVariants}
-              className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4"
-            >
-              Jhojan Jimenez
-            </motion.h1>
-
-            <motion.h2
-              variants={itemVariants}
-              className="text-xl md:text-2xl text-blue-600 dark:text-blue-400 mb-6"
-            >
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1, duration: 0.5 }}
-              >
-                Software Engineer | Backend & Cloud Architecture
-              </motion.span>
-            </motion.h2>
-          </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            className="mb-8 max-w-2xl mx-auto"
-          >
-            <motion.p
-              className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2, duration: 0.8 }}
-            >
-              Software Engineer specializing in Backend, Cloud Architecture,
-              and Distributed Systems with strong Full Stack delivery. 2+ years
-              of production experience with Python, Node.js/NestJS, cloud
-              services (AWS/GCP), async workflows, and multi-agent AI
-              architectures. 1st place at Sabana Hack 2025.
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            className="flex items-center justify-center mb-8"
-          >
-            <motion.div
-              initial={{ x: -20, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 1.4, duration: 0.5 }}
-              className="flex items-center"
-            >
-              <MapPin className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" />
-              <span className="text-gray-600 dark:text-gray-300">
-                Bogotá, Colombia
-              </span>
+              <div className="relative w-full h-full rounded-full overflow-hidden bg-[#0c0517]">
+                <Image
+                  src="/Me.jpeg"
+                  alt="Jhojan Jimenez"
+                  fill
+                  priority
+                  className="object-cover scale-105"
+                />
+              </div>
             </motion.div>
           </motion.div>
 
+
+          <motion.h1
+            variants={itemVariants}
+            className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-3"
+          >
+            {t.name}
+          </motion.h1>
+
+          {/* Subtitle / Role */}
+          <motion.h2
+            variants={itemVariants}
+            className="text-lg sm:text-xl md:text-2xl text-blue-400 font-medium mb-5"
+          >
+            {t.role}
+          </motion.h2>
+
+          {/* Bio */}
+          <motion.p
+            variants={itemVariants}
+            className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed mb-6 font-normal"
+          >
+            {t.bio}
+          </motion.p>
+
+          {/* Location */}
           <motion.div
             variants={itemVariants}
-            className="flex justify-center space-x-6 mb-8"
+            className="flex items-center justify-center gap-1.5 text-sm text-gray-400 mb-6"
           >
-            {socialLinks.map((link, index) => (
+            <MapPin className="w-4 h-4 text-gray-400" />
+            <span>{t.location}</span>
+          </motion.div>
+
+          {/* Social Icons */}
+          <motion.div
+            variants={itemVariants}
+            className="flex justify-center items-center gap-4 mb-8"
+          >
+            {socialLinks.map((link) => (
               <motion.a
-                key={index}
+                key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 variants={socialVariants}
-                whileHover="hover"
-                whileTap={{ scale: 0.9 }}
-                className="group p-3 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-blue-900 transition-all duration-300"
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-11 h-11 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 hover:border-white/25 flex items-center justify-center text-gray-300 hover:text-white transition-all duration-200"
                 aria-label={link.label}
-                custom={index}
               >
-                <link.icon className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300" />
+                <link.icon className="w-5 h-5" />
               </motion.a>
             ))}
           </motion.div>
 
+          {/* Action Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <motion.button
-              variants={buttonVariants}
-              whileHover="hover"
-              whileTap="tap"
-              onClick={() => {
-                utilScrollToSection("projects");
-              }}
-              className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => utilScrollToSection("projects")}
+              className="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-medium text-sm transition-all duration-200 shadow-lg shadow-blue-600/20 hover:shadow-blue-600/30 cursor-pointer min-w-[160px]"
             >
-              View Projects
+              {t.ctaProjects}
             </motion.button>
+
             <motion.button
-              variants={buttonVariants}
-              whileHover="hover"
-              whileTap="tap"
-              onClick={() => {
-                utilScrollToSection("contact");
-              }}
-              className="px-8 py-3 border-2 border-blue-600 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white rounded-lg font-medium transition-all duration-300"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              onClick={() => utilScrollToSection("contact")}
+              className="px-8 py-3 border border-indigo-700/60 bg-indigo-950/20 hover:bg-indigo-900/40 text-indigo-200 hover:text-white rounded-lg font-medium text-sm transition-all duration-200 cursor-pointer min-w-[160px]"
             >
-              Contact
+              {t.ctaContact}
             </motion.button>
           </motion.div>
         </motion.div>
