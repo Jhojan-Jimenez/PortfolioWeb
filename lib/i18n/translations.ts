@@ -323,9 +323,9 @@ export const TRANSLATIONS = {
         institution: "Universidad de La Sabana",
         location: "Chía, Colombia",
         period: "2022 – 2026",
-        scholarship: "80% Merit Academic Scholarship",
+        scholarship: "80% Academic Excellence Scholarship",
         gpa: "GPA: 4.4 / 5.0 · Top Percentile",
-        details: "Awarded an 80% Merit-Based Academic Scholarship for academic excellence (GPA: 4.4 / 5.0). Core academic focus on Software Architecture, Distributed Systems, and Cloud Engineering. Active member of the Engineering Student Council and Academic Peer Tutor. Architected initial core iterations of the WheelUS mobility platform.",
+        details: "Recipient of 80% Academic Excellence Scholarship (Cumulative GPA: 4.4 / 5.0). Core academic focus on Software Architecture, Distributed Systems, and Cloud Engineering. Active member of the Engineering Student Council and Academic Peer Tutor. Architected initial core iterations of the WheelUS mobility platform.",
       },
     },
     contact: {
@@ -681,7 +681,7 @@ export const TRANSLATIONS = {
         period: "2022 – 2026",
         scholarship: "Beca de Excelencia Académica del 80%",
         gpa: "Promedio: 4.4 / 5.0 · Percentil Superior",
-        details: "Beneficiario de Beca de Excelencia Académica del 80% por mérito académico sobresaliente (Promedio: 4.4 / 5.0). Enfoque académico central en Arquitectura de Software, Sistemas Distribuidos e Ingeniería Cloud. Miembro del Consejo Estudiantil de Ingeniería y Tutor Académico. Arquitectura de las primeras iteraciones centrales de la plataforma de movilidad WheelUS.",
+        details: "Beneficiario de Beca de Excelencia Académica del 80% (Promedio acumulado: 4.4 / 5.0). Enfoque académico central en Arquitectura de Software, Sistemas Distribuidos e Ingeniería Cloud. Miembro del Consejo Estudiantil de Ingeniería y Tutor Académico. Arquitectura de las primeras iteraciones centrales de la plataforma de movilidad WheelUS.",
       },
     },
     contact: {

@@ -13,8 +13,8 @@ Contexto completo del proyecto para sesiones futuras.
 - Portfolio desplegado: https://dev.jhojan.cloud
 - GitHub: https://github.com/Jhojan-Jimenez
 - Ubicaci?n: Bogot?, Colombia
-- Idiomas: Espa?ol (nativo), Ingl?s B1/B2 (sitio web estrictamente en ingl?s)
-- Educaci?n: B.S. in Computer Engineering ? Universidad de La Sabana (Promedio: 4.4 / 5.0) ? Graduaci?n 2026 (?nfasis en Arquitectura de Software)
+- Idiomas: Español (nativo), Inglés B2
+- Educación: B.S. in Computer Engineering — Universidad de La Sabana (Promedio: 4.4 / 5.0) — Graduación 2026 (Énfasis en Arquitectura de Software)
 
 **Objetivo profesional:** Roles de Backend puro, Cloud Architecture e Infraestructura, con capacidad FullStack complementaria. Prefiere trabajo remoto o h?brido.
 
