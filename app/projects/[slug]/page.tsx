@@ -74,16 +74,16 @@ export default function ProjectDetailPage({
     allProjects[(currentIndex - 1 + allProjects.length) % allProjects.length];
 
   return (
-    <div className="min-h-screen text-neutral-100 selection:bg-purple-900/50 selection:text-white pb-24">
+    <div className="min-h-screen bg-[#0f0715] text-neutral-100 selection:bg-purple-900/50 selection:text-white pb-24">
       {/* FLOATING TOP NAV */}
-      <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#0e051d]/85 border-b border-white/[0.07]">
+      <header className="sticky top-0 z-50 backdrop-blur-xl bg-[#140c1c]/90 border-b border-white/10">
         <div className="container mx-auto max-w-5xl px-4 h-16 flex items-center justify-between">
           <Link
             href="/#projects"
             className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-neutral-400 hover:text-white transition-colors group"
           >
-            <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1" />
-            <span>{language === "es" ? "Volver a Trabajos" : "Archive"}</span>
+            <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-1 text-[#8750f7]" />
+            <span>{language === "es" ? "Volver a Proyectos" : "Back to Works"}</span>
           </Link>
 
           <div className="hidden sm:flex items-center gap-3">
