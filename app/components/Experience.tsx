@@ -49,33 +49,48 @@ export default function Experience() {
   };
 
   return (
-    <section id="experience" className="py-24 sm:py-32 px-4 relative z-10">
+    <section id="experience" className="py-24 sm:py-32 px-4 relative z-10 bg-[#131313]">
       <div className="container mx-auto max-w-6xl">
-        {/* CLEAN OFFICIAL DOCUMENTS HUB */}
-        <div id="resume-hub" className="mb-20 scroll-mt-28 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
-              {t.resumeHub.title}
+        {/* SECTION HEADER: "Engineering Success Stories" (MATCHING REFERENCE DESIGN) */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 text-left">
+          <div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#18181d] border border-[#7F1DFF]/30 text-purple-200 text-xs font-mono mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FFEB34] animate-pulse" />
+              <span>{t.badge}</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
+              {language === "es" ? "Casos de Éxito & Experiencia" : "Engineering Success Stories"}
             </h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mx-auto mb-8 leading-relaxed">
-              {t.resumeHub.description}
-            </p>
+          </div>
+          <p className="text-neutral-300 text-xs sm:text-sm font-normal max-w-md leading-relaxed">
+            {t.subtitle}
+          </p>
+        </div>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-              {/* CV Español (Blue Segmented Pill) */}
-              <div className="flex items-stretch justify-center border-2 border-blue-600 rounded-lg overflow-hidden shadow-lg shadow-blue-600/10">
+        {/* CONSOLIDATED OFFICIAL RESUME HUB */}
+        <div id="resume-hub" className="mb-12 scroll-mt-28 p-6 sm:p-8 rounded-3xl bg-[#18181d]/90 backdrop-blur-xl border border-white/10 hover:border-[#7F1DFF]/30 transition-all shadow-xl text-left">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div>
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="text-xs font-mono uppercase tracking-wider text-[#D46F88] font-bold">
+                  ✦ {t.resumeHub.title}
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-neutral-300 font-normal max-w-xl leading-relaxed">
+                {t.resumeHub.description}
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+              {/* CV Español */}
+              <div className="inline-flex rounded-2xl overflow-hidden border border-white/15 bg-[#131313] shadow-lg">
                 <motion.button
                   onClick={() => handleAction("cv", "download")}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm sm:text-base transition-all duration-200 cursor-pointer"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-[#7F1DFF] hover:bg-[#6b14dd] text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer min-h-[44px]"
                 >
-                  <Download className="w-5 h-5" />
+                  <Download className="w-4 h-4 text-white" />
                   <span>{t.resumeHub.downloadCv}</span>
                 </motion.button>
 
@@ -84,22 +99,22 @@ export default function Experience() {
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
                   aria-label="Preview CV"
-                  className="flex items-center justify-center gap-2 px-4 py-3 bg-black/40 text-blue-400 hover:bg-blue-600 hover:text-white transition-all duration-200 border-l-2 border-blue-600 text-sm sm:text-base font-medium cursor-pointer"
+                  className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 bg-[#131313] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-white/15 text-xs sm:text-sm font-medium cursor-pointer min-h-[44px]"
                 >
-                  <Eye className="w-5 h-5" />
+                  <Eye className="w-4 h-4" />
                   <span>{t.resumeHub.preview}</span>
                 </motion.button>
               </div>
 
-              {/* Resume English (Green Segmented Pill) */}
-              <div className="flex items-stretch justify-center border-2 border-green-600 rounded-lg overflow-hidden shadow-lg shadow-green-600/10">
+              {/* Resume English */}
+              <div className="inline-flex rounded-2xl overflow-hidden border border-white/15 bg-[#131313] shadow-lg">
                 <motion.button
                   onClick={() => handleAction("resume", "download")}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-2 px-5 py-3 bg-green-600 hover:bg-green-500 text-white font-medium text-sm sm:text-base transition-all duration-200 cursor-pointer"
+                  className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#7F1DFF] to-[#D46F88] hover:from-[#6b14dd] hover:to-[#be5872] text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer min-h-[44px]"
                 >
-                  <Download className="w-5 h-5" />
+                  <Download className="w-4 h-4 text-white" />
                   <span>{t.resumeHub.downloadResume}</span>
                 </motion.button>
 
@@ -108,29 +123,14 @@ export default function Experience() {
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
                   aria-label="Preview Resume"
-                  className="flex items-center justify-center gap-2 px-4 py-3 bg-black/40 text-green-400 hover:bg-green-600 hover:text-white transition-all duration-200 border-l-2 border-green-600 text-sm sm:text-base font-medium cursor-pointer"
+                  className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 bg-[#131313] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-white/15 text-xs sm:text-sm font-medium cursor-pointer min-h-[44px]"
                 >
-                  <Eye className="w-5 h-5" />
+                  <Eye className="w-4 h-4" />
                   <span>{t.resumeHub.preview}</span>
                 </motion.button>
               </div>
             </div>
-          </motion.div>
-        </div>
-
-        {/* SECTION HEADER */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
-          <div>
-            <span className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-400 font-semibold block mb-2">
-              {t.badge}
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
-              {t.title} {t.titleItalic}
-            </h2>
           </div>
-          <p className="text-neutral-300 text-xs sm:text-sm font-light max-w-md leading-relaxed">
-            {t.subtitle}
-          </p>
         </div>
 
         {/* HIGHLIGHT BANNERS */}
@@ -140,7 +140,7 @@ export default function Experience() {
             return (
               <div
                 key={i}
-                className="p-6 rounded-2xl bg-[#0c0a14]/90 backdrop-blur-xl border border-purple-500/20 hover:border-purple-400/40 hover:shadow-2xl hover:shadow-purple-950/30 transition-all duration-300 shadow-xl flex items-start gap-4"
+                className="p-6 rounded-3xl bg-[#18181d]/90 backdrop-blur-xl border border-white/10 hover:border-[#7F1DFF]/40 hover:shadow-2xl hover:shadow-[#7F1DFF]/15 transition-all duration-300 shadow-xl flex items-start gap-4 text-left"
               >
                 <div className="w-12 h-12 rounded-xl bg-purple-950/40 border border-purple-500/30 flex items-center justify-center text-purple-300 shrink-0 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
                   <Icon className="w-6 h-6 stroke-[1.75]" />
@@ -148,7 +148,7 @@ export default function Experience() {
                 <div>
                   <div className="flex items-center gap-2 mb-1.5">
                     <h4 className="text-base font-bold text-white tracking-tight">{h.title}</h4>
-                    <span className="text-[11px] font-mono text-purple-300 font-semibold">
+                    <span className="text-xs font-mono text-purple-300 font-semibold">
                       · {h.badge}
                     </span>
                   </div>
@@ -177,7 +177,7 @@ export default function Experience() {
                   : "Technical Timeline & Architecture Inspector"}
               </span>
             </div>
-            <span className="text-[11px] font-mono text-neutral-400">
+            <span className="text-xs font-mono text-neutral-400">
               {language === "es"
                 ? "Pasa el cursor o haz clic en cualquier rol para inspeccionar sus métricas y arquitectura"
                 : "Hover or click any role to inspect live metrics & system architecture"}
@@ -207,18 +207,18 @@ export default function Experience() {
                         setActiveRole(idx);
                         setHoveredRole(null);
                       }}
-                      className={`relative flex items-start gap-4 p-4 rounded-2xl transition-all duration-200 cursor-pointer border select-none ${
+                      className={`relative flex items-start gap-4 p-4 rounded-3xl transition-all duration-200 cursor-pointer border select-none ${
                         isActive
-                          ? "bg-purple-950/35 border-purple-400 shadow-xl shadow-purple-950/40 translate-x-1"
-                          : "bg-[#0c0a14]/80 border-purple-500/20 hover:border-purple-400/40 hover:bg-[#0e0a1a]"
+                          ? "bg-[#18181d] border-[#7F1DFF] shadow-2xl shadow-[#7F1DFF]/25 translate-x-1"
+                          : "bg-[#18181d]/80 border-white/10 hover:border-[#7F1DFF]/30 hover:bg-[#18181d]"
                       }`}
                     >
                       {/* Timeline Node Icon */}
                       <div
-                        className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 z-10 transition-all duration-200 ${
+                        className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 z-10 transition-all duration-200 ${
                           isActive
-                            ? "bg-purple-500 text-white border-2 border-purple-300 shadow-[0_0_16px_rgba(168,85,247,0.5)] scale-105"
-                            : "bg-purple-950/70 text-purple-300 border border-purple-500/30"
+                            ? "bg-[#7F1DFF] text-white border-2 border-white/40 shadow-[0_0_16px_rgba(127,29,255,0.6)] scale-105"
+                            : "bg-[#131313] text-purple-300 border border-white/10"
                         }`}
                       >
                         <Icon className="w-5 h-5 stroke-[1.75]" />
@@ -231,12 +231,12 @@ export default function Experience() {
                             {job.company}
                           </h4>
                           {job.isCurrent ? (
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shrink-0">
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shrink-0">
                               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                               {t.activeStatus}
                             </span>
                           ) : (
-                            <span className="text-[11px] font-mono text-neutral-400 shrink-0">
+                            <span className="text-xs font-mono text-neutral-400 shrink-0">
                               {job.period.split("–")[0].trim()}
                             </span>
                           )}
@@ -246,7 +246,7 @@ export default function Experience() {
                           {job.title}
                         </p>
 
-                        <div className="flex items-center gap-2 text-[11px] font-mono text-neutral-400 mb-2">
+                        <div className="flex items-center gap-2 text-xs font-mono text-neutral-400 mb-2">
                           <span>{job.period}</span>
                           <span>·</span>
                           <span>{job.location}</span>
@@ -254,13 +254,13 @@ export default function Experience() {
 
                         {/* Highlight Metric Pill */}
                         <div className="flex items-center justify-between gap-2 pt-2 border-t border-white/[0.06]">
-                          <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-purple-950/50 text-purple-300 border border-purple-500/25 truncate max-w-[240px]">
+                          <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-[#131313] text-[#D46F88] border border-white/10 truncate max-w-[240px] font-semibold">
                             ✦ {job.highlightMetric}
                           </span>
                           <span
                             className={`text-xs font-mono transition-transform duration-200 ${
                               isActive
-                                ? "text-purple-300 translate-x-1 font-bold"
+                                ? "text-[#7F1DFF] translate-x-1 font-bold"
                                 : "text-neutral-500"
                             }`}
                           >
@@ -283,18 +283,18 @@ export default function Experience() {
                 const Icon = roleIcons[effectiveIdx] || Briefcase;
 
                 return (
-                  <div className="rounded-2xl bg-[#0c0a14]/95 border border-purple-500/30 p-6 shadow-2xl shadow-purple-950/40 backdrop-blur-xl">
+                  <div className="rounded-3xl bg-[#18181d]/95 border border-white/15 p-6 shadow-2xl shadow-[#7F1DFF]/15 backdrop-blur-xl text-left">
                     {/* Console Header Bar */}
                     <div className="flex items-center justify-between pb-4 mb-5 border-b border-white/[0.08]">
                       <div className="flex items-center gap-2">
                         <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#FFEB34]" />
                         <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                        <span className="text-[10px] font-mono text-neutral-400 ml-2 tracking-wider">
+                        <span className="text-xs font-mono text-neutral-300 ml-2 tracking-wider">
                           SYSTEM::CONSOLE // NODE_{effectiveIdx + 1}
                         </span>
                       </div>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-500/25 font-semibold">
+                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#131313] text-[#D46F88] border border-white/10 font-semibold">
                         {hoveredRole !== null ? "PREVIEW [HOVER]" : "LOCKED [CLICK]"}
                       </span>
                     </div>
@@ -321,7 +321,7 @@ export default function Experience() {
                                   {job.company}
                                 </h3>
                                 {job.isCurrent && (
-                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+                                  <span className="px-2 py-0.5 rounded-full text-xs font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
                                     {t.activeStatus}
                                   </span>
                                 )}
@@ -336,7 +336,7 @@ export default function Experience() {
                             <span className="text-xs font-mono text-white block font-semibold">
                               {job.period}
                             </span>
-                            <span className="text-[11px] font-mono text-neutral-400">
+                            <span className="text-xs font-mono text-neutral-400">
                               {job.location} · {job.roleType}
                             </span>
                           </div>
@@ -349,13 +349,13 @@ export default function Experience() {
                               key={mIdx}
                               className="p-3 rounded-xl bg-purple-950/25 border border-purple-500/20 hover:border-purple-500/40 transition-colors"
                             >
-                              <span className="text-[10px] font-mono text-purple-300 uppercase block font-semibold truncate">
+                              <span className="text-xs font-mono text-purple-300 uppercase block font-semibold truncate">
                                 {m.label}
                               </span>
                               <span className="text-base sm:text-lg font-mono font-bold text-white block mt-0.5">
                                 {m.value}
                               </span>
-                              <span className="text-[11px] text-neutral-300 block mt-1 leading-snug line-clamp-2">
+                              <span className="text-xs text-neutral-300 block mt-1 leading-snug line-clamp-2">
                                 {m.detail}
                               </span>
                             </div>
@@ -364,7 +364,7 @@ export default function Experience() {
 
                         {/* Executive Summary */}
                         <div>
-                          <h4 className="text-[10px] font-mono uppercase tracking-wider text-purple-300 font-bold mb-1.5">
+                          <h4 className="text-xs font-mono uppercase tracking-wider text-purple-300 font-bold mb-1.5">
                             {t.summaryLabel}
                           </h4>
                           <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
@@ -374,7 +374,7 @@ export default function Experience() {
 
                         {/* Architectural Deliverables */}
                         <div>
-                          <h4 className="text-[10px] font-mono uppercase tracking-wider text-purple-300 font-bold mb-2">
+                          <h4 className="text-xs font-mono uppercase tracking-wider text-purple-300 font-bold mb-2">
                             {t.deliverablesLabel}
                           </h4>
                           <ul className="space-y-2">
@@ -385,7 +385,7 @@ export default function Experience() {
                               >
                                 <span className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
                                 <div>
-                                  <span className="font-mono font-bold text-[10px] text-purple-300 uppercase mr-1.5">
+                                  <span className="font-mono font-bold text-xs text-purple-300 uppercase mr-1.5">
                                     [{ach.tag}]
                                   </span>
                                   {ach.description}
@@ -397,7 +397,7 @@ export default function Experience() {
 
                         {/* Verified Technologies */}
                         <div className="pt-3 border-t border-white/[0.08]">
-                          <span className="text-[10px] font-mono uppercase tracking-wider text-purple-300 font-bold block mb-2">
+                          <span className="text-xs font-mono uppercase tracking-wider text-purple-300 font-bold block mb-2">
                             {t.verifiedTechLabel}
                           </span>
                           <div className="flex flex-wrap gap-1.5">
@@ -431,10 +431,10 @@ export default function Experience() {
                 return (
                   <div
                     key={idx}
-                    className={`relative rounded-2xl border transition-all duration-300 ${
+                    className={`relative rounded-3xl border transition-all duration-300 ${
                       isOpen
-                        ? "bg-[#0c0a14]/95 border-purple-500/40 shadow-xl shadow-purple-950/30"
-                        : "bg-[#0c0a14]/80 border-purple-500/20"
+                        ? "bg-[#18181d]/95 border-[#7F1DFF]/50 shadow-xl shadow-[#7F1DFF]/20"
+                        : "bg-[#18181d]/80 border-white/10"
                     }`}
                   >
                     {/* Basic Info (Tap to toggle console details) */}
@@ -472,11 +472,11 @@ export default function Experience() {
                         <p className="text-xs text-purple-300 font-medium mb-1">
                           {job.title}
                         </p>
-                        <p className="text-[11px] font-mono text-neutral-400 mb-2">
+                        <p className="text-xs font-mono text-neutral-400 mb-2">
                           {job.period} · {job.location}
                         </p>
 
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-950/40 text-purple-300 border border-purple-500/20 line-clamp-1">
+                        <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-purple-950/40 text-purple-300 border border-purple-500/20 line-clamp-1">
                           ✦ {job.highlightMetric}
                         </span>
                       </div>
@@ -499,13 +499,13 @@ export default function Experience() {
                                 key={mIdx}
                                 className="p-2.5 rounded-xl bg-purple-950/30 border border-purple-500/20"
                               >
-                                <span className="text-[9px] font-mono text-purple-300 uppercase block font-semibold truncate">
+                                <span className="text-xs font-mono text-purple-300 uppercase block font-semibold truncate">
                                   {m.label}
                                 </span>
                                 <span className="text-sm font-mono font-bold text-white block">
                                   {m.value}
                                 </span>
-                                <span className="text-[10px] text-neutral-300 block truncate">
+                                <span className="text-xs text-neutral-300 block truncate">
                                   {m.detail}
                                 </span>
                               </div>
@@ -518,15 +518,15 @@ export default function Experience() {
 
                           {/* Architectural deliverables */}
                           <div className="space-y-1.5">
-                            <span className="text-[10px] font-mono uppercase tracking-wider text-purple-300 font-bold block">
+                            <span className="text-xs font-mono uppercase tracking-wider text-purple-300 font-bold block">
                               {t.deliverablesLabel}
                             </span>
                             {job.achievements.map((ach, aIdx) => (
                               <div
                                 key={aIdx}
-                                className="p-2 rounded-lg bg-purple-950/20 border border-purple-500/15 text-[11px] text-neutral-200 leading-relaxed"
+                                className="p-2 rounded-lg bg-purple-950/20 border border-purple-500/15 text-xs text-neutral-200 leading-relaxed"
                               >
-                                <span className="font-mono font-bold text-[9px] text-purple-300 uppercase mr-1">
+                                <span className="font-mono font-bold text-xs text-purple-300 uppercase mr-1">
                                   [{ach.tag}]
                                 </span>
                                 {ach.description}
@@ -540,7 +540,7 @@ export default function Experience() {
                               {job.technologies.map((tech, tIdx) => (
                                 <span
                                   key={tIdx}
-                                  className="px-2 py-0.5 rounded-full text-[11px] text-neutral-200 bg-purple-950/40 border border-purple-500/20"
+                                  className="px-2 py-0.5 rounded-full text-xs text-neutral-200 bg-purple-950/40 border border-purple-500/20"
                                 >
                                   {tech}
                                 </span>
@@ -558,13 +558,13 @@ export default function Experience() {
         </div>
 
         {/* ACADEMIC BACKGROUND */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-[#0c0a14]/90 backdrop-blur-xl border border-purple-500/20 hover:border-purple-400/40 hover:shadow-2xl hover:shadow-purple-950/30 transition-all duration-300 shadow-xl">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#18181d]/90 backdrop-blur-xl border border-white/10 hover:border-[#7F1DFF]/40 hover:shadow-2xl hover:shadow-[#7F1DFF]/15 transition-all duration-300 shadow-xl text-left">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-12 rounded-xl bg-purple-950/40 border border-purple-500/30 flex items-center justify-center text-purple-300 shrink-0 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
+            <div className="w-12 h-12 rounded-2xl bg-[#7F1DFF]/15 border border-[#7F1DFF]/30 flex items-center justify-center text-[#D46F88] shrink-0 shadow-md">
               <GraduationCap className="w-6 h-6 stroke-[1.75]" />
             </div>
             <div>
-              <span className="text-[11px] font-mono font-bold tracking-wider uppercase text-purple-300 mb-0.5 block">
+              <span className="text-xs font-mono font-bold tracking-wider uppercase text-[#D46F88] mb-0.5 block">
                 {t.education.badge}
               </span>
               <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">

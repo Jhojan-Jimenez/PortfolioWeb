@@ -2,7 +2,7 @@
 
 import type React from "react";
 import { useState } from "react";
-import { Mail, MapPin, ArrowUpRight, Github, Linkedin } from "lucide-react";
+import { Mail, MapPin, ArrowUpRight, Github, Linkedin, Send } from "lucide-react";
 import { toast } from "react-toastify";
 import { useLanguage } from "@/app/context/LanguageContext";
 import { TRANSLATIONS } from "@/lib/i18n/translations";
@@ -51,47 +51,50 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 sm:py-32 px-4 relative z-10 border-t border-purple-500/15">
+    <section id="contact" className="py-24 sm:py-32 px-4 relative z-10 bg-[#131313] border-t border-white/10">
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-16">
           {/* LEFT: EDITORIAL COPY & CONTACT INFO */}
-          <div className="lg:col-span-5 flex flex-col justify-between">
+          <div className="lg:col-span-5 flex flex-col justify-between text-left">
             <div>
-              <span className="text-xs font-mono uppercase tracking-[0.25em] text-neutral-400 font-semibold block mb-2">
-                {t.badge}
-              </span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#18181d] border border-[#7F1DFF]/30 text-purple-200 text-xs font-mono mb-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FFEB34] animate-pulse" />
+                <span>{t.badge}</span>
+              </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-6">
-                {t.title} {t.titleItalic}
+                {t.title}
               </h2>
-              <p className="text-neutral-300 text-xs sm:text-sm font-light leading-relaxed mb-8 max-w-md">
+              <p className="text-neutral-300 text-xs sm:text-sm font-normal leading-relaxed mb-8 max-w-md">
                 {t.description}
               </p>
 
               <div className="space-y-4">
                 <a
                   href="mailto:jhojanjimene@gmail.com"
-                  className="group flex items-center justify-between p-4 rounded-2xl bg-[#0c0a14]/90 backdrop-blur-xl border border-purple-500/20 hover:border-purple-400/40 hover:shadow-xl hover:shadow-purple-950/20 transition-all cursor-pointer"
+                  className="group flex items-center justify-between p-4 rounded-3xl bg-[#18181d]/90 backdrop-blur-xl border border-white/10 hover:border-[#7F1DFF]/40 hover:shadow-xl hover:shadow-[#7F1DFF]/15 transition-all cursor-pointer"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl bg-purple-950/40 border border-purple-500/30 flex items-center justify-center text-purple-300 shrink-0">
-                      <Mail className="w-4 h-4" />
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-11 h-11 rounded-2xl bg-[#7F1DFF]/15 border border-[#7F1DFF]/30 flex items-center justify-center text-[#D46F88] shrink-0 shadow-md">
+                      <Mail className="w-5 h-5 stroke-[1.75]" />
                     </div>
                     <div>
-                      <p className="text-[10px] font-mono text-purple-300 uppercase font-semibold">{t.directEmail}</p>
+                      <p className="text-xs font-mono text-[#D46F88] uppercase font-bold">{t.directEmail}</p>
                       <p className="text-xs sm:text-sm font-mono text-white group-hover:text-purple-200 transition-colors">
                         jhojanjimene@gmail.com
                       </p>
                     </div>
                   </div>
-                  <ArrowUpRight className="w-4 h-4 text-neutral-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  <div className="w-8 h-8 rounded-full bg-[#131313] border border-white/10 flex items-center justify-center text-neutral-300 group-hover:bg-[#7F1DFF] group-hover:text-white group-hover:border-[#7F1DFF] transition-all">
+                    <ArrowUpRight className="w-4 h-4" />
+                  </div>
                 </a>
 
-                <div className="flex items-center gap-3 p-4 rounded-2xl bg-[#0c0a14]/90 backdrop-blur-xl border border-purple-500/20">
-                  <div className="w-9 h-9 rounded-xl bg-purple-950/40 border border-purple-500/30 flex items-center justify-center text-purple-300 shrink-0">
-                    <MapPin className="w-4 h-4" />
+                <div className="flex items-center gap-3.5 p-4 rounded-3xl bg-[#18181d]/90 backdrop-blur-xl border border-white/10">
+                  <div className="w-11 h-11 rounded-2xl bg-[#7F1DFF]/15 border border-[#7F1DFF]/30 flex items-center justify-center text-[#D46F88] shrink-0 shadow-md">
+                    <MapPin className="w-5 h-5 stroke-[1.75]" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-mono text-purple-300 uppercase font-semibold">{t.location}</p>
+                    <p className="text-xs font-mono text-[#D46F88] uppercase font-bold">{t.location}</p>
                     <p className="text-xs sm:text-sm font-mono text-white">
                       {t.locationValue}
                     </p>
@@ -107,38 +110,38 @@ export default function Contact() {
                   href="https://github.com/Jhojan-Jimenez"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-xl bg-purple-950/40 border border-purple-500/30 text-purple-300 hover:text-white hover:bg-gradient-to-tr hover:from-purple-600 hover:to-indigo-500 flex items-center justify-center transition-all shadow-[0_0_10px_rgba(168,85,247,0.15)]"
+                  className="w-10 h-10 rounded-2xl bg-[#18181d] border border-white/15 text-neutral-300 hover:text-white hover:border-[#7F1DFF] hover:scale-105 flex items-center justify-center transition-all shadow-md"
                   aria-label="GitHub"
                 >
                   <Github className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/jhojan-jimenez-dev/"
+                  href="https://www.linkedin.com/in/jhojanjimenez/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-xl bg-purple-950/40 border border-purple-500/30 text-purple-300 hover:text-white hover:bg-gradient-to-tr hover:from-purple-600 hover:to-indigo-500 flex items-center justify-center transition-all shadow-[0_0_10px_rgba(168,85,247,0.15)]"
+                  className="w-10 h-10 rounded-2xl bg-[#18181d] border border-white/15 text-neutral-300 hover:text-white hover:border-[#7F1DFF] hover:scale-105 flex items-center justify-center transition-all shadow-md"
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="w-4 h-4" />
                 </a>
               </div>
-              <p className="text-[10px] font-mono text-neutral-400">
+              <p className="text-xs font-mono text-neutral-400">
                 © {new Date().getFullYear()} JHOJAN JIMENEZ · {t.rights}
               </p>
             </div>
           </div>
 
-          {/* RIGHT: MINIMAL DARK FORM */}
-          <div className="lg:col-span-7">
+          {/* RIGHT: MINIMAL DARK FORM WITH DESIGN SYSTEM GLOW */}
+          <div className="lg:col-span-7 text-left">
             <form
               onSubmit={handleSubmit}
-              className="p-7 sm:p-10 rounded-2xl bg-[#0c0a14]/90 backdrop-blur-xl border border-purple-500/20 shadow-2xl shadow-purple-950/30 space-y-5"
+              className="p-7 sm:p-10 rounded-3xl bg-[#18181d]/90 backdrop-blur-xl border border-white/10 hover:border-[#7F1DFF]/30 shadow-2xl space-y-5 transition-all duration-300"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label
                     htmlFor="name"
-                    className="block text-[10px] font-mono tracking-wider uppercase text-purple-300 font-semibold mb-2"
+                    className="block text-xs font-mono tracking-wider uppercase text-[#D46F88] font-bold mb-2"
                   >
                     {t.form.nameLabel}
                   </label>
@@ -150,14 +153,14 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     placeholder={t.form.namePlaceholder}
-                    className="w-full bg-purple-950/20 border border-purple-500/20 focus:border-purple-400/50 text-white placeholder-neutral-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none transition-colors"
+                    className="w-full bg-[#131313] border border-white/10 focus:border-[#7F1DFF] text-white placeholder-neutral-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none transition-colors"
                   />
                 </div>
 
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-[10px] font-mono tracking-wider uppercase text-purple-300 font-semibold mb-2"
+                    className="block text-xs font-mono tracking-wider uppercase text-[#D46F88] font-bold mb-2"
                   >
                     {t.form.emailLabel}
                   </label>
@@ -169,7 +172,7 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     placeholder={t.form.emailPlaceholder}
-                    className="w-full bg-purple-950/20 border border-purple-500/20 focus:border-purple-400/50 text-white placeholder-neutral-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none transition-colors"
+                    className="w-full bg-[#131313] border border-white/10 focus:border-[#7F1DFF] text-white placeholder-neutral-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none transition-colors"
                   />
                 </div>
               </div>
@@ -177,7 +180,7 @@ export default function Contact() {
               <div>
                 <label
                   htmlFor="subject"
-                  className="block text-[10px] font-mono tracking-wider uppercase text-purple-300 font-semibold mb-2"
+                  className="block text-xs font-mono tracking-wider uppercase text-[#D46F88] font-bold mb-2"
                 >
                   {t.form.subjectLabel}
                 </label>
@@ -189,14 +192,14 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   placeholder={t.form.subjectPlaceholder}
-                  className="w-full bg-purple-950/20 border border-purple-500/20 focus:border-purple-400/50 text-white placeholder-neutral-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none transition-colors"
+                  className="w-full bg-[#131313] border border-white/10 focus:border-[#7F1DFF] text-white placeholder-neutral-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none transition-colors"
                 />
               </div>
 
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-[10px] font-mono tracking-wider uppercase text-purple-300 font-semibold mb-2"
+                  className="block text-xs font-mono tracking-wider uppercase text-[#D46F88] font-bold mb-2"
                 >
                   {t.form.messageLabel}
                 </label>
@@ -208,7 +211,7 @@ export default function Contact() {
                   onChange={handleChange}
                   required
                   placeholder={t.form.messagePlaceholder}
-                  className="w-full bg-purple-950/20 border border-purple-500/20 focus:border-purple-400/50 text-white placeholder-neutral-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none transition-colors resize-none"
+                  className="w-full bg-[#131313] border border-white/10 focus:border-[#7F1DFF] text-white placeholder-neutral-500 rounded-xl px-4 py-3 text-xs sm:text-sm outline-none transition-colors resize-none"
                 />
               </div>
 
@@ -216,10 +219,10 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 rounded-full bg-[#eae6df] hover:bg-white text-neutral-950 border border-purple-500/30 hover:shadow-[0_0_20px_rgba(168,85,247,0.35)] font-semibold text-xs tracking-wider uppercase transition-all duration-200 disabled:opacity-50 active:scale-95 cursor-pointer"
+                  className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-[#7F1DFF] to-[#D46F88] hover:from-[#6b14dd] hover:to-[#be5872] text-white font-semibold text-xs font-mono tracking-wider uppercase shadow-[0_0_20px_rgba(127,29,255,0.4)] hover:shadow-[0_0_30px_rgba(212,111,136,0.5)] transition-all duration-200 disabled:opacity-50 active:scale-95 cursor-pointer"
                 >
                   <span>{submitting ? t.form.submittingBtn : t.form.submitBtn}</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
+                  <Send className="w-3.5 h-3.5" />
                 </button>
               </div>
             </form>

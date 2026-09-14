@@ -33,6 +33,9 @@ typography:
   code:
     fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
     fontSize: "0.875rem"
+  badge:
+    fontFamily: "ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace"
+    fontSize: "0.75rem"
 rounded:
   sm: "6px"
   md: "10px"

@@ -87,18 +87,18 @@ export default function ProjectDetailPage({
           </Link>
 
           <div className="hidden sm:flex items-center gap-3">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-neutral-400 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08]">
+            <span className="text-xs font-mono uppercase tracking-wider text-neutral-400 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08]">
               {project.category}
             </span>
           </div>
 
           <div className="flex items-center gap-3">
             {/* Language Switcher */}
-            <div className="inline-flex p-0.5 rounded-full bg-black/60 border border-white/10 text-[10px] font-mono">
+            <div className="inline-flex p-0.5 rounded-full bg-black/60 border border-white/10 text-xs font-mono">
               <button
                 type="button"
                 onClick={() => setLanguage("en")}
-                className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
+                className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
                   language === "en"
                     ? "bg-purple-600 text-white font-semibold"
                     : "text-neutral-400 hover:text-white"
@@ -109,7 +109,7 @@ export default function ProjectDetailPage({
               <button
                 type="button"
                 onClick={() => setLanguage("es")}
-                className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
+                className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
                   language === "es"
                     ? "bg-purple-600 text-white font-semibold"
                     : "text-neutral-400 hover:text-white"
@@ -255,7 +255,7 @@ export default function ProjectDetailPage({
                         <div className="w-8 h-8 rounded-lg bg-purple-950/50 border border-purple-500/30 flex items-center justify-center text-purple-300 group-hover:text-white transition-colors">
                           <IconComponent className="w-4 h-4" />
                         </div>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/[0.04] border border-white/10 text-neutral-300">
+                        <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/10 text-neutral-300">
                           {demo.badge}
                         </span>
                       </div>
@@ -267,7 +267,7 @@ export default function ProjectDetailPage({
                         {demo.description}
                       </p>
                     </div>
-                    <div className="mt-4 pt-3 border-t border-purple-500/10 text-[11px] font-mono text-purple-400 group-hover:text-purple-300 flex items-center gap-1">
+                    <div className="mt-4 pt-3 border-t border-purple-500/10 text-xs font-mono text-purple-400 group-hover:text-purple-300 flex items-center gap-1">
                       <span>{language === "es" ? "Abrir endpoint" : "Launch endpoint"}</span>
                       <span>→</span>
                     </div>
@@ -296,7 +296,7 @@ export default function ProjectDetailPage({
                   key={mIdx}
                   className="p-5 rounded-2xl bg-[#0d0d0d] border border-white/[0.07]"
                 >
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-500 block mb-1">
+                  <span className="text-xs font-mono uppercase tracking-widest text-neutral-400 block mb-1">
                     {metric.label}
                   </span>
                   <span className="text-2xl sm:text-3xl font-light font-mono text-white block mb-2">
@@ -322,7 +322,7 @@ export default function ProjectDetailPage({
           {/* Challenge */}
           <div className="p-7 rounded-2xl bg-[#0d0d0d] border border-white/[0.07] flex flex-col justify-between">
             <div>
-              <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-500 block mb-3">
+              <span className="text-xs font-mono tracking-widest uppercase text-neutral-400 block mb-3">
                 01 / {language === "es" ? "EL DESAFÍO" : "THE CHALLENGE"}
               </span>
               <h3 className="text-lg font-medium text-white mb-3">
@@ -346,7 +346,7 @@ export default function ProjectDetailPage({
           {/* Architecture Solution */}
           <div className="p-7 rounded-2xl bg-[#0d0d0d] border border-white/[0.07] flex flex-col justify-between">
             <div>
-              <span className="text-[10px] font-mono tracking-widest uppercase text-neutral-500 block mb-3">
+              <span className="text-xs font-mono tracking-widest uppercase text-neutral-400 block mb-3">
                 02 / {language === "es" ? "SOLUCIÓN DE ARQUITECTURA" : "ARCHITECTURE & RESOLUTION"}
               </span>
               <h3 className="text-lg font-medium text-white mb-3">
@@ -393,7 +393,7 @@ export default function ProjectDetailPage({
                         <div className="p-2 rounded-lg bg-white/[0.04] text-neutral-300">
                           <Icon className="w-4 h-4" />
                         </div>
-                        <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.05]">
+                        <span className="text-xs font-mono uppercase px-2.5 py-0.5 rounded bg-white/[0.04] text-neutral-400 border border-white/[0.05]">
                           {pillar.badge}
                         </span>
                       </div>
@@ -440,7 +440,7 @@ export default function ProjectDetailPage({
                       <h4 className="text-xs font-mono font-semibold uppercase text-neutral-200">
                         {dec.title}
                       </h4>
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.05] text-neutral-400">
+                      <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-white/[0.05] text-neutral-400">
                         {language === "es" ? "Decisión Técnica" : "Design Choice"}
                       </span>
                     </div>
@@ -479,7 +479,7 @@ export default function ProjectDetailPage({
                     : "Quick Technical Inspection Guide (Terminal)"}
                 </h3>
               </div>
-              <span className="text-[10px] font-mono text-neutral-400 hidden sm:inline">
+              <span className="text-xs font-mono text-neutral-400 hidden sm:inline">
                 bash / zsh
               </span>
             </div>
@@ -499,7 +499,7 @@ export default function ProjectDetailPage({
                     </span>
                     <button
                       onClick={() => copyCommand(cmd.command, cIdx)}
-                      className="inline-flex items-center gap-1 text-[11px] font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-md bg-purple-950/50 hover:bg-purple-900/60 border border-purple-500/30 transition-colors cursor-pointer"
+                      className="inline-flex items-center gap-1 text-xs font-mono text-neutral-300 hover:text-white px-2.5 py-1 rounded-md bg-purple-950/50 hover:bg-purple-900/60 border border-purple-500/30 transition-colors cursor-pointer"
                     >
                       {copiedCmdIdx === cIdx ? (
                         <>
@@ -515,11 +515,11 @@ export default function ProjectDetailPage({
                     </button>
                   </div>
                   {cmd.description && (
-                    <p className="text-[11px] text-neutral-400 font-mono">
+                    <p className="text-xs text-neutral-400 font-mono">
                       {cmd.description}
                     </p>
                   )}
-                  <pre className="p-3.5 rounded-xl bg-black/60 border border-purple-500/20 text-[11px] font-mono text-neutral-200 overflow-x-auto selection:bg-purple-800">
+                  <pre className="p-3.5 rounded-xl bg-black/60 border border-purple-500/20 text-xs font-mono text-neutral-200 overflow-x-auto selection:bg-purple-800">
                     <code>{cmd.command}</code>
                   </pre>
                 </div>
@@ -536,7 +536,7 @@ export default function ProjectDetailPage({
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-500 mb-4">
+          <h2 className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-4">
             {language === "es" ? "STACK DE COMPONENTES DEL SISTEMA" : "SYSTEM COMPONENT STACK"}
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -557,9 +557,9 @@ export default function ProjectDetailPage({
             href={`/projects/${prevProject.slug}`}
             className="w-full sm:w-auto p-4 rounded-xl bg-[#0d0d0d] hover:bg-[#121212] border border-white/[0.07] flex items-center gap-3 transition-colors group"
           >
-            <ArrowLeft className="w-4 h-4 text-neutral-500 group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft className="w-4 h-4 text-neutral-400 group-hover:-translate-x-1 transition-transform" />
             <div className="text-left">
-              <span className="text-[10px] font-mono text-neutral-500 uppercase block">
+              <span className="text-xs font-mono text-neutral-400 uppercase block">
                 {language === "es" ? "Caso Anterior" : "Previous Case"}
               </span>
               <span className="text-xs font-medium text-white">
@@ -580,14 +580,14 @@ export default function ProjectDetailPage({
             className="w-full sm:w-auto p-4 rounded-xl bg-[#0d0d0d] hover:bg-[#121212] border border-white/[0.07] flex items-center justify-between sm:justify-start gap-3 transition-colors group text-right sm:text-left"
           >
             <div>
-              <span className="text-[10px] font-mono text-neutral-500 uppercase block">
+              <span className="text-xs font-mono text-neutral-400 uppercase block">
                 {language === "es" ? "Siguiente Caso" : "Next Case"}
               </span>
               <span className="text-xs font-medium text-white">
                 {nextProject.title.split("—")[0]}
               </span>
             </div>
-            <ArrowRight className="w-4 h-4 text-neutral-500 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 text-neutral-400 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </main>

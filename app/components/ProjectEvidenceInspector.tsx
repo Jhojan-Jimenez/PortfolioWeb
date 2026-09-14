@@ -64,7 +64,7 @@ export default function ProjectEvidenceInspector({
         {/* Subtle Bar for Iframes / Pop-out */}
         {currentItem?.type === "iframe" && (
           <div className="flex items-center justify-between px-4 py-2 bg-[#0d0818] border-b border-white/10 text-xs font-mono text-neutral-400">
-            <span className="text-[11px] text-neutral-300 font-medium truncate">
+            <span className="text-xs text-neutral-300 font-medium truncate">
               {currentItem.title}
             </span>
             {currentItem.openUrl && (
@@ -72,7 +72,7 @@ export default function ProjectEvidenceInspector({
                 href={currentItem.openUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[11px] text-purple-300 hover:text-white inline-flex items-center gap-1 transition-colors"
+                className="text-xs text-purple-300 hover:text-white inline-flex items-center gap-1 transition-colors"
               >
                 <span>{currentItem.openLabel || "Abrir enlace"}</span>
                 <ArrowUpRight className="w-3 h-3" />
