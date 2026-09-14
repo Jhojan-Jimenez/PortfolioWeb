@@ -121,7 +121,7 @@ export default function ProjectEvidenceInspector({
               </motion.div>
             )}
 
-            {!currentItem && (
+            {!currentItem && defaultHeroImage ? (
               <div className="relative aspect-[16/9] w-full bg-neutral-950">
                 <Image
                   src={defaultHeroImage}
@@ -131,7 +131,11 @@ export default function ProjectEvidenceInspector({
                   priority
                 />
               </div>
-            )}
+            ) : !currentItem ? (
+              <div className="relative aspect-[16/9] w-full bg-[#140c1c] flex items-center justify-center text-purple-300 font-mono text-sm">
+                {projectTitle}
+              </div>
+            ) : null}
           </AnimatePresence>
         </div>
 
