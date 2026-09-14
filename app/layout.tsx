@@ -1,12 +1,13 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "./context/LanguageContext";
 
-const inter = Inter({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -29,13 +30,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth dark ${inter.variable}`}>
+    <html lang="en" className={`scroll-smooth dark ${plusJakarta.variable}`}>
       <body className="text-neutral-100 font-sans antialiased selection:bg-purple-900/50 selection:text-white">
         <LanguageProvider>{children}</LanguageProvider>
-      {/* impeccable-live-start */}
-<script src="http://localhost:8400/live.js?token=35f42241-3f25-45b2-9823-5afac6651832"></script>
-{/* impeccable-live-end */}
-</body>
+      </body>
     </html>
   );
 }
