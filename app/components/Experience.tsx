@@ -5,13 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Download,
   Eye,
-  Briefcase,
-  GraduationCap,
   Award,
-  CheckCircle2,
-  Calendar,
-  Building2,
-  ChevronDown,
+  GraduationCap,
   Sparkles,
 } from "lucide-react";
 import { useLanguage } from "@/app/context/LanguageContext";
@@ -21,7 +16,7 @@ export default function Experience() {
   const { language } = useLanguage();
   const t = TRANSLATIONS[language].experience;
 
-  // Track expanded cards for detailed technical architecture view
+  // Track expanded cards for detailed technical architecture inspect
   const [expandedRole, setExpandedRole] = useState<number | null>(null);
 
   const handleAction = (type: "cv" | "resume", mode: "download" | "preview") => {
@@ -49,58 +44,77 @@ export default function Experience() {
       period: "2022 – 2026",
       title:
         language === "es"
-          ? "Grado en Ingeniería Informática (Computational Science)"
-          : "B.S. in Computer Science & Informatics Engineering",
+          ? "INGENIERÍA INFORMÁTICA / COMPUTATIONAL SCIENCE"
+          : "B.S. IN COMPUTER SCIENCE & INFORMATICS",
       institution:
         language === "es"
-          ? "Universidad de La Sabana · Chía, Colombia"
-          : "Universidad de La Sabana · Chía, Colombia",
+          ? "Universidad de La Sabana · Promedio 4.4 / 5.0"
+          : "Universidad de La Sabana · Cumulative GPA: 4.4 / 5.0",
       highlight:
         language === "es"
-          ? "Beneficiario de Beca de Excelencia Académica del 80% · Promedio 4.4 / 5.0"
-          : "80% Academic Excellence Merit Scholarship · Cumulative GPA: 4.4 / 5.0",
+          ? "Énfasis en Arquitectura de Software y Sistemas Distribuidos"
+          : "Focus on Software Architecture & Distributed Systems",
       description:
         language === "es"
-          ? "Formación rigurosa con énfasis en Arquitectura de Software, Sistemas Distribuidos, Concurrencia y Bases de Datos Vectoriales y Relacionales de alta escala."
-          : "Rigorous curriculum emphasizing Software Architecture, Distributed Systems, Concurrency, and high-scale Relational and Vector Databases.",
+          ? "Formación en alta concurrencia, bases de datos vectoriales y relacionales, redes y diseño de sistemas distribuidos."
+          : "Curriculum focusing on high concurrency, vector and relational databases, networks, and distributed systems design.",
+    },
+    {
+      period: "2022 – 2026",
+      title:
+        language === "es"
+          ? "BECA DE EXCELENCIA ACADÉMICA DEL 80%"
+          : "80% ACADEMIC EXCELLENCE SCHOLARSHIP",
+      institution:
+        language === "es"
+          ? "Universidad de La Sabana · Mérito al Ingreso"
+          : "Universidad de La Sabana · Entrance Merit Honor",
+      highlight:
+        language === "es"
+          ? "Beca otorgada por rendimiento académico sobresaliente"
+          : "Awarded for top-tier academic merit and technical potential",
+      description:
+        language === "es"
+          ? "Reconocimiento institucional mantenido de forma continua con un promedio acumulado de 4.4 / 5.0."
+          : "Continuous institutional honor maintained with a cumulative 4.4 / 5.0 grade point average.",
     },
     {
       period: "2025",
       title:
         language === "es"
-          ? "🏆 1er Lugar — Sabana Hack 2025"
-          : "🏆 1st Place — Sabana Hack 2025",
+          ? "1ER LUGAR — SABANA HACK 2025"
+          : "1ST PLACE — SABANA HACK 2025",
       institution:
         language === "es"
           ? "Cruz Roja Colombiana & Unisabana"
           : "Colombian Red Cross & Unisabana",
       highlight:
         language === "es"
-          ? "Sistema de Alertas en Tiempo Real con IA en sprint de 24h"
-          : "Real-Time AI Alerting & Triage System built in 24h sprint",
+          ? "Alertas en Tiempo Real con IA en sprint de 24 horas"
+          : "Real-Time AI Alerting System built in 24h sprint",
       description:
         language === "es"
-          ? "Diseño e implementación de arquitectura distribuida para procesamiento de emergencias y triaje inteligente bajo alta demanda."
-          : "Engineered and shipped a distributed real-time emergency triage and automated alerting architecture under high concurrency.",
+          ? "Diseño e implementación de arquitectura distribuida para triaje de emergencias y procesamiento en tiempo real."
+          : "Designed and deployed distributed emergency triage architecture and real-time processing under high demand.",
     },
     {
       period: language === "es" ? "Continuo" : "Ongoing",
       title:
         language === "es"
-          ? "Competencia Profesional & Bilingüismo"
-          : "Professional Competence & Bilingualism",
+          ? "BILINGÜISMO & COMPETENCIA TÉCNICA"
+          : "BILINGUAL & TECHNICAL EXPERTISE",
       institution:
         language === "es"
-          ? "Estándar Global de Ingeniería"
-          : "Global Engineering Standards",
+          ? "Inglés (B2 Profesional) · Español (Nativo)"
+          : "English (B2 Professional) · Spanish (Native)",
       highlight:
         language === "es"
-          ? "Español (Nativo) · Inglés (B2 Profesional)"
-          : "Spanish (Native) · English (B2 Professional)",
+          ? "Comunicación fluida para equipos globales remotos"
+          : "Fluent technical communication for global remote teams",
       description:
         language === "es"
-          ? "Comunicación técnica fluida para entornos internacionales, code reviews en inglés y diseño de especificaciones de sistemas distribuidos."
-          : "Fluent technical communication in English, architectural design documents, international code reviews, and remote agile workflows.",
+          ? "Capacidad de documentación técnica, diseño de especificaciones RFCs y code reviews en inglés."
+          : "Proven RFC specification authoring, international code reviews, and remote agile collaboration in English.",
     },
   ];
 
@@ -110,35 +124,15 @@ export default function Experience() {
       className="py-24 sm:py-32 px-4 relative z-10 bg-[#0f0715]"
     >
       <div className="container mx-auto max-w-6xl">
-        {/* GEROLD'S SECTION HEADER */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#140c1c] border border-[#8750f7]/40 text-purple-200 text-xs font-mono mb-4 shadow-[0_0_15px_rgba(135,80,247,0.15)]">
-            <span className="w-2 h-2 rounded-full bg-[#8750f7] animate-pulse" />
-            <span>{t.badge}</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8750f7] via-[#a855f7] to-white">
-              {language === "es" ? "Mi Trayectoria & Resumen" : "My Experience & Resume"}
-            </span>
-          </h2>
-
-          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-            {language === "es"
-              ? "Historial comprobado en empresas y startups liderando arquitecturas backend resilientes, despliegues cloud y pipelines de datos de alto rendimiento."
-              : "Proven production track record across high-growth ventures leading resilient backend architectures, cloud infrastructure, and data pipelines."}
-          </p>
-        </div>
-
-        {/* OFFICIAL RESUME HUB (GEROLD STYLE BUTTONS) */}
-        <div className="p-6 sm:p-8 rounded-[30px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/40 transition-all duration-300 shadow-xl mb-16 flex flex-col lg:flex-row lg:items-center justify-between gap-6 text-left">
+        {/* OFFICIAL RESUME HUB (DOWNLOAD BUTTONS) */}
+        <div className="p-6 sm:p-7 rounded-[26px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/40 transition-all duration-300 shadow-xl mb-16 flex flex-col sm:flex-row sm:items-center justify-between gap-5 text-left">
           <div>
-            <div className="flex items-center gap-2 mb-1.5">
+            <div className="flex items-center gap-2 mb-1">
               <span className="text-xs font-mono uppercase tracking-wider text-[#8750f7] font-bold">
                 ✦ {t.resumeHub.title}
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-neutral-300 max-w-xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-xl">
               {t.resumeHub.description}
             </p>
           </div>
@@ -182,95 +176,70 @@ export default function Experience() {
           </div>
         </div>
 
-        {/* GEROLD'S 2-COLUMN PARALLEL RESUME (MY EXPERIENCE & MY EDUCATION) */}
+        {/* GEROLD'S EXACT 2-COLUMN EXPERIENCE & EDUCATION LAYOUT (4 vs 4) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 items-start text-left">
-          {/* COLUMN 1: MY EXPERIENCE */}
+          {/* COLUMN 1: MY EXPERIENCE (4 CARDS) */}
           <div>
-            {/* Column Header */}
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 rounded-full bg-[#1c102b] border border-[#8750f7]/40 text-[#8750f7] flex items-center justify-center shadow-md">
-                <Briefcase className="w-5 h-5" />
+            {/* Column Header with Gerold's Badge/Award Icon */}
+            <div className="flex items-center gap-3.5 mb-8">
+              <div className="text-[#8750f7]">
+                <Award className="w-8 h-8 sm:w-9 sm:h-9 stroke-[1.75]" />
               </div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
                 {language === "es" ? "Mi Experiencia" : "My Experience"}
               </h3>
             </div>
 
-            {/* Resume Items List */}
-            <div className="space-y-6">
+            {/* 4 Experience Cards */}
+            <div className="space-y-5">
               {t.roles.map((job, idx) => {
                 const isExpanded = expandedRole === idx;
                 return (
                   <div
                     key={idx}
-                    className="p-6 sm:p-7 rounded-[26px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 hover:bg-[#190f24] transition-all duration-300 group relative shadow-lg"
+                    onClick={() => setExpandedRole(isExpanded ? null : idx)}
+                    className="p-6 sm:p-7 rounded-[22px] bg-[#140c1c] border border-white/5 hover:border-[#8750f7]/60 hover:bg-gradient-to-r hover:from-[#1b0e30] hover:to-[#140c1c] transition-all duration-300 group cursor-pointer relative shadow-lg"
                   >
                     {/* Time Period in Gerold's Neon Purple */}
                     <div className="flex items-center justify-between gap-2 mb-2">
-                      <span className="text-base sm:text-lg font-bold text-[#8750f7] font-mono">
+                      <span className="text-sm sm:text-base font-bold text-[#8750f7] tracking-wide">
                         {job.period}
                       </span>
                       {job.isCurrent && (
-                        <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 inline-flex items-center gap-1">
+                        <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 inline-flex items-center gap-1">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                           {t.activeStatus}
                         </span>
                       )}
                     </div>
 
-                    {/* Role Title */}
-                    <h4 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#8750f7] transition-colors mb-1">
+                    {/* Role Title in Bold Uppercase (Direct from Gerold Screenshot) */}
+                    <h4 className="text-lg sm:text-xl font-extrabold text-white tracking-wide uppercase group-hover:text-purple-200 transition-colors mb-1.5 leading-snug">
                       {job.title}
                     </h4>
 
-                    {/* Company & Location */}
-                    <p className="text-neutral-400 text-xs sm:text-sm font-medium mb-3">
-                      {job.company} · {job.location}
+                    {/* Company and Location */}
+                    <p className="text-neutral-400 text-sm font-medium">
+                      {job.company}, {job.location}
                     </p>
 
-                    {/* Highlight Metric Pill */}
-                    <div className="mb-4">
-                      <span className="text-xs font-mono px-3 py-1 rounded-full bg-[#1e1130] text-[#D46F88] border border-[#8750f7]/30 inline-block font-semibold">
+                    {/* Highlight Metric Badge */}
+                    <div className="mt-3 flex items-center justify-between">
+                      <span className="text-xs font-mono text-purple-300/90">
                         ✦ {job.highlightMetric}
                       </span>
-                    </div>
-
-                    {/* Summary Description */}
-                    <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed mb-4">
-                      {job.description}
-                    </p>
-
-                    {/* Tech Stack Pills */}
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {(job.technologies || []).slice(0, 5).map((tech, tIdx) => (
-                        <span
-                          key={tIdx}
-                          className="px-2 py-0.5 rounded-md text-[11px] font-mono text-neutral-300 bg-white/5 border border-white/5"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Expandable Architectural Details Toggle */}
-                    <button
-                      onClick={() =>
-                        setExpandedRole(isExpanded ? null : idx)
-                      }
-                      className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#8750f7] hover:text-[#a855f7] transition-colors cursor-pointer"
-                    >
-                      <span>
+                      <span className="text-[11px] font-mono text-[#8750f7] opacity-0 group-hover:opacity-100 transition-opacity">
                         {isExpanded
                           ? language === "es"
-                            ? "Ocultar entregables [-]"
-                            : "Hide details [-]"
+                            ? "Cerrar [-]"
+                            : "Close [-]"
                           : language === "es"
-                          ? "Ver entregables técnicos [+]"
-                          : "View technical deliverables [+]"}
+                          ? "Ver detalles [+]"
+                          : "Inspect [+]"}
                       </span>
-                    </button>
+                    </div>
 
-                    {/* Expanded Deliverables Drawer */}
+                    {/* Expandable Architectural Deliverables Drawer */}
                     <AnimatePresence>
                       {isExpanded && (
                         <motion.div
@@ -278,12 +247,16 @@ export default function Experience() {
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.3 }}
-                          className="pt-4 mt-4 border-t border-white/10 space-y-2"
+                          className="pt-4 mt-4 border-t border-white/10 space-y-2.5"
                         >
+                          <p className="text-xs text-neutral-300 leading-relaxed">
+                            {job.description}
+                          </p>
+
                           {job.achievements.map((ach, aIdx) => (
                             <div
                               key={aIdx}
-                              className="p-3 rounded-xl bg-purple-950/20 border border-purple-500/20 text-xs text-neutral-200 leading-relaxed"
+                              className="p-2.5 rounded-xl bg-purple-950/20 border border-purple-500/20 text-xs text-neutral-200 leading-relaxed"
                             >
                               <span className="font-mono font-bold text-xs text-[#8750f7] uppercase mr-1.5">
                                 [{ach.tag}]
@@ -291,6 +264,18 @@ export default function Experience() {
                               {ach.description}
                             </div>
                           ))}
+
+                          {/* Tech Pills */}
+                          <div className="pt-2 flex flex-wrap gap-1.5">
+                            {(job.technologies || []).map((tech, tIdx) => (
+                              <span
+                                key={tIdx}
+                                className="px-2 py-0.5 rounded-md text-[10px] font-mono text-neutral-300 bg-white/5 border border-white/5"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -300,53 +285,48 @@ export default function Experience() {
             </div>
           </div>
 
-          {/* COLUMN 2: MY EDUCATION */}
+          {/* COLUMN 2: MY EDUCATION (4 CARDS) */}
           <div>
-            {/* Column Header */}
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 rounded-full bg-[#1c102b] border border-[#8750f7]/40 text-[#8750f7] flex items-center justify-center shadow-md">
-                <GraduationCap className="w-5 h-5" />
+            {/* Column Header with Gerold's Mortarboard Icon */}
+            <div className="flex items-center gap-3.5 mb-8">
+              <div className="text-[#8750f7]">
+                <GraduationCap className="w-8 h-8 sm:w-9 sm:h-9 stroke-[1.75]" />
               </div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
                 {language === "es" ? "Mi Educación" : "My Education"}
               </h3>
             </div>
 
-            {/* Education Items List */}
-            <div className="space-y-6">
+            {/* 4 Education & Recognition Cards */}
+            <div className="space-y-5">
               {educationItems.map((edu, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 rounded-[26px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 hover:bg-[#190f24] transition-all duration-300 group relative shadow-lg"
+                  className="p-6 sm:p-7 rounded-[22px] bg-[#140c1c] border border-white/5 hover:border-[#8750f7]/60 hover:bg-gradient-to-r hover:from-[#1b0e30] hover:to-[#140c1c] transition-all duration-300 group cursor-pointer relative shadow-lg"
                 >
                   {/* Time Period in Gerold's Neon Purple */}
                   <div className="mb-2">
-                    <span className="text-base sm:text-lg font-bold text-[#8750f7] font-mono">
+                    <span className="text-sm sm:text-base font-bold text-[#8750f7] tracking-wide">
                       {edu.period}
                     </span>
                   </div>
 
-                  {/* Title */}
-                  <h4 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#8750f7] transition-colors mb-1">
+                  {/* Title in Bold Uppercase (Direct from Gerold Screenshot) */}
+                  <h4 className="text-lg sm:text-xl font-extrabold text-white tracking-wide uppercase group-hover:text-purple-200 transition-colors mb-1.5 leading-snug">
                     {edu.title}
                   </h4>
 
                   {/* Institution */}
-                  <p className="text-neutral-400 text-xs sm:text-sm font-medium mb-3">
+                  <p className="text-neutral-400 text-sm font-medium">
                     {edu.institution}
                   </p>
 
-                  {/* Highlight Distinction Pill */}
-                  <div className="mb-4">
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-[#1e1130] text-[#D46F88] border border-[#8750f7]/30 inline-block font-semibold">
+                  {/* Highlight Pill */}
+                  <div className="mt-3">
+                    <span className="text-xs font-mono text-purple-300/90">
                       ✦ {edu.highlight}
                     </span>
                   </div>
-
-                  {/* Description */}
-                  <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed">
-                    {edu.description}
-                  </p>
                 </div>
               ))}
             </div>
