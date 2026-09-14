@@ -61,7 +61,7 @@ export default function Header() {
           onClick={() => scrollToSection("home")}
           className="group inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-neutral-100 hover:text-purple-300 transition-all cursor-pointer"
         >
-          <span className="w-5 h-5 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-500 text-[10px] font-bold text-white flex items-center justify-center shadow-[0_0_10px_rgba(168,85,247,0.35)] group-hover:scale-110 transition-transform">
+          <span className="w-6 h-6 rounded-full bg-purple-600 border border-purple-400/40 text-xs font-bold text-white flex items-center justify-center shadow-[0_0_12px_rgba(168,85,247,0.4)] group-hover:scale-110 transition-transform">
             J
           </span>
           <span className="flex items-center gap-0.5">
@@ -75,7 +75,7 @@ export default function Header() {
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`text-[11px] font-medium tracking-[0.16em] uppercase transition-all duration-200 relative cursor-pointer ${
+              className={`text-xs font-medium tracking-[0.16em] uppercase transition-all duration-200 relative cursor-pointer ${
                 activeSection === item.id
                   ? "text-purple-300 font-semibold"
                   : "text-neutral-400 hover:text-white"
@@ -85,7 +85,7 @@ export default function Header() {
               {activeSection === item.id && (
                 <motion.div
                   layoutId="activeNavIndicator"
-                  className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full"
+                  className="absolute -bottom-1 left-0 right-0 h-[2px] bg-purple-400 shadow-[0_0_8px_rgba(168,85,247,0.8)] rounded-full"
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
@@ -96,11 +96,11 @@ export default function Header() {
         {/* Right cluster: Language Switcher Pill + CTA + Mobile Hamburger */}
         <div className="flex items-center gap-2.5">
           {/* Segmented Language Switcher (EN | ES) */}
-          <div className="inline-flex p-0.5 rounded-full bg-black/40 border border-white/10 text-[10px] font-mono">
+          <div className="inline-flex p-0.5 rounded-full bg-black/40 border border-white/10 text-xs font-mono">
             <button
               type="button"
               onClick={() => setLanguage("en")}
-              className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
+              className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
                 language === "en"
                   ? "bg-purple-600 text-white font-semibold shadow-[0_0_10px_rgba(168,85,247,0.5)]"
                   : "text-neutral-400 hover:text-white"
@@ -112,7 +112,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setLanguage("es")}
-              className={`px-2 py-0.5 rounded-full transition-all cursor-pointer ${
+              className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
                 language === "es"
                   ? "bg-purple-600 text-white font-semibold shadow-[0_0_10px_rgba(168,85,247,0.5)]"
                   : "text-neutral-400 hover:text-white"
@@ -123,10 +123,10 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Action Button: Warm Cream & Purple Ring "LET'S TALK / HABLEMOS" Pill */}
+          {/* Action Button: Glowing Purple-Pink Gradient Pill (matching reference design) */}
           <button
             onClick={() => scrollToSection("contact")}
-            className="inline-flex items-center justify-center px-3.5 sm:px-4 py-1.5 rounded-full text-xs font-medium tracking-wide bg-[#eae6df] hover:bg-white text-neutral-950 border border-purple-500/30 hover:shadow-[0_0_20px_rgba(168,85,247,0.35)] transition-all duration-200 active:scale-95 cursor-pointer shrink-0"
+            className="inline-flex items-center justify-center px-4 sm:px-5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(236,72,153,0.5)] transition-all duration-200 active:scale-95 cursor-pointer shrink-0"
           >
             {t.cta}
           </button>
