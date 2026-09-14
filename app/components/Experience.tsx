@@ -5,14 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Download,
   Eye,
-  Award,
-  Workflow,
-  GraduationCap,
-  ChevronDown,
   Briefcase,
+  GraduationCap,
+  Award,
+  CheckCircle2,
+  Calendar,
   Building2,
-  Activity,
-  ShoppingCart,
+  ChevronDown,
+  Sparkles,
 } from "lucide-react";
 import { useLanguage } from "@/app/context/LanguageContext";
 import { TRANSLATIONS } from "@/lib/i18n/translations";
@@ -21,12 +21,8 @@ export default function Experience() {
   const { language } = useLanguage();
   const t = TRANSLATIONS[language].experience;
 
-  // Unified Hybrid Timeline + Console State (Active locked role & temporary hover preview)
-  const [activeRole, setActiveRole] = useState<number>(0);
-  const [hoveredRole, setHoveredRole] = useState<number | null>(null);
-
-  const roleIcons = [Building2, Workflow, Activity, ShoppingCart];
-
+  // Track expanded cards for detailed technical architecture view
+  const [expandedRole, setExpandedRole] = useState<number | null>(null);
 
   const handleAction = (type: "cv" | "resume", mode: "download" | "preview") => {
     const fileUrl =
@@ -48,505 +44,253 @@ export default function Experience() {
     }
   };
 
+  const educationItems = [
+    {
+      period: "2022 – 2026",
+      title:
+        language === "es"
+          ? "Grado en Ingeniería Informática (Computational Science)"
+          : "B.S. in Computer Science & Informatics Engineering",
+      institution:
+        language === "es"
+          ? "Universidad de La Sabana · Chía, Colombia"
+          : "Universidad de La Sabana · Chía, Colombia",
+      highlight:
+        language === "es"
+          ? "Beneficiario de Beca de Excelencia Académica del 80% · Promedio 4.4 / 5.0"
+          : "80% Academic Excellence Merit Scholarship · Cumulative GPA: 4.4 / 5.0",
+      description:
+        language === "es"
+          ? "Formación rigurosa con énfasis en Arquitectura de Software, Sistemas Distribuidos, Concurrencia y Bases de Datos Vectoriales y Relacionales de alta escala."
+          : "Rigorous curriculum emphasizing Software Architecture, Distributed Systems, Concurrency, and high-scale Relational and Vector Databases.",
+    },
+    {
+      period: "2025",
+      title:
+        language === "es"
+          ? "🏆 1er Lugar — Sabana Hack 2025"
+          : "🏆 1st Place — Sabana Hack 2025",
+      institution:
+        language === "es"
+          ? "Cruz Roja Colombiana & Unisabana"
+          : "Colombian Red Cross & Unisabana",
+      highlight:
+        language === "es"
+          ? "Sistema de Alertas en Tiempo Real con IA en sprint de 24h"
+          : "Real-Time AI Alerting & Triage System built in 24h sprint",
+      description:
+        language === "es"
+          ? "Diseño e implementación de arquitectura distribuida para procesamiento de emergencias y triaje inteligente bajo alta demanda."
+          : "Engineered and shipped a distributed real-time emergency triage and automated alerting architecture under high concurrency.",
+    },
+    {
+      period: language === "es" ? "Continuo" : "Ongoing",
+      title:
+        language === "es"
+          ? "Competencia Profesional & Bilingüismo"
+          : "Professional Competence & Bilingualism",
+      institution:
+        language === "es"
+          ? "Estándar Global de Ingeniería"
+          : "Global Engineering Standards",
+      highlight:
+        language === "es"
+          ? "Español (Nativo) · Inglés (B2 Profesional)"
+          : "Spanish (Native) · English (B2 Professional)",
+      description:
+        language === "es"
+          ? "Comunicación técnica fluida para entornos internacionales, code reviews en inglés y diseño de especificaciones de sistemas distribuidos."
+          : "Fluent technical communication in English, architectural design documents, international code reviews, and remote agile workflows.",
+    },
+  ];
+
   return (
-    <section id="experience" className="py-24 sm:py-32 px-4 relative z-10 bg-[#131313]">
+    <section
+      id="experience"
+      className="py-24 sm:py-32 px-4 relative z-10 bg-[#0f0715]"
+    >
       <div className="container mx-auto max-w-6xl">
-        {/* SECTION HEADER: "Engineering Success Stories" (MATCHING REFERENCE DESIGN) */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 text-left">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#18181d] border border-[#7F1DFF]/30 text-purple-200 text-xs font-mono mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FFEB34] animate-pulse" />
-              <span>{t.badge}</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
-              {language === "es" ? "Casos de Éxito & Experiencia" : "Engineering Success Stories"}
-            </h2>
+        {/* GEROLD'S SECTION HEADER */}
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#140c1c] border border-[#8750f7]/40 text-purple-200 text-xs font-mono mb-4 shadow-[0_0_15px_rgba(135,80,247,0.15)]">
+            <span className="w-2 h-2 rounded-full bg-[#8750f7] animate-pulse" />
+            <span>{t.badge}</span>
           </div>
-          <p className="text-neutral-300 text-xs sm:text-sm font-normal max-w-md leading-relaxed">
-            {t.subtitle}
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8750f7] via-[#a855f7] to-white">
+              {language === "es" ? "Mi Trayectoria & Resumen" : "My Experience & Resume"}
+            </span>
+          </h2>
+
+          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
+            {language === "es"
+              ? "Historial comprobado en empresas y startups liderando arquitecturas backend resilientes, despliegues cloud y pipelines de datos de alto rendimiento."
+              : "Proven production track record across high-growth ventures leading resilient backend architectures, cloud infrastructure, and data pipelines."}
           </p>
         </div>
 
-        {/* CONSOLIDATED OFFICIAL RESUME HUB */}
-        <div id="resume-hub" className="mb-12 scroll-mt-28 p-6 sm:p-8 rounded-3xl bg-[#18181d]/90 backdrop-blur-xl border border-white/10 hover:border-[#7F1DFF]/30 transition-all shadow-xl text-left">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div>
-              <div className="flex items-center gap-2 mb-1.5">
-                <span className="text-xs font-mono uppercase tracking-wider text-[#D46F88] font-bold">
-                  ✦ {t.resumeHub.title}
-                </span>
-              </div>
-              <p className="text-xs sm:text-sm text-neutral-300 font-normal max-w-xl leading-relaxed">
-                {t.resumeHub.description}
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
-              {/* CV Español */}
-              <div className="inline-flex rounded-2xl overflow-hidden border border-white/15 bg-[#131313] shadow-lg">
-                <motion.button
-                  onClick={() => handleAction("cv", "download")}
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-[#7F1DFF] hover:bg-[#6b14dd] text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer min-h-[44px]"
-                >
-                  <Download className="w-4 h-4 text-white" />
-                  <span>{t.resumeHub.downloadCv}</span>
-                </motion.button>
-
-                <motion.button
-                  onClick={() => handleAction("cv", "preview")}
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.98 }}
-                  aria-label="Preview CV"
-                  className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 bg-[#131313] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-white/15 text-xs sm:text-sm font-medium cursor-pointer min-h-[44px]"
-                >
-                  <Eye className="w-4 h-4" />
-                  <span>{t.resumeHub.preview}</span>
-                </motion.button>
-              </div>
-
-              {/* Resume English */}
-              <div className="inline-flex rounded-2xl overflow-hidden border border-white/15 bg-[#131313] shadow-lg">
-                <motion.button
-                  onClick={() => handleAction("resume", "download")}
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#7F1DFF] to-[#D46F88] hover:from-[#6b14dd] hover:to-[#be5872] text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer min-h-[44px]"
-                >
-                  <Download className="w-4 h-4 text-white" />
-                  <span>{t.resumeHub.downloadResume}</span>
-                </motion.button>
-
-                <motion.button
-                  onClick={() => handleAction("resume", "preview")}
-                  whileHover={{ scale: 1.01 }}
-                  whileTap={{ scale: 0.98 }}
-                  aria-label="Preview Resume"
-                  className="flex items-center justify-center gap-1.5 px-3.5 py-2.5 bg-[#131313] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-white/15 text-xs sm:text-sm font-medium cursor-pointer min-h-[44px]"
-                >
-                  <Eye className="w-4 h-4" />
-                  <span>{t.resumeHub.preview}</span>
-                </motion.button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* HIGHLIGHT BANNERS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
-          {t.highlights.map((h, i) => {
-            const Icon = h.icon;
-            return (
-              <div
-                key={i}
-                className="p-6 rounded-3xl bg-[#18181d]/90 backdrop-blur-xl border border-white/10 hover:border-[#7F1DFF]/40 hover:shadow-2xl hover:shadow-[#7F1DFF]/15 transition-all duration-300 shadow-xl flex items-start gap-4 text-left"
-              >
-                <div className="w-12 h-12 rounded-xl bg-purple-950/40 border border-purple-500/30 flex items-center justify-center text-purple-300 shrink-0 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
-                  <Icon className="w-6 h-6 stroke-[1.75]" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <h4 className="text-base font-bold text-white tracking-tight">{h.title}</h4>
-                    <span className="text-xs font-mono text-purple-300 font-semibold">
-                      · {h.badge}
-                    </span>
-                  </div>
-                  <p className="text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed">
-                    {h.description}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* ========================================================================= */}
-        {/* PROGRESSIVE SMART ACCORDION (DESPLEGABLES) — UNIFIED RESPONSIVE TIMELINE    */}
-        {/* ========================================================================= */}
-        {/* HYBRID TIMELINE + CAREER CONSOLE (HOVER & CLICK INSPECTOR)                */}
-        {/* ========================================================================= */}
-        <div className="mb-16">
-          {/* Section Subtitle / Instructions */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-1 mb-6 pb-3 border-b border-purple-500/20">
-            <div className="flex items-center gap-3">
-              <span className="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse" />
-              <span className="text-xs font-mono uppercase tracking-wider text-purple-300 font-bold">
-                {language === "es"
-                  ? "Cronología Técnica e Inspector de Arquitectura"
-                  : "Technical Timeline & Architecture Inspector"}
+        {/* OFFICIAL RESUME HUB (GEROLD STYLE BUTTONS) */}
+        <div className="p-6 sm:p-8 rounded-[30px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/40 transition-all duration-300 shadow-xl mb-16 flex flex-col lg:flex-row lg:items-center justify-between gap-6 text-left">
+          <div>
+            <div className="flex items-center gap-2 mb-1.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#8750f7] font-bold">
+                ✦ {t.resumeHub.title}
               </span>
             </div>
-            <span className="text-xs font-mono text-neutral-400">
-              {language === "es"
-                ? "Pasa el cursor o haz clic en cualquier rol para inspeccionar sus métricas y arquitectura"
-                : "Hover or click any role to inspect live metrics & system architecture"}
-            </span>
+            <p className="text-xs sm:text-sm text-neutral-300 max-w-xl leading-relaxed">
+              {t.resumeHub.description}
+            </p>
           </div>
 
-          {/* DESKTOP VIEW (lg+): SPLIT TIMELINE + STICKY CONSOLE */}
-          <div className="hidden lg:grid lg:grid-cols-12 gap-8 items-start">
-            {/* LEFT COLUMN: CONNECTED TIMELINE */}
-            <div className="lg:col-span-5 relative">
-              {/* Continuous vertical glowing timeline spine */}
-              <div className="absolute left-[27px] top-6 bottom-6 w-0.5 bg-gradient-to-b from-purple-500 via-indigo-500/70 to-purple-900/30" />
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            {/* CV Español */}
+            <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
+              <button
+                onClick={() => handleAction("cv", "download")}
+                className="flex items-center gap-2 px-5 py-2.5 bg-[#8750f7] hover:bg-[#7435f5] text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+              >
+                <Download className="w-4 h-4" />
+                <span>{t.resumeHub.downloadCv}</span>
+              </button>
+              <button
+                onClick={() => handleAction("cv", "preview")}
+                aria-label="Preview CV"
+                className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
+              >
+                <Eye className="w-4 h-4" />
+              </button>
+            </div>
 
-              <div className="space-y-4">
-                {t.roles.map((job, idx) => {
-                  const isSelected = activeRole === idx;
-                  const isHovered = hoveredRole === idx;
-                  const isActive = isHovered || (hoveredRole === null && isSelected);
-                  const Icon = roleIcons[idx] || Briefcase;
+            {/* Resume English */}
+            <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
+              <button
+                onClick={() => handleAction("resume", "download")}
+                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#8750f7] to-[#a855f7] hover:brightness-110 text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+              >
+                <Download className="w-4 h-4" />
+                <span>{t.resumeHub.downloadResume}</span>
+              </button>
+              <button
+                onClick={() => handleAction("resume", "preview")}
+                aria-label="Preview Resume"
+                className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
+              >
+                <Eye className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
 
-                  return (
-                    <div
-                      key={idx}
-                      onMouseEnter={() => setHoveredRole(idx)}
-                      onMouseLeave={() => setHoveredRole(null)}
-                      onClick={() => {
-                        setActiveRole(idx);
-                        setHoveredRole(null);
-                      }}
-                      className={`relative flex items-start gap-4 p-4 rounded-3xl transition-all duration-200 cursor-pointer border select-none ${
-                        isActive
-                          ? "bg-[#18181d] border-[#7F1DFF] shadow-2xl shadow-[#7F1DFF]/25 translate-x-1"
-                          : "bg-[#18181d]/80 border-white/10 hover:border-[#7F1DFF]/30 hover:bg-[#18181d]"
-                      }`}
-                    >
-                      {/* Timeline Node Icon */}
-                      <div
-                        className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 z-10 transition-all duration-200 ${
-                          isActive
-                            ? "bg-[#7F1DFF] text-white border-2 border-white/40 shadow-[0_0_16px_rgba(127,29,255,0.6)] scale-105"
-                            : "bg-[#131313] text-purple-300 border border-white/10"
-                        }`}
-                      >
-                        <Icon className="w-5 h-5 stroke-[1.75]" />
-                      </div>
-
-                      {/* Basic Info (Default view) */}
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center justify-between gap-2 mb-0.5">
-                          <h4 className="text-base font-bold text-white tracking-tight truncate">
-                            {job.company}
-                          </h4>
-                          {job.isCurrent ? (
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 shrink-0">
-                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                              {t.activeStatus}
-                            </span>
-                          ) : (
-                            <span className="text-xs font-mono text-neutral-400 shrink-0">
-                              {job.period.split("–")[0].trim()}
-                            </span>
-                          )}
-                        </div>
-
-                        <p className="text-xs font-medium text-purple-300/90 mb-1.5 line-clamp-1">
-                          {job.title}
-                        </p>
-
-                        <div className="flex items-center gap-2 text-xs font-mono text-neutral-400 mb-2">
-                          <span>{job.period}</span>
-                          <span>·</span>
-                          <span>{job.location}</span>
-                        </div>
-
-                        {/* Highlight Metric Pill */}
-                        <div className="flex items-center justify-between gap-2 pt-2 border-t border-white/[0.06]">
-                          <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-[#131313] text-[#D46F88] border border-white/10 truncate max-w-[240px] font-semibold">
-                            ✦ {job.highlightMetric}
-                          </span>
-                          <span
-                            className={`text-xs font-mono transition-transform duration-200 ${
-                              isActive
-                                ? "text-[#7F1DFF] translate-x-1 font-bold"
-                                : "text-neutral-500"
-                            }`}
-                          >
-                            →
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+        {/* GEROLD'S 2-COLUMN PARALLEL RESUME (MY EXPERIENCE & MY EDUCATION) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 items-start text-left">
+          {/* COLUMN 1: MY EXPERIENCE */}
+          <div>
+            {/* Column Header */}
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-10 h-10 rounded-full bg-[#1c102b] border border-[#8750f7]/40 text-[#8750f7] flex items-center justify-center shadow-md">
+                <Briefcase className="w-5 h-5" />
               </div>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                {language === "es" ? "Mi Experiencia" : "My Experience"}
+              </h3>
             </div>
 
-            {/* RIGHT COLUMN: STICKY ENGINEERING CONSOLE (REVEALS ON HOVER / CLICK) */}
-            <div className="lg:col-span-7 sticky top-24">
-              {(() => {
-                const effectiveIdx =
-                  hoveredRole !== null ? hoveredRole : activeRole;
-                const job = t.roles[effectiveIdx] || t.roles[0];
-                const Icon = roleIcons[effectiveIdx] || Briefcase;
-
-                return (
-                  <div className="rounded-3xl bg-[#18181d]/95 border border-white/15 p-6 shadow-2xl shadow-[#7F1DFF]/15 backdrop-blur-xl text-left">
-                    {/* Console Header Bar */}
-                    <div className="flex items-center justify-between pb-4 mb-5 border-b border-white/[0.08]">
-                      <div className="flex items-center gap-2">
-                        <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-[#FFEB34]" />
-                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                        <span className="text-xs font-mono text-neutral-300 ml-2 tracking-wider">
-                          SYSTEM::CONSOLE // NODE_{effectiveIdx + 1}
-                        </span>
-                      </div>
-                      <span className="text-xs font-mono px-2 py-0.5 rounded bg-[#131313] text-[#D46F88] border border-white/10 font-semibold">
-                        {hoveredRole !== null ? "PREVIEW [HOVER]" : "LOCKED [CLICK]"}
-                      </span>
-                    </div>
-
-                    {/* Animated Console Body */}
-                    <AnimatePresence mode="wait">
-                      <motion.div
-                        key={effectiveIdx}
-                        initial={{ opacity: 0, y: 8 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -8 }}
-                        transition={{ duration: 0.2 }}
-                        className="space-y-6"
-                      >
-                        {/* Company & Role Header */}
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex items-center gap-3.5">
-                            <div className="w-12 h-12 rounded-xl bg-purple-950/50 border border-purple-500/30 flex items-center justify-center text-purple-300 shrink-0 shadow-[0_0_15px_rgba(168,85,247,0.2)]">
-                              <Icon className="w-6 h-6 stroke-[1.75]" />
-                            </div>
-                            <div>
-                              <div className="flex items-center gap-2">
-                                <h3 className="text-xl font-bold text-white tracking-tight">
-                                  {job.company}
-                                </h3>
-                                {job.isCurrent && (
-                                  <span className="px-2 py-0.5 rounded-full text-xs font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                                    {t.activeStatus}
-                                  </span>
-                                )}
-                              </div>
-                              <span className="text-sm text-purple-300 font-medium">
-                                {job.title}
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="text-right">
-                            <span className="text-xs font-mono text-white block font-semibold">
-                              {job.period}
-                            </span>
-                            <span className="text-xs font-mono text-neutral-400">
-                              {job.location} · {job.roleType}
-                            </span>
-                          </div>
-                        </div>
-
-                        {/* 3 Prominent Impact Metric Cards */}
-                        <div className="grid grid-cols-3 gap-3">
-                          {job.impactMetrics.map((m, mIdx) => (
-                            <div
-                              key={mIdx}
-                              className="p-3 rounded-xl bg-purple-950/25 border border-purple-500/20 hover:border-purple-500/40 transition-colors"
-                            >
-                              <span className="text-xs font-mono text-purple-300 uppercase block font-semibold truncate">
-                                {m.label}
-                              </span>
-                              <span className="text-base sm:text-lg font-mono font-bold text-white block mt-0.5">
-                                {m.value}
-                              </span>
-                              <span className="text-xs text-neutral-300 block mt-1 leading-snug line-clamp-2">
-                                {m.detail}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-
-                        {/* Executive Summary */}
-                        <div>
-                          <h4 className="text-xs font-mono uppercase tracking-wider text-purple-300 font-bold mb-1.5">
-                            {t.summaryLabel}
-                          </h4>
-                          <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
-                            {job.description}
-                          </p>
-                        </div>
-
-                        {/* Architectural Deliverables */}
-                        <div>
-                          <h4 className="text-xs font-mono uppercase tracking-wider text-purple-300 font-bold mb-2">
-                            {t.deliverablesLabel}
-                          </h4>
-                          <ul className="space-y-2">
-                            {job.achievements.map((ach, aIdx) => (
-                              <li
-                                key={aIdx}
-                                className="flex items-start gap-2.5 p-2.5 rounded-lg bg-purple-950/20 border border-purple-500/15 text-xs text-neutral-200 leading-relaxed"
-                              >
-                                <span className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5 shrink-0" />
-                                <div>
-                                  <span className="font-mono font-bold text-xs text-purple-300 uppercase mr-1.5">
-                                    [{ach.tag}]
-                                  </span>
-                                  {ach.description}
-                                </div>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* Verified Technologies */}
-                        <div className="pt-3 border-t border-white/[0.08]">
-                          <span className="text-xs font-mono uppercase tracking-wider text-purple-300 font-bold block mb-2">
-                            {t.verifiedTechLabel}
-                          </span>
-                          <div className="flex flex-wrap gap-1.5">
-                            {job.technologies.map((tech, tIdx) => (
-                              <span
-                                key={tIdx}
-                                className="px-2.5 py-0.5 rounded-full text-xs font-medium text-neutral-200 bg-purple-950/40 border border-purple-500/25"
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    </AnimatePresence>
-                  </div>
-                );
-              })()}
-            </div>
-          </div>
-
-          {/* MOBILE VIEW (<lg): CONNECTED TIMELINE WITH INLINE CONSOLE EXPANSION ON TAP */}
-          <div className="lg:hidden relative">
-            <div className="absolute left-[23px] top-6 bottom-6 w-0.5 bg-gradient-to-b from-purple-500 via-indigo-500/70 to-purple-900/30" />
-
-            <div className="space-y-4">
+            {/* Resume Items List */}
+            <div className="space-y-6">
               {t.roles.map((job, idx) => {
-                const isOpen = activeRole === idx;
-                const Icon = roleIcons[idx] || Briefcase;
-
+                const isExpanded = expandedRole === idx;
                 return (
                   <div
                     key={idx}
-                    className={`relative rounded-3xl border transition-all duration-300 ${
-                      isOpen
-                        ? "bg-[#18181d]/95 border-[#7F1DFF]/50 shadow-xl shadow-[#7F1DFF]/20"
-                        : "bg-[#18181d]/80 border-white/10"
-                    }`}
+                    className="p-6 sm:p-7 rounded-[26px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 hover:bg-[#190f24] transition-all duration-300 group relative shadow-lg"
                   >
-                    {/* Basic Info (Tap to toggle console details) */}
-                    <button
-                      type="button"
-                      onClick={() => setActiveRole(isOpen ? -1 : idx)}
-                      className="w-full text-left p-4 sm:p-5 flex items-start gap-3.5 cursor-pointer"
-                    >
-                      <div
-                        className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 z-10 transition-all ${
-                          isOpen
-                            ? "bg-purple-500 text-white border border-purple-300 shadow-[0_0_12px_rgba(168,85,247,0.4)]"
-                            : "bg-purple-950/60 text-purple-300 border border-purple-500/20"
-                        }`}
-                      >
-                        <Icon className="w-5 h-5 stroke-[1.75]" />
-                      </div>
-
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center justify-between gap-2 mb-0.5">
-                          <h4 className="text-base font-bold text-white tracking-tight truncate">
-                            {job.company}
-                          </h4>
-                          <div
-                            className={`w-6 h-6 rounded-full flex items-center justify-center text-xs transition-transform ${
-                              isOpen
-                                ? "bg-purple-600 text-white rotate-180"
-                                : "bg-purple-950/50 text-neutral-400 border border-purple-500/20"
-                            }`}
-                          >
-                            <ChevronDown className="w-3.5 h-3.5" />
-                          </div>
-                        </div>
-
-                        <p className="text-xs text-purple-300 font-medium mb-1">
-                          {job.title}
-                        </p>
-                        <p className="text-xs font-mono text-neutral-400 mb-2">
-                          {job.period} · {job.location}
-                        </p>
-
-                        <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-purple-950/40 text-purple-300 border border-purple-500/20 line-clamp-1">
-                          ✦ {job.highlightMetric}
+                    {/* Time Period in Gerold's Neon Purple */}
+                    <div className="flex items-center justify-between gap-2 mb-2">
+                      <span className="text-base sm:text-lg font-bold text-[#8750f7] font-mono">
+                        {job.period}
+                      </span>
+                      {job.isCurrent && (
+                        <span className="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 inline-flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                          {t.activeStatus}
                         </span>
-                      </div>
+                      )}
+                    </div>
+
+                    {/* Role Title */}
+                    <h4 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#8750f7] transition-colors mb-1">
+                      {job.title}
+                    </h4>
+
+                    {/* Company & Location */}
+                    <p className="text-neutral-400 text-xs sm:text-sm font-medium mb-3">
+                      {job.company} · {job.location}
+                    </p>
+
+                    {/* Highlight Metric Pill */}
+                    <div className="mb-4">
+                      <span className="text-xs font-mono px-3 py-1 rounded-full bg-[#1e1130] text-[#D46F88] border border-[#8750f7]/30 inline-block font-semibold">
+                        ✦ {job.highlightMetric}
+                      </span>
+                    </div>
+
+                    {/* Summary Description */}
+                    <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed mb-4">
+                      {job.description}
+                    </p>
+
+                    {/* Tech Stack Pills */}
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {(job.technologies || []).slice(0, 5).map((tech, tIdx) => (
+                        <span
+                          key={tIdx}
+                          className="px-2 py-0.5 rounded-md text-[11px] font-mono text-neutral-300 bg-white/5 border border-white/5"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Expandable Architectural Details Toggle */}
+                    <button
+                      onClick={() =>
+                        setExpandedRole(isExpanded ? null : idx)
+                      }
+                      className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-[#8750f7] hover:text-[#a855f7] transition-colors cursor-pointer"
+                    >
+                      <span>
+                        {isExpanded
+                          ? language === "es"
+                            ? "Ocultar entregables [-]"
+                            : "Hide details [-]"
+                          : language === "es"
+                          ? "Ver entregables técnicos [+]"
+                          : "View technical deliverables [+]"}
+                      </span>
                     </button>
 
-                    {/* Expanded Mobile Console Details */}
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
+                    {/* Expanded Deliverables Drawer */}
+                    <AnimatePresence>
+                      {isExpanded && (
                         <motion.div
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.25 }}
-                          className="overflow-hidden border-t border-white/[0.08] px-4 sm:px-5 pb-5 pt-3 space-y-4"
+                          transition={{ duration: 0.3 }}
+                          className="pt-4 mt-4 border-t border-white/10 space-y-2"
                         >
-                          {/* 3 Metric cards */}
-                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
-                            {job.impactMetrics.map((m, mIdx) => (
-                              <div
-                                key={mIdx}
-                                className="p-2.5 rounded-xl bg-purple-950/30 border border-purple-500/20"
-                              >
-                                <span className="text-xs font-mono text-purple-300 uppercase block font-semibold truncate">
-                                  {m.label}
-                                </span>
-                                <span className="text-sm font-mono font-bold text-white block">
-                                  {m.value}
-                                </span>
-                                <span className="text-xs text-neutral-300 block truncate">
-                                  {m.detail}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-
-                          <p className="text-xs text-neutral-300 leading-relaxed">
-                            {job.description}
-                          </p>
-
-                          {/* Architectural deliverables */}
-                          <div className="space-y-1.5">
-                            <span className="text-xs font-mono uppercase tracking-wider text-purple-300 font-bold block">
-                              {t.deliverablesLabel}
-                            </span>
-                            {job.achievements.map((ach, aIdx) => (
-                              <div
-                                key={aIdx}
-                                className="p-2 rounded-lg bg-purple-950/20 border border-purple-500/15 text-xs text-neutral-200 leading-relaxed"
-                              >
-                                <span className="font-mono font-bold text-xs text-purple-300 uppercase mr-1">
-                                  [{ach.tag}]
-                                </span>
-                                {ach.description}
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Technologies */}
-                          <div className="pt-2 border-t border-white/[0.06]">
-                            <div className="flex flex-wrap gap-1">
-                              {job.technologies.map((tech, tIdx) => (
-                                <span
-                                  key={tIdx}
-                                  className="px-2 py-0.5 rounded-full text-xs text-neutral-200 bg-purple-950/40 border border-purple-500/20"
-                                >
-                                  {tech}
-                                </span>
-                              ))}
+                          {job.achievements.map((ach, aIdx) => (
+                            <div
+                              key={aIdx}
+                              className="p-3 rounded-xl bg-purple-950/20 border border-purple-500/20 text-xs text-neutral-200 leading-relaxed"
+                            >
+                              <span className="font-mono font-bold text-xs text-[#8750f7] uppercase mr-1.5">
+                                [{ach.tag}]
+                              </span>
+                              {ach.description}
                             </div>
-                          </div>
+                          ))}
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -555,45 +299,58 @@ export default function Experience() {
               })}
             </div>
           </div>
-        </div>
 
-        {/* ACADEMIC BACKGROUND */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#18181d]/90 backdrop-blur-xl border border-white/10 hover:border-[#7F1DFF]/40 hover:shadow-2xl hover:shadow-[#7F1DFF]/15 transition-all duration-300 shadow-xl text-left">
-          <div className="flex items-center gap-4 mb-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#7F1DFF]/15 border border-[#7F1DFF]/30 flex items-center justify-center text-[#D46F88] shrink-0 shadow-md">
-              <GraduationCap className="w-6 h-6 stroke-[1.75]" />
-            </div>
-            <div>
-              <span className="text-xs font-mono font-bold tracking-wider uppercase text-[#D46F88] mb-0.5 block">
-                {t.education.badge}
-              </span>
-              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                {t.education.degree}
+          {/* COLUMN 2: MY EDUCATION */}
+          <div>
+            {/* Column Header */}
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-10 h-10 rounded-full bg-[#1c102b] border border-[#8750f7]/40 text-[#8750f7] flex items-center justify-center shadow-md">
+                <GraduationCap className="w-5 h-5" />
+              </div>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                {language === "es" ? "Mi Educación" : "My Education"}
               </h3>
             </div>
-          </div>
 
-          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-3">
-            <p className="text-xs sm:text-sm font-mono text-neutral-300">
-              {t.education.institution} · {t.education.location}
-            </p>
-            <span className="text-xs font-mono text-neutral-400">
-              {t.education.period}
-            </span>
-          </div>
+            {/* Education Items List */}
+            <div className="space-y-6">
+              {educationItems.map((edu, idx) => (
+                <div
+                  key={idx}
+                  className="p-6 sm:p-7 rounded-[26px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 hover:bg-[#190f24] transition-all duration-300 group relative shadow-lg"
+                >
+                  {/* Time Period in Gerold's Neon Purple */}
+                  <div className="mb-2">
+                    <span className="text-base sm:text-lg font-bold text-[#8750f7] font-mono">
+                      {edu.period}
+                    </span>
+                  </div>
 
-          <div className="flex flex-wrap items-center gap-2 mb-4">
-            <span className="text-xs font-mono px-3.5 py-1 rounded-full bg-purple-950/40 text-purple-200 border border-purple-500/30 font-medium inline-flex items-center gap-1.5">
-              <span>★</span> {t.education.scholarship}
-            </span>
-            <span className="text-xs font-mono px-3.5 py-1 rounded-full bg-purple-950/30 text-neutral-200 border border-purple-500/20 font-medium">
-              {t.education.gpa}
-            </span>
-          </div>
+                  {/* Title */}
+                  <h4 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#8750f7] transition-colors mb-1">
+                    {edu.title}
+                  </h4>
 
-          <p className="text-neutral-300 text-sm sm:text-base font-normal leading-relaxed">
-            {t.education.details}
-          </p>
+                  {/* Institution */}
+                  <p className="text-neutral-400 text-xs sm:text-sm font-medium mb-3">
+                    {edu.institution}
+                  </p>
+
+                  {/* Highlight Distinction Pill */}
+                  <div className="mb-4">
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-[#1e1130] text-[#D46F88] border border-[#8750f7]/30 inline-block font-semibold">
+                      ✦ {edu.highlight}
+                    </span>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-neutral-300 text-xs sm:text-sm leading-relaxed">
+                    {edu.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

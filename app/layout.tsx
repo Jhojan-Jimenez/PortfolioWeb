@@ -1,10 +1,10 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Sora } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "./context/LanguageContext";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const sora = Sora({
   subsets: ["latin"],
   variable: "--font-sans",
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth dark ${plusJakarta.variable}`}>
+    <html lang="en" className={`scroll-smooth dark ${sora.variable}`}>
       <body className="text-neutral-100 font-sans antialiased selection:bg-purple-900/50 selection:text-white">
         <LanguageProvider>{children}</LanguageProvider>
       </body>

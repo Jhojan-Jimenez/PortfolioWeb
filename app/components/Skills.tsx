@@ -151,17 +151,22 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="pt-24 sm:pt-32 pb-20 sm:pb-28 px-4 relative z-10 bg-[#131313]">
+    <section
+      id="skills"
+      className="py-24 sm:py-32 px-4 relative z-10 bg-[#0f0715]"
+    >
       <div className="container mx-auto max-w-6xl">
-        {/* SECTION 1: "My Skills and Development" (DIRECT FROM REFERENCE IMAGE) */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#18181d] border border-[#7F1DFF]/30 text-purple-200 text-xs font-mono mb-4 shadow-[0_0_20px_rgba(127,29,255,0.15)]">
-            <span className="w-2 h-2 rounded-full bg-[#FFEB34] animate-pulse" />
+        {/* SECTION HEADER: "My Skills and Development" */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#140c1c] border border-[#8750f7]/40 text-purple-200 text-xs font-mono mb-4 shadow-[0_0_15px_rgba(135,80,247,0.15)]">
+            <span className="w-2 h-2 rounded-full bg-[#8750f7] animate-pulse" />
             <span>{language === "es" ? "ARQUITECTURA & HABILIDADES" : "ARCHITECTURE & SKILLS"}</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-3">
-            {language === "es" ? "Mis Habilidades y Desarrollo" : "My Skills and Development"}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8750f7] via-[#a855f7] to-white">
+              {language === "es" ? "Mis Habilidades y Desarrollo" : "My Skills and Development"}
+            </span>
           </h2>
 
           <p className="text-neutral-300 text-sm sm:text-base font-normal leading-relaxed">
@@ -178,7 +183,7 @@ export default function Skills() {
             return (
               <div
                 key={card.id}
-                className="group p-6 sm:p-7 rounded-3xl bg-[#18181d]/90 border border-white/10 hover:border-[#7F1DFF]/40 backdrop-blur-xl shadow-xl hover:shadow-2xl hover:shadow-[#7F1DFF]/20 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 relative overflow-hidden"
+                className="group p-6 sm:p-7 rounded-[28px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 shadow-xl hover:shadow-2xl hover:shadow-[#8750f7]/20 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 relative overflow-hidden"
               >
                 {/* Top ambient glow */}
                 <div className="absolute -top-10 -right-10 w-28 h-28 bg-[#7F1DFF]/10 rounded-full blur-2xl group-hover:bg-[#7F1DFF]/25 transition-all duration-300 pointer-events-none" />
@@ -253,7 +258,7 @@ export default function Skills() {
               return (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 rounded-3xl bg-[#18181d]/85 border border-white/10 hover:border-[#7F1DFF]/35 backdrop-blur-xl shadow-xl flex flex-col justify-between transition-all duration-200 text-left"
+                  className="p-6 sm:p-7 rounded-[26px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 shadow-xl hover:shadow-2xl hover:shadow-[#8750f7]/15 flex flex-col justify-between transition-all duration-300 text-left group"
                 >
                   <div className="flex items-start gap-4 mb-4">
                     <div className="w-11 h-11 rounded-2xl bg-[#7F1DFF]/15 border border-[#7F1DFF]/30 flex items-center justify-center text-[#D46F88] shrink-0 shadow-md">

@@ -7,12 +7,11 @@ import {
   Github,
   Linkedin,
   Mail,
-  ArrowUpRight,
-  Server,
-  Cloud,
-  Cpu,
-  FileText,
+  Download,
+  ArrowDown,
   Sparkles,
+  Award,
+  CheckCircle2,
 } from "lucide-react";
 import { useLanguage } from "@/app/context/LanguageContext";
 import { TRANSLATIONS } from "@/lib/i18n/translations";
@@ -44,6 +43,30 @@ export default function Hero() {
       ? "/resume/Jhojan_JimenezCV.pdf"
       : "/resume/Jhojan_Jimenez_Resume.pdf";
 
+  const stats = [
+    {
+      number: "+2",
+      labelLine1: language === "es" ? "Años de" : "Years of",
+      labelLine2: language === "es" ? "Experiencia" : "Experience",
+    },
+    {
+      number: "15+",
+      labelLine1: language === "es" ? "Proyectos" : "Projects",
+      labelLine2: language === "es" ? "Completados" : "Completed",
+    },
+    {
+      number: "4.4",
+      suffix: "/5.0",
+      labelLine1: language === "es" ? "Beca de Excelencia" : "Academic Honors",
+      labelLine2: language === "es" ? "80% de Mérito" : "80% Merit Scholar",
+    },
+    {
+      number: "99.9%",
+      labelLine1: language === "es" ? "Disponibilidad" : "System",
+      labelLine2: language === "es" ? "& Fiabilidad" : "Reliability",
+    },
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -56,7 +79,7 @@ export default function Hero() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
@@ -67,305 +90,179 @@ export default function Hero() {
     },
   };
 
-  const roleTracks = [
-    {
-      title: language === "es" ? "Sistemas Distribuidos" : "Distributed Systems",
-    },
-    {
-      title: language === "es" ? "Arquitectura Cloud" : "Cloud Architecture",
-    },
-    {
-      title: language === "es" ? "IA Aplicada & Datos" : "Applied AI & Data",
-    },
-  ];
-
   return (
     <section
       id="home"
-      className="min-h-screen pt-28 pb-20 px-4 relative overflow-hidden flex flex-col justify-center bg-[#131313]"
+      className="min-h-screen pt-28 sm:pt-36 pb-20 px-4 relative overflow-hidden flex flex-col justify-center bg-[#0f0715]"
     >
-      {/* BACKGROUND NEON GLOWS & ABSTRACT PURPLE WAVES (DESIGN SYSTEM: #7F1DFF, #D46F88, #FFEB34) */}
-      <div className="absolute inset-0 pointer-events-none -z-10 overflow-hidden">
-        {/* Ambient radial glows */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-[#7F1DFF]/15 blur-[140px] rounded-full" />
-        <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-[#D46F88]/10 blur-[130px] rounded-full" />
-        <div className="absolute top-1/3 right-1/4 w-[450px] h-[450px] bg-[#7F1DFF]/12 blur-[130px] rounded-full" />
-
-        {/* Sinusoidal Glowing Ribbon Waves (Matching the reference design) */}
+      {/* BACKGROUND WATERMARK (GEROLD THEME WATERMARK TEXT) */}
+      <div className="absolute inset-0 pointer-events-none -z-10 flex items-center justify-center overflow-hidden">
         <svg
-          className="absolute top-10 left-1/2 -translate-x-1/2 w-[1440px] h-[720px] opacity-45 overflow-visible"
-          viewBox="0 0 1440 720"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1320 300"
+          className="w-full max-w-7xl select-none opacity-[0.045]"
         >
-          <defs>
-            <linearGradient id="dsNeonWave1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#7F1DFF" stopOpacity="0.85" />
-              <stop offset="60%" stopColor="#D46F88" stopOpacity="0.75" />
-              <stop offset="100%" stopColor="#FFEB34" stopOpacity="0.4" />
-            </linearGradient>
-            <linearGradient id="dsNeonWave2" x1="100%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#D46F88" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#7F1DFF" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#9333ea" stopOpacity="0.3" />
-            </linearGradient>
-            <filter id="dsGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="8" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
-          </defs>
-
-          {/* Glowing main sinusoidal path flowing behind the center cutout */}
-          <path
-            d="M -120 340 C 180 160, 440 440, 720 280 C 1000 120, 1260 410, 1560 250"
-            stroke="url(#dsNeonWave1)"
+          <text
+            x="50%"
+            y="55%"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fill="none"
+            stroke="#8750f7"
             strokeWidth="3"
-            filter="url(#dsGlow)"
-          />
-          <path
-            d="M -120 380 C 200 200, 460 480, 740 320 C 1020 160, 1280 440, 1560 290"
-            stroke="url(#dsNeonWave2)"
-            strokeWidth="1.5"
-            strokeDasharray="8 6"
-            opacity="0.8"
-          />
-          <path
-            d="M -120 280 C 280 420, 580 140, 880 370 C 1140 520, 1380 210, 1560 360"
-            stroke="url(#dsNeonWave1)"
-            strokeWidth="1.2"
-            opacity="0.45"
-          />
+            className="text-[280px] font-black tracking-widest uppercase font-mono"
+          >
+            DEV
+          </text>
         </svg>
+
+        {/* Ambient radial glows inspired by Gerold purple lighting */}
+        <div className="absolute top-1/4 right-1/4 w-[550px] h-[550px] bg-[#8750f7]/15 blur-[140px] rounded-full" />
+        <div className="absolute bottom-1/4 left-1/4 w-[450px] h-[450px] bg-[#2a1454]/40 blur-[130px] rounded-full" />
       </div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
-        {/* 12-COLUMN DESKTOP GRID (EXACTLY AS SPECIFIED IN DESIGN SYSTEM SETUP) */}
+        {/* GEROLD 2-COLUMN HERO BANNER */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-6 mb-16"
+          className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-8 mb-20"
         >
-          {/* LEFT 4 COLUMNS: "Hello," + TAGLINE + CIRCUIT ROLE TRACKS */}
-          <motion.div variants={itemVariants} className="lg:col-span-4 text-left">
-            {/* "Hello," with horizontal line connector and glowing node */}
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white tracking-tight">
-                {language === "es" ? "Hola," : "Hello,"}
+          {/* LEFT COLUMN: HERO CONTENT (col-md-6) */}
+          <motion.div
+            variants={itemVariants}
+            className="lg:col-span-7 text-left order-2 lg:order-1"
+          >
+            {/* Hero Subtitle */}
+            <div className="inline-flex items-center gap-2 mb-3">
+              <span className="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
+                {language === "es" ? "Soy Jhojan Jimenez" : "I am Jhojan Jimenez"}
               </span>
-              <div className="flex-1 max-w-[80px] sm:max-w-[110px] h-[2px] bg-gradient-to-r from-white/90 via-[#7F1DFF] to-transparent relative">
-                <span className="absolute -right-1 -top-1 w-2.5 h-2.5 rounded-full bg-[#FFEB34] shadow-[0_0_12px_rgba(255,235,52,0.9)]" />
-              </div>
+              <span className="w-2.5 h-2.5 rounded-full bg-[#8750f7] shadow-[0_0_12px_rgba(135,80,247,0.9)] animate-pulse" />
             </div>
 
-            {/* Tagline */}
-            <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-8 max-w-sm font-normal">
-              {language === "es"
-                ? "Diseñando arquitecturas cloud y sistemas distribuidos de alto rendimiento en producción."
-                : "Delivering efficient, scalable solutions to transform your tech vision into reality."}
-            </p>
-
-            {/* Connected Circuit Role Tracks */}
-            <div className="space-y-4 max-w-sm">
-              {roleTracks.map((track, idx) => (
-                <div
-                  key={idx}
-                  className="group flex items-center justify-between gap-3 text-neutral-300 hover:text-white transition-colors py-1"
-                >
-                  <span className="text-xs sm:text-sm font-medium tracking-wide">
-                    {track.title}
-                  </span>
-                  <div className="flex-1 h-[1px] bg-white/15 group-hover:bg-[#7F1DFF]/60 relative transition-all duration-300">
-                    <span className="absolute right-0 -top-1 w-2 h-2 rounded-full bg-white group-hover:bg-[#FFEB34] shadow-[0_0_8px_rgba(255,255,255,0.8)] group-hover:shadow-[0_0_10px_rgba(255,235,52,0.9)] transition-all" />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* CENTER 4 COLUMNS: STUDIO PORTRAIT CUTOUT + CONNECTED CIRCUIT SOCIAL TILES */}
-          <motion.div
-            variants={itemVariants}
-            className="lg:col-span-4 flex justify-center items-center relative my-6 lg:my-0"
-          >
-            {/* Ambient purple backlight halo */}
-            <div className="absolute w-72 h-72 sm:w-80 sm:h-80 bg-[#7F1DFF]/25 rounded-full blur-[80px] pointer-events-none" />
-
-            {/* Portrait Cutout Frame with smooth bottom fade into #131313 */}
-            <div
-              className="relative w-64 h-80 sm:w-72 sm:h-96 rounded-3xl overflow-hidden border border-[#7F1DFF]/30 shadow-[0_0_40px_rgba(127,29,255,0.25)] bg-[#18181d]/80 backdrop-blur-sm group"
-              style={{
-                maskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
-                WebkitMaskImage: "linear-gradient(to bottom, black 85%, transparent 100%)",
-              }}
-            >
-              <Image
-                src="/Me.jpeg"
-                alt="Jhojan Jimenez"
-                fill
-                priority
-                className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Connected Circuit Wire & Floating Social Media Badges (As in reference image) */}
-            <div className="absolute -right-3 sm:-right-5 top-8 flex flex-col items-center z-20">
-              {/* Vertical connector circuit line */}
-              <div className="absolute top-4 bottom-4 w-[1px] bg-white/20 -z-10" />
-
-              <div className="flex flex-col gap-4">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={link.label}
-                    className="w-10 h-10 rounded-xl bg-[#18181d]/95 border border-white/20 hover:border-[#7F1DFF] backdrop-blur-md flex items-center justify-center text-neutral-300 hover:text-white hover:scale-110 shadow-xl shadow-black/80 transition-all duration-200"
-                  >
-                    <link.icon className="w-4 h-4" />
-                  </a>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* RIGHT 4 COLUMNS: LARGE STACKED "I am Jhojan Jimenez" */}
-          <motion.div
-            variants={itemVariants}
-            className="lg:col-span-4 text-left lg:text-left pl-0 lg:pl-6"
-          >
-            <span className="block text-2xl sm:text-3xl text-neutral-200 font-medium tracking-tight mb-1">
-              {language === "es" ? "Soy" : "I am"}
-            </span>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.05] mb-4">
-              Jhojan
-              <br />
-              Jimenez
+            {/* Hero Title with Gerold's Signature Gradient */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12] mb-6">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8750f7] via-[#a855f7] to-white">
+                {language === "es"
+                  ? "Software Engineer + Cloud Architect"
+                  : "Software Engineer + Cloud Architect"}
+              </span>
             </h1>
 
-            {/* Credential Status Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#18181d] border border-[#7F1DFF]/30 text-purple-200 text-xs font-mono mb-6 shadow-[0_0_15px_rgba(127,29,255,0.15)]">
-              <span className="w-2 h-2 rounded-full bg-[#FFEB34] shadow-[0_0_8px_rgba(255,235,52,0.9)] animate-pulse" />
-              <span>
-                {language === "es"
-                  ? "+2 Años en Prod · Sabana Hack 1º"
-                  : "+2 Yrs in Prod · Sabana Hack 1st"}
-              </span>
-            </div>
+            {/* Lead Description */}
+            <p className="text-neutral-300 text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
+              {language === "es"
+                ? "Diseño y construyo arquitecturas cloud escalables, sistemas distribuidos de alta concurrencia e integración de IA aplicada. Soluciones de ingeniería de misión crítica que garantizan fiabilidad, rendimiento y cero caídas en producción."
+                : "I break down complex distributed systems and cloud architectures to build high-concurrency, fault-tolerant solutions and applied AI pipelines that scale to millions of requests with deterministic reliability."}
+            </p>
 
-            {/* Quick Action Button (Design System gradient: #7F1DFF -> #D46F88) */}
-            <div>
+            {/* Gerold Button Box: Download CV + Social Icons */}
+            <div className="flex flex-wrap items-center gap-5">
+              {/* Primary Download CV Pill */}
               <a
                 href={resumeFile}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#7F1DFF] to-[#D46F88] hover:from-[#6b14dd] hover:to-[#be5872] text-white text-xs font-semibold tracking-wider uppercase shadow-[0_0_25px_rgba(127,29,255,0.4)] hover:shadow-[0_0_35px_rgba(212,111,136,0.5)] transition-all cursor-pointer font-mono"
+                download
+                className="group relative inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full border-2 border-[#8750f7] text-[#8750f7] hover:bg-[#8750f7] hover:text-white transition-all duration-300 font-semibold text-sm shadow-[0_0_25px_rgba(135,80,247,0.25)] hover:shadow-[0_0_35px_rgba(135,80,247,0.6)] cursor-pointer"
               >
-                <FileText className="w-3.5 h-3.5" />
-                <span>{language === "es" ? "Descargar CV (PDF)" : "Download Resume"}</span>
-                <ArrowUpRight className="w-3.5 h-3.5 opacity-80" />
+                <span>{language === "es" ? "Descargar CV" : "Download CV"}</span>
+                <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
               </a>
+
+              {/* View Projects CTA button */}
+              <button
+                onClick={() => utilScrollToSection("projects")}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-[#140c1c] text-neutral-200 border border-white/10 hover:border-[#8750f7]/60 hover:text-white transition-all duration-300 font-semibold text-sm cursor-pointer hover:shadow-lg hover:shadow-[#8750f7]/20"
+              >
+                <span>{language === "es" ? "Ver Proyectos" : "Explore Work"}</span>
+                <ArrowDown className="w-4 h-4 text-[#8750f7]" />
+              </button>
+
+              {/* Social Icons (Gerold circular pills) */}
+              <div className="flex items-center gap-3">
+                {socialLinks.map((s, idx) => {
+                  const Icon = s.icon;
+                  return (
+                    <a
+                      key={idx}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={s.label}
+                      className="w-11 h-11 rounded-full border border-[#8750f7]/40 bg-[#140c1c] text-[#8750f7] hover:bg-[#8750f7] hover:text-white hover:border-[#8750f7] transition-all duration-300 hover:rotate-12 flex items-center justify-center cursor-pointer shadow-[0_0_15px_rgba(135,80,247,0.15)]"
+                    >
+                      <Icon className="w-4 h-4" />
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* RIGHT COLUMN: HERO IMAGE BOX WITH GEROLD'S ROTATED PROFILE FRAME (col-md-6) */}
+          <motion.div
+            variants={itemVariants}
+            className="lg:col-span-5 flex justify-center order-1 lg:order-2"
+          >
+            <div className="relative group">
+              {/* Outer decorative glow */}
+              <div className="absolute inset-0 bg-[#8750f7]/30 rounded-[38px] blur-2xl group-hover:blur-3xl transition-all duration-500 -z-10" />
+
+              {/* Gerold's Signature Rotated Box: -4.5deg rotating to 0deg on hover */}
+              <div className="relative w-[280px] h-[340px] sm:w-[320px] sm:h-[400px] lg:w-[350px] lg:h-[430px] rounded-[38px] border-2 border-[#8750f7]/80 bg-[#140c1c] overflow-hidden rotate-[-4.5deg] group-hover:rotate-0 transition-transform duration-500 shadow-[0_0_40px_rgba(135,80,247,0.35)] p-2">
+                <div className="w-full h-full rounded-[30px] overflow-hidden relative bg-[#0f0715]">
+                  <Image
+                    src="/Me.jpeg"
+                    alt="Jhojan Jimenez"
+                    fill
+                    priority
+                    sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 350px"
+                    className="object-cover object-top filter contrast-[1.05] brightness-[1.02] group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Subtle dark gradient overlay at base */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0f0715]/60 via-transparent to-transparent pointer-events-none" />
+                </div>
+              </div>
+
+              {/* Verified floating badge */}
+              <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 px-4 py-2 rounded-2xl bg-[#140c1c]/95 border border-[#8750f7]/50 shadow-xl backdrop-blur-md flex items-center gap-2 z-20">
+                <CheckCircle2 className="w-4 h-4 text-[#8750f7]" />
+                <span className="text-xs font-mono font-bold text-white">
+                  {language === "es" ? "Ingeniero Verificado" : "Verified Engineer"}
+                </span>
+              </div>
             </div>
           </motion.div>
         </motion.div>
 
-        {/* LOWER HERO: "ABOUT ME" FEATURE CARD (EXACTLY MATCHING THE REFERENCE DESIGN) */}
+        {/* GEROLD'S COUNTER WIDGET (FUNFACT ITEMS) */}
         <motion.div
-          variants={itemVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="rounded-3xl bg-[#18181d]/90 border border-white/10 hover:border-[#7F1DFF]/30 backdrop-blur-xl p-6 sm:p-8 md:p-10 shadow-2xl relative overflow-hidden transition-all duration-300"
+          transition={{ duration: 0.7 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 pt-10 border-t border-white/10 text-left"
         >
-          {/* Subtle ambient highlight */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[#7F1DFF]/10 rounded-full blur-[90px] pointer-events-none" />
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-            {/* LEFT SIDE: Heading + Bio + CTAs */}
-            <div className="lg:col-span-6 text-left">
-              <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-4 flex items-center gap-3">
-                <span>{language === "es" ? "Sobre Mí" : "About Me"}</span>
-                <span className="h-[2px] w-12 bg-gradient-to-r from-[#7F1DFF] to-[#D46F88] inline-block" />
-              </h2>
-
-              <p className="text-neutral-300 text-sm sm:text-base leading-relaxed mb-6 font-normal">
-                {t.bio}
-              </p>
-
-              <div className="flex flex-wrap items-center gap-3">
-                <button
-                  onClick={() => utilScrollToSection("projects")}
-                  className="px-6 py-2.5 bg-[#eae6df] hover:bg-white text-neutral-950 rounded-full font-semibold text-xs tracking-wider uppercase transition-all shadow-md hover:shadow-[0_0_20px_rgba(127,29,255,0.3)] cursor-pointer inline-flex items-center gap-1.5"
-                >
-                  <span>{t.ctaProjects}</span>
-                  <ArrowUpRight className="w-3.5 h-3.5 text-neutral-900" />
-                </button>
-
-                <button
-                  onClick={() => utilScrollToSection("contact")}
-                  className="px-6 py-2.5 border border-white/20 bg-white/[0.04] hover:bg-[#7F1DFF]/20 hover:border-[#7F1DFF]/40 text-neutral-200 hover:text-white rounded-full font-medium text-xs tracking-wider uppercase transition-all cursor-pointer"
-                >
-                  {t.ctaContact}
-                </button>
+          {stats.map((st, i) => (
+            <div
+              key={i}
+              className="flex items-center gap-3.5 sm:gap-4 p-4 rounded-2xl bg-[#140c1c]/60 border border-white/5 hover:border-[#8750f7]/40 transition-all duration-300"
+            >
+              <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white font-mono shrink-0">
+                <span>{st.number}</span>
+                {st.suffix && (
+                  <span className="text-lg sm:text-xl text-[#8750f7] font-semibold">
+                    {st.suffix}
+                  </span>
+                )}
+              </div>
+              <div className="text-xs sm:text-sm text-neutral-300 font-medium leading-snug">
+                <span>{st.labelLine1}</span>
+                <br />
+                <span className="text-neutral-400">{st.labelLine2}</span>
               </div>
             </div>
-
-            {/* RIGHT SIDE: 2 FEATURE HIGHLIGHT ROWS (EXACTLY AS IN THE REFERENCE DESIGN) */}
-            <div className="lg:col-span-6 flex flex-col gap-4">
-              {/* Feature 1: Distributed Systems & Cloud */}
-              <div
-                onClick={() => utilScrollToSection("skills")}
-                className="group p-4 sm:p-5 rounded-2xl bg-[#131313] border border-white/10 hover:border-[#7F1DFF]/40 backdrop-blur-md flex items-center justify-between gap-4 transition-all duration-200 cursor-pointer hover:bg-[#18181d]"
-              >
-                <div className="flex items-center gap-4 min-w-0">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7F1DFF] to-[#D46F88] p-2.5 flex items-center justify-center text-white shrink-0 shadow-lg shadow-[#7F1DFF]/25 group-hover:scale-105 transition-transform">
-                    <Cloud className="w-6 h-6 stroke-[2]" />
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-sm sm:text-base font-bold text-white tracking-tight truncate group-hover:text-purple-300 transition-colors">
-                      {language === "es"
-                        ? "Sistemas Distribuidos & Cloud"
-                        : "Distributed Systems & Cloud"}
-                    </h3>
-                    <p className="text-xs text-neutral-400 truncate">
-                      k3s ARM64 · Docker · Cloud Run · PostgreSQL 16 HA
-                    </p>
-                  </div>
-                </div>
-
-                <div className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 group-hover:text-white group-hover:bg-[#7F1DFF] group-hover:border-[#7F1DFF] shrink-0 transition-all">
-                  <ArrowUpRight className="w-4 h-4" />
-                </div>
-              </div>
-
-              {/* Feature 2: High-Throughput Backends & AI */}
-              <div
-                onClick={() => utilScrollToSection("projects")}
-                className="group p-4 sm:p-5 rounded-2xl bg-[#131313] border border-white/10 hover:border-[#7F1DFF]/40 backdrop-blur-md flex items-center justify-between gap-4 transition-all duration-200 cursor-pointer hover:bg-[#18181d]"
-              >
-                <div className="flex items-center gap-4 min-w-0">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#7F1DFF] to-[#4c1d95] p-2.5 flex items-center justify-center text-white shrink-0 shadow-lg shadow-[#7F1DFF]/25 group-hover:scale-105 transition-transform">
-                    <Cpu className="w-6 h-6 stroke-[2]" />
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-sm sm:text-base font-bold text-white tracking-tight truncate group-hover:text-purple-300 transition-colors">
-                      {language === "es"
-                        ? "Backend de Alto Rendimiento & IA"
-                        : "High-Throughput Backends & AI"}
-                    </h3>
-                    <p className="text-xs text-neutral-400 truncate">
-                      FastAPI · NestJS · pgvector · CLIP · OpenTelemetry
-                    </p>
-                  </div>
-                </div>
-
-                <div className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-300 group-hover:text-white group-hover:bg-[#7F1DFF] group-hover:border-[#7F1DFF] shrink-0 transition-all">
-                  <ArrowUpRight className="w-4 h-4" />
-                </div>
-              </div>
-            </div>
-          </div>
+          ))}
         </motion.div>
       </div>
     </section>
