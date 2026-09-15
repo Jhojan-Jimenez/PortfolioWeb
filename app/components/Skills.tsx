@@ -97,62 +97,71 @@ export default function Skills() {
     },
   ];
 
-  // 2. TECH ARSENAL — BENTO CONTAINERS WITH AUTHENTIC LOGOS/ICONS (REFERENCE IMAGE 1)
-  const arsenalCategories = [
+  // 2. TECH ARSENAL — BENTO CONTAINERS WITH AUTHENTIC MULTI-COLOR LOGOS & OFFICIAL BRAND COLORS (REFERENCE IMAGE 1)
+  const arsenalCategories: {
+    name: string;
+    icon: React.ComponentType<{ className?: string }>;
+    tools: {
+      name: string;
+      svg?: string;
+      icon?: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+      color: string;
+    }[];
+  }[] = [
     {
       name: language === "es" ? "Backend" : "Backend",
       icon: Server,
       tools: [
-        { name: "Python", icon: SiPython },
-        { name: "FastAPI", icon: SiFastapi },
-        { name: "Node.js", icon: SiNodedotjs },
-        { name: "NestJS", icon: SiNestjs },
-        { name: "TypeScript", icon: SiTypescript },
-        { name: "Java", icon: FaJava },
-        { name: "Django", icon: SiDjango },
-        { name: "Pydantic", icon: SiPydantic },
+        { name: "Python", svg: "/tech-icons/python.svg", icon: SiPython, color: "#3776AB" },
+        { name: "FastAPI", svg: "/tech-icons/fastapi.svg", icon: SiFastapi, color: "#009688" },
+        { name: "Node.js", svg: "/tech-icons/nodejs.svg", icon: SiNodedotjs, color: "#5FA04E" },
+        { name: "NestJS", svg: "/tech-icons/nestjs.svg", icon: SiNestjs, color: "#E0234E" },
+        { name: "TypeScript", svg: "/tech-icons/typescript.svg", icon: SiTypescript, color: "#3178C6" },
+        { name: "Java", svg: "/tech-icons/java.svg", icon: FaJava, color: "#ED8B00" },
+        { name: "Django", svg: "/tech-icons/django.svg", icon: SiDjango, color: "#44B78B" },
+        { name: "Pydantic", icon: SiPydantic, color: "#E92063" },
       ],
     },
     {
       name: language === "es" ? "Cloud & DevOps" : "Cloud & DevOps",
       icon: Cloud,
       tools: [
-        { name: "Kubernetes", icon: SiKubernetes },
-        { name: "Docker", icon: SiDocker },
-        { name: "GCP", icon: SiGooglecloud },
-        { name: "AWS S3", icon: FaAws },
-        { name: "GitHub CI", icon: SiGithubactions },
-        { name: "Linux", icon: SiLinux },
-        { name: "GitLab CI", icon: SiGitlab },
-        { name: "OTel", icon: SiOpentelemetry },
+        { name: "Kubernetes", svg: "/tech-icons/kubernetes.svg", icon: SiKubernetes, color: "#326CE5" },
+        { name: "Docker", svg: "/tech-icons/docker.svg", icon: SiDocker, color: "#2496ED" },
+        { name: "GCP", svg: "/tech-icons/googlecloud.svg", icon: SiGooglecloud, color: "#4285F4" },
+        { name: "AWS S3", svg: "/tech-icons/amazonwebservices.svg", icon: FaAws, color: "#FF9900" },
+        { name: "GitHub CI", svg: "/tech-icons/githubactions.svg", icon: SiGithubactions, color: "#2088FF" },
+        { name: "Linux", icon: SiLinux, color: "#FCC624" },
+        { name: "GitLab CI", svg: "/tech-icons/gitlab.svg", icon: SiGitlab, color: "#FC6D26" },
+        { name: "OTel", svg: "/tech-icons/opentelemetry.svg", icon: SiOpentelemetry, color: "#F5A800" },
       ],
     },
     {
       name: language === "es" ? "Datos & IA" : "Data & AI",
       icon: Database,
       tools: [
-        { name: "PostgreSQL", icon: SiPostgresql },
-        { name: "pgvector", icon: TbVectorTriangle },
-        { name: "Redis", icon: SiRedis },
-        { name: "CLIP AI", icon: TbScan },
-        { name: "OpenAI", icon: RiOpenaiFill },
-        { name: "Pandas", icon: SiPandas },
-        { name: "Alembic", icon: TbDatabaseCog },
-        { name: "SQL", icon: TbSql },
+        { name: "PostgreSQL", svg: "/tech-icons/postgresql.svg", icon: SiPostgresql, color: "#336791" },
+        { name: "pgvector", icon: TbVectorTriangle, color: "#A855F7" },
+        { name: "Redis", svg: "/tech-icons/redis.svg", icon: SiRedis, color: "#DC382D" },
+        { name: "CLIP AI", icon: TbScan, color: "#38BDF8" },
+        { name: "OpenAI", icon: RiOpenaiFill, color: "#10A37F" },
+        { name: "Pandas", svg: "/tech-icons/pandas.svg", icon: SiPandas, color: "#E70488" },
+        { name: "Alembic", icon: TbDatabaseCog, color: "#F59E0B" },
+        { name: "SQL", icon: TbSql, color: "#00BCF2" },
       ],
     },
     {
       name: language === "es" ? "Frontend & Herramientas" : "Frontend & Tools",
       icon: Code2,
       tools: [
-        { name: "Next.js", icon: SiNextdotjs },
-        { name: "React", icon: SiReact },
-        { name: "Tailwind", icon: SiTailwindcss },
-        { name: "JavaScript", icon: SiJavascript },
-        { name: "HTML / CSS", icon: SiHtml5 },
-        { name: "Git", icon: SiGit },
-        { name: "Postman", icon: SiPostman },
-        { name: "PostHog", icon: SiPosthog },
+        { name: "Next.js", icon: SiNextdotjs, color: "#FFFFFF" },
+        { name: "React", svg: "/tech-icons/react.svg", icon: SiReact, color: "#61DAFB" },
+        { name: "Tailwind", svg: "/tech-icons/tailwindcss.svg", icon: SiTailwindcss, color: "#06B6D4" },
+        { name: "JavaScript", svg: "/tech-icons/javascript.svg", icon: SiJavascript, color: "#F7DF1E" },
+        { name: "HTML / CSS", svg: "/tech-icons/html5.svg", icon: SiHtml5, color: "#E34F26" },
+        { name: "Git", svg: "/tech-icons/git.svg", icon: SiGit, color: "#F05032" },
+        { name: "Postman", svg: "/tech-icons/postman.svg", icon: SiPostman, color: "#FF6C37" },
+        { name: "PostHog", icon: SiPosthog, color: "#F54E00" },
       ],
     },
   ];
@@ -302,12 +311,24 @@ export default function Skills() {
                         return (
                           <div
                             key={tIdx}
-                            className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#0d0714] border border-white/5 hover:border-purple-500/40 hover:bg-purple-950/20 transition-all duration-300 group/item hover:-translate-y-1 hover:shadow-lg hover:shadow-[#8750f7]/10"
+                            className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#0d0714] border border-white/5 hover:border-white/20 hover:bg-white/[0.03] transition-all duration-300 group/item hover:-translate-y-1 hover:shadow-lg"
                           >
-                            <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/5 flex items-center justify-center text-neutral-300 group-hover/item:text-purple-300 group-hover/item:border-purple-500/30 group-hover/item:scale-110 transition-all duration-300 mb-2">
-                              <ToolIcon className="w-5 h-5 transition-transform" />
+                            <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/5 flex items-center justify-center group-hover/item:scale-110 group-hover/item:border-white/25 group-hover/item:bg-white/[0.08] transition-all duration-300 mb-2 p-2 relative overflow-hidden">
+                              {tool.svg ? (
+                                <img
+                                  src={tool.svg}
+                                  alt={tool.name}
+                                  className="w-full h-full object-contain filter drop-shadow transition-transform"
+                                  loading="lazy"
+                                />
+                              ) : ToolIcon ? (
+                                <ToolIcon
+                                  className="w-5 h-5 transition-transform filter drop-shadow"
+                                  style={{ color: tool.color }}
+                                />
+                              ) : null}
                             </div>
-                            <span className="text-[11px] font-medium text-neutral-300 group-hover/item:text-white text-center leading-tight truncate w-full">
+                            <span className="text-[11px] font-medium text-neutral-300 group-hover/item:text-white text-center leading-tight truncate w-full transition-colors">
                               {tool.name}
                             </span>
                           </div>
