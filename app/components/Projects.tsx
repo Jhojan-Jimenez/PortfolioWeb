@@ -11,44 +11,23 @@ import { TRANSLATIONS } from "@/lib/i18n/translations";
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
-  const [previewVariant, setPreviewVariant] = useState<"original" | "1" | "2" | "3">("1");
   const { language } = useLanguage();
   const t = TRANSLATIONS[language].projects;
 
   const projects = getLocalizedProjects(language);
 
-  // Filter categories matching Gerold's layout
+  // Filter categories matching Gerold's layout with multi-tag support
   const categories = [
     { id: "all", label: language === "es" ? "Todos" : "All" },
     { id: "cloud", label: "Cloud & K8s" },
-    { id: "ai", label: "Applied AI" },
     { id: "backend", label: "Backend & Systems" },
+    { id: "ai", label: "Applied AI" },
+    { id: "frontend", label: "Frontend" },
   ];
 
   const filteredProjects = projects.filter((p) => {
     if (activeFilter === "all") return true;
-    if (activeFilter === "cloud") {
-      return (
-        p.slug === "gazu" ||
-        p.category.toLowerCase().includes("cloud") ||
-        p.category.toLowerCase().includes("kubernetes")
-      );
-    }
-    if (activeFilter === "ai") {
-      return (
-        p.slug === "talentmatch" ||
-        p.category.toLowerCase().includes("ai") ||
-        p.category.toLowerCase().includes("vector")
-      );
-    }
-    if (activeFilter === "backend") {
-      return (
-        p.slug === "wheelus" ||
-        p.slug === "vaccine-cdss" ||
-        p.slug === "mercedes-gt3"
-      );
-    }
-    return true;
+    return p.categories?.includes(activeFilter);
   });
 
   return (
@@ -72,151 +51,39 @@ export default function Projects() {
           </p>
         </div>
 
-        {/* IMPECCABLE LIVE VARIANT SWITCHER */}
-        <div className="flex items-center justify-center gap-2 mb-5">
-          <span className="text-[11px] font-mono text-purple-400 font-semibold tracking-wider uppercase">
-            ✦ Impeccable:
-          </span>
-          <div className="inline-flex p-1 rounded-full bg-[#140c1c] border border-white/15 shadow-md">
-            {(["original", "1", "2", "3"] as const).map((v) => (
-              <button
-                key={v}
-                onClick={() => setPreviewVariant(v)}
-                className={`px-3 py-1 rounded-full text-xs font-mono font-semibold transition-all cursor-pointer ${
-                  previewVariant === v
-                    ? "bg-[#8750f7] text-white shadow-[0_0_12px_rgba(135,80,247,0.6)]"
-                    : "text-neutral-400 hover:text-white"
-                }`}
-              >
-                {v === "original" ? "Original" : `Var ${v}`}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* GEROLD'S PILL CATEGORY FILTER BAR */}
+        {/* GEROLD'S PILL CATEGORY FILTER BAR (OPTION 1 - SEGMENTED STUDIO GLASS) */}
         <div className="flex justify-center mb-12 sm:mb-16">
-          <div data-impeccable-variants="40127c21" data-impeccable-variant-count="3" style={{ display: "contents" }}>
-            {/* impeccable-variants-start 40127c21 */}
-            {/* Original */}
-            <div data-impeccable-variant="original" style={{ display: previewVariant === "original" ? "block" : "none" }}>
-              <div className="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-full bg-[#140c1c] border border-white/10 shadow-lg">
-                {categories.map((cat) => {
-                  const isActive = activeFilter === cat.id;
-                  return (
-                    <button
-                      key={cat.id}
-                      onClick={() => setActiveFilter(cat.id)}
-                      className={`px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
-                        isActive
-                          ? "bg-[#8750f7] text-white shadow-[0_0_20px_rgba(135,80,247,0.5)]"
-                          : "text-neutral-400 hover:text-white hover:bg-white/5"
-                      }`}
-                    >
-                      {cat.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-            {/* Variants: insert below this line */}
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 p-2 rounded-full bg-[#120a1c]/95 border border-[#8750f7]/40 shadow-2xl shadow-purple-950/60 backdrop-blur-xl">
+            {categories.map((cat) => {
+              const isActive = activeFilter === cat.id;
+              const count =
+                cat.id === "all"
+                  ? projects.length
+                  : projects.filter((p) => p.categories?.includes(cat.id)).length;
 
-            {/* Variant 1: Segmented Studio Glass with Glowing Active Pill & Count Badges */}
-            <div data-impeccable-variant="1" style={{ display: previewVariant === "1" ? "block" : "none" }}>
-              <div className="inline-flex flex-wrap items-center justify-center gap-2 p-2 rounded-full bg-[#120a1c]/95 border border-[#8750f7]/40 shadow-2xl shadow-purple-950/60 backdrop-blur-xl">
-                {categories.map((cat) => {
-                  const isActive = activeFilter === cat.id;
-                  const count =
-                    cat.id === "all"
-                      ? projects.length
-                      : projects.filter((p) => {
-                          if (cat.id === "cloud") return p.slug === "gazu" || p.category.toLowerCase().includes("cloud");
-                          if (cat.id === "ai") return p.slug === "talentmatch" || p.category.toLowerCase().includes("ai");
-                          if (cat.id === "backend") return p.slug === "wheelus" || p.slug === "vaccine-cdss" || p.slug === "mercedes-gt3";
-                          return true;
-                        }).length;
-
-                  return (
-                    <button
-                      key={cat.id}
-                      onClick={() => setActiveFilter(cat.id)}
-                      className={`relative px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 flex items-center gap-2 cursor-pointer ${
-                        isActive
-                          ? "bg-gradient-to-r from-[#8750f7] to-[#a855f7] text-white shadow-[0_0_25px_rgba(135,80,247,0.6)] scale-[1.02]"
-                          : "text-neutral-400 hover:text-white hover:bg-white/5"
-                      }`}
-                    >
-                      <span>{cat.label}</span>
-                      <span
-                        className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full transition-colors ${
-                          isActive
-                            ? "bg-white/20 text-white font-bold"
-                            : "bg-white/5 text-neutral-500"
-                        }`}
-                      >
-                        {count}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Variant 2: Minimalist Tech Tabs with Live Indicator & Underline Glow */}
-            <div data-impeccable-variant="2" style={{ display: previewVariant === "2" ? "block" : "none" }}>
-              <div className="inline-flex flex-wrap items-center justify-center gap-6 px-6 py-2.5 rounded-2xl bg-[#140c1c]/80 border border-white/10 backdrop-blur-md">
-                {categories.map((cat) => {
-                  const isActive = activeFilter === cat.id;
-                  return (
-                    <button
-                      key={cat.id}
-                      onClick={() => setActiveFilter(cat.id)}
-                      className={`relative py-1.5 text-xs sm:text-sm font-mono tracking-wider transition-all duration-200 cursor-pointer flex items-center gap-2 ${
-                        isActive ? "text-white font-bold" : "text-neutral-400 hover:text-neutral-200"
-                      }`}
-                    >
-                      <span
-                        className={`w-1.5 h-1.5 rounded-full transition-all ${
-                          isActive
-                            ? "bg-[#8750f7] shadow-[0_0_10px_rgba(135,80,247,1)] scale-125"
-                            : "bg-neutral-600"
-                        }`}
-                      />
-                      <span>{cat.label}</span>
-                      {isActive && (
-                        <div className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gradient-to-r from-[#8750f7] via-[#c084fc] to-transparent shadow-[0_0_8px_rgba(135,80,247,0.8)]" />
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Variant 3: Terminal Hardware Chips with Neon Circuit Brackets */}
-            <div data-impeccable-variant="3" style={{ display: previewVariant === "3" ? "block" : "none" }}>
-              <div className="inline-flex flex-wrap items-center justify-center gap-2.5 p-2 rounded-2xl bg-[#0d0714] border border-white/10">
-                {categories.map((cat) => {
-                  const isActive = activeFilter === cat.id;
-                  return (
-                    <button
-                      key={cat.id}
-                      onClick={() => setActiveFilter(cat.id)}
-                      className={`px-4 py-2 rounded-xl text-xs font-mono transition-all duration-300 cursor-pointer border ${
-                        isActive
-                          ? "bg-[#1f1035] border-[#8750f7] text-white shadow-[0_0_20px_rgba(135,80,247,0.35)] font-bold"
-                          : "bg-transparent border-white/5 text-neutral-400 hover:text-white hover:border-white/20"
-                      }`}
-                    >
-                      <span className="text-[#8750f7] opacity-80 mr-1.5">[</span>
-                      <span>{cat.label}</span>
-                      <span className="text-[#8750f7] opacity-80 ml-1.5">]</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* impeccable-variants-end 40127c21 */}
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveFilter(cat.id)}
+                  className={`relative px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                    isActive
+                      ? "bg-gradient-to-r from-[#8750f7] to-[#a855f7] text-white shadow-[0_0_25px_rgba(135,80,247,0.6)] scale-[1.02]"
+                      : "text-neutral-400 hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  <span>{cat.label}</span>
+                  <span
+                    className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full transition-colors ${
+                      isActive
+                        ? "bg-white/20 text-white font-bold"
+                        : "bg-white/5 text-neutral-500"
+                    }`}
+                  >
+                    {count}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -236,6 +103,28 @@ export default function Projects() {
               >
                 {/* Framed Image Container */}
                 <div className="relative aspect-[16/11] w-full rounded-2xl sm:rounded-[24px] overflow-hidden bg-[#09040d]">
+                  {/* Category Pills at top-left of card */}
+                  <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex flex-wrap gap-1.5 pointer-events-none">
+                    {project.categories?.map((catId) => {
+                      const catLabel =
+                        catId === "cloud"
+                          ? "Cloud"
+                          : catId === "backend"
+                          ? "Backend"
+                          : catId === "ai"
+                          ? "AI"
+                          : "Frontend";
+                      return (
+                        <span
+                          key={catId}
+                          className="text-[10px] sm:text-xs font-mono font-semibold px-2.5 py-1 rounded-full bg-[#0f0715]/85 text-purple-200 border border-[#8750f7]/40 backdrop-blur-md shadow-lg"
+                        >
+                          {catLabel}
+                        </span>
+                      );
+                    })}
+                  </div>
+
                   {project.heroImage ? (
                     <Image
                       src={project.heroImage}
@@ -258,6 +147,26 @@ export default function Projects() {
                 <div className="absolute bottom-5 left-5 right-5 sm:bottom-7 sm:left-7 sm:right-7 md:bottom-8 md:left-8 md:right-8 z-20 transition-all duration-300 ease-out sm:opacity-0 sm:translate-y-4 sm:group-hover:opacity-100 sm:group-hover:translate-y-0">
                   <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#8750f7] via-[#7435f5] to-[#401280] shadow-2xl shadow-purple-950/80 flex items-center justify-between gap-4 border border-white/10">
                     <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
+                        {project.categories?.map((catId) => {
+                          const catLabel =
+                            catId === "cloud"
+                              ? "Cloud"
+                              : catId === "backend"
+                              ? "Backend"
+                              : catId === "ai"
+                              ? "AI"
+                              : "Frontend";
+                          return (
+                            <span
+                              key={catId}
+                              className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-white/20 text-white"
+                            >
+                              {catLabel}
+                            </span>
+                          );
+                        })}
+                      </div>
                       <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-1 truncate">
                         {project.title}
                       </h3>

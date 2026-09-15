@@ -60,6 +60,7 @@ export interface ProjectCaseStudy {
   title: string;
   subtitle: string;
   category: string;
+  categories?: string[];
   badge?: string;
   isFlagship?: boolean;
   date: string;
@@ -102,6 +103,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     subtitle:
       "Enterprise decoupled commerce engine with Next.js 15 (App Router), React 19, Vendure/NestJS GraphQL core, k3s GitOps via ArgoCD, multi-arch ARM64 CI/CD, Traefik anti-CORS ingress, and full-stack observability.",
     category: "Cloud Native & E-Commerce",
+    categories: ["cloud", "backend", "frontend"],
     badge: "Flagship Architecture",
     isFlagship: true,
     date: "2025 – Present",
@@ -367,6 +369,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     subtitle:
       "Production talent discovery engine combining CLIP ViT-B/32 multimodal embeddings (512d), GPT-4o-mini Vision attribute extraction, PostgreSQL 16 pgvector cosine similarity, and weighted trait permanence re-ranking.",
     category: "Applied AI & Vector Search",
+    categories: ["ai", "backend", "frontend"],
     badge: "Computer Vision & Vector Search",
     date: "2025",
     role: "AI & Backend Systems Engineer",
@@ -579,6 +582,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     subtitle:
       "Regulated Ride-Sharing Network with WebSocket State Synchronization, Geospatial Routing, and Race-Condition-Safe Concurrency",
     category: "Distributed Systems & Real-Time",
+    categories: ["frontend", "backend"],
     date: "2024",
     role: "Lead Full Stack & Systems Engineer",
     teamOrContext: "Universidad de La Sabana Community Initiative",
@@ -721,6 +725,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     subtitle:
       "High-Fidelity WebGL Showcase with React Three Fiber, Custom Shaders, Scroll-Driven Camera Choreography, and Real-Time Telemetry HUD",
     category: "Creative Engineering & WebGL",
+    categories: ["frontend", "backend"],
     date: "2025",
     role: "Creative & Graphics Engineer",
     teamOrContext: "Interactive Digital Twin Showcase",
@@ -856,6 +861,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     subtitle:
       "Deterministic Clinical Rule Engine for Pediatric & Adult Immunization Protocols with 100% Reproducible Decision Logs",
     category: "Algorithmic Systems & HealthTech",
+    categories: ["backend", "frontend"],
     date: "2023",
     role: "Algorithm & Systems Engineer",
     teamOrContext: "Healthcare Decision Support Architecture",
