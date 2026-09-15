@@ -125,32 +125,28 @@ export default function Projects() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 group-hover:opacity-60 transition-opacity pointer-events-none" />
                 </div>
 
-                {/* GEROLD'S SIGNATURE HOVER BANNER (FLOATING AT BOTTOM) */}
-                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 md:bottom-5 md:left-5 md:right-5 z-20 transition-all duration-300 ease-out sm:opacity-0 sm:translate-y-3 sm:group-hover:opacity-100 sm:group-hover:translate-y-0">
-                  <div className="p-3.5 sm:p-4 md:p-5 rounded-2xl bg-gradient-to-r from-[#8750f7] via-[#7435f5] to-[#401280] shadow-2xl shadow-purple-950/80 flex items-center justify-between gap-3 sm:gap-4 border border-white/10">
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-1.5 mb-1">
-                        {project.categories?.map((catId) => (
-                          <span
-                            key={catId}
-                            className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-white/20 text-white"
-                          >
-                            {getCatLabel(catId)}
-                          </span>
-                        ))}
-                      </div>
-                      <h3 className="text-base sm:text-lg md:text-xl font-bold text-white tracking-tight mb-0.5 truncate">
-                        {project.title}
-                      </h3>
-                      <p className="text-purple-100/90 text-xs sm:text-[13px] font-normal line-clamp-1 leading-normal">
-                        {project.shortDescription || project.subtitle}
-                      </p>
+                {/* IMPECCABLE 3-VARIANT CONTAINER: INFO BELOW SCREENSHOT */}
+                <div className="mt-4 sm:mt-5 p-3.5 sm:p-4 md:p-5 rounded-2xl bg-gradient-to-r from-[#8750f7] via-[#7435f5] to-[#401280] shadow-xl shadow-purple-950/50 flex items-center justify-between gap-3 sm:gap-4 border border-white/10 group-hover:border-white/25 transition-all duration-300">
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
+                      {project.categories?.map((catId) => (
+                        <span
+                          key={catId}
+                          className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-white/20 text-white backdrop-blur-sm"
+                        >
+                          {getCatLabel(catId)}
+                        </span>
+                      ))}
                     </div>
-
-                    {/* Signature Gerold Up-Right Arrow Icon */}
-                    <div className="shrink-0 text-white pl-1">
-                      <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </div>
+                    <h3 className="text-base sm:text-lg md:text-xl font-bold text-white tracking-tight mb-0.5 truncate">
+                      {project.title}
+                    </h3>
+                    <p className="text-purple-100/90 text-xs sm:text-[13px] font-normal line-clamp-1 leading-normal">
+                      {project.shortDescription || project.subtitle}
+                    </p>
+                  </div>
+                  <div className="shrink-0 text-white p-2 rounded-xl bg-white/10 group-hover:bg-white/20 transition-colors">
+                    <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
                 </div>
               </Link>
