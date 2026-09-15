@@ -138,10 +138,10 @@ export default function Projects() {
                 </div>
 
                 {/* GEROLD'S SIGNATURE HOVER BANNER (FLOATING AT BOTTOM) */}
-                <div className="absolute bottom-5 left-5 right-5 sm:bottom-7 sm:left-7 sm:right-7 md:bottom-8 md:left-8 md:right-8 z-20 transition-all duration-300 ease-out sm:opacity-0 sm:translate-y-4 sm:group-hover:opacity-100 sm:group-hover:translate-y-0">
-                  <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#8750f7] via-[#7435f5] to-[#401280] shadow-2xl shadow-purple-950/80 flex items-center justify-between gap-4 border border-white/10">
+                <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 md:bottom-5 md:left-5 md:right-5 z-20 transition-all duration-300 ease-out sm:opacity-0 sm:translate-y-3 sm:group-hover:opacity-100 sm:group-hover:translate-y-0">
+                  <div className="p-3.5 sm:p-4 md:p-5 rounded-2xl bg-gradient-to-r from-[#8750f7] via-[#7435f5] to-[#401280] shadow-2xl shadow-purple-950/80 flex items-center justify-between gap-3 sm:gap-4 border border-white/10">
                     <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
+                      <div className="flex flex-wrap items-center gap-1.5 mb-1">
                         {project.categories?.map((catId) => (
                           <span
                             key={catId}
@@ -151,17 +151,17 @@ export default function Projects() {
                           </span>
                         ))}
                       </div>
-                      <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-1 truncate">
+                      <h3 className="text-base sm:text-lg md:text-xl font-bold text-white tracking-tight mb-0.5 truncate">
                         {project.title}
                       </h3>
-                      <p className="text-purple-100 text-xs sm:text-sm font-normal line-clamp-1">
+                      <p className="text-purple-100/90 text-xs sm:text-[13px] font-normal line-clamp-1 leading-normal">
                         {project.shortDescription || project.subtitle}
                       </p>
                     </div>
 
                     {/* Signature Gerold Up-Right Arrow Icon */}
-                    <div className="shrink-0 text-white pl-2">
-                      <ArrowUpRight className="w-6 h-6 sm:w-7 sm:h-7 stroke-[2.2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    <div className="shrink-0 text-white pl-1">
+                      <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.2] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </div>
                   </div>
                 </div>
