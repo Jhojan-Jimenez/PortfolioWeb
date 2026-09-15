@@ -111,7 +111,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     teamOrContext: "Cloud-Native Commerce Platform",
     shortDescription:
       "Enterprise decoupled commerce engine on Kubernetes (k3s). Features Next.js 15 App Router, Vendure GraphQL APIs, declarative GitOps with ArgoCD & Kustomize, multi-arch ARM64 pipelines on Oracle Cloud, Traefik anti-CORS routing, and production observability (OTel, Prometheus, PostHog).",
-    heroImage: "/projects/gazu-showcase.png",
+    heroImage: "/projects/gazu-ecommerce.png",
     liveUrl: "https://dev.gazu.jhojan.cloud",
     devUrl: "https://dev.gazu.jhojan.cloud",
     gitlabUrl: "https://gitlab.com/portfolio-dev3/ecommerce",
@@ -376,7 +376,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     teamOrContext: "Talent Agency Management Platform",
     shortDescription:
       "Enterprise multimodal casting platform. Discovers talent through natural language descriptions or reference photo uploads using CLIP ViT-B/32 (512d), automated biometric attribute extraction via GPT-4o-mini Vision, and two-stage retrieval with pgvector cosine similarity and SQL trait filtering.",
-    heroImage: "/projects/talentmatch-showcase.png",
+    heroImage: "/projects/TalentMatchAI.png",
     liveUrl: "https://models.jhojan.cloud/",
     devUrl: "https://models.jhojan.cloud/",
     githubUrl: "https://github.com/Jhojan-Jimenez/Models",
