@@ -8,6 +8,8 @@ import {
   Award,
   GraduationCap,
   Sparkles,
+  FileText,
+  Terminal,
 } from "lucide-react";
 import { useLanguage } from "@/app/context/LanguageContext";
 import { TRANSLATIONS } from "@/lib/i18n/translations";
@@ -45,56 +47,295 @@ export default function Experience() {
       className="py-24 sm:py-32 px-4 relative z-10 bg-[#0f0715]"
     >
       <div className="container mx-auto max-w-6xl">
-        {/* OFFICIAL RESUME HUB (DOWNLOAD BUTTONS) */}
-        <div className="p-6 sm:p-7 rounded-[26px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/40 transition-all duration-300 shadow-xl mb-16 flex flex-col sm:flex-row sm:items-center justify-between gap-5 text-left">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs font-mono uppercase tracking-wider text-[#8750f7] font-bold">
-                ✦ {t.resumeHub.title}
-              </span>
+        {/* Impeccable Variants Container for Session 49005009 */}
+        <div data-impeccable-variants="49005009" data-impeccable-variant-count="3" style={{ display: "contents" }}>
+          {/* impeccable-variants-start 49005009 */}
+          {/* Original */}
+          <div data-impeccable-variant="original" style={{ display: "none" }}>
+            <div className="p-6 sm:p-7 rounded-[26px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/40 transition-all duration-300 shadow-xl mb-16 flex flex-col sm:flex-row sm:items-center justify-between gap-5 text-left">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-xs font-mono uppercase tracking-wider text-[#8750f7] font-bold">
+                    ✦ {t.resumeHub.title}
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-xl">
+                  {t.resumeHub.description}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 shrink-0">
+                {/* CV Español */}
+                <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
+                  <button
+                    onClick={() => handleAction("cv", "download")}
+                    className="flex items-center gap-2 px-5 py-2.5 bg-[#8750f7] hover:bg-[#7435f5] text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>{t.resumeHub.downloadCv}</span>
+                  </button>
+                  <button
+                    onClick={() => handleAction("cv", "preview")}
+                    aria-label="Preview CV"
+                    className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Resume English */}
+                <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
+                  <button
+                    onClick={() => handleAction("resume", "download")}
+                    className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#8750f7] to-[#a855f7] hover:brightness-110 text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>{t.resumeHub.downloadResume}</span>
+                  </button>
+                  <button
+                    onClick={() => handleAction("resume", "preview")}
+                    aria-label="Preview Resume"
+                    className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
             </div>
-            <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-xl">
-              {t.resumeHub.description}
-            </p>
+          </div>
+          {/* Variants: insert below this line */}
+
+          {/* VARIANT 1: Dual Document Cards (Side-by-Side ATS Cards) */}
+          <div data-impeccable-variant="1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-16 text-left">
+              {/* Card 1: Español */}
+              <div className="p-6 rounded-[22px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 hover:bg-[#180e26] transition-all duration-300 shadow-xl flex flex-col justify-between group">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-xl bg-purple-950/50 text-[#8750f7] border border-purple-800/40">
+                        <FileText className="w-4 h-4" />
+                      </div>
+                      <span className="text-xs font-mono font-bold text-purple-300 uppercase tracking-wider">
+                        {language === "es" ? "Curriculum Vitae (ES)" : "Curriculum Vitae (ES)"}
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                      ATS Ready · 1 Page
+                    </span>
+                  </div>
+                  <h4 className="text-base font-extrabold text-white tracking-wide mb-1.5 group-hover:text-purple-200 transition-colors">
+                    {language === "es" ? "Hoja de Vida Oficial (Español)" : "Official CV (Spanish)"}
+                  </h4>
+                  <p className="text-xs text-neutral-400 leading-relaxed mb-5">
+                    {language === "es"
+                      ? "Formato monocolumna optimizado para ATS, métricas de impacto Google XYZ y verificación técnica."
+                      : "Single-column ATS-optimized CV built with Google's XYZ formula and verified technical achievements."}
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                  <span className="text-[11px] font-mono text-neutral-400">PDF · DOCX</span>
+                  <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
+                    <button
+                      onClick={() => handleAction("cv", "download")}
+                      className="flex items-center gap-2 px-4 py-2 bg-[#8750f7] hover:bg-[#7435f5] text-white font-semibold text-xs transition-all cursor-pointer"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>{t.resumeHub.downloadCv}</span>
+                    </button>
+                    <button
+                      onClick={() => handleAction("cv", "preview")}
+                      aria-label="Preview CV"
+                      className="flex items-center justify-center px-3 py-2 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs cursor-pointer"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 2: English */}
+              <div className="p-6 rounded-[22px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 hover:bg-[#180e26] transition-all duration-300 shadow-xl flex flex-col justify-between group">
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="p-2 rounded-xl bg-purple-950/50 text-[#a855f7] border border-purple-800/40">
+                        <FileText className="w-4 h-4" />
+                      </div>
+                      <span className="text-xs font-mono font-bold text-purple-300 uppercase tracking-wider">
+                        {language === "es" ? "Professional Resume (EN)" : "Professional Resume (EN)"}
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20">
+                      ATS Compliant · 1 Page
+                    </span>
+                  </div>
+                  <h4 className="text-base font-extrabold text-white tracking-wide mb-1.5 group-hover:text-purple-200 transition-colors">
+                    {language === "es" ? "Resume Oficial en Inglés" : "Official Technical Resume"}
+                  </h4>
+                  <p className="text-xs text-neutral-400 leading-relaxed mb-5">
+                    {language === "es"
+                      ? "Diseñado para reclutadores internacionales y equipos globales remotos. Nivel B2 profesional."
+                      : "Designed for international recruiters, engineering managers, and global remote teams. Professional B2."}
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-white/5 flex items-center justify-between gap-3">
+                  <span className="text-[11px] font-mono text-neutral-400">PDF · DOCX</span>
+                  <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
+                    <button
+                      onClick={() => handleAction("resume", "download")}
+                      className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#8750f7] to-[#a855f7] hover:brightness-110 text-white font-semibold text-xs transition-all cursor-pointer"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>{t.resumeHub.downloadResume}</span>
+                    </button>
+                    <button
+                      onClick={() => handleAction("resume", "preview")}
+                      aria-label="Preview Resume"
+                      className="flex items-center justify-center px-3 py-2 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs cursor-pointer"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
-            {/* CV Español */}
-            <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
-              <button
-                onClick={() => handleAction("cv", "download")}
-                className="flex items-center gap-2 px-5 py-2.5 bg-[#8750f7] hover:bg-[#7435f5] text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
-              >
-                <Download className="w-4 h-4" />
-                <span>{t.resumeHub.downloadCv}</span>
-              </button>
-              <button
-                onClick={() => handleAction("cv", "preview")}
-                aria-label="Preview CV"
-                className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
-              >
-                <Eye className="w-4 h-4" />
-              </button>
-            </div>
+          {/* VARIANT 2: Minimalist Integrated Header Bar (Ultra-clean Floating Toolbar) */}
+          <div data-impeccable-variant="2" style={{ display: "none" }}>
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#140c1c]/90 border border-white/10 hover:border-[#8750f7]/40 transition-all duration-300 shadow-xl mb-16 flex flex-col md:flex-row md:items-center justify-between gap-4 text-left backdrop-blur-md">
+              <div className="flex items-center gap-3">
+                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono uppercase tracking-wider text-[#8750f7] font-bold">
+                      ✦ {t.resumeHub.title}
+                    </span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-neutral-300 border border-white/5">
+                      ATS Verified
+                    </span>
+                  </div>
+                  <p className="text-xs text-neutral-400 leading-snug mt-0.5">
+                    {t.resumeHub.description}
+                  </p>
+                </div>
+              </div>
 
-            {/* Resume English */}
-            <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
-              <button
-                onClick={() => handleAction("resume", "download")}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#8750f7] to-[#a855f7] hover:brightness-110 text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
-              >
-                <Download className="w-4 h-4" />
-                <span>{t.resumeHub.downloadResume}</span>
-              </button>
-              <button
-                onClick={() => handleAction("resume", "preview")}
-                aria-label="Preview Resume"
-                className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
-              >
-                <Eye className="w-4 h-4" />
-              </button>
+              <div className="flex flex-wrap items-center gap-3 shrink-0">
+                {/* CV Español */}
+                <div className="inline-flex rounded-full overflow-hidden border border-white/10 shadow-md">
+                  <button
+                    onClick={() => handleAction("cv", "download")}
+                    className="flex items-center gap-1.5 px-4 py-2 bg-[#8750f7] hover:bg-[#7435f5] text-white font-medium text-xs transition-all cursor-pointer"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>CV (ES)</span>
+                  </button>
+                  <button
+                    onClick={() => handleAction("cv", "preview")}
+                    aria-label="Preview CV"
+                    className="flex items-center justify-center px-2.5 py-2 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-white/10 text-xs cursor-pointer"
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+
+                {/* Resume English */}
+                <div className="inline-flex rounded-full overflow-hidden border border-white/10 shadow-md">
+                  <button
+                    onClick={() => handleAction("resume", "download")}
+                    className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-[#8750f7] to-[#a855f7] hover:brightness-110 text-white font-medium text-xs transition-all cursor-pointer"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Resume (EN)</span>
+                  </button>
+                  <button
+                    onClick={() => handleAction("resume", "preview")}
+                    aria-label="Preview Resume"
+                    className="flex items-center justify-center px-2.5 py-2 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-white/10 text-xs cursor-pointer"
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
+
+          {/* VARIANT 3: Engineering Console / Terminal Tech Box */}
+          <div data-impeccable-variant="3" style={{ display: "none" }}>
+            <div className="p-5 sm:p-6 rounded-[22px] bg-[#120a1a] border border-[#8750f7]/30 hover:border-[#8750f7]/60 transition-all duration-300 shadow-2xl mb-16 font-mono text-left relative overflow-hidden">
+              {/* Terminal Window Header Bar */}
+              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                  <span className="text-[11px] text-neutral-400 ml-2 font-mono">
+                    ~/jhojan/credentials-vault // ats_monocolumn_v2.4
+                  </span>
+                </div>
+                <span className="text-[10px] text-[#8750f7] bg-purple-950/40 px-2 py-0.5 rounded border border-purple-800/30">
+                  STATUS: VERIFIED
+                </span>
+              </div>
+
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
+                <div>
+                  <div className="flex items-center gap-2 text-xs text-purple-300 mb-1">
+                    <Terminal className="w-3.5 h-3.5 text-[#8750f7]" />
+                    <span className="font-bold">curl -O https://dev.jhojan.cloud/resume</span>
+                  </div>
+                  <p className="text-xs text-neutral-400 leading-relaxed max-w-xl font-sans">
+                    {language === "es"
+                      ? "Documentos oficiales de 1 página estricta, monocolumna, sin tablas complejas y 100% compatibles con sistemas ATS corporativos."
+                      : "Strict 1-page, single-column documents built for high ATS-compatibility and engineering leadership review."}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-3 shrink-0 font-sans">
+                  {/* CV Español */}
+                  <div className="inline-flex rounded-xl overflow-hidden border border-[#8750f7]/40 shadow-md">
+                    <button
+                      onClick={() => handleAction("cv", "download")}
+                      className="flex items-center gap-2 px-4 py-2.5 bg-[#8750f7] hover:bg-[#7435f5] text-white font-semibold text-xs transition-all cursor-pointer font-mono"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>CV_ES.pdf</span>
+                    </button>
+                    <button
+                      onClick={() => handleAction("cv", "preview")}
+                      aria-label="Preview CV"
+                      className="flex items-center justify-center px-3 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs cursor-pointer"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+
+                  {/* Resume English */}
+                  <div className="inline-flex rounded-xl overflow-hidden border border-[#8750f7]/40 shadow-md">
+                    <button
+                      onClick={() => handleAction("resume", "download")}
+                      className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#8750f7] to-[#a855f7] hover:brightness-110 text-white font-semibold text-xs transition-all cursor-pointer font-mono"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>RESUME_EN.pdf</span>
+                    </button>
+                    <button
+                      onClick={() => handleAction("resume", "preview")}
+                      aria-label="Preview Resume"
+                      className="flex items-center justify-center px-3 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs cursor-pointer"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* impeccable-variants-end 49005009 */}
         </div>
 
         {/* STACKED FULL-WIDTH EXPERIENCE & EDUCATION SECTIONS */}
