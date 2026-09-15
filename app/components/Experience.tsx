@@ -190,8 +190,8 @@ export default function Experience() {
               </h3>
             </div>
 
-            {/* Experience Cards - Responsive Full-Width Grid (2x2 on desktop) */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* Experience Cards - Single Full-Width Column */}
+            <div className="space-y-6">
               {t.roles.map((job, idx) => {
                 const isExpanded = expandedRole === idx;
                 return (
@@ -297,8 +297,8 @@ export default function Experience() {
               </h3>
             </div>
 
-            {/* 4 Education & Recognition Cards in 2x2 Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* 4 Education & Recognition Cards in Single Full-Width Column */}
+            <div className="space-y-6">
               {educationItems.map((edu, idx) => (
                 <div
                   key={idx}
