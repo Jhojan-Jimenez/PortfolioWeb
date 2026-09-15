@@ -23,7 +23,25 @@ export default function Projects() {
     { id: "backend", label: "Backend & Systems" },
     { id: "ai", label: "Applied AI" },
     { id: "frontend", label: "Frontend" },
+    { id: "3d", label: "3D & WebGL" },
   ];
+
+  const getCatLabel = (catId: string) => {
+    switch (catId) {
+      case "cloud":
+        return "Cloud";
+      case "backend":
+        return "Backend";
+      case "ai":
+        return "AI";
+      case "frontend":
+        return "Frontend";
+      case "3d":
+        return "3D / WebGL";
+      default:
+        return catId;
+    }
+  };
 
   const filteredProjects = projects.filter((p) => {
     if (activeFilter === "all") return true;
@@ -91,24 +109,14 @@ export default function Projects() {
                 <div className="relative aspect-[16/11] w-full rounded-2xl sm:rounded-[24px] overflow-hidden bg-[#09040d]">
                   {/* Category Pills at top-left of card */}
                   <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex flex-wrap gap-1.5 pointer-events-none">
-                    {project.categories?.map((catId) => {
-                      const catLabel =
-                        catId === "cloud"
-                          ? "Cloud"
-                          : catId === "backend"
-                          ? "Backend"
-                          : catId === "ai"
-                          ? "AI"
-                          : "Frontend";
-                      return (
-                        <span
-                          key={catId}
-                          className="text-[10px] sm:text-xs font-mono font-semibold px-2.5 py-1 rounded-full bg-[#0f0715]/85 text-purple-200 border border-[#8750f7]/40 backdrop-blur-md shadow-lg"
-                        >
-                          {catLabel}
-                        </span>
-                      );
-                    })}
+                    {project.categories?.map((catId) => (
+                      <span
+                        key={catId}
+                        className="text-[10px] sm:text-xs font-mono font-semibold px-2.5 py-1 rounded-full bg-[#0f0715]/85 text-purple-200 border border-[#8750f7]/40 backdrop-blur-md shadow-lg"
+                      >
+                        {getCatLabel(catId)}
+                      </span>
+                    ))}
                   </div>
 
                   {project.heroImage ? (
@@ -134,24 +142,14 @@ export default function Projects() {
                   <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-[#8750f7] via-[#7435f5] to-[#401280] shadow-2xl shadow-purple-950/80 flex items-center justify-between gap-4 border border-white/10">
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-1.5 mb-1.5">
-                        {project.categories?.map((catId) => {
-                          const catLabel =
-                            catId === "cloud"
-                              ? "Cloud"
-                              : catId === "backend"
-                              ? "Backend"
-                              : catId === "ai"
-                              ? "AI"
-                              : "Frontend";
-                          return (
-                            <span
-                              key={catId}
-                              className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-white/20 text-white"
-                            >
-                              {catLabel}
-                            </span>
-                          );
-                        })}
+                        {project.categories?.map((catId) => (
+                          <span
+                            key={catId}
+                            className="text-[9px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-white/20 text-white"
+                          >
+                            {getCatLabel(catId)}
+                          </span>
+                        ))}
                       </div>
                       <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight mb-1 truncate">
                         {project.title}

@@ -369,7 +369,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     subtitle:
       "Production talent discovery engine combining CLIP ViT-B/32 multimodal embeddings (512d), GPT-4o-mini Vision attribute extraction, PostgreSQL 16 pgvector cosine similarity, and weighted trait permanence re-ranking.",
     category: "Applied AI & Vector Search",
-    categories: ["ai", "backend", "frontend"],
+    categories: ["cloud", "ai", "backend", "frontend"],
     badge: "Computer Vision & Vector Search",
     date: "2025",
     role: "AI & Backend Systems Engineer",
@@ -725,7 +725,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     subtitle:
       "High-Fidelity WebGL Showcase with React Three Fiber, Custom Shaders, Scroll-Driven Camera Choreography, and Real-Time Telemetry HUD",
     category: "Creative Engineering & WebGL",
-    categories: ["frontend", "backend"],
+    categories: ["3d", "frontend"],
     date: "2025",
     role: "Creative & Graphics Engineer",
     teamOrContext: "Interactive Digital Twin Showcase",
