@@ -53,7 +53,7 @@ export default function Projects() {
       id="projects"
       className="py-24 sm:py-32 px-4 relative z-10 bg-[#0f0715]"
     >
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-7xl">
         {/* GEROLD'S CENTERED SECTION HEADER */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
@@ -103,7 +103,7 @@ export default function Projects() {
             >
               <Link
                 href={`/projects/${project.slug}`}
-                className="group relative block rounded-[32px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 p-5 sm:p-7 md:p-8 transition-all duration-500 overflow-hidden hover:shadow-2xl hover:shadow-[#8750f7]/25"
+                className="group relative block rounded-[28px] sm:rounded-[32px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 p-3.5 sm:p-5 md:p-6 transition-all duration-500 overflow-hidden hover:shadow-2xl hover:shadow-[#8750f7]/25"
               >
                 {/* Framed Image Container (16:9 widescreen to fit app captures without crops) */}
                 <div className="relative aspect-[16/9] w-full rounded-2xl sm:rounded-[24px] overflow-hidden bg-[#09040d]">
@@ -112,7 +112,7 @@ export default function Projects() {
                       src={project.heroImage}
                       alt={project.title}
                       fill
-                      sizes="(max-width: 1024px) 100vw, 560px"
+                      sizes="(max-width: 1024px) 100vw, 680px"
                       className="object-cover object-center filter brightness-[0.96] group-hover:scale-105 group-hover:brightness-105 transition-all duration-700 ease-out"
                     />
                   ) : (
