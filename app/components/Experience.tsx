@@ -47,57 +47,228 @@ export default function Experience() {
       className="py-24 sm:py-32 px-4 relative z-10 bg-[#0f0715]"
     >
       <div className="container mx-auto max-w-6xl">
-        {/* Impeccable Variants Container for Session 49005009 */}
+        {/* Impeccable Variants Container for Session a9e93c1e */}
+        <div data-impeccable-variants="a9e93c1e" data-impeccable-variant-count="3" style={{ display: "contents" }}>
+          {/* impeccable-variants-start a9e93c1e */}
+          {/* Original */}
+          <div data-impeccable-variant="original" style={{ display: "none" }}>
+            <div className="p-6 sm:p-7 rounded-[26px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/40 transition-all duration-300 shadow-xl mb-16 flex flex-col sm:flex-row sm:items-center justify-between gap-5 text-left">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-xs font-mono uppercase tracking-wider text-[#8750f7] font-bold">
+                    ✦ {t.resumeHub.title}
+                  </span>
+                </div>
+                <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-xl">
+                  {t.resumeHub.description}
+                </p>
+              </div>
 
-        <div className="p-6 sm:p-7 rounded-[26px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/40 transition-all duration-300 shadow-xl mb-16 flex flex-col sm:flex-row sm:items-center justify-between gap-5 text-left">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs font-mono uppercase tracking-wider text-[#8750f7] font-bold">
+              <div className="flex flex-wrap items-center gap-3 shrink-0">
+                {/* CV Español */}
+                <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
+                  <button
+                    onClick={() => handleAction("cv", "download")}
+                    className="flex items-center gap-2 px-5 py-2.5 bg-[#8750f7] hover:bg-[#7435f5] text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>{t.resumeHub.downloadCv}</span>
+                  </button>
+                  <button
+                    onClick={() => handleAction("cv", "preview")}
+                    aria-label="Preview CV"
+                    className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Resume English */}
+                <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
+                  <button
+                    onClick={() => handleAction("resume", "download")}
+                    className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#8750f7] to-[#a855f7] hover:brightness-110 text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>{t.resumeHub.downloadResume}</span>
+                  </button>
+                  <button
+                    onClick={() => handleAction("resume", "preview")}
+                    aria-label="Preview Resume"
+                    className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* Variants: insert below this line */}
+
+          {/* VARIANT 1: Versión Original Centrada en Columna (Título, Descripción, luego los 2 botones centrados) */}
+          <div data-impeccable-variant="1">
+            <div className="mb-16 text-center max-w-2xl mx-auto space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/40 border border-purple-800/40 text-purple-300 text-xs font-mono">
+                <Sparkles className="w-3.5 h-3.5 text-[#8750f7]" />
+                <span>{t.resumeHub.title}</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
+                {language === "es" ? "Curriculum Vitae & Resume" : "Curriculum Vitae & Resume"}
+              </h2>
+              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-xl mx-auto">
+                {t.resumeHub.description}
+              </p>
+
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+                {/* CV Español */}
+                <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-lg shadow-[#8750f7]/10">
+                  <button
+                    onClick={() => handleAction("cv", "download")}
+                    className="flex items-center gap-2 px-6 py-3 bg-[#8750f7] hover:bg-[#7435f5] text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>{t.resumeHub.downloadCv}</span>
+                  </button>
+                  <button
+                    onClick={() => handleAction("cv", "preview")}
+                    aria-label="Preview CV"
+                    className="flex items-center justify-center px-4 py-3 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Resume English */}
+                <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-lg shadow-[#8750f7]/10">
+                  <button
+                    onClick={() => handleAction("resume", "download")}
+                    className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#8750f7] to-[#a855f7] hover:brightness-110 text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>{t.resumeHub.downloadResume}</span>
+                  </button>
+                  <button
+                    onClick={() => handleAction("resume", "preview")}
+                    aria-label="Preview Resume"
+                    className="flex items-center justify-center px-4 py-3 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* VARIANT 2: Tarjeta Enmarcada en Columna (Título, Descripción, Botones apilados) */}
+          <div data-impeccable-variant="2" style={{ display: "none" }}>
+            <div className="p-6 sm:p-8 rounded-[24px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/40 transition-all duration-300 shadow-xl mb-16 text-center max-w-xl mx-auto space-y-4">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#8750f7] font-bold block">
                 ✦ {t.resumeHub.title}
               </span>
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                {language === "es" ? "Descargar Documentación Oficial" : "Download Official Credentials"}
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+                {t.resumeHub.description}
+              </p>
+
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+                {/* CV Español */}
+                <div className="w-full sm:w-auto inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
+                  <button
+                    onClick={() => handleAction("cv", "download")}
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-[#8750f7] hover:bg-[#7435f5] text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>{t.resumeHub.downloadCv}</span>
+                  </button>
+                  <button
+                    onClick={() => handleAction("cv", "preview")}
+                    aria-label="Preview CV"
+                    className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+                </div>
+
+                {/* Resume English */}
+                <div className="w-full sm:w-auto inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
+                  <button
+                    onClick={() => handleAction("resume", "download")}
+                    className="flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#8750f7] to-[#a855f7] hover:brightness-110 text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>{t.resumeHub.downloadResume}</span>
+                  </button>
+                  <button
+                    onClick={() => handleAction("resume", "preview")}
+                    aria-label="Preview Resume"
+                    className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
             </div>
-            <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-xl">
-              {t.resumeHub.description}
-            </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
-            {/* CV Español */}
-            <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
-              <button
-                onClick={() => handleAction("cv", "download")}
-                className="flex items-center gap-2 px-5 py-2.5 bg-[#8750f7] hover:bg-[#7435f5] text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
-              >
-                <Download className="w-4 h-4" />
-                <span>{t.resumeHub.downloadCv}</span>
-              </button>
-              <button
-                onClick={() => handleAction("cv", "preview")}
-                aria-label="Preview CV"
-                className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
-              >
-                <Eye className="w-4 h-4" />
-              </button>
-            </div>
+          {/* VARIANT 3: Columna Alineada a la Izquierda con Borde de Acento */}
+          <div data-impeccable-variant="3" style={{ display: "none" }}>
+            <div className="p-6 sm:p-7 rounded-[22px] bg-[#140c1c] border-l-4 border-l-[#8750f7] border-y border-r border-white/10 mb-16 text-left space-y-3 shadow-lg">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono uppercase tracking-wider text-[#8750f7] font-bold">
+                  ✦ {t.resumeHub.title}
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-purple-200 border border-white/10">
+                  1-Page ATS Standard
+                </span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+                {language === "es" ? "Hoja de Vida y Resúmenes Verificados" : "Verified Resumes & Credentials"}
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed max-w-2xl">
+                {t.resumeHub.description}
+              </p>
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                {/* CV Español */}
+                <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
+                  <button
+                    onClick={() => handleAction("cv", "download")}
+                    className="flex items-center gap-2 px-5 py-2.5 bg-[#8750f7] hover:bg-[#7435f5] text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>{t.resumeHub.downloadCv}</span>
+                  </button>
+                  <button
+                    onClick={() => handleAction("cv", "preview")}
+                    aria-label="Preview CV"
+                    className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+                </div>
 
-            {/* Resume English */}
-            <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
-              <button
-                onClick={() => handleAction("resume", "download")}
-                className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#8750f7] to-[#a855f7] hover:brightness-110 text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
-              >
-                <Download className="w-4 h-4" />
-                <span>{t.resumeHub.downloadResume}</span>
-              </button>
-              <button
-                onClick={() => handleAction("resume", "preview")}
-                aria-label="Preview Resume"
-                className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
-              >
-                <Eye className="w-4 h-4" />
-              </button>
+                {/* Resume English */}
+                <div className="inline-flex rounded-full overflow-hidden border border-[#8750f7]/50 shadow-md">
+                  <button
+                    onClick={() => handleAction("resume", "download")}
+                    className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#8750f7] to-[#a855f7] hover:brightness-110 text-white font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>{t.resumeHub.downloadResume}</span>
+                  </button>
+                  <button
+                    onClick={() => handleAction("resume", "preview")}
+                    aria-label="Preview Resume"
+                    className="flex items-center justify-center px-3.5 py-2.5 bg-[#140c1c] text-purple-200 hover:bg-white/10 hover:text-white transition-all border-l border-[#8750f7]/40 text-xs sm:text-sm cursor-pointer"
+                  >
+                    <Eye className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
+          {/* impeccable-variants-end a9e93c1e */}
         </div>
 
 
