@@ -111,7 +111,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     teamOrContext: "Cloud-Native Commerce Platform",
     shortDescription:
       "Enterprise decoupled commerce engine on Kubernetes (k3s). Features Next.js 15 App Router, Vendure GraphQL APIs, declarative GitOps with ArgoCD & Kustomize, multi-arch ARM64 pipelines on Oracle Cloud, Traefik anti-CORS routing, and production observability (OTel, Prometheus, PostHog).",
-    heroImage: "/projects/gazu-ecommerce.png",
+    heroImage: "/projects/gazu-showcase.png",
     liveUrl: "https://dev.gazu.jhojan.cloud",
     devUrl: "https://dev.gazu.jhojan.cloud",
     gitlabUrl: "https://gitlab.com/portfolio-dev3/ecommerce",
@@ -376,7 +376,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     teamOrContext: "Talent Agency Management Platform",
     shortDescription:
       "Enterprise multimodal casting platform. Discovers talent through natural language descriptions or reference photo uploads using CLIP ViT-B/32 (512d), automated biometric attribute extraction via GPT-4o-mini Vision, and two-stage retrieval with pgvector cosine similarity and SQL trait filtering.",
-    heroImage: "/projects/TalentMatchAI.png",
+    heroImage: "/projects/talentmatch-showcase.png",
     liveUrl: "https://models.jhojan.cloud/",
     devUrl: "https://models.jhojan.cloud/",
     githubUrl: "https://github.com/Jhojan-Jimenez/Models",
@@ -588,7 +588,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     teamOrContext: "Universidad de La Sabana Community Initiative",
     shortDescription:
       "Regulated university ride-sharing platform connecting the Universidad de La Sabana community. Implements WebSocket trip synchronization, OpenStreetMap geospatial routing, and race-condition-safe seat booking.",
-    heroImage: "/projects/WheelUSCreateRidePage.png",
+    heroImage: "/projects/wheelus-showcase.png",
     githubUrl: "https://github.com/Jhojan-Jimenez/WheelUS-Front",
     liveUrl: "https://wheelus.jhojan.cloud",
     technologies: [

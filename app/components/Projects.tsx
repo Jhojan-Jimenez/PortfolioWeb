@@ -105,27 +105,15 @@ export default function Projects() {
                 href={`/projects/${project.slug}`}
                 className="group relative block rounded-[32px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 p-5 sm:p-7 md:p-8 transition-all duration-500 overflow-hidden hover:shadow-2xl hover:shadow-[#8750f7]/25"
               >
-                {/* Framed Image Container (16:9 widescreen to fit app captures without heavy crops) */}
+                {/* Framed Image Container (16:9 widescreen to fit app captures without crops) */}
                 <div className="relative aspect-[16/9] w-full rounded-2xl sm:rounded-[24px] overflow-hidden bg-[#09040d]">
-                  {/* Category Pills at top-left of card */}
-                  <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex flex-wrap gap-1.5 pointer-events-none">
-                    {project.categories?.map((catId) => (
-                      <span
-                        key={catId}
-                        className="text-[10px] sm:text-xs font-mono font-semibold px-2.5 py-1 rounded-full bg-[#0f0715]/85 text-purple-200 border border-[#8750f7]/40 backdrop-blur-md shadow-lg"
-                      >
-                        {getCatLabel(catId)}
-                      </span>
-                    ))}
-                  </div>
-
                   {project.heroImage ? (
                     <Image
                       src={project.heroImage}
                       alt={project.title}
                       fill
                       sizes="(max-width: 1024px) 100vw, 560px"
-                      className="object-cover object-top sm:object-center filter brightness-[0.96] group-hover:scale-105 group-hover:brightness-105 transition-all duration-700 ease-out"
+                      className="object-cover object-center filter brightness-[0.96] group-hover:scale-105 group-hover:brightness-105 transition-all duration-700 ease-out"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-[#140c1c] text-purple-300 font-mono text-sm">
