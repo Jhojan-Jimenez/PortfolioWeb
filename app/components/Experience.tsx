@@ -176,9 +176,9 @@ export default function Experience() {
           </div>
         </div>
 
-        {/* GEROLD'S EXACT 2-COLUMN EXPERIENCE & EDUCATION LAYOUT (4 vs 4) */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-12 items-start text-left">
-          {/* COLUMN 1: MY EXPERIENCE (4 CARDS) */}
+        {/* STACKED FULL-WIDTH EXPERIENCE & EDUCATION SECTIONS */}
+        <div className="space-y-16 sm:space-y-20 text-left">
+          {/* SECTION 1: MY EXPERIENCE (FULL WIDTH) */}
           <div>
             {/* Column Header with Gerold's Badge/Award Icon */}
             <div className="flex items-center gap-3.5 mb-8">
@@ -190,8 +190,8 @@ export default function Experience() {
               </h3>
             </div>
 
-            {/* 4 Experience Cards */}
-            <div className="space-y-5">
+            {/* Experience Cards - Responsive Full-Width Grid (2x2 on desktop) */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {t.roles.map((job, idx) => {
                 const isExpanded = expandedRole === idx;
                 return (
@@ -285,7 +285,7 @@ export default function Experience() {
             </div>
           </div>
 
-          {/* COLUMN 2: MY EDUCATION (4 CARDS) */}
+          {/* SECTION 2: MY EDUCATION (UNDERNEATH, FULL WIDTH) */}
           <div>
             {/* Column Header with Gerold's Mortarboard Icon */}
             <div className="flex items-center gap-3.5 mb-8">
@@ -297,8 +297,8 @@ export default function Experience() {
               </h3>
             </div>
 
-            {/* 4 Education & Recognition Cards */}
-            <div className="space-y-5">
+            {/* 4 Education & Recognition Cards in 2x2 Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {educationItems.map((edu, idx) => (
                 <div
                   key={idx}
