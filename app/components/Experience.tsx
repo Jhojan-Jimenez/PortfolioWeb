@@ -285,45 +285,47 @@ export default function Experience() {
             </div>
           </div>
 
-          {/* SECTION 2: MY EDUCATION (UNDERNEATH, FULL WIDTH) */}
+          {/* SECTION 2: MY EDUCATION & HONORS (CONDENSED) */}
           <div>
             {/* Column Header with Gerold's Mortarboard Icon */}
-            <div className="flex items-center gap-3.5 mb-8">
+            <div className="flex items-center gap-3.5 mb-6">
               <div className="text-[#8750f7]">
-                <GraduationCap className="w-8 h-8 sm:w-9 sm:h-9 stroke-[1.75]" />
+                <GraduationCap className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.75]" />
               </div>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                {language === "es" ? "Mi Educación" : "My Education"}
+              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                {language === "es" ? "Educación & Reconocimientos" : "Education & Honors"}
               </h3>
             </div>
 
-            {/* 4 Education & Recognition Cards in Single Full-Width Column */}
-            <div className="space-y-6">
+            {/* 4 Condensed Education & Recognition Cards (1 Row on Desktop, 2x2 on Tablet) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
               {educationItems.map((edu, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 rounded-[22px] bg-[#140c1c] border border-white/5 hover:border-[#8750f7]/60 hover:bg-gradient-to-r hover:from-[#1b0e30] hover:to-[#140c1c] transition-all duration-300 group cursor-pointer relative shadow-lg"
+                  className="p-5 rounded-2xl bg-[#140c1c] border border-white/5 hover:border-[#8750f7]/60 hover:bg-[#1a0e2a] transition-all duration-300 group flex flex-col justify-between shadow-md"
                 >
-                  {/* Time Period in Gerold's Neon Purple */}
-                  <div className="mb-2">
-                    <span className="text-sm sm:text-base font-bold text-[#8750f7] tracking-wide">
-                      {edu.period}
-                    </span>
+                  <div>
+                    {/* Time Period in Gerold's Neon Purple */}
+                    <div className="mb-1.5">
+                      <span className="text-xs font-bold text-[#8750f7] tracking-wider font-mono">
+                        {edu.period}
+                      </span>
+                    </div>
+
+                    {/* Title in Bold Uppercase */}
+                    <h4 className="text-sm sm:text-[15px] font-extrabold text-white tracking-wide uppercase group-hover:text-purple-200 transition-colors mb-1.5 leading-snug">
+                      {edu.title}
+                    </h4>
+
+                    {/* Institution */}
+                    <p className="text-neutral-400 text-xs font-medium leading-relaxed">
+                      {edu.institution}
+                    </p>
                   </div>
 
-                  {/* Title in Bold Uppercase (Direct from Gerold Screenshot) */}
-                  <h4 className="text-lg sm:text-xl font-extrabold text-white tracking-wide uppercase group-hover:text-purple-200 transition-colors mb-1.5 leading-snug">
-                    {edu.title}
-                  </h4>
-
-                  {/* Institution */}
-                  <p className="text-neutral-400 text-sm font-medium">
-                    {edu.institution}
-                  </p>
-
                   {/* Highlight Pill */}
-                  <div className="mt-3">
-                    <span className="text-xs font-mono text-purple-300/90">
+                  <div className="mt-3.5 pt-3 border-t border-white/5">
+                    <span className="text-[11px] font-mono text-purple-300/90 leading-tight block">
                       ✦ {edu.highlight}
                     </span>
                   </div>
