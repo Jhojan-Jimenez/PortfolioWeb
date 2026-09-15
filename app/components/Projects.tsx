@@ -51,7 +51,7 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-24 sm:py-32 px-4 relative z-10 bg-[#0f0715]"
+      className="py-24 sm:py-32 sm:pt-10 px-4 relative z-10 bg-[#0f0715]"
     >
       <div className="container mx-auto max-w-7xl">
         {/* GEROLD'S CENTERED SECTION HEADER */}

@@ -153,15 +153,12 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-24 sm:py-32 px-4 relative z-10 bg-[#0f0715]"
+      className="pb-24 sm:pb-32 sm:pt-10 px-4 relative z-10 bg-[#0f0715]"
     >
       <div className="container mx-auto max-w-6xl">
         {/* SECTION HEADER: "My Skills and Development" */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#140c1c] border border-[#8750f7]/40 text-purple-200 text-xs font-mono mb-4 shadow-[0_0_15px_rgba(135,80,247,0.15)]">
-            <span className="w-2 h-2 rounded-full bg-[#8750f7] animate-pulse" />
-            <span>{language === "es" ? "ARQUITECTURA & HABILIDADES" : "ARCHITECTURE & SKILLS"}</span>
-          </div>
+          
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8750f7] via-[#a855f7] to-white">

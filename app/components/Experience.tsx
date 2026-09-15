@@ -42,11 +42,8 @@ export default function Experience() {
   const renderExperienceBody = () => (
     <div className="container mx-auto max-w-6xl">
       {/* OFFICIAL RESUME HUB (DOWNLOAD BUTTONS) */}
-      <div className="mb-16 text-center max-w-2xl mx-auto space-y-4">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/40 border border-purple-800/40 text-purple-300 text-xs font-mono">
-          <Sparkles className="w-3.5 h-3.5 text-[#8750f7]" />
-          <span>{t.resumeHub.title}</span>
-        </div>
+      <div id="resume-hub" className="scroll-mt-28 mb-16 sm:mb-24 text-center max-w-2xl mx-auto space-y-4">
+        
         <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
           {language === "es" ? "Curriculum Vitae & Resume" : "Curriculum Vitae & Resume"}
         </h2>
@@ -96,7 +93,7 @@ export default function Experience() {
       {/* STACKED FULL-WIDTH EXPERIENCE & EDUCATION SECTIONS */}
       <div className="space-y-16 sm:space-y-20 text-left">
         {/* SECTION 1: MY EXPERIENCE (FULL WIDTH) */}
-        <div>
+        <div id="experience-list" className="scroll-mt-28">
           {/* Column Header with Gerold's Badge/Award Icon */}
           <div className="flex items-center gap-3.5 mb-8">
             <div className="text-[#8750f7]">

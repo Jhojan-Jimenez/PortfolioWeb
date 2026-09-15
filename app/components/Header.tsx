@@ -18,7 +18,7 @@ export default function Header() {
   const navItems = [
     { id: "skills", label: t.nav.skills },
     { id: "projects", label: t.nav.projects },
-    { id: "experience", label: t.nav.experience },
+    { id: "experience-list", label: t.nav.experience },
     { id: "resume-hub", label: t.nav.resumeHub },
     { id: "contact", label: t.nav.contact },
   ];
@@ -26,7 +26,7 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
-      const sections = ["home", "skills", "projects", "experience", "resume-hub", "contact"];
+      const sections = ["home", "skills", "projects", "experience-list", "resume-hub", "contact"];
       const scrollPos = window.scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {
@@ -123,7 +123,7 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Action Button: Glowing Purple-Pink Gradient Pill (matching reference design) */}
+          {/* Action Button: Glowing Purple-Pink Gradient Pill */}
           <button
             onClick={() => scrollToSection("contact")}
             className="inline-flex items-center justify-center px-4 sm:px-5 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-gradient-to-r from-purple-600 via-purple-500 to-pink-500 hover:from-purple-500 hover:to-pink-400 text-white shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(236,72,153,0.5)] transition-all duration-200 active:scale-95 cursor-pointer shrink-0"
