@@ -13,7 +13,38 @@ import {
   CheckCircle2,
   Layers,
   Sparkles,
+  Wrench,
 } from "lucide-react";
+import {
+  SiPython,
+  SiFastapi,
+  SiNodedotjs,
+  SiNestjs,
+  SiTypescript,
+  SiDjango,
+  SiPydantic,
+  SiKubernetes,
+  SiDocker,
+  SiGooglecloud,
+  SiGithubactions,
+  SiLinux,
+  SiGitlab,
+  SiOpentelemetry,
+  SiPostgresql,
+  SiRedis,
+  SiPandas,
+  SiNextdotjs,
+  SiReact,
+  SiTailwindcss,
+  SiJavascript,
+  SiHtml5,
+  SiGit,
+  SiPostman,
+  SiPosthog,
+} from "react-icons/si";
+import { FaJava, FaAws } from "react-icons/fa6";
+import { RiOpenaiFill } from "react-icons/ri";
+import { TbVectorTriangle, TbDatabaseCog, TbScan, TbSql } from "react-icons/tb";
 import { useLanguage } from "@/app/context/LanguageContext";
 import { TRANSLATIONS } from "@/lib/i18n/translations";
 
@@ -66,62 +97,62 @@ export default function Skills() {
     },
   ];
 
-  // 2. TECH ARSENAL — BENTO CONTAINERS ORGANIZED BY DOMAIN (REFERENCE IMAGE 1)
+  // 2. TECH ARSENAL — BENTO CONTAINERS WITH AUTHENTIC LOGOS/ICONS (REFERENCE IMAGE 1)
   const arsenalCategories = [
     {
       name: language === "es" ? "Backend" : "Backend",
       icon: Server,
       tools: [
-        { name: "Python", letter: "Py" },
-        { name: "FastAPI", letter: "FA" },
-        { name: "Node.js", letter: "No" },
-        { name: "NestJS", letter: "Ne" },
-        { name: "TypeScript", letter: "TS" },
-        { name: "Java", letter: "Jv" },
-        { name: "Django REST", letter: "Dj" },
-        { name: "Pydantic", letter: "Py" },
+        { name: "Python", icon: SiPython },
+        { name: "FastAPI", icon: SiFastapi },
+        { name: "Node.js", icon: SiNodedotjs },
+        { name: "NestJS", icon: SiNestjs },
+        { name: "TypeScript", icon: SiTypescript },
+        { name: "Java", icon: FaJava },
+        { name: "Django", icon: SiDjango },
+        { name: "Pydantic", icon: SiPydantic },
       ],
     },
     {
       name: language === "es" ? "Cloud & DevOps" : "Cloud & DevOps",
       icon: Cloud,
       tools: [
-        { name: "Kubernetes (k3s)", letter: "K8" },
-        { name: "Docker", letter: "Dk" },
-        { name: "GCP (Cloud Run)", letter: "GC" },
-        { name: "AWS (S3)", letter: "AW" },
-        { name: "GitHub Actions", letter: "GH" },
-        { name: "Linux / Bash", letter: "Lx" },
-        { name: "GitLab CI", letter: "GL" },
-        { name: "OpenTelemetry", letter: "OT" },
+        { name: "Kubernetes", icon: SiKubernetes },
+        { name: "Docker", icon: SiDocker },
+        { name: "GCP", icon: SiGooglecloud },
+        { name: "AWS S3", icon: FaAws },
+        { name: "GitHub CI", icon: SiGithubactions },
+        { name: "Linux", icon: SiLinux },
+        { name: "GitLab CI", icon: SiGitlab },
+        { name: "OTel", icon: SiOpentelemetry },
       ],
     },
     {
       name: language === "es" ? "Datos & IA" : "Data & AI",
       icon: Database,
       tools: [
-        { name: "PostgreSQL 16", letter: "PG" },
-        { name: "pgvector", letter: "Vv" },
-        { name: "Redis", letter: "Rd" },
-        { name: "CLIP ViT-B/32", letter: "CL" },
-        { name: "OpenAI API", letter: "AI" },
-        { name: "Pandas ETL", letter: "Pd" },
-        { name: "Alembic", letter: "Al" },
-        { name: "SQL Modeling", letter: "SQ" },
+        { name: "PostgreSQL", icon: SiPostgresql },
+        { name: "pgvector", icon: TbVectorTriangle },
+        { name: "Redis", icon: SiRedis },
+        { name: "CLIP AI", icon: TbScan },
+        { name: "OpenAI", icon: RiOpenaiFill },
+        { name: "Pandas", icon: SiPandas },
+        { name: "Alembic", icon: TbDatabaseCog },
+        { name: "SQL", icon: TbSql },
       ],
     },
     {
-      name: language === "es" ? "Frontend & Web" : "Frontend & Web",
+      name: language === "es" ? "Frontend & Herramientas" : "Frontend & Tools",
       icon: Code2,
       tools: [
-        { name: "Next.js 15", letter: "Nx" },
-        { name: "React 19", letter: "Rc" },
-        { name: "Tailwind CSS", letter: "TW" },
-        { name: "JavaScript", letter: "JS" },
-        { name: "HTML5 / CSS3", letter: "W3" },
-        { name: "Git / GitHub", letter: "Gt" },
-        { name: "Postman", letter: "Pm" },
-        { name: "PostHog", letter: "PH" },
+        { name: "Next.js", icon: SiNextdotjs },
+        { name: "React", icon: SiReact },
+        { name: "Tailwind", icon: SiTailwindcss },
+        { name: "JavaScript", icon: SiJavascript },
+        { name: "HTML / CSS", icon: SiHtml5 },
+        { name: "Git", icon: SiGit },
+        { name: "Postman", icon: SiPostman },
+        { name: "PostHog", icon: SiPosthog },
       ],
     },
   ];
@@ -264,21 +295,24 @@ export default function Skills() {
                       </div>
                     </div>
 
-                    {/* Grid of Tools with rounded badges */}
+                    {/* Grid of Tools with Authentic Logos/Icons (Ref Image 1) */}
                     <div className="grid grid-cols-2 gap-2.5">
-                      {cat.tools.map((tool, tIdx) => (
-                        <div
-                          key={tIdx}
-                          className="flex items-center gap-2 p-2 rounded-xl bg-[#0d0714] border border-white/5 hover:border-purple-500/40 hover:bg-purple-950/20 transition-all group/item"
-                        >
-                          <div className="w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center text-[10px] font-mono font-bold text-purple-300 group-hover/item:text-white group-hover/item:bg-[#8750f7] transition-all shrink-0">
-                            {tool.letter}
+                      {cat.tools.map((tool, tIdx) => {
+                        const ToolIcon = tool.icon;
+                        return (
+                          <div
+                            key={tIdx}
+                            className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#0d0714] border border-white/5 hover:border-purple-500/40 hover:bg-purple-950/20 transition-all duration-300 group/item hover:-translate-y-1 hover:shadow-lg hover:shadow-[#8750f7]/10"
+                          >
+                            <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/5 flex items-center justify-center text-neutral-300 group-hover/item:text-purple-300 group-hover/item:border-purple-500/30 group-hover/item:scale-110 transition-all duration-300 mb-2">
+                              <ToolIcon className="w-5 h-5 transition-transform" />
+                            </div>
+                            <span className="text-[11px] font-medium text-neutral-300 group-hover/item:text-white text-center leading-tight truncate w-full">
+                              {tool.name}
+                            </span>
                           </div>
-                          <span className="text-xs font-medium text-neutral-300 group-hover/item:text-white truncate">
-                            {tool.name}
-                          </span>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
