@@ -6,16 +6,13 @@ import {
   Cloud,
   Server,
   Database,
-  Sparkles,
-  ChevronDown,
-  Layers,
   Cpu,
-  Workflow,
-  Zap,
-  CheckCircle2,
-  ShieldCheck,
-  Code2,
   Terminal,
+  Code2,
+  ChevronDown,
+  CheckCircle2,
+  Layers,
+  Sparkles,
 } from "lucide-react";
 import { useLanguage } from "@/app/context/LanguageContext";
 import { TRANSLATIONS } from "@/lib/i18n/translations";
@@ -25,108 +22,115 @@ export default function Skills() {
   const t = TRANSLATIONS[language].skills;
   const [showAllTech, setShowAllTech] = useState(false);
 
-  // 4 Top Cards ("My Skills and Development" from reference design: Fast, Responsive, Intuitive, Dynamic)
-  const coreSkillCards = [
+  // 1. WHAT I DO — PRAGMATIC & HUMBLE STACKED WIDE CARDS (REFERENCE IMAGE 2)
+  const whatIDoItems = [
     {
-      id: "fast",
-      icon: Zap,
-      gradient: "from-[#7F1DFF] to-[#D46F88]",
-      tag: "01",
-      title: "Fast",
-      role: language === "es" ? "Cloud & Orquestación" : "Cloud & Kubernetes",
+      number: "01",
+      icon: Cloud,
+      title: language === "es" ? "Despliegue Cloud & Contenedores" : "Cloud Deployment & Containers",
       description:
         language === "es"
-          ? "Rendimiento óptimo y ultra-baja latencia garantizada mediante clústeres k3s sobre ARM64 y despliegues contenerizados."
-          : "Optimal performance and ultra-low latency ensured through k3s ARM64 orchestration and containerized delivery.",
+          ? "Configuro y despliego aplicaciones usando Docker, clústeres livianos en Kubernetes (k3s ARM64) y servicios gestionados en GCP (Cloud Run, Cloud SQL) o AWS S3, cuidando el consumo de recursos."
+          : "Configuring and deploying services using Docker, lightweight Kubernetes clusters (k3s ARM64), and managed cloud resources on GCP (Cloud Run, Cloud SQL) or AWS S3.",
       pills: ["k3s ARM64", "Docker", "Cloud Run", "AWS S3"],
     },
     {
-      id: "responsive",
+      number: "02",
       icon: Server,
-      gradient: "from-[#7F1DFF] to-[#4c1d95]",
-      tag: "02",
-      title: "Responsive",
-      role: language === "es" ? "Backend Distribuido" : "Distributed Backend",
+      title: language === "es" ? "Desarrollo Backend & APIs" : "Backend Development & APIs",
       description:
         language === "es"
-          ? "Microservicios reactivos diseñados para escalar sin esfuerzo, gestionando alta concurrencia con tolerancia a fallos."
-          : "Reactive microservices designed to scale effortlessly, handling high-volume concurrency with zero downtime.",
-      pills: ["FastAPI", "NestJS", "Python", "TypeScript"],
+          ? "Construyo servicios web y APIs estructuradas en Python (FastAPI) y Node.js (NestJS/Express), asegurando esquemas tipados con Pydantic, validación de datos y comunicación fluida entre componentes."
+          : "Building structured web services and APIs in Python (FastAPI) and Node.js (NestJS/Express), enforcing type-safe Pydantic schemas, validation, and clean inter-service communication.",
+      pills: ["FastAPI", "NestJS", "Python", "TypeScript", "Node.js"],
     },
     {
-      id: "intuitive",
+      number: "03",
       icon: Database,
-      gradient: "from-[#D46F88] to-[#7F1DFF]",
-      tag: "03",
-      title: "Intuitive",
-      role: language === "es" ? "Datos & Vectores" : "Data & Vector Storage",
+      title: language === "es" ? "Bases de Datos & Búsqueda Vectorial" : "Databases & Vector Search",
       description:
         language === "es"
-          ? "Modelado relacional determinista en PostgreSQL 16, búsquedas vectoriales por similitud con pgvector y pipelines ETL limpios."
-          : "Deterministic relational modeling in PostgreSQL 16, vector similarity search via pgvector, and clean ETL pipelines.",
-      pills: ["pgvector", "PostgreSQL", "Redis", "Pandas ETL"],
+          ? "Diseño modelos de datos en PostgreSQL, creo índices y búsquedas por similitud con pgvector, e implemento caché con Redis y scripts de procesamiento con Pandas cuando se requiere."
+          : "Designing relational models in PostgreSQL, setting up semantic similarity search with pgvector, and implementing Redis caching and data processing with Pandas.",
+      pills: ["PostgreSQL 16", "pgvector", "Redis", "Pandas"],
     },
     {
-      id: "dynamic",
-      icon: Sparkles,
-      gradient: "from-[#FFEB34] to-[#D46F88]",
-      iconColor: "text-neutral-900",
-      tag: "04",
-      title: "Dynamic",
-      role: language === "es" ? "IA Aplicada & Modern Web" : "Applied AI & Web",
+      number: "04",
+      icon: Cpu,
+      title: language === "es" ? "Integración de IA & Soporte Full Stack" : "Applied AI & Full-Stack Delivery",
       description:
         language === "es"
-          ? "Integración de modelos multimodales (CLIP ViT-B/32, GPT-4o Vision) y delivery web moderno y fluido con Next.js y Tailwind."
-          : "Multimodal AI integration (CLIP ViT-B/32, GPT-4o Vision) and fluid, accessible web delivery with Next.js and Tailwind.",
-      pills: ["CLIP ViT-B/32", "OpenAI / RAG", "Next.js", "React 19"],
+          ? "Conecto modelos de IA preentrenados (como CLIP o la API de OpenAI) directamente a la lógica de negocio, complementándolo con interfaces web claras y funcionales en Next.js y Tailwind CSS."
+          : "Connecting pre-trained AI models (like CLIP or OpenAI APIs) into business workflows, complemented with clean, functional web interfaces built with Next.js and Tailwind CSS.",
+      pills: ["CLIP ViT-B/32", "OpenAI API", "Next.js 15", "React 19"],
     },
   ];
 
-  // 4 Enterprise Solutions ("Custom IT Solutions Tailored to Your Needs" from reference design)
-  const enterpriseSolutions = [
+  // 2. TECH ARSENAL — BENTO CONTAINERS ORGANIZED BY DOMAIN (REFERENCE IMAGE 1)
+  const arsenalCategories = [
     {
+      name: language === "es" ? "Backend" : "Backend",
+      icon: Server,
+      tools: [
+        { name: "Python", letter: "Py" },
+        { name: "FastAPI", letter: "FA" },
+        { name: "Node.js", letter: "No" },
+        { name: "NestJS", letter: "Ne" },
+        { name: "TypeScript", letter: "TS" },
+        { name: "Java", letter: "Jv" },
+        { name: "Django REST", letter: "Dj" },
+        { name: "Pydantic", letter: "Py" },
+      ],
+    },
+    {
+      name: language === "es" ? "Cloud & DevOps" : "Cloud & DevOps",
       icon: Cloud,
-      title: language === "es" ? "Infraestructura Cloud & Despliegue" : "Cloud Infrastructure Setup",
-      bullets: [
-        language === "es" ? "Experticia en GCP (Cloud Run, Cloud SQL) y AWS (S3)" : "GCP (Cloud Run, Cloud SQL) & AWS (S3) expertise",
-        language === "es" ? "Arquitectura de clústeres k3s ARM64 segura y escalable" : "Secure, scalable k3s ARM64 Kubernetes architecture",
-        language === "es" ? "Optimización de costos y alta disponibilidad (HA)" : "Cost optimization and high availability (HA)",
+      tools: [
+        { name: "Kubernetes (k3s)", letter: "K8" },
+        { name: "Docker", letter: "Dk" },
+        { name: "GCP (Cloud Run)", letter: "GC" },
+        { name: "AWS (S3)", letter: "AW" },
+        { name: "GitHub Actions", letter: "GH" },
+        { name: "Linux / Bash", letter: "Lx" },
+        { name: "GitLab CI", letter: "GL" },
+        { name: "OpenTelemetry", letter: "OT" },
       ],
     },
     {
-      icon: Code2,
-      title: language === "es" ? "Desarrollo Backend & APIs Concurrentes" : "High-Concurrency Backend & APIs",
-      bullets: [
-        language === "es" ? "Microservicios REST y GraphQL en FastAPI y NestJS" : "Production REST & GraphQL microservices in FastAPI and NestJS",
-        language === "es" ? "Esquemas Pydantic estrictos y validación de tipos" : "Strict Pydantic schemas and runtime type validation",
-        language === "es" ? "Integraciones transaccionales con Stripe, Twilio y webhooks" : "Transactional integrations with Stripe, Twilio & webhooks",
-      ],
-    },
-    {
+      name: language === "es" ? "Datos & IA" : "Data & AI",
       icon: Database,
-      title: language === "es" ? "Sistemas de Datos & Búsqueda Vectorial" : "Data Systems & Vector Solutions",
-      bullets: [
-        language === "es" ? "Búsqueda vectorial semántica in-database con pgvector" : "In-database semantic vector search with pgvector",
-        language === "es" ? "Migraciones deterministas y versionadas con Alembic" : "Deterministic, version-controlled migrations with Alembic",
-        language === "es" ? "Pipelines de agregación y análisis con Pandas y Redis" : "ETL aggregation pipelines with Pandas and Redis caching",
+      tools: [
+        { name: "PostgreSQL 16", letter: "PG" },
+        { name: "pgvector", letter: "Vv" },
+        { name: "Redis", letter: "Rd" },
+        { name: "CLIP ViT-B/32", letter: "CL" },
+        { name: "OpenAI API", letter: "AI" },
+        { name: "Pandas ETL", letter: "Pd" },
+        { name: "Alembic", letter: "Al" },
+        { name: "SQL Modeling", letter: "SQ" },
       ],
     },
     {
-      icon: Terminal,
-      title: language === "es" ? "DevOps, CI/CD & Observabilidad" : "DevOps, CI/CD & Observability",
-      bullets: [
-        language === "es" ? "Pipelines automatizados con GitHub Actions y GitLab CI" : "Automated CI/CD workflows with GitHub Actions & GitLab",
-        language === "es" ? "Contenerización reproducible y multi-stage con Docker" : "Reproducible multi-stage containerization with Docker",
-        language === "es" ? "Monitoreo con OpenTelemetry, métricas y telemetría" : "Telemetry, error tracing, and OpenTelemetry instrumentation",
+      name: language === "es" ? "Frontend & Web" : "Frontend & Web",
+      icon: Code2,
+      tools: [
+        { name: "Next.js 15", letter: "Nx" },
+        { name: "React 19", letter: "Rc" },
+        { name: "Tailwind CSS", letter: "TW" },
+        { name: "JavaScript", letter: "JS" },
+        { name: "HTML5 / CSS3", letter: "W3" },
+        { name: "Git / GitHub", letter: "Gt" },
+        { name: "Postman", letter: "Pm" },
+        { name: "PostHog", letter: "PH" },
       ],
     },
   ];
 
-  // Full stack inventory
+  // Full stack inventory for expandable drawer
   const fullInventory = [
     {
       category: language === "es" ? "Lenguajes Principales" : "Core Languages",
-      items: ["Python", "TypeScript", "JavaScript", "SQL", "HTML5 / CSS3"],
+      items: ["Python", "TypeScript", "JavaScript", "SQL", "Java", "HTML5 / CSS3"],
     },
     {
       category: language === "es" ? "Frameworks & Backend" : "Backend Frameworks",
@@ -134,7 +138,7 @@ export default function Skills() {
     },
     {
       category: language === "es" ? "Cloud & Orquestación" : "Cloud & Orchestration",
-      items: ["Kubernetes (k3s ARM64)", "Docker", "GCP (Cloud Run)", "AWS (S3)", "GitHub Actions", "GitLab CI/CD"],
+      items: ["Kubernetes (k3s ARM64)", "Docker", "GCP (Cloud Run)", "AWS (S3)", "GitHub Actions", "GitLab CI/CD", "Linux"],
     },
     {
       category: language === "es" ? "Bases de Datos & Vectores" : "Databases & Vector Storage",
@@ -145,7 +149,7 @@ export default function Skills() {
       items: ["CLIP ViT-B/32", "OpenAI API", "GPT-4o Vision", "RAG Pipelines", "Embeddings"],
     },
     {
-      category: language === "es" ? "Frontend & Analítica" : "Frontend & Analytics",
+      category: language === "es" ? "Frontend & Observabilidad" : "Frontend & Observability",
       items: ["Next.js (App Router)", "React 19", "Tailwind CSS", "Pandas ETL", "PostHog", "OpenTelemetry"],
     },
   ];
@@ -156,123 +160,125 @@ export default function Skills() {
       className="pb-24 sm:pb-32 sm:pt-10 px-4 relative z-10 bg-[#0f0715]"
     >
       <div className="container mx-auto max-w-6xl">
-        {/* SECTION HEADER: "My Skills and Development" */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          
-
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8750f7] via-[#a855f7] to-white">
-              {language === "es" ? "Mis Habilidades y Desarrollo" : "My Skills and Development"}
+        {/* ========================================================================= */}
+        {/* BLOQUE 1: WHAT I DO (WIDE STACKED CARDS - REFERENCIA IMAGEN 2)             */}
+        {/* ========================================================================= */}
+        <div className="mb-24">
+          <div className="text-left mb-10">
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#8750f7] font-bold block mb-2">
+              {language === "es" ? "— EN QUÉ ME ENFOCO" : "— WHAT I DO"}
             </span>
-          </h2>
-
-          <p className="text-neutral-300 text-sm sm:text-base font-normal leading-relaxed">
-            {language === "es"
-              ? "Capacidades técnicas probadas sobre sistemas en producción, infraestructura cloud y modelos de IA aplicada."
-              : "Engineering capabilities grounded in production distributed systems, cloud orchestration, and applied AI."}
-          </p>
-        </div>
-
-        {/* 4 SLEEK TALL CARDS (Fast, Responsive, Intuitive, Dynamic) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {coreSkillCards.map((card) => {
-            const Icon = card.icon;
-            return (
-              <div
-                key={card.id}
-                className="group p-6 sm:p-7 rounded-[28px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 shadow-xl hover:shadow-2xl hover:shadow-[#8750f7]/20 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 relative overflow-hidden"
-              >
-                {/* Top ambient glow */}
-                <div className="absolute -top-10 -right-10 w-28 h-28 bg-[#7F1DFF]/10 rounded-full blur-2xl group-hover:bg-[#7F1DFF]/25 transition-all duration-300 pointer-events-none" />
-
-                <div>
-                  {/* Top Neon Icon Badge */}
-                  <div className="mb-6 flex items-center justify-between">
-                    <div
-                      className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${card.gradient} p-2.5 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}
-                    >
-                      <Icon className={`w-6 h-6 stroke-[2] ${card.iconColor || "text-white"}`} />
-                    </div>
-
-                    <span className="text-xs font-mono font-bold text-neutral-400">
-                      {card.tag}
-                    </span>
-                  </div>
-
-                  {/* Title & Role */}
-                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-1 group-hover:text-purple-200 transition-colors">
-                    {card.title}
-                  </h3>
-                  <span className="text-xs font-mono uppercase tracking-wider text-[#D46F88] font-semibold block mb-3">
-                    {card.role}
-                  </span>
-
-                  {/* Description */}
-                  <p className="text-neutral-300 text-xs sm:text-sm font-normal leading-relaxed mb-6">
-                    {card.description}
-                  </p>
-                </div>
-
-                {/* Tech Tags */}
-                <div className="pt-4 border-t border-white/[0.08] flex flex-wrap gap-1.5">
-                  {card.pills.map((pill, sIdx) => (
-                    <span
-                      key={sIdx}
-                      className="px-2.5 py-1 rounded-full text-[11px] font-mono text-neutral-300 bg-[#131313] border border-white/10 group-hover:border-[#7F1DFF]/30 group-hover:text-white transition-all"
-                    >
-                      {pill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* SECTION 2: "Custom Solutions Tailored to Your Needs" (FROM REFERENCE DESIGN) */}
-        <div className="mb-14">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 text-left">
-            <div>
-              <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#D46F88] font-bold block mb-1">
-                {language === "es" ? "SOLUCIONES DE INGENIERÍA" : "ENGINEERING CAPABILITIES"}
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                {language === "es"
-                  ? "Soluciones de Ingeniería para Sistemas Críticos"
-                  : "Custom Technical Solutions Tailored to Your Needs"}
-              </h3>
-            </div>
-            <p className="text-neutral-400 text-xs sm:text-sm max-w-md">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-3">
               {language === "es"
-                ? "Arquitectura resiliente para optimizar operaciones, elevar disponibilidad y acelerar el desarrollo."
-                : "Delivering innovative backend and cloud solutions to streamline operations, enhance security, and power growth."}
+                ? "Soluciones de ingeniería y desarrollo backend"
+                : "Engineering focus and backend technical solutions"}
+            </h2>
+            <p className="text-neutral-400 text-sm sm:text-base max-w-2xl leading-relaxed">
+              {language === "es"
+                ? "Construcción pragmática de software: infraestructura cloud contenida, servicios backend tipados, bases de datos relacionales e integración de modelos de IA."
+                : "Pragmatic software delivery: containerized cloud infrastructure, type-safe backend services, relational data, and applied AI integration."}
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {enterpriseSolutions.map((solution, idx) => {
-              const Icon = solution.icon;
+          <div className="space-y-4">
+            {whatIDoItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.number}
+                  className="group p-5 sm:p-6 md:p-7 rounded-2xl bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 shadow-lg hover:shadow-xl hover:shadow-[#8750f7]/15 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-5"
+                >
+                  <div className="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0 flex-1">
+                    <span className="text-xs sm:text-sm font-mono font-bold text-neutral-500 group-hover:text-purple-400 transition-colors shrink-0 pt-1 sm:pt-0">
+                      {item.number}
+                    </span>
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-purple-950/40 border border-purple-500/30 flex items-center justify-center text-purple-300 shrink-0 group-hover:scale-105 group-hover:bg-[#8750f7] group-hover:text-white transition-all shadow-md">
+                      <Icon className="w-5 h-5 stroke-[2]" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-base sm:text-lg font-bold text-white tracking-tight group-hover:text-purple-200 transition-colors mb-1">
+                        {item.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Badges / Tech Pills on the right */}
+                  <div className="flex flex-wrap items-center gap-1.5 shrink-0 pt-3 md:pt-0 border-t md:border-t-0 border-white/5">
+                    {item.pills.map((pill, pIdx) => (
+                      <span
+                        key={pIdx}
+                        className="px-2.5 py-1 rounded-md text-[11px] font-mono text-neutral-300 bg-[#0d0714] border border-white/10 group-hover:border-purple-500/30 transition-colors"
+                      >
+                        {pill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* BLOQUE 2: TECH ARSENAL / SKILLS BY DOMAIN (REFERENCIA IMAGEN 1)           */}
+        {/* ========================================================================= */}
+        <div>
+          <div className="text-left mb-10">
+            <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#8750f7] font-bold block mb-2">
+              {language === "es" ? "— ARSENAL TÉCNICO" : "— TECH ARSENAL"}
+            </span>
+            <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-2">
+              {language === "es" ? "Habilidades & Tecnologías" : "Skills & Technologies"}
+            </h3>
+            <p className="text-neutral-400 text-sm sm:text-base max-w-xl">
+              {language === "es"
+                ? "Herramientas que utilizo activamente para desarrollo, despliegue y analítica."
+                : "Tools and technologies I actively use for engineering, deployment, and analytics."}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {arsenalCategories.map((cat, idx) => {
+              const CategoryIcon = cat.icon;
               return (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 rounded-[26px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 shadow-xl hover:shadow-2xl hover:shadow-[#8750f7]/15 flex flex-col justify-between transition-all duration-300 text-left group"
+                  className="p-6 rounded-[24px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/50 shadow-xl transition-all duration-300 flex flex-col justify-between group"
                 >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-11 h-11 rounded-2xl bg-[#7F1DFF]/15 border border-[#7F1DFF]/30 flex items-center justify-center text-[#D46F88] shrink-0 shadow-md">
-                      <Icon className="w-5 h-5 stroke-[2]" />
+                  <div>
+                    {/* Header */}
+                    <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
+                      <div className="w-10 h-10 rounded-xl bg-purple-950/40 border border-purple-500/30 flex items-center justify-center text-purple-300 group-hover:bg-[#8750f7] group-hover:text-white transition-colors">
+                        <CategoryIcon className="w-5 h-5 stroke-[2]" />
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-bold text-white tracking-tight">
+                          {cat.name}
+                        </h4>
+                        <span className="text-[10px] font-mono text-neutral-400">
+                          {cat.tools.length} {language === "es" ? "tecnologías" : "technologies"}
+                        </span>
+                      </div>
                     </div>
-                    <div>
-                      <h4 className="text-base sm:text-lg font-bold text-white tracking-tight mb-1">
-                        {solution.title}
-                      </h4>
-                      <ul className="space-y-1.5 mt-3 text-xs sm:text-sm text-neutral-300">
-                        {solution.bullets.map((bullet, bIdx) => (
-                          <li key={bIdx} className="flex items-start gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#7F1DFF] mt-1.5 shrink-0" />
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
+
+                    {/* Grid of Tools with rounded badges */}
+                    <div className="grid grid-cols-2 gap-2.5">
+                      {cat.tools.map((tool, tIdx) => (
+                        <div
+                          key={tIdx}
+                          className="flex items-center gap-2 p-2 rounded-xl bg-[#0d0714] border border-white/5 hover:border-purple-500/40 hover:bg-purple-950/20 transition-all group/item"
+                        >
+                          <div className="w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center text-[10px] font-mono font-bold text-purple-300 group-hover/item:text-white group-hover/item:bg-[#8750f7] transition-all shrink-0">
+                            {tool.letter}
+                          </div>
+                          <span className="text-xs font-medium text-neutral-300 group-hover/item:text-white truncate">
+                            {tool.name}
+                          </span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -281,8 +287,10 @@ export default function Skills() {
           </div>
         </div>
 
-        {/* SECTION 3: EXPANDABLE FULL TECHNOLOGY INVENTORY (FOR ATS AUDITS) */}
-        <div className="max-w-4xl mx-auto text-center mt-12">
+        {/* ========================================================================= */}
+        {/* BLOQUE 3: EXPANDABLE FULL TECHNOLOGY INVENTORY (FOR ATS AUDITS)           */}
+        {/* ========================================================================= */}
+        <div className="max-w-4xl mx-auto text-center mt-16">
           <button
             onClick={() => setShowAllTech(!showAllTech)}
             className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#18181d] hover:bg-white/[0.08] border border-white/20 hover:border-[#7F1DFF]/50 text-neutral-200 hover:text-white text-xs font-mono font-medium tracking-wide transition-all cursor-pointer shadow-lg"

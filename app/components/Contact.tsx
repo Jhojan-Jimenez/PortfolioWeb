@@ -118,7 +118,7 @@ export default function Contact() {
                   <Github className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/jhojanjimenez/"
+                  href="https://www.linkedin.com/in/jhojan-jimenez-dev/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-[#140c1c] border border-white/15 text-neutral-300 hover:text-white hover:border-[#8750f7] hover:scale-105 flex items-center justify-center transition-all shadow-md"
