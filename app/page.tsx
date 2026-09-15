@@ -25,22 +25,9 @@ export default function Portfolio() {
         <section className="bg-gradient-to-b from-secondaryBackground to-background">
           <Experience />
         </section>
-        <div data-impeccable-variants="fe5a82a8" data-impeccable-variant-count="1" style={{ display: "contents" }}>
-          {/* impeccable-variants-start fe5a82a8 */}
-          {/* Original */}
-          <div data-impeccable-variant="original" style={{ display: "none" }}>
-            <section className="bg-gradient-to-b from-background to-secondaryBackground pb-20">
-              <Contact />
-            </section>
-          </div>
-          {/* Variants: insert below this line */}
-          <div data-impeccable-variant="1">
-            <section className="bg-[#0f0715]">
-              <Contact />
-            </section>
-          </div>
-          {/* impeccable-variants-end fe5a82a8 */}
-        </div>
+        <section className="bg-[#0f0715]">
+          <Contact />
+        </section>
       </main>
       <ToastContainer
         position="bottom-right"
