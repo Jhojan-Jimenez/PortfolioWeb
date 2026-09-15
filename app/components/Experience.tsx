@@ -18,6 +18,7 @@ export default function Experience() {
 
   // Track expanded cards for detailed technical architecture inspect
   const [expandedRole, setExpandedRole] = useState<number | null>(null);
+  const [isEduExpanded, setIsEduExpanded] = useState<boolean>(false);
 
   const handleAction = (type: "cv" | "resume", mode: "download" | "preview") => {
     const fileUrl =
@@ -38,85 +39,6 @@ export default function Experience() {
       document.body.removeChild(link);
     }
   };
-
-  const educationItems = [
-    {
-      period: "2022 – 2026",
-      title:
-        language === "es"
-          ? "INGENIERÍA INFORMÁTICA / COMPUTATIONAL SCIENCE"
-          : "B.S. IN COMPUTER SCIENCE & INFORMATICS",
-      institution:
-        language === "es"
-          ? "Universidad de La Sabana · Promedio 4.4 / 5.0"
-          : "Universidad de La Sabana · Cumulative GPA: 4.4 / 5.0",
-      highlight:
-        language === "es"
-          ? "Énfasis en Arquitectura de Software y Sistemas Distribuidos"
-          : "Focus on Software Architecture & Distributed Systems",
-      description:
-        language === "es"
-          ? "Formación en alta concurrencia, bases de datos vectoriales y relacionales, redes y diseño de sistemas distribuidos."
-          : "Curriculum focusing on high concurrency, vector and relational databases, networks, and distributed systems design.",
-    },
-    {
-      period: "2022 – 2026",
-      title:
-        language === "es"
-          ? "BECA DE EXCELENCIA ACADÉMICA DEL 80%"
-          : "80% ACADEMIC EXCELLENCE SCHOLARSHIP",
-      institution:
-        language === "es"
-          ? "Universidad de La Sabana · Mérito al Ingreso"
-          : "Universidad de La Sabana · Entrance Merit Honor",
-      highlight:
-        language === "es"
-          ? "Beca otorgada por rendimiento académico sobresaliente"
-          : "Awarded for top-tier academic merit and technical potential",
-      description:
-        language === "es"
-          ? "Reconocimiento institucional mantenido de forma continua con un promedio acumulado de 4.4 / 5.0."
-          : "Continuous institutional honor maintained with a cumulative 4.4 / 5.0 grade point average.",
-    },
-    {
-      period: "2025",
-      title:
-        language === "es"
-          ? "1ER LUGAR — SABANA HACK 2025"
-          : "1ST PLACE — SABANA HACK 2025",
-      institution:
-        language === "es"
-          ? "Cruz Roja Colombiana & Unisabana"
-          : "Colombian Red Cross & Unisabana",
-      highlight:
-        language === "es"
-          ? "Alertas en Tiempo Real con IA en sprint de 24 horas"
-          : "Real-Time AI Alerting System built in 24h sprint",
-      description:
-        language === "es"
-          ? "Diseño e implementación de arquitectura distribuida para triaje de emergencias y procesamiento en tiempo real."
-          : "Designed and deployed distributed emergency triage architecture and real-time processing under high demand.",
-    },
-    {
-      period: language === "es" ? "Continuo" : "Ongoing",
-      title:
-        language === "es"
-          ? "BILINGÜISMO & COMPETENCIA TÉCNICA"
-          : "BILINGUAL & TECHNICAL EXPERTISE",
-      institution:
-        language === "es"
-          ? "Inglés (B2 Profesional) · Español (Nativo)"
-          : "English (B2 Professional) · Spanish (Native)",
-      highlight:
-        language === "es"
-          ? "Comunicación fluida para equipos globales remotos"
-          : "Fluent technical communication for global remote teams",
-      description:
-        language === "es"
-          ? "Capacidad de documentación técnica, diseño de especificaciones RFCs y code reviews en inglés."
-          : "Proven RFC specification authoring, international code reviews, and remote agile collaboration in English.",
-    },
-  ];
 
   return (
     <section
@@ -285,52 +207,119 @@ export default function Experience() {
             </div>
           </div>
 
-          {/* SECTION 2: MY EDUCATION & HONORS (CONDENSED) */}
+          {/* SECTION 2: MY EDUCATION & HONORS (CONDENSED SINGLE ITEM) */}
           <div>
             {/* Column Header with Gerold's Mortarboard Icon */}
-            <div className="flex items-center gap-3.5 mb-6">
+            <div className="flex items-center gap-3.5 mb-8">
               <div className="text-[#8750f7]">
-                <GraduationCap className="w-7 h-7 sm:w-8 sm:h-8 stroke-[1.75]" />
+                <GraduationCap className="w-8 h-8 sm:w-9 sm:h-9 stroke-[1.75]" />
               </div>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                {language === "es" ? "Educación & Reconocimientos" : "Education & Honors"}
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                {language === "es" ? "Mi Educación" : "My Education"}
               </h3>
             </div>
 
-            {/* 4 Condensed Education & Recognition Cards (1 Row on Desktop, 2x2 on Tablet) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-              {educationItems.map((edu, idx) => (
-                <div
-                  key={idx}
-                  className="p-5 rounded-2xl bg-[#140c1c] border border-white/5 hover:border-[#8750f7]/60 hover:bg-[#1a0e2a] transition-all duration-300 group flex flex-col justify-between shadow-md"
-                >
-                  <div>
-                    {/* Time Period in Gerold's Neon Purple */}
-                    <div className="mb-1.5">
-                      <span className="text-xs font-bold text-[#8750f7] tracking-wider font-mono">
-                        {edu.period}
-                      </span>
-                    </div>
+            {/* Single Condensed Education Card matching Experience Style */}
+            <div
+              onClick={() => setIsEduExpanded(!isEduExpanded)}
+              className="p-6 sm:p-7 rounded-[22px] bg-[#140c1c] border border-white/5 hover:border-[#8750f7]/60 hover:bg-gradient-to-r hover:from-[#1b0e30] hover:to-[#140c1c] transition-all duration-300 group cursor-pointer relative shadow-lg"
+            >
+              {/* Period & Badge */}
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <span className="text-sm sm:text-base font-bold text-[#8750f7] tracking-wide">
+                  2022 – 2026
+                </span>
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-purple-500/15 text-purple-300 border border-purple-500/30 inline-flex items-center gap-1">
+                  <Sparkles className="w-3 h-3 text-[#8750f7]" />
+                  {language === "es" ? "Beca de Excelencia 80%" : "80% Excellence Scholarship"}
+                </span>
+              </div>
 
-                    {/* Title in Bold Uppercase */}
-                    <h4 className="text-sm sm:text-[15px] font-extrabold text-white tracking-wide uppercase group-hover:text-purple-200 transition-colors mb-1.5 leading-snug">
-                      {edu.title}
-                    </h4>
+              {/* Title */}
+              <h4 className="text-lg sm:text-xl font-extrabold text-white tracking-wide uppercase group-hover:text-purple-200 transition-colors mb-1.5 leading-snug">
+                {language === "es"
+                  ? "INGENIERÍA INFORMÁTICA (COMPUTATIONAL SCIENCE)"
+                  : "B.S. IN COMPUTER SCIENCE & INFORMATICS"}
+              </h4>
 
-                    {/* Institution */}
-                    <p className="text-neutral-400 text-xs font-medium leading-relaxed">
-                      {edu.institution}
+              {/* Institution & GPA */}
+              <p className="text-neutral-400 text-sm font-medium">
+                {language === "es"
+                  ? "Universidad de La Sabana · Promedio acumulado: 4.4 / 5.0"
+                  : "Universidad de La Sabana · Cumulative GPA: 4.4 / 5.0"}
+              </p>
+
+              {/* Highlight & Toggle hint */}
+              <div className="mt-3 flex items-center justify-between">
+                <span className="text-xs font-mono text-purple-300/90">
+                  ✦ {language === "es"
+                      ? "Énfasis en Arquitectura de Software y Sistemas Distribuidos"
+                      : "Focus on Software Architecture & Distributed Systems"}
+                </span>
+                <span className="text-[11px] font-mono text-[#8750f7] opacity-0 group-hover:opacity-100 transition-opacity">
+                  {isEduExpanded
+                    ? language === "es"
+                      ? "Cerrar [-]"
+                      : "Close [-]"
+                    : language === "es"
+                    ? "Ver honores & reconocimientos [+]"
+                    : "View honors & recognitions [+]"}
+                </span>
+              </div>
+
+              {/* Expandable Drawer with Honors & Details */}
+              <AnimatePresence>
+                {isEduExpanded && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="pt-4 mt-4 border-t border-white/10 space-y-3"
+                  >
+                    <p className="text-xs text-neutral-300 leading-relaxed">
+                      {language === "es"
+                        ? "Formación rigurosa orientada a la ingeniería de software moderna, alta concurrencia, diseño de arquitecturas distribuidas, pipelines de datos y almacenamiento vectorial."
+                        : "Rigorous curriculum focused on high concurrency, distributed systems architecture, data pipelines, and vector databases."}
                     </p>
-                  </div>
 
-                  {/* Highlight Pill */}
-                  <div className="mt-3.5 pt-3 border-t border-white/5">
-                    <span className="text-[11px] font-mono text-purple-300/90 leading-tight block">
-                      ✦ {edu.highlight}
-                    </span>
-                  </div>
-                </div>
-              ))}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
+                      <div className="p-3 rounded-xl bg-purple-950/20 border border-purple-500/20 text-xs text-neutral-200">
+                        <span className="font-mono font-bold text-[11px] text-[#8750f7] uppercase block mb-1">
+                          [HONOR] {language === "es" ? "Beca 80%" : "80% Scholarship"}
+                        </span>
+                        <p className="text-[11px] text-neutral-300 leading-snug">
+                          {language === "es"
+                            ? "Beca de Excelencia Académica otorgada por mérito al ingreso y sostenida con GPA 4.4/5.0."
+                            : "Academic Excellence Scholarship awarded for entrance merit and sustained with GPA 4.4/5.0."}
+                        </p>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-purple-950/20 border border-purple-500/20 text-xs text-neutral-200">
+                        <span className="font-mono font-bold text-[11px] text-[#8750f7] uppercase block mb-1">
+                          [AWARD] {language === "es" ? "1er Lugar Sabana Hack" : "1st Place Sabana Hack"}
+                        </span>
+                        <p className="text-[11px] text-neutral-300 leading-snug">
+                          {language === "es"
+                            ? "Cruz Roja Colombiana: Sistema de alertas en tiempo real con IA en sprint de 24h."
+                            : "Colombian Red Cross: Real-Time AI Alerting System built in 24h sprint."}
+                        </p>
+                      </div>
+
+                      <div className="p-3 rounded-xl bg-purple-950/20 border border-purple-500/20 text-xs text-neutral-200">
+                        <span className="font-mono font-bold text-[11px] text-[#8750f7] uppercase block mb-1">
+                          [LANG] {language === "es" ? "Bilingüismo B2" : "Bilingual B2"}
+                        </span>
+                        <p className="text-[11px] text-neutral-300 leading-snug">
+                          {language === "es"
+                            ? "Español nativo e Inglés B2 profesional para diseño técnico y equipos remotos."
+                            : "Native Spanish and professional B2 English for technical design and remote teams."}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
