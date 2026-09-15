@@ -51,36 +51,22 @@ export default function Projects() {
           </p>
         </div>
 
-        {/* GEROLD'S PILL CATEGORY FILTER BAR (OPTION 1 - SEGMENTED STUDIO GLASS) */}
+        {/* GEROLD'S PILL CATEGORY FILTER BAR (ORIGINAL) */}
         <div className="flex justify-center mb-12 sm:mb-16">
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 p-2 rounded-full bg-[#120a1c]/95 border border-[#8750f7]/40 shadow-2xl shadow-purple-950/60 backdrop-blur-xl">
+          <div className="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-full bg-[#140c1c] border border-white/10 shadow-lg">
             {categories.map((cat) => {
               const isActive = activeFilter === cat.id;
-              const count =
-                cat.id === "all"
-                  ? projects.length
-                  : projects.filter((p) => p.categories?.includes(cat.id)).length;
-
               return (
                 <button
                   key={cat.id}
                   onClick={() => setActiveFilter(cat.id)}
-                  className={`relative px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 flex items-center gap-2 cursor-pointer ${
+                  className={`px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? "bg-gradient-to-r from-[#8750f7] to-[#a855f7] text-white shadow-[0_0_25px_rgba(135,80,247,0.6)] scale-[1.02]"
+                      ? "bg-[#8750f7] text-white shadow-[0_0_20px_rgba(135,80,247,0.5)]"
                       : "text-neutral-400 hover:text-white hover:bg-white/5"
                   }`}
                 >
-                  <span>{cat.label}</span>
-                  <span
-                    className={`text-[10px] font-mono px-1.5 py-0.5 rounded-full transition-colors ${
-                      isActive
-                        ? "bg-white/20 text-white font-bold"
-                        : "bg-white/5 text-neutral-500"
-                    }`}
-                  >
-                    {count}
-                  </span>
+                  {cat.label}
                 </button>
               );
             })}
