@@ -112,8 +112,8 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     shortDescription:
       "Enterprise decoupled commerce engine on Kubernetes (k3s). Features Next.js 15 App Router, Vendure GraphQL APIs, declarative GitOps with ArgoCD & Kustomize, multi-arch ARM64 pipelines on Oracle Cloud, Traefik anti-CORS routing, and production observability (OTel, Prometheus, PostHog).",
     heroImage: "/projects/gazu-ecommerce.png",
-    liveUrl: "https://dev.gazu.jhojan.cloud",
-    devUrl: "https://dev.gazu.jhojan.cloud",
+    liveUrl: "https://gazu.jhojan.cloud/",
+    devUrl: "https://dev.gazu.jhojan.cloud/",
     gitlabUrl: "https://gitlab.com/portfolio-dev3/ecommerce",
     clusterStatus: {
       indicator: "live",

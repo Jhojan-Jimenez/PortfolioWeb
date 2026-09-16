@@ -92,7 +92,7 @@ export default function ProjectDetailPage({
           </div>
         </motion.div>
 
-        {/* HEADER: TITLE, SUBTITLE & CTAs */}
+        {/* HEADER: SOBER TITLE, SUBTITLE & DUAL-ENVIRONMENT CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -100,66 +100,79 @@ export default function ProjectDetailPage({
           className="space-y-4"
         >
           {project.clusterStatus && (
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-[11px] font-mono text-emerald-300">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
+            <div className="inline-flex items-center gap-2 text-xs font-mono text-neutral-400">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)] shrink-0" />
               <span>{project.clusterStatus.badgeText}</span>
             </div>
           )}
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-white leading-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-white leading-snug">
             {project.title}
           </h1>
 
-          <p className="text-base sm:text-lg font-light text-neutral-300 leading-relaxed max-w-4xl">
+          <p className="text-sm sm:text-base font-light text-neutral-400 leading-relaxed max-w-3xl">
             {project.subtitle}
           </p>
 
-          <div className="flex flex-wrap items-center gap-3 text-xs text-neutral-400 font-mono pt-1">
+          <div className="flex flex-wrap items-center gap-2.5 text-xs text-neutral-400 font-mono pt-1">
             <span>{project.role}</span>
             <span className="text-white/20">•</span>
             <span>{project.date}</span>
             <span className="text-white/20">•</span>
-            <span className="text-purple-300">{project.category}</span>
+            <span className="text-neutral-300">{project.category}</span>
           </div>
 
-          {/* ACTION CTAs (CHARAN MUNUR BUTTON ROW) */}
+          {/* ACTION CTAs (SOBER, PREMIUM BUTTON ROW) */}
           <div className="flex flex-wrap items-center gap-3 pt-2">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium bg-[#8750f7] hover:bg-[#9662f8] text-white transition-all shadow-lg shadow-[#8750f7]/25 cursor-pointer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-medium bg-white text-neutral-950 hover:bg-neutral-200 transition-colors shadow-sm cursor-pointer"
               >
-                <ExternalLink className="w-4 h-4" />
-                <span>{language === "es" ? "Plataforma en Vivo" : "Live Demo"}</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span>
+                  {project.slug === "gazu"
+                    ? language === "es"
+                      ? "Producción (Live)"
+                      : "Production (Live)"
+                    : language === "es"
+                    ? "Plataforma en Vivo"
+                    : "Live Demo"}
+                </span>
               </a>
             )}
 
-            {project.githubUrl && (
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium border border-dashed border-white/20 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/40 text-neutral-200 hover:text-white transition-all cursor-pointer"
-              >
-                <Github className="w-4 h-4" />
-                <span>{language === "es" ? "Ver Código" : "View Source"}</span>
-              </a>
-            )}
-
-            {project.devUrl && (
+            {project.devUrl && project.devUrl !== project.liveUrl && (
               <a
                 href={project.devUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium border border-white/10 bg-white/[0.02] hover:bg-white/[0.06] text-neutral-300 hover:text-white transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-medium border border-white/15 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/30 text-neutral-200 hover:text-white transition-colors cursor-pointer"
               >
-                <Terminal className="w-4 h-4" />
-                <span>{language === "es" ? "Playground / Demo" : "Interactive Demo"}</span>
+                <Terminal className="w-3.5 h-3.5 text-purple-400" />
+                <span>
+                  {project.slug === "gazu"
+                    ? language === "es"
+                      ? "Entorno Dev (k3s)"
+                      : "Dev Environment (k3s)"
+                    : language === "es"
+                    ? "Entorno de Prueba"
+                    : "Development"}
+                </span>
+              </a>
+            )}
+
+            {(project.githubUrl || project.gitlabUrl) && (
+              <a
+                href={project.githubUrl || project.gitlabUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-medium border border-white/10 bg-transparent hover:bg-white/[0.04] hover:border-white/20 text-neutral-400 hover:text-neutral-200 transition-colors cursor-pointer"
+              >
+                <Github className="w-3.5 h-3.5" />
+                <span>{language === "es" ? "Código Fuente" : "View Source"}</span>
               </a>
             )}
           </div>
