@@ -92,44 +92,42 @@ export default function ProjectDetailPage({
           </div>
         </motion.div>
 
-        {/* HEADER: SOBER TITLE, SUBTITLE & DUAL-ENVIRONMENT CTAs */}
+        {/* HEADER: COLOR-ACCENTED SOBER TITLE, SUBTITLE & DUAL-ENVIRONMENT CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.05 }}
           className="space-y-4"
         >
-          {project.clusterStatus && (
-            <div className="inline-flex items-center gap-2 text-xs font-mono text-neutral-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)] shrink-0" />
-              <span>{project.clusterStatus.badgeText}</span>
-            </div>
-          )}
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-medium bg-purple-950/60 text-purple-300 border border-purple-500/30 shadow-[0_0_15px_rgba(135,80,247,0.15)]">
+              ✦ {project.category}
+            </span>
+            <span className="text-xs font-mono text-neutral-400">
+              {project.role}
+            </span>
+            <span className="text-white/20">•</span>
+            <span className="text-xs font-mono text-neutral-400">
+              {project.date}
+            </span>
+          </div>
 
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-normal tracking-tight text-white leading-snug">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-100 to-purple-300 leading-snug">
             {project.title}
           </h1>
 
-          <p className="text-sm sm:text-base font-light text-neutral-400 leading-relaxed max-w-3xl">
+          <p className="text-sm sm:text-base font-light text-neutral-300 leading-relaxed max-w-3xl">
             {project.subtitle}
           </p>
 
-          <div className="flex flex-wrap items-center gap-2.5 text-xs text-neutral-400 font-mono pt-1">
-            <span>{project.role}</span>
-            <span className="text-white/20">•</span>
-            <span>{project.date}</span>
-            <span className="text-white/20">•</span>
-            <span className="text-neutral-300">{project.category}</span>
-          </div>
-
-          {/* ACTION CTAs (SOBER, PREMIUM BUTTON ROW) */}
+          {/* ACTION CTAs (TASTEFUL COLOR & CONTRAST) */}
           <div className="flex flex-wrap items-center gap-3 pt-2">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-medium bg-white text-neutral-950 hover:bg-neutral-200 transition-colors shadow-sm cursor-pointer"
+                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium bg-gradient-to-r from-[#8750f7] to-[#7435f5] text-white hover:shadow-[0_0_20px_rgba(135,80,247,0.4)] hover:scale-[1.02] transition-all cursor-pointer shadow-md"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
                 <span>
@@ -149,7 +147,7 @@ export default function ProjectDetailPage({
                 href={project.devUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-medium border border-white/15 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/30 text-neutral-200 hover:text-white transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium border border-purple-500/40 bg-purple-950/30 hover:bg-purple-900/50 hover:border-purple-400/60 text-purple-200 transition-all cursor-pointer shadow-sm"
               >
                 <Terminal className="w-3.5 h-3.5 text-purple-400" />
                 <span>
@@ -169,7 +167,7 @@ export default function ProjectDetailPage({
                 href={project.githubUrl || project.gitlabUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs sm:text-sm font-medium border border-white/10 bg-transparent hover:bg-white/[0.04] hover:border-white/20 text-neutral-400 hover:text-neutral-200 transition-colors cursor-pointer"
+                className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium border border-white/15 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/30 text-neutral-300 hover:text-white transition-all cursor-pointer"
               >
                 <Github className="w-3.5 h-3.5" />
                 <span>{language === "es" ? "Código Fuente" : "View Source"}</span>
@@ -178,12 +176,12 @@ export default function ProjectDetailPage({
           </div>
         </motion.div>
 
-        {/* HERO IMAGE SCREENSHOT (EXPANSIVE 16:9 DISPLAY) */}
+        {/* HERO IMAGE SCREENSHOT (EXPANSIVE 16:9 DISPLAY WITH SUBTLE GLOW) */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.15 }}
-          className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-white/10 bg-black/40 shadow-2xl"
+          className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden border border-purple-500/20 bg-black/40 shadow-2xl shadow-purple-950/20"
         >
           {project.heroImage ? (
             <Image
@@ -208,9 +206,12 @@ export default function ProjectDetailPage({
           transition={{ duration: 0.4, delay: 0.2 }}
           className="space-y-3"
         >
-          <h2 className="text-xl sm:text-2xl font-light tracking-tight text-white">
-            {language === "es" ? "Tecnologías Utilizadas" : "Technologies Used"}
-          </h2>
+          <div className="flex items-center gap-2.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#8750f7] shadow-[0_0_8px_#8750f7]" />
+            <h2 className="text-xl sm:text-2xl font-light tracking-tight text-white">
+              {language === "es" ? "Tecnologías Utilizadas" : "Technologies Used"}
+            </h2>
+          </div>
           <div className="flex flex-wrap gap-2 pt-1">
             {project.technologies.map((tech) => (
               <TechPill key={tech} name={tech} />
@@ -227,12 +228,15 @@ export default function ProjectDetailPage({
             className="space-y-3 pt-2"
           >
             <div className="flex items-baseline justify-between">
-              <h2 className="text-xl sm:text-2xl font-light tracking-tight text-white">
-                {language === "es"
-                  ? "Especificaciones y Métricas"
-                  : "System Specs & Metrics"}
-              </h2>
-              <span className="text-xs font-mono text-neutral-400">
+              <div className="flex items-center gap-2.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#8750f7] shadow-[0_0_8px_#8750f7]" />
+                <h2 className="text-xl sm:text-2xl font-light tracking-tight text-white">
+                  {language === "es"
+                    ? "Especificaciones y Métricas"
+                    : "System Specs & Metrics"}
+                </h2>
+              </div>
+              <span className="text-xs font-mono text-purple-300/80">
                 {project.metrics.length} {language === "es" ? "verificadas" : "verified"}
               </span>
             </div>
@@ -244,16 +248,16 @@ export default function ProjectDetailPage({
                 return (
                   <div
                     key={mIdx}
-                    className="rounded-xl border border-white/10 bg-white/[0.02] p-4 flex flex-col justify-between hover:border-white/20 transition-colors"
+                    className="rounded-xl border border-white/10 hover:border-purple-500/40 bg-white/[0.02] hover:bg-purple-950/15 p-4 flex flex-col justify-between transition-all hover:shadow-[0_0_20px_rgba(135,80,247,0.08)]"
                   >
                     <div>
-                      <span className="text-[10px] font-mono uppercase tracking-widest text-neutral-400 mb-1.5 block">
+                      <span className="text-[10px] font-mono uppercase tracking-widest text-purple-400 font-medium mb-1.5 block">
                         {metric.label}
                       </span>
                       <div
-                        className={`text-white tracking-tight ${
+                        className={`tracking-tight ${
                           isNumeric
-                            ? "text-xl sm:text-2xl font-mono font-semibold text-purple-300"
+                            ? "text-xl sm:text-2xl font-mono font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-white"
                             : "text-base font-semibold text-neutral-100"
                         }`}
                       >
