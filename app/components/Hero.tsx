@@ -27,7 +27,7 @@ export default function Hero() {
       label: "GitHub",
     },
     {
-      href: "https://www.linkedin.com/in/jhojanjimenez/",
+      href: "https://www.linkedin.com/in/jhojan-jimenez-dev/",
       icon: Linkedin,
       label: "LinkedIn",
     },
@@ -212,12 +212,12 @@ export default function Hero() {
               <div className="relative w-[280px] h-[340px] sm:w-[320px] sm:h-[400px] lg:w-[350px] lg:h-[430px] rounded-[38px] border-2 border-[#8750f7]/80 bg-[#140c1c] overflow-hidden rotate-[-4.5deg] group-hover:rotate-0 transition-transform duration-500 shadow-[0_0_40px_rgba(135,80,247,0.35)] p-2">
                 <div className="w-full h-full rounded-[30px] overflow-hidden relative bg-[#0f0715]">
                   <Image
-                    src="/Me.jpeg"
+                    src="/profile.png"
                     alt="Jhojan Jimenez"
                     fill
                     priority
                     sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 350px"
-                    className="object-cover object-top filter contrast-[1.05] brightness-[1.02] group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-center filter contrast-[1.02] brightness-[1.01] group-hover:scale-105 transition-transform duration-500"
                   />
                   {/* Subtle dark gradient overlay at base */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0f0715]/60 via-transparent to-transparent pointer-events-none" />
@@ -228,7 +228,7 @@ export default function Hero() {
               <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 px-4 py-2 rounded-2xl bg-[#140c1c]/95 border border-[#8750f7]/50 shadow-xl backdrop-blur-md flex items-center gap-2 z-20">
                 <CheckCircle2 className="w-4 h-4 text-[#8750f7]" />
                 <span className="text-xs font-mono font-bold text-white">
-                  {language === "es" ? "Ingeniero Verificado" : "Verified Engineer"}
+                  {language === "es" ? "Ingeniero Informático" : "Sofware Engineer"}
                 </span>
               </div>
             </div>

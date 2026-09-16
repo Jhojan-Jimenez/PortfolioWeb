@@ -17,13 +17,13 @@ export default function Portfolio() {
           <Hero />
         </section>
         <section className="bg-gradient-to-b from-secondaryBackground to-background">
-          <Skills />
-        </section>
-        <section className="bg-gradient-to-b from-background to-secondaryBackground">
           <Projects />
         </section>
-        <section className="bg-gradient-to-b from-secondaryBackground to-background">
+        <section className="bg-gradient-to-b from-background to-secondaryBackground">
           <Experience />
+        </section>
+        <section className="bg-gradient-to-b from-secondaryBackground to-background">
+          <Skills />
         </section>
         <section className="bg-[#0f0715]">
           <Contact />

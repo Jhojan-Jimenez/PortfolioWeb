@@ -16,17 +16,17 @@ export default function Header() {
   const t = TRANSLATIONS[language].header;
 
   const navItems = [
-    { id: "skills", label: t.nav.skills },
     { id: "projects", label: t.nav.projects },
     { id: "experience-list", label: t.nav.experience },
     { id: "resume-hub", label: t.nav.resumeHub },
+    { id: "skills", label: t.nav.skills },
     { id: "contact", label: t.nav.contact },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 40);
-      const sections = ["home", "skills", "projects", "experience-list", "resume-hub", "contact"];
+      const sections = ["home", "projects", "resume-hub", "experience-list", "skills", "contact"];
       const scrollPos = window.scrollY + 200;
 
       for (let i = sections.length - 1; i >= 0; i--) {

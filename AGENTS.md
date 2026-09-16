@@ -42,7 +42,7 @@ Este documento sirve como memoria y guía arquitectónica para Antigravity y otr
 PortfolioWeb/
 ├── app/
 │   ├── layout.tsx         # Root layout, metadata SEO y fuentes
-│   ├── page.tsx           # Ensambla la SPA (Hero -> Skills -> Projects -> Experience -> Contact)
+│   ├── page.tsx           # Ensambla la SPA (Hero -> Projects -> Experience -> Skills -> Contact)
 │   ├── globals.css        # Tokens de color HSL y clases utilitarias
 │   ├── components/
 │   │   ├── Header.tsx     # Navbar fija con scroll adaptativo y Dark Mode toggle
@@ -61,7 +61,8 @@ PortfolioWeb/
 │       ├── translations.ts # Diccionario bilingüe global (UI, Skills, Experience, Contact)
 │       └── projects-es.ts  # Traducciones al ESPAÑOL de casos de estudio
 ├── public/
-│   ├── Me.jpeg            # Foto de perfil
+│   ├── profile.png        # Foto de perfil oficial (HD)
+│   ├── Me.jpeg            # Foto de perfil anterior (backup)
 │   ├── projects/          # Capturas de pantalla de proyectos
 │   └── resume/            # CVs y Resumes oficiales (DOCX y PDF en 1 sola página)
 ├── scripts/

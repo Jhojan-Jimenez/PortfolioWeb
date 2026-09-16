@@ -10,6 +10,7 @@ import {
   Terminal,
   Code2,
   ChevronDown,
+  ChevronUp,
   CheckCircle2,
   Layers,
   Sparkles,
@@ -52,8 +53,14 @@ import { TRANSLATIONS } from "@/lib/i18n/translations";
 export default function Skills() {
   const { language } = useLanguage();
   const t = TRANSLATIONS[language].skills;
-  const [showAllTech, setShowAllTech] = useState(false);
+  const [expandedCategories, setExpandedCategories] = useState<number[]>([]);
   const [activeService, setActiveService] = useState<number | null>(0);
+
+  const toggleCategory = (idx: number) => {
+    setExpandedCategories((prev) =>
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
+    );
+  };
 
   // 1. WHAT I DO — PRAGMATIC & HUMBLE STACKED WIDE CARDS (REFERENCE IMAGE 2)
   const whatIDoItems = [
@@ -168,33 +175,140 @@ export default function Skills() {
     },
   ];
 
-  // Full stack inventory for expandable drawer
-  const fullInventory = [
-    {
-      category: language === "es" ? "Lenguajes Principales" : "Core Languages",
-      items: ["Python", "TypeScript", "JavaScript", "SQL", "Java", "HTML5 / CSS3"],
-    },
-    {
-      category: language === "es" ? "Frameworks & Backend" : "Backend Frameworks",
-      items: ["FastAPI", "NestJS", "Express.js", "Django REST", "Pydantic", "Node.js"],
-    },
-    {
-      category: language === "es" ? "Cloud & Orquestación" : "Cloud & Orchestration",
-      items: ["Kubernetes (k3s ARM64)", "Docker", "GCP (Cloud Run)", "AWS (S3)", "GitHub Actions", "GitLab CI/CD", "Linux"],
-    },
-    {
-      category: language === "es" ? "Bases de Datos & Vectores" : "Databases & Vector Storage",
-      items: ["PostgreSQL 16", "pgvector", "Redis", "Alembic", "SQL Optimization"],
-    },
-    {
-      category: language === "es" ? "IA & Machine Learning" : "AI & Machine Learning",
-      items: ["CLIP ViT-B/32", "OpenAI API", "GPT-4o Vision", "RAG Pipelines", "Embeddings"],
-    },
-    {
-      category: language === "es" ? "Frontend & Observabilidad" : "Frontend & Observability",
-      items: ["Next.js (App Router)", "React 19", "Tailwind CSS", "Pandas ETL", "PostHog", "OpenTelemetry"],
-    },
-  ];
+  const renderArsenalCards = () =>
+    arsenalCategories.map((cat, idx) => {
+      const CategoryIcon = cat.icon;
+      const isExpanded = expandedCategories.includes(idx);
+
+      return (
+        <div
+          key={idx}
+          className="p-5 sm:p-6 rounded-[24px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/50 shadow-xl transition-all duration-300 flex flex-col justify-between group"
+        >
+          <div>
+            {/* Header / Clickable on mobile to open/close this specific card */}
+            <div
+              onClick={() => toggleCategory(idx)}
+              className="flex items-center justify-between pb-4 border-b border-white/10 cursor-pointer md:cursor-default select-none"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-purple-950/40 border border-purple-500/30 flex items-center justify-center text-purple-300 group-hover:bg-[#8750f7] group-hover:text-white transition-colors">
+                  <CategoryIcon className="w-5 h-5 stroke-[2]" />
+                </div>
+                <div>
+                  <h4 className="text-sm sm:text-base font-bold text-white tracking-tight">
+                    {cat.name}
+                  </h4>
+                  <span className="text-[10px] sm:text-xs font-mono text-neutral-400">
+                    {cat.tools.length} {language === "es" ? "tecnologías" : "technologies"}
+                  </span>
+                </div>
+              </div>
+
+              {/* Mobile Expand / Collapse Trigger Indicator */}
+              <div className="md:hidden flex items-center gap-1.5 text-xs font-mono text-[#8750f7] pl-2">
+                <span>
+                  {isExpanded
+                    ? language === "es"
+                      ? "[-] Ocultar"
+                      : "[-] Hide"
+                    : language === "es"
+                    ? "[+] Ver"
+                    : "[+] View"}
+                </span>
+                <div
+                  className={`w-7 h-7 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-purple-300 transition-transform duration-300 ${
+                    isExpanded ? "rotate-180 bg-[#8750f7]/20 text-white" : ""
+                  }`}
+                >
+                  <ChevronDown className="w-3.5 h-3.5" />
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile collapsible content */}
+            <div className="md:hidden">
+              <AnimatePresence initial={false}>
+                {isExpanded && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden pt-4"
+                  >
+                    <div className="grid grid-cols-2 gap-2.5">
+                      {cat.tools.map((tool, tIdx) => {
+                        const ToolIcon = tool.icon;
+                        return (
+                          <div
+                            key={tIdx}
+                            className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#0d0714] border border-white/5 hover:border-white/20 hover:bg-white/[0.03] transition-all duration-300 group/item hover:-translate-y-1 hover:shadow-lg"
+                          >
+                            <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/5 flex items-center justify-center group-hover/item:scale-110 group-hover/item:border-white/25 group-hover/item:bg-white/[0.08] transition-all duration-300 mb-2 p-2 relative overflow-hidden">
+                              {tool.svg ? (
+                                <img
+                                  src={tool.svg}
+                                  alt={tool.name}
+                                  className="w-full h-full object-contain filter drop-shadow transition-transform"
+                                  loading="lazy"
+                                />
+                              ) : ToolIcon ? (
+                                <ToolIcon
+                                  className="w-5 h-5 transition-transform filter drop-shadow"
+                                  style={{ color: tool.color }}
+                                />
+                              ) : null}
+                            </div>
+                            <span className="text-[11px] font-medium text-neutral-300 group-hover/item:text-white text-center leading-tight truncate w-full transition-colors">
+                              {tool.name}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {/* Desktop permanent content (always visible) */}
+            <div className="hidden md:block pt-6">
+              <div className="grid grid-cols-2 gap-2.5">
+                {cat.tools.map((tool, tIdx) => {
+                  const ToolIcon = tool.icon;
+                  return (
+                    <div
+                      key={tIdx}
+                      className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#0d0714] border border-white/5 hover:border-white/20 hover:bg-white/[0.03] transition-all duration-300 group/item hover:-translate-y-1 hover:shadow-lg"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/5 flex items-center justify-center group-hover/item:scale-110 group-hover/item:border-white/25 group-hover/item:bg-white/[0.08] transition-all duration-300 mb-2 p-2 relative overflow-hidden">
+                        {tool.svg ? (
+                          <img
+                            src={tool.svg}
+                            alt={tool.name}
+                            className="w-full h-full object-contain filter drop-shadow transition-transform"
+                            loading="lazy"
+                          />
+                        ) : ToolIcon ? (
+                          <ToolIcon
+                            className="w-5 h-5 transition-transform filter drop-shadow"
+                            style={{ color: tool.color }}
+                          />
+                        ) : null}
+                      </div>
+                      <span className="text-[11px] font-medium text-neutral-300 group-hover/item:text-white text-center leading-tight truncate w-full transition-colors">
+                        {tool.name}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    });
 
   return (
     <section
@@ -284,8 +398,8 @@ export default function Skills() {
         {/* ========================================================================= */}
         {/* BLOQUE 2: TECH ARSENAL / SKILLS BY DOMAIN (REFERENCIA IMAGEN 1)           */}
         {/* ========================================================================= */}
-        <div>
-          <div className="text-left mb-10">
+        <div id="tech-arsenal">
+          <div className="text-left mb-8 sm:mb-10">
             <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#8750f7] font-bold block mb-2">
               {language === "es" ? "— ARSENAL TÉCNICO" : "— TECH ARSENAL"}
             </span>
@@ -299,69 +413,12 @@ export default function Skills() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {arsenalCategories.map((cat, idx) => {
-              const CategoryIcon = cat.icon;
-              return (
-                <div
-                  key={idx}
-                  className="p-6 rounded-[24px] bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/50 shadow-xl transition-all duration-300 flex flex-col justify-between group"
-                >
-                  <div>
-                    {/* Header */}
-                    <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
-                      <div className="w-10 h-10 rounded-xl bg-purple-950/40 border border-purple-500/30 flex items-center justify-center text-purple-300 group-hover:bg-[#8750f7] group-hover:text-white transition-colors">
-                        <CategoryIcon className="w-5 h-5 stroke-[2]" />
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-white tracking-tight">
-                          {cat.name}
-                        </h4>
-                        <span className="text-[10px] font-mono text-neutral-400">
-                          {cat.tools.length} {language === "es" ? "tecnologías" : "technologies"}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Grid of Tools with Authentic Logos/Icons (Ref Image 1) */}
-                    <div className="grid grid-cols-2 gap-2.5">
-                      {cat.tools.map((tool, tIdx) => {
-                        const ToolIcon = tool.icon;
-                        return (
-                          <div
-                            key={tIdx}
-                            className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#0d0714] border border-white/5 hover:border-white/20 hover:bg-white/[0.03] transition-all duration-300 group/item hover:-translate-y-1 hover:shadow-lg"
-                          >
-                            <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/5 flex items-center justify-center group-hover/item:scale-110 group-hover/item:border-white/25 group-hover/item:bg-white/[0.08] transition-all duration-300 mb-2 p-2 relative overflow-hidden">
-                              {tool.svg ? (
-                                <img
-                                  src={tool.svg}
-                                  alt={tool.name}
-                                  className="w-full h-full object-contain filter drop-shadow transition-transform"
-                                  loading="lazy"
-                                />
-                              ) : ToolIcon ? (
-                                <ToolIcon
-                                  className="w-5 h-5 transition-transform filter drop-shadow"
-                                  style={{ color: tool.color }}
-                                />
-                              ) : null}
-                            </div>
-                            <span className="text-[11px] font-medium text-neutral-300 group-hover/item:text-white text-center leading-tight truncate w-full transition-colors">
-                              {tool.name}
-                            </span>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+          {/* Unified Grid: 1 col on mobile (each card is an individual accordion, closed by default), 4 cols on desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+            {renderArsenalCards()}
           </div>
         </div>
 
-    
       </div>
     </section>
   );

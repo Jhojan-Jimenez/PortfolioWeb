@@ -16,8 +16,123 @@ export default function Experience() {
   const { language } = useLanguage();
   const t = TRANSLATIONS[language].experience;
 
-  // Track expanded cards for detailed technical architecture inspect
-  const [expandedRole, setExpandedRole] = useState<number | null>(null);
+  // Track expanded items for detailed technical architecture inspect (checklist-style toggle)
+  const [expandedRoles, setExpandedRoles] = useState<number[]>([]);
+  const [expandedEducation, setExpandedEducation] = useState<number[]>([]);
+
+  const toggleRole = (idx: number) => {
+    setExpandedRoles((prev) =>
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
+    );
+  };
+
+  const toggleEducation = (idx: number) => {
+    setExpandedEducation((prev) =>
+      prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
+    );
+  };
+
+  const educationItems = [
+    {
+      period: "2022 – 2026",
+      status: language === "es" ? "Promedio: 4.4 / 5.0" : "GPA: 4.4 / 5.0",
+      title:
+        language === "es"
+          ? "Ingeniería Informática (Computational Science)"
+          : "B.S. in Computer Science & Engineering",
+      institution: "Universidad de La Sabana",
+      location: language === "es" ? "Chía, Colombia" : "Chía, Colombia",
+      description:
+        language === "es"
+          ? "Pregrado en Ingeniería Informática con énfasis en Arquitectura de Software, Sistemas Distribuidos de alta concurrencia y Almacenamiento Vectorial. Beneficiario de Beca de Excelencia Académica del 80% otorgada al ingreso por mérito continuo."
+          : "Undergraduate degree in Computer Engineering with core emphasis on Software Architecture, High-Concurrency Distributed Systems, and Vector Storage. Recipient of entrance 80% Academic Excellence Scholarship.",
+      badgeMetric:
+        language === "es"
+          ? "Beca de Excelencia 80% · Promedio Acumulado: 4.4 / 5.0"
+          : "80% Academic Excellence Scholarship · Cumulative GPA: 4.4 / 5.0",
+      achievements: [
+        {
+          tag: language === "es" ? "Beca de Excelencia Académica" : "Academic Excellence Scholarship",
+          description:
+            language === "es"
+              ? "Beneficiario de Beca de Excelencia Académica del 80% otorgada al ingreso por mérito sobresaliente y mantenida de forma continua con un promedio acumulado de 4.4 / 5.0."
+              : "Recipient of entrance 80% Academic Excellence Scholarship awarded for outstanding merit, continuously maintained with a 4.4 / 5.0 cumulative GPA.",
+        },
+        {
+          tag: language === "es" ? "Liderazgo & Tutoría Universitaria" : "Academic Leadership & Tutoring",
+          description:
+            language === "es"
+              ? "Tutor Académico en Fundamentos de Programación y Ciencias de la Computación, y Miembro Activo del Consejo Estudiantil de la Facultad de Ingeniería."
+              : "Academic Peer Tutor in Computer Science and Programming Fundamentals, and Active Member of the Engineering Student Council.",
+        },
+        {
+          tag: language === "es" ? "Énfasis Curricular" : "Curricular Focus",
+          description:
+            language === "es"
+              ? "Profundización en modelado de datos relacionales, computación concurrente, patrones de arquitectura de microservicios y sistemas distribuidos tolerantes a fallos."
+              : "Core specialization in relational data modeling, concurrent computing, microservices architectural patterns, and fault-tolerant distributed systems.",
+        },
+        {
+          tag: language === "es" ? "Proyecto Aplicado / Capstone" : "Applied Capstone",
+          description:
+            language === "es"
+              ? "Diseño e implementación de la arquitectura central y flujos de reserva de WheelUS, plataforma de carpooling universitario."
+              : "Designed and implemented the core architecture and booking dispatch flows for the WheelUS university carpooling platform.",
+        },
+      ],
+      technologies: [
+        language === "es" ? "Arquitectura de Software" : "Software Architecture",
+        language === "es" ? "Sistemas Distribuidos" : "Distributed Systems",
+        language === "es" ? "Almacenamiento Vectorial" : "Vector Storage",
+        language === "es" ? "Bases de Datos Relacionales" : "Relational Databases",
+        language === "es" ? "Ingeniería Cloud" : "Cloud Engineering",
+        language === "es" ? "Algoritmia y Concurrencia" : "Algorithms & Concurrency",
+        language === "es" ? "Sistemas Operativos (Linux)" : "Operating Systems (Linux)",
+      ],
+    },
+    {
+      period: "2025",
+      status: language === "es" ? "🏆 1er Lugar Hackathon" : "🏆 1st Place Hackathon",
+      title:
+        language === "es"
+          ? "1er Lugar — Sabana Hack 2025 (Cruz Roja Colombiana)"
+          : "1st Place — Sabana Hack 2025 (Colombian Red Cross)",
+      institution: "Cruz Roja Colombiana & Universidad de La Sabana",
+      location: language === "es" ? "Bogotá, Colombia" : "Bogotá, Colombia",
+      description:
+        language === "es"
+          ? "Diseño e implementación en sprint intensivo de 24 horas de un sistema distribuido de alertas tempranas y triaje de emergencias humanitarias asistido por IA multimodal."
+          : "Engineered in a 24-hour intensive sprint a real-time distributed early-warning alert and multimodal AI emergency triage platform for humanitarian disaster response.",
+      badgeMetric:
+        language === "es"
+          ? "Sprint de 24h · Alertas en Tiempo Real con IA"
+          : "24h Sprint · Real-time AI Emergency Alerts",
+      achievements: [
+        {
+          tag: language === "es" ? "Ingeniería en Tiempo Real" : "Real-Time Engineering",
+          description:
+            language === "es"
+              ? "Pipeline de ingesta y georreferenciación de incidentes con WebSockets y telemetría en vivo para despacho de brigadas."
+              : "Incident ingestion and georeferencing pipeline with WebSockets and live telemetry for emergency brigade dispatch.",
+        },
+        {
+          tag: language === "es" ? "IA Multimodal" : "Multimodal AI",
+          description:
+            language === "es"
+              ? "Clasificación automatizada de gravedad del incidente a partir de imágenes de campo y descripciones de texto."
+              : "Automated incident severity triage based on field imagery and audio/text incident descriptions.",
+        },
+      ],
+      technologies: [
+        "FastAPI",
+        "WebSockets",
+        "Python",
+        "Multimodal AI",
+        "Real-Time Telemetry",
+        "Cloud Deployment",
+      ],
+    },
+  ];
 
   const handleAction = (type: "cv" | "resume", mode: "download" | "preview") => {
     const fileUrl =
@@ -92,10 +207,10 @@ export default function Experience() {
 
       {/* STACKED FULL-WIDTH EXPERIENCE & EDUCATION SECTIONS */}
       <div className="space-y-16 sm:space-y-20 text-left">
-        {/* SECTION 1: MY EXPERIENCE (FULL WIDTH) */}
+        {/* SECTION 1: MY EXPERIENCE (CLEAN TIMELINE STYLE) */}
         <div id="experience-list" className="scroll-mt-28">
           {/* Column Header with Gerold's Badge/Award Icon */}
-          <div className="flex items-center gap-3.5 mb-8">
+          <div className="flex items-center gap-3.5 mb-10 sm:mb-12">
             <div className="text-[#8750f7]">
               <Award className="w-8 h-8 sm:w-9 sm:h-9 stroke-[1.75]" />
             </div>
@@ -104,91 +219,114 @@ export default function Experience() {
             </h3>
           </div>
 
-          {/* Experience Cards - Single Full-Width Column */}
-          <div className="space-y-6">
+          {/* Continuous Vertical Timeline */}
+          <div className="relative border-l border-white/15 ml-3 sm:ml-4 space-y-12 sm:space-y-16">
             {t.roles.map((job, idx) => {
-              const isExpanded = expandedRole === idx;
+              const isExpanded = expandedRoles.includes(idx);
               return (
                 <div
                   key={idx}
-                  onClick={() => setExpandedRole(isExpanded ? null : idx)}
-                  className="p-6 sm:p-7 rounded-[22px] bg-[#140c1c] border border-white/5 hover:border-[#8750f7]/60 hover:bg-gradient-to-r hover:from-[#1b0e30] hover:to-[#140c1c] transition-all duration-300 group cursor-pointer relative shadow-lg"
+                  onClick={() => toggleRole(idx)}
+                  className="relative pl-7 sm:pl-9 group cursor-pointer transition-colors"
                 >
-                  {/* Time Period in Gerold's Neon Purple */}
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-sm sm:text-base font-bold text-[#8750f7] tracking-wide">
+                  {/* Timeline Circular Dot Marker (Centered on the line) */}
+                  <div
+                    className={`absolute -left-[6px] top-1.5 rounded-full transition-all duration-300 ${
+                      job.isCurrent
+                        ? "w-3 h-3 bg-[#8750f7] ring-4 ring-[#8750f7]/30 shadow-[0_0_12px_rgba(135,80,247,0.8)]"
+                        : "w-3 h-3 bg-[#8750f7]/70 border-2 border-[#0a0512] group-hover:bg-[#8750f7] group-hover:scale-125"
+                    }`}
+                  />
+
+                  {/* 1. Period on Top */}
+                  <div className="flex items-center gap-2.5 mb-1.5">
+                    <span className="text-xs sm:text-sm font-mono font-semibold text-[#8750f7] tracking-wide">
                       {job.period}
                     </span>
                     {job.isCurrent && (
-                      <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 inline-flex items-center gap-1">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 inline-flex items-center gap-1">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                         {t.activeStatus}
                       </span>
                     )}
                   </div>
 
-                  {/* Role Title in Bold Uppercase (Direct from Gerold Screenshot) */}
-                  <h4 className="text-lg sm:text-xl font-extrabold text-white tracking-wide uppercase group-hover:text-purple-200 transition-colors mb-1.5 leading-snug">
+                  {/* 2. Role Title in Bold */}
+                  <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-1 group-hover:text-purple-300 transition-colors">
                     {job.title}
                   </h4>
 
-                  {/* Company and Location */}
-                  <p className="text-neutral-400 text-sm font-medium">
-                    {job.company}, {job.location}
+                  {/* 3. Company Name */}
+                  <div className="text-sm sm:text-base font-semibold text-neutral-200">
+                    {job.company}
+                  </div>
+
+                  {/* 4. Location */}
+                  <div className="text-xs sm:text-sm text-neutral-400 font-light mb-3">
+                    {job.location}
+                  </div>
+
+                  {/* 5. Summary Description */}
+                  <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed max-w-3xl">
+                    {job.description}
                   </p>
 
-                  {/* Highlight Metric Badge */}
-                  <div className="mt-3 flex items-center justify-between">
-                    <span className="text-xs font-mono text-purple-300/90">
-                      ✦ {job.highlightMetric}
-                    </span>
-                    <span className="text-[11px] font-mono text-[#8750f7] opacity-0 group-hover:opacity-100 transition-opacity">
+                  {/* 6. Expand / Collapse Trigger Indicator */}
+                  <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-mono text-[#8750f7] group-hover:text-purple-300 transition-colors">
+                    <span>
                       {isExpanded
                         ? language === "es"
-                          ? "Cerrar [-]"
-                          : "Close [-]"
+                          ? "[-] Ocultar detalles"
+                          : "[-] Hide details"
                         : language === "es"
-                        ? "Ver detalles [+]"
-                        : "Inspect [+]"}
+                        ? "[+] Ver arquitectura & entregables"
+                        : "[+] View architecture & deliverables"}
                     </span>
                   </div>
 
-                  {/* Expandable Architectural Deliverables Drawer */}
-                  <AnimatePresence>
+                  {/* 7. Expandable Drawer (Animación Framer Motion) */}
+                  <AnimatePresence initial={false}>
                     {isExpanded && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="pt-4 mt-4 border-t border-white/10 space-y-2.5"
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
                       >
-                        <p className="text-xs text-neutral-300 leading-relaxed">
-                          {job.description}
-                        </p>
-
-                        {job.achievements.map((ach, aIdx) => (
-                          <div
-                            key={aIdx}
-                            className="p-2.5 rounded-xl bg-purple-950/20 border border-purple-500/20 text-xs text-neutral-200 leading-relaxed"
-                          >
-                            <span className="font-mono font-bold text-xs text-[#8750f7] uppercase mr-1.5">
-                              [{ach.tag}]
-                            </span>
-                            {ach.description}
+                        <div className="pt-4 mt-3 border-t border-white/10 space-y-3 max-w-3xl">
+                          {/* Star Metric */}
+                          <div className="flex items-center gap-2 text-xs font-mono text-purple-300 bg-purple-950/30 px-3 py-1.5 rounded-lg border border-purple-500/20 w-fit">
+                            <span>✦</span>
+                            <span>{job.highlightMetric}</span>
                           </div>
-                        ))}
 
-                        {/* Tech Pills */}
-                        <div className="pt-2 flex flex-wrap gap-1.5">
-                          {(job.technologies || []).map((tech, tIdx) => (
-                            <span
-                              key={tIdx}
-                              className="px-2 py-0.5 rounded-md text-[10px] font-mono text-neutral-300 bg-white/5 border border-white/5"
-                            >
-                              {tech}
-                            </span>
-                          ))}
+                          {/* Achievements with [TAG] */}
+                          <div className="space-y-2 pt-1">
+                            {job.achievements.map((ach, aIdx) => (
+                              <div
+                                key={aIdx}
+                                className="p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-purple-500/30 transition-colors text-xs sm:text-sm text-neutral-300 leading-relaxed"
+                              >
+                                <span className="font-mono font-bold text-xs text-[#8750f7] uppercase mr-1.5 block sm:inline">
+                                  [{ach.tag}]
+                                </span>
+                                <span>{ach.description}</span>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Tech Pills */}
+                          <div className="pt-1 flex flex-wrap gap-1.5">
+                            {(job.technologies || []).map((tech, tIdx) => (
+                              <span
+                                key={tIdx}
+                                className="px-2.5 py-1 rounded-md text-[11px] font-mono text-neutral-300 bg-white/5 border border-white/10"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </motion.div>
                     )}
@@ -199,82 +337,126 @@ export default function Experience() {
           </div>
         </div>
 
-        {/* SECTION 2: MY EDUCATION & HONORS (CONDENSED SINGLE ITEM) */}
+        {/* SECTION 2: MY EDUCATION & HONORS (TIMELINE STYLE) */}
         <div>
           {/* Column Header with Gerold's Mortarboard Icon */}
-          <div className="flex items-center gap-3.5 mb-8">
+          <div className="flex items-center gap-3.5 mb-10 sm:mb-12">
             <div className="text-[#8750f7]">
               <GraduationCap className="w-8 h-8 sm:w-9 sm:h-9 stroke-[1.75]" />
             </div>
             <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              {language === "es" ? "Mi Educación" : "My Education"}
+              {language === "es" ? "Mi Educación & Distinciones" : "My Education & Honors"}
             </h3>
           </div>
 
-          {/* Bento Split Card */}
-          <div className="p-6 sm:p-7 rounded-[22px] bg-[#140c1c] border border-[#8750f7]/40 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-            <div className="lg:col-span-7 space-y-2">
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-[#8750f7] tracking-wide font-mono">
-                  2022 – 2026
-                </span>
-                <span className="text-neutral-500 text-xs">·</span>
-                <span className="text-xs font-mono text-purple-300 bg-purple-950/40 px-2 py-0.5 rounded border border-purple-800/40">
-                  GPA 4.4 / 5.0
-                </span>
-              </div>
-              <h4 className="text-xl font-extrabold text-white uppercase tracking-tight leading-tight">
-                {language === "es"
-                  ? "Ingeniería Informática / Computational Science"
-                  : "B.S. in Computer Science & Informatics"}
-              </h4>
-              <p className="text-neutral-400 text-sm font-medium">
-                Universidad de La Sabana
-              </p>
-              <p className="text-xs text-neutral-300 leading-relaxed pt-1">
-                {language === "es"
-                  ? "Énfasis de carrera en Arquitectura de Software, Almacenamiento Vectorial y Sistemas Distribuidos de alta concurrencia."
-                  : "Degree emphasis on Software Architecture, Vector Storage, and High-Concurrency Distributed Systems."}
-              </p>
-            </div>
+          {/* Continuous Vertical Timeline */}
+          <div className="relative border-l border-white/15 ml-3 sm:ml-4 space-y-12 sm:space-y-16">
+            {educationItems.map((edu, idx) => {
+              const isExpanded = expandedEducation.includes(idx);
+              return (
+                <div
+                  key={idx}
+                  onClick={() => toggleEducation(idx)}
+                  className="relative pl-7 sm:pl-9 group cursor-pointer transition-colors"
+                >
+                  {/* Timeline Circular Dot Marker (Centered on the line) */}
+                  <div
+                    className="absolute -left-[6px] top-1.5 w-3 h-3 rounded-full bg-[#8750f7]/70 border-2 border-[#0a0512] group-hover:bg-[#8750f7] group-hover:scale-125 transition-all duration-300"
+                  />
 
-            <div className="lg:col-span-5 space-y-2.5 border-t lg:border-t-0 lg:border-l border-white/10 pt-4 lg:pt-0 lg:pl-6">
-              <div className="p-2.5 rounded-xl bg-purple-950/20 border border-purple-500/20 flex items-center justify-between gap-3">
-                <div>
-                  <div className="text-[11px] font-mono font-bold text-white">
-                    {language === "es" ? "Beca de Excelencia 80%" : "80% Academic Scholarship"}
+                  {/* 1. Period on Top */}
+                  <div className="flex items-center gap-2.5 mb-1.5 flex-wrap">
+                    <span className="text-xs sm:text-sm font-mono font-semibold text-[#8750f7] tracking-wide">
+                      {edu.period}
+                    </span>
+                    <span className="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-white/5 border border-white/10 text-neutral-300 font-medium">
+                      {edu.status}
+                    </span>
                   </div>
-                  <div className="text-[10px] text-neutral-400">
-                    {language === "es" ? "Mérito académico continuo" : "Continuous entrance merit"}
-                  </div>
-                </div>
-                <span className="text-xs text-[#8750f7]">🎓</span>
-              </div>
 
-              <div className="p-2.5 rounded-xl bg-purple-950/20 border border-purple-500/20 flex items-center justify-between gap-3">
-                <div>
-                  <div className="text-[11px] font-mono font-bold text-white">
-                    {language === "es" ? "1er Lugar Sabana Hack" : "1st Place Sabana Hack"}
-                  </div>
-                  <div className="text-[10px] text-neutral-400">
-                    {language === "es" ? "Cruz Roja · Alertas IA 24h" : "Red Cross · Real-time AI alerts"}
-                  </div>
-                </div>
-                <span className="text-xs text-[#8750f7]">🏆</span>
-              </div>
+                  {/* 2. Degree / Role Title */}
+                  <h4 className="text-lg sm:text-xl font-bold text-white group-hover:text-purple-300 transition-colors">
+                    {edu.title}
+                  </h4>
 
-              <div className="p-2.5 rounded-xl bg-purple-950/20 border border-purple-500/20 flex items-center justify-between gap-3">
-                <div>
-                  <div className="text-[11px] font-mono font-bold text-white">
-                    {language === "es" ? "Bilingüe Inglés (B2) / Español" : "Bilingual English (B2) / Spanish"}
+                  {/* 3. Institution */}
+                  <div className="text-xs sm:text-sm text-purple-200/90 font-medium mt-0.5">
+                    {edu.institution}
                   </div>
-                  <div className="text-[10px] text-neutral-400">
-                    {language === "es" ? "Comunicación técnica fluida" : "Fluent technical communication"}
+
+                  {/* 4. Location */}
+                  <div className="text-xs sm:text-sm text-neutral-400 font-light mb-3">
+                    {edu.location}
                   </div>
+
+                  {/* 5. Summary Description */}
+                  <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed max-w-3xl">
+                    {edu.description}
+                  </p>
+
+                  {/* 6. Expand / Collapse Trigger Indicator */}
+                  <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-mono text-[#8750f7] group-hover:text-purple-300 transition-colors">
+                    <span>
+                      {isExpanded
+                        ? language === "es"
+                          ? "[-] Ocultar detalles"
+                          : "[-] Hide details"
+                        : language === "es"
+                        ? "[+] Ver detalles & competencias"
+                        : "[+] View details & competencies"}
+                    </span>
+                  </div>
+
+                  {/* 7. Expandable Drawer (Animación Framer Motion) */}
+                  <AnimatePresence initial={false}>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="pt-4 mt-3 border-t border-white/10 space-y-3 max-w-3xl">
+                          {/* Badge Metric */}
+                          <div className="flex items-center gap-2 text-xs font-mono text-purple-300 bg-purple-950/30 px-3 py-1.5 rounded-lg border border-purple-500/20 w-fit">
+                            <span>✦</span>
+                            <span>{edu.badgeMetric}</span>
+                          </div>
+
+                          {/* Achievements with [TAG] */}
+                          <div className="space-y-2 pt-1">
+                            {edu.achievements.map((ach, aIdx) => (
+                              <div
+                                key={aIdx}
+                                className="p-3 rounded-xl bg-white/[0.02] border border-white/5 hover:border-purple-500/30 transition-colors text-xs sm:text-sm text-neutral-300 leading-relaxed"
+                              >
+                                <span className="font-mono font-bold text-xs text-[#8750f7] uppercase mr-1.5 block sm:inline">
+                                  [{ach.tag}]
+                                </span>
+                                <span>{ach.description}</span>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Tech / Area Pills */}
+                          <div className="pt-1 flex flex-wrap gap-1.5">
+                            {edu.technologies.map((tech, tIdx) => (
+                              <span
+                                key={tIdx}
+                                className="px-2.5 py-1 rounded-md text-[11px] font-mono text-neutral-300 bg-white/5 border border-white/10"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-                <span className="text-xs text-[#8750f7]">🌐</span>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>

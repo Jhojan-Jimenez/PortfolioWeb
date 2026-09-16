@@ -123,3 +123,57 @@
     display: none !important;
   }
 }
+
+/* ========================================================================= */
+/* VILEN DESIGN STYLE VIEW TRANSITIONS (OPEN DETAIL FROM TITLE)              */
+/* ========================================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root) {
+    animation: 200ms cubic-bezier(0.16, 1, 0.3, 1) both vt-fade-out;
+  }
+
+  ::view-transition-new(root) {
+    animation: 350ms cubic-bezier(0.16, 1, 0.3, 1) both vt-fade-in;
+  }
+
+  ::view-transition-group(case-title) {
+    animation-duration: 520ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  ::view-transition-group(case-desc) {
+    animation-duration: 520ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  ::view-transition-old(case-title),
+  ::view-transition-new(case-title) {
+    height: 100%;
+    width: auto;
+  }
+
+  ::view-transition-old(case-desc),
+  ::view-transition-new(case-desc) {
+    height: 100%;
+    width: auto;
+  }
+}
+
+@keyframes vt-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+

@@ -1,13 +1,21 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Sora } from "next/font/google";
+import { Figtree, JetBrains_Mono } from "next/font/google";
+import { ViewTransitions } from "next-view-transitions";
 import "./globals.css";
 import { LanguageProvider } from "./context/LanguageContext";
 
-const sora = Sora({
+const figtree = Figtree({
   subsets: ["latin"],
   variable: "--font-sans",
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -30,10 +38,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth dark ${sora.variable}`}>
-      <body className="text-neutral-100 font-sans antialiased selection:bg-purple-900/50 selection:text-white">
-        <LanguageProvider>{children}</LanguageProvider>
-      </body>
-    </html>
+    <ViewTransitions>
+      <html
+        lang="en"
+        className={`dark ${figtree.variable} ${jetbrainsMono.variable}`}
+      >
+        <body className="text-neutral-100 font-sans antialiased selection:bg-purple-900/50 selection:text-white">
+          <LanguageProvider>{children}</LanguageProvider>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

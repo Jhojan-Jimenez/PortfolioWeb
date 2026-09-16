@@ -51,16 +51,18 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 sm:py-32 px-4 relative z-10 bg-[#0f0715] border-t border-white/10">
+    <section id="contact" className="py-24 sm:py-32 px-4 relative z-10 bg-[#0f0715]">
+      {/* Subdivided / Cropped Top Line */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl px-4 pointer-events-none">
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-[#8750f7]/40 via-white/20 to-transparent" />
+      </div>
+
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-16">
           {/* LEFT: EDITORIAL COPY & CONTACT INFO */}
           <div className="lg:col-span-5 flex flex-col justify-between text-left">
             <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#140c1c] border border-[#8750f7]/40 text-purple-200 text-xs font-mono mb-4 shadow-[0_0_15px_rgba(135,80,247,0.15)]">
-                <span className="w-2 h-2 rounded-full bg-[#8750f7] animate-pulse" />
-                <span>{t.badge}</span>
-              </div>
+              
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-6">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8750f7] via-[#a855f7] to-white">
                   {t.title}
@@ -106,7 +108,7 @@ export default function Contact() {
             </div>
 
             {/* Social Links & Footer note */}
-            <div className="pt-8 mt-8 border-t border-white/[0.08] flex items-center justify-between">
+            <div className="pt-8 mt-8 border-t border-white/[0.08] flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <a
                   href="https://github.com/Jhojan-Jimenez"
@@ -127,7 +129,7 @@ export default function Contact() {
                   <Linkedin className="w-4 h-4" />
                 </a>
               </div>
-              <p className="text-xs font-mono text-neutral-400">
+              <p className="text-xs font-mono sm:text-left text-center text-neutral-400">
                 © {new Date().getFullYear()} JHOJAN JIMENEZ · {t.rights}
               </p>
             </div>
