@@ -2,14 +2,14 @@ export const PROJECTS_ES: Record<string, any> = {
   gazu: {
     title: "Gazu — E-Commerce Headless Cloud-Native",
     subtitle:
-      "Motor de comercio desacoplado empresarial con Next.js 15 (App Router), React 19, núcleo GraphQL en Vendure/NestJS, GitOps en k3s vía ArgoCD, CI/CD multi-arquitectura ARM64, Traefik anti-CORS y observabilidad integral.",
+      "Motor de comercio desacoplado empresarial con **Next.js 15 (App Router)**, **React 19**, núcleo GraphQL en **Vendure/NestJS**, GitOps en **k3s vía ArgoCD**, CI/CD multi-arquitectura **ARM64**, **Traefik anti-CORS** y **observabilidad integral**.",
     category: "Cloud Native & E-Commerce",
     badge: "Arquitectura Flagship",
     date: "2025 – Presente",
     role: "Arquitecto Cloud & Ingeniero Full Stack",
     teamOrContext: "Plataforma de Comercio Cloud-Native",
     shortDescription:
-      "Motor de comercio empresarial desacoplado en Kubernetes (k3s). Incluye Next.js 15 App Router, APIs GraphQL de Vendure, GitOps declarativo con ArgoCD y Kustomize, pipelines multi-arch ARM64 en Oracle Cloud, enrutamiento Traefik anti-CORS y observabilidad con OTel, Prometheus y PostHog.",
+      "Motor de comercio empresarial desacoplado en **Kubernetes (k3s)**. Incluye **Next.js 15 App Router**, APIs GraphQL de **Vendure**, GitOps declarativo con **ArgoCD y Kustomize**, pipelines multi-arch **ARM64 en Oracle Cloud**, enrutamiento **Traefik anti-CORS** y observabilidad con **OTel, Prometheus y PostHog**.",
     clusterStatus: {
       indicator: "live",
       badgeText: "Estado del Clúster: En Vivo en Kubernetes (k3s) | GitOps Sincronizado",
@@ -86,24 +86,24 @@ export const PROJECTS_ES: Record<string, any> = {
     problem: {
       title: "El Desafío: Cuellos de Botella Monolíticos y Operaciones Frágiles",
       summary:
-        "Las plataformas monolíticas tradicionales acoplan la interfaz visual con la lógica transaccional, generan fricciones de CORS entre dominios, dependen de despliegues manuales propensos a error y arriesgan la persistencia con estado.",
+        "Las plataformas monolíticas tradicionales acoplan la interfaz visual con la lógica transaccional, generan **fricciones de CORS**, dependen de **despliegues manuales propensos a error** y arriesgan la **persistencia con estado**.",
       points: [
-        "Renderizado de catálogo compitiendo directamente con la base de datos transaccional, degradando la conversión de compra.",
-        "Comandos manuales kubectl apply en clústeres de producción provocando desvío de configuración (drift) y caídas.",
-        "Arquitecturas desacopladas multi-dominio que originan bloqueos de CORS y mecanismos vulnerables de cookies.",
-        "Bloqueadores de anuncios de clientes que distorsionan los embudos críticos de conversión y retención de producto.",
+        "Renderizado de catálogo compitiendo directamente con la **base de datos transaccional**, degradando la conversión de compra.",
+        "Comandos manuales `kubectl apply` en clústeres de producción provocando **desvío de configuración (drift)** y caídas.",
+        "Arquitecturas desacopladas multi-dominio que originan **bloqueos de CORS** y mecanismos vulnerables de cookies.",
+        "Bloqueadores de anuncios de clientes que distorsionan los **embudos críticos de conversión y analítica**.",
       ],
     },
     solution: {
       title: "La Solución: Arquitectura de Comercio Cloud-Native Desacoplada",
       summary:
-        "Diseño e implementación de un ecosistema de comercio headless de nivel empresarial orquestado en Kubernetes (k3s), con entrega continua mediante GitOps, compilación multi-arquitectura y telemetría distribuida de producción.",
+        "Diseño e implementación de un ecosistema **headless en Kubernetes (k3s)**, con entrega continua mediante **GitOps declarativo**, compilación **multi-arquitectura ARM64** y **telemetría distribuida** de producción.",
       points: [
-        "Storefront desacoplado en Next.js 15 App Router comunicándose con el núcleo GraphQL de Vendure/NestJS.",
-        "Pipeline de GitOps declarativo con ArgoCD y Kustomize, eliminando modificaciones manuales en el clúster.",
-        "Ingress Traefik que consolida storefront (/), API (/shop-api) y panel (/dashboard) bajo un único host sin CORS.",
-        "Separación estricta: pods de aplicación stateless escalables y PostgreSQL aislado en un StatefulSet con PVCs dedicados.",
-        "Observabilidad de extremo a extremo integrando trazas distribuidas con OpenTelemetry, métricas con Prometheus y analítica con PostHog.",
+        "Storefront desacoplado en **Next.js 15 App Router** comunicándose con el núcleo GraphQL de **Vendure/NestJS**.",
+        "Pipeline de GitOps declarativo con **ArgoCD y Kustomize**, eliminando modificaciones manuales en el clúster.",
+        "Ingress **Traefik** que consolida storefront (`/`), API (`/shop-api`) y panel (`/dashboard`) bajo un **único host sin CORS**.",
+        "Separación estricta: pods de aplicación **stateless escalables** y **PostgreSQL aislado en StatefulSet** con PVCs dedicados.",
+        "Observabilidad de extremo a extremo integrando trazas distribuidas con **OpenTelemetry**, métricas con **Prometheus** y analítica con **PostHog**.",
       ],
     },
     architecture: {
@@ -114,27 +114,27 @@ export const PROJECTS_ES: Record<string, any> = {
         {
           title: "GitOps Declarativo con ArgoCD y Kustomize",
           choice: "Controlador ArgoCD + Overlays de Kustomize (dev vs prod)",
-          why: "El clúster no se modifica con kubectl apply; todo el estado deseado reside en Git. ArgoCD provee auto-reparación (self-healing) si un pod se desvía y separación estricta de entornos.",
+          why: "El clúster no se modifica con `kubectl apply`; todo el estado deseado reside en Git. **ArgoCD provee auto-reparación (self-healing)** si un pod se desvía y **separación estricta de entornos**.",
         },
         {
           title: "Pipeline CI/CD Multi-Arch (Linux ARM64)",
           choice: "Docker Buildx + Emulación QEMU en GitLab CI",
-          why: "Optimizado específicamente para procesadores ARM64 (Ampere A1 en Oracle Cloud), reduciendo los costos de infraestructura a cero mientras maximiza el throughput por ciclo.",
+          why: "Optimizado específicamente para procesadores **ARM64 (Ampere A1 en Oracle Cloud)**, reduciendo los **costos de infraestructura a cero** mientras maximiza el **throughput por ciclo**.",
         },
         {
           title: "Dominio Único y Arquitectura Anti-CORS vía Traefik",
           choice: "Traefik Ingress + Cert-Manager (Let's Encrypt automático)",
-          why: "Enruta en dev.gazu.jhojan.cloud: / hacia Next.js, y /shop-api & /dashboard hacia Vendure. Elimina problemas de CORS, permite cookies seguras SameSite=Lax/Strict y reutiliza un solo certificado TLS.",
+          why: "Enruta en un solo dominio: `/` hacia Next.js, y `/shop-api` & `/dashboard` hacia Vendure. **Elimina problemas de CORS**, permite cookies seguras `SameSite=Lax/Strict` y reutiliza un **solo certificado TLS**.",
         },
         {
           title: "Separación de Ciclos de Vida (Stateful vs Stateless)",
           choice: "Pods Stateless + PostgreSQL en StatefulSet con PVCs dedicados",
-          why: "El frontend y backend se escalan horizontalmente o se recrean en segundos sin riesgo. La base de datos PostgreSQL está blindada en volúmenes persistentes dedicados ante cualquier fallo de despliegue.",
+          why: "El frontend y backend se escalan horizontalmente **sin riesgo**. La base de datos PostgreSQL está blindada en **volúmenes persistentes dedicados (PVC)** ante cualquier fallo de despliegue.",
         },
         {
           title: "Observabilidad de Grado de Producción",
           choice: "OpenTelemetry (OTel gRPC) + Prometheus (prom-client) + Proxy PostHog",
-          why: "Trazas distribuidas con OTel, métricas operativas vivas en Prometheus y analítica de producto con PostHog mediante proxy inverso en Next.js para resistir bloqueadores y cumplir GDPR.",
+          why: "**Trazas distribuidas con OTel**, métricas operativas vivas en **Prometheus** y analítica de producto con **PostHog vía proxy inverso** en Next.js para resistir bloqueadores y cumplir **GDPR**.",
         },
       ],
     },
@@ -213,14 +213,14 @@ export const PROJECTS_ES: Record<string, any> = {
   talentmatch: {
     title: "TalentMatch AI — Casting Multimodal & Búsqueda Semántica de Modelos",
     subtitle:
-      "Motor de descubrimiento de talentos en producción que combina embeddings multimodales CLIP ViT-B/32 (512d), extracción de atributos con GPT-4o-mini Vision, similitud coseno con pgvector en PostgreSQL 16 y re-ranking ponderado por permanencia de rasgos físicos.",
+      "Motor de descubrimiento de talentos en producción que combina embeddings multimodales **CLIP ViT-B/32 (512d)**, extracción de atributos con **GPT-4o-mini Vision**, similitud coseno con **pgvector en PostgreSQL 16** y **re-ranking ponderado** por permanencia de rasgos físicos.",
     category: "IA Aplicada & Búsqueda Vectorial",
     badge: "Visión & Búsqueda Vectorial",
     date: "2025",
     role: "Ingeniero de Sistemas de IA & Backend",
     teamOrContext: "Plataforma de Gestión para Agencia de Modelaje",
     shortDescription:
-      "Plataforma empresarial de casting multimodal. Descubre talentos a partir de descripciones en lenguaje natural o fotos de referencia mediante CLIP ViT-B/32 (512d), extracción automatizada de biometría con GPT-4o-mini Vision y recuperación en dos etapas con similitud coseno en pgvector y filtros relacionales SQL.",
+      "Plataforma empresarial de casting multimodal. Descubre talentos a partir de descripciones en **lenguaje natural o fotos de referencia** mediante **CLIP ViT-B/32 (512d)**, extracción automatizada de biometría con **GPT-4o-mini Vision** y recuperación en dos etapas con **similitud coseno en pgvector** y filtros relacionales SQL.",
     clusterStatus: {
       indicator: "live",
       badgeText: "Producción En Vivo | VPS Coolify & Docker Compose",
@@ -278,24 +278,24 @@ export const PROJECTS_ES: Record<string, any> = {
     problem: {
       title: "El Desafío: Filtros Rígidos y Ambigüedad Visual",
       summary:
-        "El casting tradicional depende de filtros rígidos de base de datos o revisión manual de comp-cards impresas, los cuales fallan al buscar estilos estéticos complejos o descripciones en lenguaje natural.",
+        "El casting tradicional depende de **filtros rígidos de base de datos** o revisión manual de comp-cards impresas, los cuales fallan al buscar **estilos estéticos complejos o descripciones en lenguaje natural**.",
       points: [
-        "Incapacidad de buscar modelos a partir de moodboards o fotos de referencia visual sin etiquetado manual previo.",
-        "Filtros estrictos por etiquetas que fallan cuando las consultas usan lenguaje descriptivo matizado (ej. 'morena ojos claros pasarela alta moda').",
-        "La búsqueda puramente visual de CLIP confunde iluminación y estilo cosmético temporal (peinados, maquillaje) con fisionomía real.",
-        "Alto costo operativo para catalogar manualmente medidas (busto, cintura, cadera, calzado) por cada talento registrado.",
+        "Incapacidad de buscar modelos a partir de **moodboards o fotos de referencia visual** sin etiquetado manual previo.",
+        "Filtros estrictos por etiquetas que fallan cuando las consultas usan **lenguaje descriptivo matizado** (ej. 'morena ojos claros pasarela alta moda').",
+        "La búsqueda puramente visual de CLIP confunde **iluminación y estilo cosmético temporal** (peinados, maquillaje) con fisionomía real.",
+        "Alto costo operativo para **catalogar manualmente medidas corporales** (busto, cintura, cadera) por cada talento registrado.",
       ],
     },
     solution: {
       title: "La Solución: Recuperación Híbrida en Dos Etapas & Permanencia de Rasgos",
       summary:
-        "Diseño e implementación de un pipeline multimodal en producción combinando embeddings paralelos CLIP ViT-B/32, extracción con GPT-4o-mini Vision, filtros duros SQL WHERE y re-ranking ponderado.",
+        "Diseño e implementación de un **pipeline multimodal en producción** combinando embeddings paralelos **CLIP ViT-B/32**, extracción con **GPT-4o-mini Vision**, filtros duros **SQL WHERE** y **re-ranking ponderado**.",
       points: [
-        "Procesamiento paralelo: las consultas de texto se envían concurrentemente a GPT-4o-mini para extraer atributos y a CLIP para proyección vectorial.",
-        "Recuperación en dos etapas: SQL aplica filtros duros WHERE para rasgos permanentes (tono de piel y género), retornando un pool ampliado (top_n * 10).",
-        "Re-ranking por permanencia física: ponderación score = 0.45*clip + 0.45*attr_match + 0.10*exp_bonus, priorizando rasgos permanentes sobre estilismo mutable.",
-        "Onboarding automatizado: background workers extraen características biométricas de comp-cards y generan vectores CLIP de 512d al registrar modelos.",
-        "Despliegue eficiente en VPS: orquestado en Coolify VPS (8GB RAM) con Docker Compose, proxy Nginx interno y certificados SSL automáticos con Traefik.",
+        "**Procesamiento paralelo**: las consultas de texto se envían concurrentemente a **GPT-4o-mini** para extraer atributos y a **CLIP** para proyección vectorial.",
+        "**Recuperación en dos etapas**: SQL aplica filtros duros WHERE para rasgos permanentes (tono de piel y género), retornando un **pool ampliado (top_n * 10)**.",
+        "**Re-ranking por permanencia física**: scoring compuesto que balancea distancia coseno visual con pesos según **permanencia biológica de los rasgos**.",
+        "**Onboarding automatizado**: background workers extraen características biométricas de comp-cards y generan **vectores CLIP de 512d** al registrar modelos.",
+        "**Despliegue eficiente en VPS**: orquestado en Coolify VPS (8GB RAM) con **Docker Compose**, proxy interno y certificados SSL automáticos con **Traefik**.",
       ],
     },
     architecture: {
@@ -306,22 +306,22 @@ export const PROJECTS_ES: Record<string, any> = {
         {
           title: "Espacio Latente Unificado con CLIP ViT-B/32 (512 Dimensiones)",
           choice: "Codificador Compartido de Texto e Imagen vía sentence-transformers",
-          why: "Proyectar tanto descripciones de texto como fotografías de modelos en el mismo espacio vectorial de 512 dimensiones permite buscar indistintamente por texto o fotos de referencia sin puentes de traducción.",
+          why: "Proyectar tanto descripciones de texto como fotos en el **mismo espacio vectorial de 512 dimensiones** permite buscar indistintamente por **texto o fotos de referencia** sin puentes de traducción.",
         },
         {
           title: "Recuperación en Dos Etapas y Ponderación por Permanencia de Rasgos",
           choice: "Filtros Duros SQL (Tez, Género) + Re-Ranker Ponderado en Python",
-          why: "La similitud visual pura de CLIP confunde iluminación de estudio con rasgos biológicos. Combinar filtros relacionales con pesos de permanencia (ojos: 0.40, complexión: 0.30 vs largo de cabello: 0.04) logró un 94% de concordancia con directores de casting.",
+          why: "La similitud pura de CLIP confunde iluminación con rasgos biológicos. Combinar filtros relacionales con pesos de permanencia (**ojos: 0.40, complexión: 0.30 vs cabello: 0.04**) logró un **94% de concordancia con directores de casting**.",
         },
         {
           title: "PostgreSQL 16 + pgvector vs Base de Datos Vectorial SaaS",
           choice: "Extensión Nativa pgvector con Consistencia ACID Relacional",
-          why: "Elimina latencias de sincronización de red y costos recurrentes de SaaS externos (Pinecone/Weaviate) al ejecutar consultas de distancia coseno y filtros de medidas numéricas en la misma transacción.",
+          why: "Elimina latencias de red y costos de SaaS externos al ejecutar **consultas de distancia coseno y filtros relacionales SQL en la misma transacción ACID**.",
         },
         {
           title: "Arquitectura Asíncrona Ligera sobre VPS Coolify",
           choice: "FastAPI + Docker Compose + BackgroundTasks (Consumo ~3.5GB RAM)",
-          why: "Se descartaron brokers pesados de mensajería (Celery/Redis) a favor de BackgroundTasks nativas de FastAPI, optimizando los recursos del VPS de 8GB para que CLIP (~600MB) y PostgreSQL operen holgadamente.",
+          why: "Se priorizaron **BackgroundTasks nativas de FastAPI**, optimizando los recursos del VPS de 8GB para que **CLIP (~600MB) y PostgreSQL operen con máxima holgura**.",
         },
       ],
     },
@@ -381,14 +381,14 @@ export const PROJECTS_ES: Record<string, any> = {
   wheelus: {
     title: "WheelUS — Plataforma de Carpooling Universitario en Tiempo Real",
     subtitle:
-      "Sistema de transporte universitario seguro y distribuido con geolocalización en tiempo real, reserva de asientos atómica y verificación académica",
+      "Sistema de transporte universitario seguro y distribuido con **geolocalización en tiempo real**, **reserva de asientos atómica (0 sobreventas)** y **verificación institucional**.",
     category: "Sistemas Distribuidos & Geolocalización",
     badge: "Concurrencia & Geoespacial",
     date: "2024 – 2025",
     role: "Arquitecto de Backend & Co-Fundador",
     teamOrContext: "Iniciativa de Movilidad Sostenible · Universidad de La Sabana",
     shortDescription:
-      "Plataforma integral de movilidad colaborativa para comunidades universitarias. Resuelve congestión vehicular mediante geolocalización sobre OpenStreetMap/Leaflet, barreras atómicas de concurrencia para reserva de asientos y verificación de identidad institucional.",
+      "Plataforma integral de movilidad colaborativa para comunidades universitarias. Resuelve congestión vehicular mediante **geolocalización sobre OpenStreetMap/Leaflet**, barreras atómicas de concurrencia con **SELECT FOR UPDATE en PostgreSQL** y verificación estricta de identidad institucional.",
     metrics: [
       {
         label: "CONCURRENCIA ATÓMICA",
@@ -414,21 +414,21 @@ export const PROJECTS_ES: Record<string, any> = {
     problem: {
       title: "El Desafío: Inseguridad, Congestión y Rutas Informales",
       summary:
-        "Los estudiantes universitarios que viajan entre Bogotá y los campus en Sabana Norte enfrentan transporte público costoso y grupos informales de mensajería propensos a fraudes, cancelaciones de último momento y problemas de seguridad.",
+        "Los estudiantes universitarios que viajan entre Bogotá y los campus en Sabana Norte enfrentan transporte costoso y grupos informales de chat propensos a **fraudes, cancelaciones de último momento y condiciones de carrera** en reservas.",
       points: [
-        "Inseguridad y falta de trazabilidad en grupos de chat no regulados.",
-        "Conflictos de concurrencia: Varios pasajeros intentando reservar el mismo cupo a la vez.",
-        "Falta de mapas interactivos que optimicen los puntos de recogida y llegada en ruta.",
+        "Inseguridad y falta de trazabilidad en grupos de mensajería no regulados.",
+        "**Condiciones de carrera críticas**: Múltiples pasajeros intentando reservar el último cupo disponible en el mismo milisegundo.",
+        "Ausencia de cálculo dinámico de rutas y paradas optimizadas en tiempo real.",
       ],
     },
     solution: {
       title: "La Solución: Ecosistema Georreferenciado con Reserva Atómica",
       summary:
-        "Desarrollo de un backend transaccional robusto en Django REST y PostgreSQL con soporte geoespacial, combinado con una interfaz interactiva de mapas sobre OpenStreetMap.",
+        "Desarrollo de un backend transaccional en **Django REST y PostgreSQL**, con **bloqueos pesimistas atómicos**, geocodificación sobre **OpenStreetMap** y autenticación federada institucional.",
       points: [
-        "Barrera atómica en base de datos: Uso de SELECT FOR UPDATE en PostgreSQL que impide sobre-asignación de asientos.",
-        "Geocodificación y ruteo sobre OpenStreetMap/Leaflet sin costos de licencias propietarias.",
-        "Sistema de reputación y validación institucional por correo institucional verificado.",
+        "Barrera transaccional atómica con **`SELECT FOR UPDATE` en PostgreSQL**, garantizando **cero sobrereservas** bajo alta concurrencia.",
+        "Ruteo y geolocalización punto a punto sobre **Leaflet y OSRM/OpenStreetMap** sin dependencias de APIs propietarias costosas.",
+        "Validación de usuarios ligada a **correos y credenciales universitarias oficiales** para máxima seguridad.",
       ],
     },
     architecture: {
@@ -439,12 +439,12 @@ export const PROJECTS_ES: Record<string, any> = {
         {
           title: "Transacciones Atómicas con SELECT FOR UPDATE",
           choice: "Bloqueo pesimista a nivel de fila durante la confirmación de la reserva.",
-          why: "Previene condiciones de carrera cuando múltiples estudiantes intentan tomar el último asiento disponible en milisegundos simultáneos.",
+          why: "Los bloqueos a nivel de fila (`SELECT FOR UPDATE`) garantizan **atomicidad transaccional ACID estricta**, impidiendo race conditions incluso con decenas de peticiones concurrentes.",
         },
         {
           title: "OpenStreetMap + Leaflet vs Google Maps Platform",
           choice: "Pila geoespacial de código abierto.",
-          why: "Cero costos recurrentes de API para una iniciativa universitaria, manteniendo libertad para personalizar estilos de ruteo.",
+          why: "Uso de **OpenStreetMap y Leaflet** para autonomía técnica total, reduciendo a **costo cero** las consultas de mapas y cálculos de rutas.",
         },
       ],
     },
@@ -505,14 +505,14 @@ export const PROJECTS_ES: Record<string, any> = {
   "mercedes-amg": {
     title: "Mercedes-AMG GT3 — Experiencia Interactiva de Producto 3D",
     subtitle:
-      "Configurador 3D WebGL de alto rendimiento con shaders PBR personalizados, compresión Draco de geometría y renderizado a 60 FPS constantes",
+      "Configurador 3D WebGL de alto rendimiento con **shaders PBR personalizados**, **compresión Draco de geometría (-72% peso)** y renderizado constante a **60 FPS**.",
     category: "Gráficos 3D & Ingeniería Frontend",
     badge: "WebGL 3D · Three.js",
     date: "2024",
     role: "Ingeniero de Gráficos Web & Frontend",
     teamOrContext: "Desarrollo Creativo & Simulación Visual Interactiva",
     shortDescription:
-      "Showcase interactivo de renderizado 3D para el vehículo de carreras Mercedes-AMG GT3. Diseñado en React Three Fiber y Three.js con materiales físicamente realistas (PBR), compresión Draco para carga ultrarrápida y controles orbitales de cámara fluidos a 60 FPS.",
+      "Showcase interactivo de renderizado 3D para el vehículo de carreras Mercedes-AMG GT3. Diseñado en **React Three Fiber y Three.js** con materiales físicamente realistas (**PBR**), compresión **Draco** para carga ultrarrápida en **<1.2s** y controles orbitales de cámara fluidos a **60 FPS**.",
     metrics: [
       {
         label: "TASA DE FRAMES",
@@ -538,21 +538,21 @@ export const PROJECTS_ES: Record<string, any> = {
     problem: {
       title: "El Desafío: Renderizado 3D Pesado y Caídas de Rendimiento Web",
       summary:
-        "Las experiencias 3D en la web a menudo sufren de descargas pesadas de varios cientos de megabytes, tiempos de carga frustrantes y caídas de frames en GPUs integradas o dispositivos móviles.",
+        "Las experiencias 3D en la web sufren frecuentemente de **archivos CAD de cientos de megabytes**, tiempos de carga frustrantes y **caídas severas de framerate** en GPUs integradas o dispositivos móviles.",
       points: [
-        "Modelos CAD de alta fidelidad que sobrecargan la memoria de la GPU si no son procesados.",
-        "Materiales poco realistas que no transmiten la calidad estética de vehículos deportivos de alta gama.",
-        "Bloqueo del hilo principal de JavaScript durante la compilación de shaders.",
+        "Geometrías CAD complejas que sobrecargan el **bus de memoria de la GPU** sin optimización previa.",
+        "Materiales poco realistas que no reflejan la estética de vehículos deportivos de alta competición.",
+        "Bloqueo del hilo principal de JavaScript durante la **compilación de shaders y texturas**.",
       ],
     },
     solution: {
       title: "La Solución: Compresión Draco, React Three Fiber & Shaders PBR",
       summary:
-        "Diseño de un canvas WebGL interactivo aprovechando compresión geométrica Draco, mapas de entorno HDR con iluminación IBL y carga diferida controlada.",
+        "Pipeline gráfico optimizado con **compresión geométrica Draco**, mapas de entorno HDR con **iluminación basada en imágenes (IBL)** y decodificación en **Web Workers secundarios**.",
       points: [
-        "Compresión Draco reduciendo el tamaño del archivo GLTF en más del 70%.",
-        "React Three Fiber (R3F) para control declarativo del árbol de escena y estados de cámara.",
-        "Post-procesamiento sutil con reflejos y sombras de contacto optimizadas.",
+        "Compresión Draco reduciendo el tamaño del archivo GLTF en **más del 70%** sin pérdida visual.",
+        "Ecosistema **React Three Fiber (R3F)** para control declarativo reactivo del árbol de escena.",
+        "Materiales PBR avanzados con **reflejos ambientales IBL y sombras de contacto optimizadas**.",
       ],
     },
     architecture: {
@@ -563,12 +563,12 @@ export const PROJECTS_ES: Record<string, any> = {
         {
           title: "React Three Fiber (R3F) sobre Three.js Vanilla",
           choice: "Ecosistema R3F con Drei para gestión de recursos.",
-          why: "Permite enlazar reactivamente la interacción del usuario con la escena 3D y reutilizar ciclos de vida de React.",
+          why: "Permite enlazar reactivamente la interacción del usuario con la escena 3D y **reutilizar ciclos de vida y reconciliación de React**.",
         },
         {
           title: "Geometría Draco & Texturas WebP",
           choice: "Descompresión en Web Workers dedicados.",
-          why: "Evita congelamientos de la interfaz durante la inicialización de la escena 3D.",
+          why: "Descomprime geometría en **hilos secundarios (Web Workers)**, evitando congelamientos de la interfaz durante la inicialización.",
         },
       ],
     },
@@ -613,14 +613,14 @@ export const PROJECTS_ES: Record<string, any> = {
   "vaccine-recommender": {
     title: "Vaccine Recommender — Motor de Decisión Clínica PAI Colombia",
     subtitle:
-      "Motor determinista de evaluación matricial para esquemas nacionales de vacunación bajo directrices PAI y normativas epidemiológicas",
+      "Motor determinista de evaluación matricial para esquemas nacionales de vacunación bajo **directrices PAI y normativas epidemiológicas oficiales**.",
     category: "Ingeniería de Datos de Salud & Algoritmos",
     badge: "Algoritmos Clínicos PAI",
     date: "2025",
     role: "Ingeniero de Sistemas Algorítmicos & Salud",
     teamOrContext: "UCTS Innovation Center · Salud Pública",
     shortDescription:
-      "Motor algorítmico determinista que evalúa historiales de vacunación y codifica las directrices epidemiológicas del PAI (Programa Ampliado de Inmunizaciones) de Colombia. Genera recomendaciones precisas según edad, patologías crónicas y contraindicaciones médicas.",
+      "Motor algorítmico **100% determinista** que evalúa historiales de vacunación y codifica las directrices epidemiológicas del **PAI (Programa Ampliado de Inmunizaciones)** de Colombia. Genera recomendaciones clínicas precisas en **<15ms** según edad, patologías crónicas y contraindicaciones.",
     metrics: [
       {
         label: "DETERMINISMO CLÍNICO",
@@ -646,21 +646,21 @@ export const PROJECTS_ES: Record<string, any> = {
     problem: {
       title: "El Desafío: Ambigüedad en Protocolos Complejos de Inmunización",
       summary:
-        "El personal de salud en puntos de vacunación maneja manuales impresos de cientos de páginas con reglas cambiantes según intervalos de dosis, edades, patologías previas y vacunas atrasadas, lo que genera errores humanos y retrasos en atención.",
+        "El personal de salud en puntos de vacunación maneja manuales impresos de cientos de páginas con reglas complejas y cambiantes, provocando **errores humanos de dosificación, retrasos en atención y oportunidades perdidas**.",
       points: [
-        "Errores de dosificación o intervalos inapropiados por complejidad de las tablas normativas.",
-        "Falta de herramientas digitales rápidas que evalúen contraindicaciones en segundos.",
-        "Pérdida de oportunidades de vacunación por dudas en esquemas combinados.",
+        "Riesgo de errores en intervalos mínimos requeridos entre dosis biológicas distintas.",
+        "Incertidumbre al evaluar pacientes con **esquemas incompletos, atrasados o patologías crónicas**.",
+        "Falta de sistemas automatizados que ofrezcan **trazabilidad y justificación normativa oficial inmediata**.",
       ],
     },
     solution: {
       title: "La Solución: Motor de Evaluación Matricial Determinista",
       summary:
-        "Diseño de un motor clínico en Node.js/TypeScript que procesa datos del paciente contra matrices lógicas de biológicos y emite recomendaciones inmediatas con respaldo normativo.",
+        "Diseño de un **motor clínico determinista en TypeScript** que evalúa vectores de estado del paciente contra matrices lógicas de biológicos en **<15 ms con explicabilidad médica total**.",
       points: [
-        "Modelado de reglas clínicas sin ambigüedad: cada biológico cuenta con vectores de intervalo, edad mínima, edad máxima y exclusiones.",
-        "Salida explicable: El motor entrega no solo la recomendación, sino el fundamento normativo oficial que la respalda.",
-        "Compatibilidad con historias clínicas digitales y registros de salud pública.",
+        "Lógica formal determinista: **Cero alucinaciones o incertidumbres probabilísticas** en decisiones clínicas críticas.",
+        "Salida clínica explicable: Cada dosis recomendada incluye el **artículo normativo y fundamento epidemiológico oficial**.",
+        "Diseñado para operar **offline y en brigadas rurales** sin dependencia de conexión a internet.",
       ],
     },
     architecture: {
@@ -671,12 +671,12 @@ export const PROJECTS_ES: Record<string, any> = {
         {
           title: "Algoritmos Deterministas vs Modelos de IA Probabilísticos",
           choice: "Lógica matricial formal y determinista en TypeScript.",
-          why: "En prescripción clínica y salud pública no se pueden tolerar alucinaciones o respuestas probabilísticas; la normativa debe cumplirse al 100%.",
+          why: "En prescripción clínica y salud pública **no se pueden tolerar alucinaciones o respuestas probabilísticas**; la normativa debe cumplirse con **100% de determinismo**.",
         },
         {
           title: "Arquitectura Ligera y Desacoplada",
           choice: "Módulo desacoplado evaluable en servidor o en cliente sin conexión.",
-          why: "Permite su uso en brigadas rurales de salud con conectividad intermitente.",
+          why: "Módulo desacoplado evaluable sin conexión, habilitando su uso en **brigadas rurales con conectividad intermitente**.",
         },
       ],
     },
@@ -730,3 +730,7 @@ export const PROJECTS_ES: Record<string, any> = {
     ],
   },
 };
+
+// Aliases for slug compatibility with PROJECTS_DATA
+PROJECTS_ES["mercedes-gt3"] = PROJECTS_ES["mercedes-amg"];
+PROJECTS_ES["vaccine-cdss"] = PROJECTS_ES["vaccine-recommender"];

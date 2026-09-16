@@ -9,6 +9,7 @@ import { getLocalizedProjects } from "@/lib/projects-data";
 import { useLanguage } from "@/app/context/LanguageContext";
 import { TRANSLATIONS } from "@/lib/i18n/translations";
 import { TechIcon } from "@/lib/tech-icons";
+import { FormattedText } from "@/lib/formatted-text";
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState<string>("all");
@@ -132,7 +133,7 @@ export default function Projects() {
                       </div>
 
                       <p className="mt-2 text-xs sm:text-sm text-neutral-400 font-light leading-relaxed line-clamp-2">
-                        {project.shortDescription || project.subtitle}
+                        <FormattedText text={project.shortDescription || project.subtitle} />
                       </p>
                     </div>
                   </div>

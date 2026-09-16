@@ -101,7 +101,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     slug: "gazu",
     title: "Gazu — Cloud-Native Headless E-Commerce",
     subtitle:
-      "Enterprise decoupled commerce engine with Next.js 15 (App Router), React 19, Vendure/NestJS GraphQL core, k3s GitOps via ArgoCD, multi-arch ARM64 CI/CD, Traefik anti-CORS ingress, and full-stack observability.",
+      "Enterprise decoupled commerce engine with **Next.js 15 (App Router)**, **React 19**, **Vendure/NestJS** GraphQL core, **k3s GitOps via ArgoCD**, multi-arch **ARM64 CI/CD**, **Traefik anti-CORS ingress**, and **full-stack observability**.",
     category: "Cloud Native & E-Commerce",
     categories: ["cloud", "backend", "frontend"],
     badge: "Flagship Architecture",
@@ -110,7 +110,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     role: "Full Stack & Cloud Architect",
     teamOrContext: "Cloud-Native Commerce Platform",
     shortDescription:
-      "Enterprise decoupled commerce engine on Kubernetes (k3s). Features Next.js 15 App Router, Vendure GraphQL APIs, declarative GitOps with ArgoCD & Kustomize, multi-arch ARM64 pipelines on Oracle Cloud, Traefik anti-CORS routing, and production observability (OTel, Prometheus, PostHog).",
+      "Enterprise decoupled commerce engine on **Kubernetes (k3s)**. Features **Next.js 15 App Router**, **Vendure GraphQL APIs**, declarative GitOps with **ArgoCD & Kustomize**, multi-arch **ARM64 pipelines on Oracle Cloud**, **Traefik anti-CORS routing**, and production observability (**OTel, Prometheus, PostHog**).",
     heroImage: "/projects/gazu-ecommerce.png",
     liveUrl: "https://gazu.jhojan.cloud/",
     devUrl: "https://dev.gazu.jhojan.cloud/",
@@ -213,24 +213,24 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     problem: {
       title: "The Challenge: Monolithic Bottlenecks & Brittle Operations",
       summary:
-        "Traditional monolithic e-commerce platforms couple storefront UI with transactional processing, introduce cross-domain CORS frictions, depend on fragile manual deployments, and risk data loss on stateful persistence.",
+        "Traditional monolithic e-commerce platforms couple storefront UI with transactional processing, introduce **cross-domain CORS frictions**, depend on **fragile manual deployments**, and risk **data loss on stateful persistence**.",
       points: [
-        "Storefront rendering competing directly with transaction processing on the same runtime, degrading performance.",
-        "Manual kubectl apply operations in production clusters leading to configuration drift and operational downtime.",
-        "Cross-domain frontend-backend architectures generating CORS overhead and insecure cross-site cookie workarounds.",
-        "Browser adblockers distorting critical conversion funnels, product analytics, and customer retention metrics.",
+        "Storefront rendering competing directly with **transaction processing** on the same runtime, degrading performance.",
+        "Manual `kubectl apply` operations in production clusters leading to **configuration drift** and operational downtime.",
+        "Cross-domain frontend-backend architectures generating **CORS overhead** and insecure cross-site cookie workarounds.",
+        "Browser adblockers distorting **critical conversion funnels, product analytics, and customer retention metrics**.",
       ],
     },
     solution: {
       title: "The Solution: Decoupled Cloud-Native Commerce Architecture",
       summary:
-        "Engineered an enterprise-grade cloud-native headless commerce ecosystem orchestrated on Kubernetes (k3s) with declarative GitOps delivery, multi-arch compilation, and production-grade distributed telemetry.",
+        "Engineered an enterprise-grade cloud-native **headless commerce ecosystem on Kubernetes (k3s)** with **declarative GitOps delivery**, multi-arch **ARM64 compilation**, and **production-grade distributed telemetry**.",
       points: [
-        "Decoupled Next.js 15 App Router storefront communicating with a high-throughput Vendure/NestJS GraphQL core.",
-        "Declarative GitOps continuous deployment using ArgoCD and Kustomize overlays, strictly banning manual cluster changes.",
-        "Traefik Ingress routing storefront (/), API (/shop-api), and back-office (/dashboard) under a single host without CORS.",
-        "Stateless application pods scaled horizontally while PostgreSQL is isolated in a StatefulSet with dedicated PVCs.",
-        "End-to-end observability combining OpenTelemetry distributed tracing, Prometheus metrics, and PostHog product analytics.",
+        "Decoupled **Next.js 15 App Router** storefront communicating with a high-throughput **Vendure/NestJS GraphQL core**.",
+        "Declarative GitOps continuous deployment using **ArgoCD and Kustomize overlays**, strictly banning manual cluster changes.",
+        "**Traefik Ingress** routing storefront (`/`), API (`/shop-api`), and back-office (`/dashboard`) under a **single host without CORS**.",
+        "**Stateless application pods** scaled horizontally while **PostgreSQL is isolated in a StatefulSet** with dedicated PVCs.",
+        "End-to-end observability combining **OpenTelemetry** distributed tracing, **Prometheus** metrics, and **PostHog** product analytics.",
       ],
     },
     architecture: {
@@ -241,27 +241,27 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         {
           title: "Declarative GitOps with ArgoCD & Kustomize",
           choice: "ArgoCD Controller + Kustomize Overlays (dev vs prod)",
-          why: "Manual kubectl apply is banned. All desired state is declared in Git; ArgoCD enforces automated deployment, drift correction, and self-healing if pods diverge.",
+          why: "Manual `kubectl apply` is banned. All desired state is declared in Git; **ArgoCD enforces automated deployment, drift correction, and self-healing** if pods diverge.",
         },
         {
           title: "Multi-Arch CI/CD Pipeline (Linux ARM64)",
           choice: "Docker Buildx + QEMU Emulation in GitLab CI",
-          why: "Specifically targeted Ampere A1 ARM64 processors on Oracle Cloud, reducing infrastructure costs to near zero while maximizing instruction throughput.",
+          why: "Specifically targeted **Ampere A1 ARM64 processors on Oracle Cloud**, reducing **infrastructure costs to near zero** while maximizing instruction throughput.",
         },
         {
           title: "Single Domain & Anti-CORS Architecture via Traefik",
           choice: "Traefik Ingress + Automated Cert-Manager (Let's Encrypt)",
-          why: "Routes / to Next.js, and /shop-api & /dashboard to Vendure on the same host. Completely eliminates CORS issues, allows secure SameSite=Lax/Strict session cookies, and reuses one auto-renewed TLS certificate.",
+          why: "Routes `/` to Next.js, and `/shop-api` & `/dashboard` to Vendure on the same host. **Completely eliminates CORS issues**, allows secure `SameSite=Lax/Strict` session cookies, and reuses **one auto-renewed TLS certificate**.",
         },
         {
           title: "Lifecycle Separation (Stateful vs Stateless)",
           choice: "Stateless App Pods + PostgreSQL StatefulSet with dedicated PVCs",
-          why: "Frontend and backend pods can scale horizontally or be terminated without data loss. PostgreSQL is isolated in a StatefulSet with persistent volume claims to safeguard transactions.",
+          why: "Frontend and backend pods scale horizontally **without data loss**. PostgreSQL is isolated in a **StatefulSet with dedicated PVCs** to safeguard transactions.",
         },
         {
           title: "Production-Grade Observability & Analytics",
           choice: "OpenTelemetry (OTel gRPC) + Prometheus (prom-client) + PostHog Proxy",
-          why: "Combines distributed tracing, live Node.js runtime memory/latency gauges, and privacy-respecting product analytics routed via Next.js to bypass client adblockers.",
+          why: "Combines **OTel distributed tracing**, live **Prometheus gauges**, and **privacy-first PostHog analytics routed via Next.js proxy** to bypass adblockers.",
         },
       ],
     },
@@ -367,7 +367,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     slug: "talentmatch",
     title: "TalentMatch AI — Multimodal Model Casting & Semantic Search",
     subtitle:
-      "Production talent discovery engine combining CLIP ViT-B/32 multimodal embeddings (512d), GPT-4o-mini Vision attribute extraction, PostgreSQL 16 pgvector cosine similarity, and weighted trait permanence re-ranking.",
+      "Production talent discovery engine combining **CLIP ViT-B/32 multimodal embeddings (512d)**, **GPT-4o-mini Vision** attribute extraction, **PostgreSQL 16 pgvector** cosine similarity, and **weighted trait permanence re-ranking**.",
     category: "Applied AI & Vector Search",
     categories: ["cloud", "ai", "backend", "frontend"],
     badge: "Computer Vision & Vector Search",
@@ -375,7 +375,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     role: "AI & Backend Systems Engineer",
     teamOrContext: "Talent Agency Management Platform",
     shortDescription:
-      "Enterprise multimodal casting platform. Discovers talent through natural language descriptions or reference photo uploads using CLIP ViT-B/32 (512d), automated biometric attribute extraction via GPT-4o-mini Vision, and two-stage retrieval with pgvector cosine similarity and SQL trait filtering.",
+      "Enterprise multimodal casting platform. Discovers talent through **natural language descriptions or reference photo uploads** using **CLIP ViT-B/32 (512d)**, automated biometric attribute extraction via **GPT-4o-mini Vision**, and two-stage retrieval with **pgvector cosine similarity** and SQL trait filtering.",
     heroImage: "/projects/TalentMatchAI.png",
     liveUrl: "https://models.jhojan.cloud/",
     devUrl: "https://models.jhojan.cloud/",
@@ -453,24 +453,24 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     problem: {
       title: "The Challenge: Rigid Keyword Tags & Visual Ambiguity",
       summary:
-        "Traditional modeling agency casting relies on rigid database filters or manual book flipping, which fail when casting directors describe nuanced aesthetic moods or provide moodboard reference photos.",
+        "Traditional modeling agency casting relies on **rigid database filters** or manual book flipping, which fail when casting directors describe **nuanced aesthetic moods or provide moodboard reference photos**.",
       points: [
-        "Inability to search models from photo moodboards or visual aesthetic references without manual tagging.",
-        "Strict keyword tags failing when casting queries use complex descriptive language (e.g., 'morena ojos claros pasarela alta moda').",
-        "Pure visual vector search (CLIP) failing to isolate permanent physical attributes (eye color, bone structure) from temporary styling (wigs, makeup).",
-        "High manual overhead required to extract and catalog measurements (bust, waist, hips, shoe size) per talent.",
+        "Inability to search models from **photo moodboards or visual references** without manual tagging.",
+        "Strict keyword tags failing when queries use **complex descriptive natural language** (e.g., 'morena ojos claros pasarela alta moda').",
+        "Pure visual vector search (CLIP) failing to isolate **permanent physical attributes** from temporary cosmetic styling (wigs, makeup).",
+        "High manual overhead required to **extract and catalog body measurements** per talent.",
       ],
     },
     solution: {
       title: "The Solution: Two-Stage Hybrid Retrieval & Physical Trait Permanence",
       summary:
-        "Engineered a production multimodal casting pipeline combining parallel CLIP ViT-B/32 embeddings, automated GPT-4o-mini Vision extraction, relational SQL hard filtering, and trait permanence re-ranking.",
+        "Engineered a production **multimodal casting pipeline** combining parallel **CLIP ViT-B/32 embeddings**, automated **GPT-4o-mini Vision** extraction, relational **SQL hard filtering**, and **trait permanence re-ranking**.",
       points: [
-        "Parallel query processing: natural language queries are parsed concurrently by GPT-4o-mini for attributes and CLIP for latent vector projection.",
-        "Two-stage retrieval: SQL applies hard WHERE filters for irrevocable attributes (skin tone and gender), returning an expanded pool (top_n * 10).",
-        "Weighted attribute permanence re-ranking: scores models using score = 0.45*clip + 0.45*attr_match + 0.10*exp_bonus, heavily prioritizing permanent traits over mutable styling.",
-        "Automated profile onboarding: background workers extract biometrics from comp-cards and generate 512-dim visual embeddings upon model upload.",
-        "Resource-efficient VPS deployment: hosted on Coolify VPS (8GB RAM) with Docker Compose, internal Nginx proxy (/api/ -> api:8000), and automated Traefik SSL.",
+        "**Parallel query processing**: natural language queries are parsed concurrently by **GPT-4o-mini** for attributes and **CLIP** for latent vector projection.",
+        "**Two-stage retrieval**: SQL applies hard WHERE filters for irrevocable attributes (skin tone and gender), returning an **expanded pool (top_n * 10)**.",
+        "**Weighted attribute permanence re-ranking**: scores models using composite formula, **heavily prioritizing permanent biological traits** over mutable styling.",
+        "**Automated profile onboarding**: background workers extract biometrics from comp-cards and generate **512-dim visual embeddings** upon model upload.",
+        "**Resource-efficient VPS deployment**: hosted on Coolify VPS (8GB RAM) with **Docker Compose**, internal Nginx proxy, and automated **Traefik SSL**.",
       ],
     },
     architecture: {
@@ -481,22 +481,22 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         {
           title: "Unified Latent Space via CLIP ViT-B/32 (512 Dimensions)",
           choice: "Shared Text & Image Encoder via sentence-transformers",
-          why: "Projecting both text descriptions and talent photos into the identical 512-dimensional vector space enables querying across modalities without separate mapping bridges.",
+          why: "Projecting text descriptions and talent photos into the **identical 512-dimensional vector space** enables querying across modalities without separate translation bridges.",
         },
         {
           title: "Two-Stage Retrieval & Physical Trait Permanence Scoring",
           choice: "SQL Hard Filters (Tez, Género) + Weighted Python Re-Ranker",
-          why: "Pure CLIP visual similarity confuses cosmetic lighting with real biology. Combining relational hard filters with permanence weights (eyes: 0.40, complexion: 0.30 vs hair length: 0.04) achieves 94% casting director alignment.",
+          why: "Pure CLIP visual similarity confuses cosmetic lighting with real biology. Combining relational hard filters with permanence weights (**eyes: 0.40, complexion: 0.30 vs hair length: 0.04**) achieves **94% casting director alignment**.",
         },
         {
           title: "PostgreSQL 16 + pgvector vs Dedicated Vector SaaS",
           choice: "In-Database pgvector Extension with ACID Relational Consistency",
-          why: "Eliminates distributed sync latency, network hops, and expensive vector DB SaaS fees (Pinecone/Weaviate) by executing cosine distance queries directly alongside relational measurement filters.",
+          why: "Eliminates distributed sync latency and expensive vector DB SaaS fees (Pinecone/Weaviate) by executing **cosine distance queries directly alongside relational filters in PostgreSQL**.",
         },
         {
           title: "Lightweight Asynchronous Architecture on Coolify VPS",
           choice: "FastAPI + Docker Compose + BackgroundTasks (3.5GB RAM Footprint)",
-          why: "Replaced heavy Celery/Redis message brokers with native FastAPI BackgroundTasks for model embedding generation, keeping the entire production stack efficient on an 8GB VPS.",
+          why: "Replaced heavy Celery/Redis brokers with **native FastAPI BackgroundTasks**, keeping the entire production stack efficient on an **8GB VPS**.",
         },
       ],
     },
@@ -580,14 +580,14 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     slug: "wheelus",
     title: "WheelUS — Real-Time University Mobility Platform",
     subtitle:
-      "Regulated Ride-Sharing Network with WebSocket State Synchronization, Geospatial Routing, and Race-Condition-Safe Concurrency",
+      "Regulated Ride-Sharing Network with **WebSocket State Synchronization**, **Geospatial Routing**, and **Race-Condition-Safe Concurrency**.",
     category: "Distributed Systems & Real-Time",
     categories: ["frontend", "backend"],
     date: "2024",
     role: "Lead Full Stack & Systems Engineer",
     teamOrContext: "Universidad de La Sabana Community Initiative",
     shortDescription:
-      "Regulated university ride-sharing platform connecting the Universidad de La Sabana community. Implements WebSocket trip synchronization, OpenStreetMap geospatial routing, and race-condition-safe seat booking.",
+      "Regulated university ride-sharing platform connecting the Universidad de La Sabana community. Implements **WebSocket trip synchronization**, **OpenStreetMap geospatial routing**, and **race-condition-safe seat booking**.",
     heroImage: "/projects/wheelus-showcase.png",
     githubUrl: "https://github.com/Jhojan-Jimenez/WheelUS-Front",
     liveUrl: "https://wheelus.jhojan.cloud",
@@ -623,9 +623,9 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     problem: {
       title: "The Challenge: Unregulated Commutes & Coordination Chaos",
       summary:
-        "University students commuting to campus relied on unmoderated WhatsApp chats, leading to security concerns, cancelled rides without notice, and multiple passengers attempting to claim the same seat.",
+        "University students commuting to campus relied on unmoderated WhatsApp chats, leading to **security concerns, cancelled rides without notice, and race conditions** when claiming seats.",
       points: [
-        "Frequent race conditions where two users claimed the final vehicle seat simultaneously.",
+        "**Frequent race conditions** where two users claimed the final vehicle seat simultaneously.",
         "Zero driver identity verification or real-time passenger location visibility.",
         "High latency in notification channels causing missed rides and delayed campus arrivals.",
       ],
@@ -633,11 +633,11 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     solution: {
       title: "The Solution: Real-Time State Machines & Geospatial Routing",
       summary:
-        "Architected an institutional mobility platform connecting verified community members with synchronized trip channels, live route mapping, and guaranteed atomic reservations.",
+        "Architected an institutional mobility platform connecting verified community members with **synchronized trip channels**, **live route mapping**, and **guaranteed atomic reservations**.",
       points: [
-        "Full-duplex WebSocket channels via Socket.io for instantaneous vehicle telemetry and seat changes.",
-        "Atomic seat reservation transactions with mutex-style validation to guarantee no double-bookings.",
-        "OpenStreetMap and Leaflet routing engine to display pickup waypoints, distance, and transit time.",
+        "Full-duplex **WebSocket channels via Socket.io** for instantaneous vehicle telemetry and seat changes.",
+        "**Atomic seat reservation transactions** with mutex-style validation to guarantee **zero double-bookings**.",
+        "**OpenStreetMap and Leaflet routing engine** to display pickup waypoints, distance, and transit time.",
       ],
     },
     architecture: {
@@ -648,12 +648,12 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         {
           title: "WebSockets (Socket.io) vs HTTP Polling",
           choice: "Persistent WebSocket connection per active ride.",
-          why: "Reduces server load by 85% compared to polling, ensuring seat availability updates reach all observing riders in sub-50ms.",
+          why: "Reduces server load by **85% compared to polling**, ensuring seat availability updates reach all observing riders in **sub-50ms**.",
         },
         {
           title: "Atomic State Transitions",
           choice: "Single-source-of-truth transactional booking handler.",
-          why: "When 5 users tap 'Reserve' on the last seat simultaneously, exactly one transaction succeeds while the remaining 4 receive deterministic rejection payloads.",
+          why: "When 5 users tap 'Reserve' on the last seat simultaneously, **atomic locks guarantee exactly one transaction succeeds** while the remaining 4 receive deterministic rejection payloads.",
         },
       ],
     },
@@ -723,14 +723,14 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     slug: "mercedes-gt3",
     title: "Mercedes-AMG GT3 — 3D Interactive Product Experience",
     subtitle:
-      "High-Fidelity WebGL Showcase with React Three Fiber, Custom Shaders, Scroll-Driven Camera Choreography, and Real-Time Telemetry HUD",
+      "High-Fidelity WebGL Showcase with **React Three Fiber**, **Custom PBR Shaders**, **Scroll-Driven Camera Choreography**, and **Real-Time Telemetry HUD**.",
     category: "Creative Engineering & WebGL",
     categories: ["3d", "frontend"],
     date: "2025",
     role: "Creative & Graphics Engineer",
     teamOrContext: "Interactive Digital Twin Showcase",
     shortDescription:
-      "High-performance interactive 3D WebGL showcase built with Next.js, Three.js, and React Three Fiber. Features scroll-driven dynamic camera transitions, real-time physically-based rendering (PBR materials), and synchronized atmospheric underglow.",
+      "High-performance interactive 3D WebGL showcase built with **Next.js, Three.js, and React Three Fiber**. Features scroll-driven dynamic camera transitions, real-time physically-based rendering (**PBR materials**), and **Draco geometry compression (-72% payload)**.",
     heroImage: "/projects/mercedes-amg-hd.png",
     liveUrl: "https://productexperience.vercel.app/",
     technologies: [
@@ -763,20 +763,20 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     problem: {
       title: "The Challenge: Static 2D Presentation in a 3D World",
       summary:
-        "High-performance automotive engineering cannot be communicated through flat image sliders. Users want to inspect vehicle aerodynamics, carbon weave, and custom finishes in real time without downloading gigabyte app bundles.",
+        "High-performance automotive engineering cannot be communicated through flat image sliders. Users need to inspect **aerodynamics, carbon weave, and finishes in real time** without downloading gigabyte app bundles.",
       points: [
         "Heavy 3D models causing long initial load times and browser memory crashes.",
         "Choppy scroll animations on standard 60Hz and 120Hz displays.",
-        "Unrealistic lighting that makes digital cars look like plastic toys instead of metal and carbon.",
+        "Unrealistic lighting that makes digital cars look synthetic instead of metal and carbon.",
       ],
     },
     solution: {
       title: "The Solution: Optimized WebGL Pipeline & Dynamic Shaders",
       summary:
-        "Engineered an interactive 3D showroom using Three.js and React Three Fiber, featuring custom PBR materials, procedural lighting, and scroll-scrubbed camera choreography.",
+        "Engineered an interactive 3D showroom using **Three.js and React Three Fiber**, featuring **custom PBR materials**, **Draco compression**, and **scroll-scrubbed camera choreography**.",
       points: [
-        "Draco compressed 3D GLTF asset streaming to load high-polygon models in under 2 seconds.",
-        "Scroll-driven camera spline animation using Motion and R3F frame hooks.",
+        "**Draco compressed 3D GLTF asset streaming** to load high-polygon models in **under 2 seconds**.",
+        "**Scroll-driven camera spline animation** using Motion and R3F frame hooks at **60 FPS**.",
         "Interactive paint customizer with dynamic atmospheric ground underglow reflection.",
       ],
     },
@@ -788,12 +788,12 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         {
           title: "Draco Mesh Compression",
           choice: "Compressed 3D assets loaded via Draco loader.",
-          why: "Reduces 3D model network payload by over 75%, allowing instant initial interaction on mobile devices.",
+          why: "Reduces 3D model network payload by **over 75%**, allowing instant initial interaction on mobile devices.",
         },
         {
           title: "Physically-Based Rendering (PBR) Environment Lighting",
           choice: "High-dynamic-range environment map (HDRI) with custom specular reflections.",
-          why: "Produces authentic metallic automotive paint reflections without expensive per-frame ray tracing computations.",
+          why: "Produces authentic metallic automotive paint reflections using **HDRI image-based lighting (IBL)** without expensive ray tracing computations.",
         },
       ],
     },
@@ -859,14 +859,14 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     slug: "vaccine-cdss",
     title: "Vaccine Recommender — Clinical Decision Support System",
     subtitle:
-      "Deterministic Clinical Rule Engine for Pediatric & Adult Immunization Protocols with 100% Reproducible Decision Logs",
+      "Deterministic Clinical Rule Engine for Pediatric & Adult Immunization Protocols with **100% Reproducible Decision Logs**.",
     category: "Algorithmic Systems & HealthTech",
     categories: ["backend", "frontend"],
     date: "2023",
     role: "Algorithm & Systems Engineer",
     teamOrContext: "Healthcare Decision Support Architecture",
     shortDescription:
-      "Clinical Decision Support System (CDSS) built in Node.js for immunization management. Features a deterministic rule-matrix engine evaluating official PAI clinical protocols with 100% reproducible decision logs.",
+      "Clinical Decision Support System (CDSS) built in Node.js for immunization management. Features a **deterministic rule-matrix engine** evaluating official PAI clinical protocols with **100% reproducible decision logs in <12ms**.",
     heroImage: "/projects/vatly-schedule-hd.png",
     githubUrl: "https://github.com/Jhojan-Jimenez",
     liveUrl: "https://vatly.jhojan.cloud",
@@ -899,19 +899,19 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     problem: {
       title: "The Challenge: Clinical Complexity in Vaccine Catch-Up",
       summary:
-        "Healthcare workers managing pediatric immunizations must calculate multi-vaccine catch-up schedules based on dense protocol tables. Missed minimum intervals can invalidate vaccine efficacy, while delays put children at risk.",
+        "Healthcare workers managing pediatric immunizations must calculate multi-vaccine catch-up schedules based on dense protocol tables, where **manual errors invalidate vaccine efficacy or delay critical doses**.",
       points: [
         "Complex dependencies: Each vaccine requires specific minimum age constraints and interval gaps from prior doses.",
         "Manual calculation errors by clinical personnel working under high patient volume pressures.",
-        "Need for absolute auditability: Medical recommendation systems cannot rely on black-box heuristics or probabilistic AI.",
+        "**Need for absolute auditability**: Medical recommendation systems **cannot rely on black-box heuristics or probabilistic AI**.",
       ],
     },
     solution: {
       title: "The Solution: Deterministic Rule Matrix Engine",
       summary:
-        "Developed an auditable clinical decision engine that maps official immunization protocols into deterministic rule tables with explainable step-by-step recommendation rationale.",
+        "Developed an **auditable clinical decision engine** that maps official immunization protocols into **deterministic rule tables** with explainable step-by-step recommendation rationale.",
       points: [
-        "Deterministic rule evaluator executing interval and contraindication audits without probabilistic drift.",
+        "**Deterministic rule evaluator** executing interval and contraindication audits without probabilistic drift (**zero hallucination guarantee**).",
         "Personalized catch-up timeline generation highlighting immediate, upcoming, and overdue doses.",
         "Complete decision log export enabling healthcare professionals to verify the clinical protocol basis.",
       ],
@@ -924,7 +924,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         {
           title: "Deterministic Rule Matrix vs Machine Learning",
           choice: "Pure deterministic business logic.",
-          why: "In clinical healthcare and pediatric medicine, recommendations must be 100% explainable and adhere strictly to legal Ministry of Health (PAI) mandates without hallucination risk.",
+          why: "In clinical healthcare and pediatric medicine, recommendations must be **100% explainable** and adhere strictly to legal **Ministry of Health (PAI) mandates without hallucination risk**.",
         },
       ],
     },

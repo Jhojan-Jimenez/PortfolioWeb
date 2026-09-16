@@ -19,6 +19,7 @@ import {
 import { getLocalizedProject, getLocalizedProjects } from "@/lib/projects-data";
 import { useLanguage } from "@/app/context/LanguageContext";
 import { TechPill } from "@/lib/tech-icons";
+import { FormattedText } from "@/lib/formatted-text";
 
 export default function ProjectDetailPage({
   params,
@@ -153,7 +154,7 @@ export default function ProjectDetailPage({
               </h1>
 
               <p className="font-mono text-sm sm:text-base text-neutral-300 font-light leading-relaxed mb-6">
-                {project.subtitle}
+                <FormattedText text={project.subtitle} />
               </p>
 
               {/* TECH TAGS ROW */}
@@ -310,7 +311,7 @@ export default function ProjectDetailPage({
                 </h2>
 
                 <p className="font-light text-neutral-300 leading-relaxed text-sm sm:text-base max-w-3xl">
-                  {project.shortDescription}
+                  <FormattedText text={project.shortDescription} />
                 </p>
 
                 {/* ARCHITECTURAL PILLARS (IF PRESENT) */}
@@ -331,7 +332,7 @@ export default function ProjectDetailPage({
                             </span>
                           </div>
                           <p className="text-xs text-neutral-400 font-light leading-relaxed">
-                            {pillar.description}
+                            <FormattedText text={pillar.description} />
                           </p>
                         </div>
                       </div>
@@ -348,13 +349,15 @@ export default function ProjectDetailPage({
                 </h2>
 
                 <div className="space-y-3 font-light text-neutral-300 leading-relaxed text-sm sm:text-base max-w-3xl">
-                  <p>{project.problem?.summary}</p>
+                  <p>
+                    <FormattedText text={project.problem?.summary} />
+                  </p>
 
                   {project.problem?.points && project.problem.points.length > 0 && (
                     <ul className="list-disc pl-5 space-y-2 text-neutral-400 text-sm sm:text-base pt-2">
                       {project.problem.points.map((point, idx) => (
                         <li key={idx} className="leading-relaxed">
-                          {point}
+                          <FormattedText text={point} />
                         </li>
                       ))}
                     </ul>
@@ -370,7 +373,7 @@ export default function ProjectDetailPage({
                 </h2>
 
                 <p className="font-light text-neutral-300 leading-relaxed text-sm sm:text-base max-w-3xl">
-                  {project.solution?.summary}
+                  <FormattedText text={project.solution?.summary} />
                 </p>
 
                 {/* Architectural Decisions Grid */}
@@ -390,7 +393,7 @@ export default function ProjectDetailPage({
                           </div>
                         </div>
                         <p className="text-xs text-neutral-400 font-light leading-relaxed">
-                          {dec.why}
+                          <FormattedText text={dec.why} />
                         </p>
                       </div>
                     ))}
@@ -433,7 +436,7 @@ export default function ProjectDetailPage({
                               {parts[0].trim()}.
                             </strong>
                             <p className="text-neutral-400 text-sm leading-relaxed">
-                              {parts.slice(1).join(":").trim()}
+                              <FormattedText text={parts.slice(1).join(":").trim()} />
                             </p>
                           </div>
                         );
@@ -444,7 +447,7 @@ export default function ProjectDetailPage({
                           className="border-l-2 border-purple-500/40 pl-4 py-1"
                         >
                           <p className="text-neutral-300 text-sm leading-relaxed">
-                            {feat}
+                            <FormattedText text={feat} />
                           </p>
                         </div>
                       );
@@ -490,7 +493,7 @@ export default function ProjectDetailPage({
                             </div>
                           </div>
                           <p className="text-xs text-neutral-400 font-light mt-3 leading-relaxed">
-                            {metric.description}
+                            <FormattedText text={metric.description} />
                           </p>
                         </div>
                       );
