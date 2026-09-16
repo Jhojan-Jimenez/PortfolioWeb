@@ -14,6 +14,7 @@ import {
   Layers,
   Sparkles,
   Wrench,
+  ArrowUpRight,
 } from "lucide-react";
 import {
   SiPython,
@@ -52,6 +53,7 @@ export default function Skills() {
   const { language } = useLanguage();
   const t = TRANSLATIONS[language].skills;
   const [showAllTech, setShowAllTech] = useState(false);
+  const [activeService, setActiveService] = useState<number | null>(0);
 
   // 1. WHAT I DO — PRAGMATIC & HUMBLE STACKED WIDE CARDS (REFERENCE IMAGE 2)
   const whatIDoItems = [
@@ -201,60 +203,77 @@ export default function Skills() {
     >
       <div className="container mx-auto max-w-6xl">
         {/* ========================================================================= */}
-        {/* BLOQUE 1: WHAT I DO (WIDE STACKED CARDS - REFERENCIA IMAGEN 2)             */}
+        {/* BLOQUE 1: MY QUALITY SERVICES / ENGINEERING FOCUS (GEROLD SIGNATURE STYLE) */}
         {/* ========================================================================= */}
         <div className="mb-24">
-          <div className="text-left mb-10">
-            <span className="text-xs font-mono uppercase tracking-[0.2em] text-[#8750f7] font-bold block mb-2">
-              {language === "es" ? "— EN QUÉ ME ENFOCO" : "— WHAT I DO"}
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-3">
-              {language === "es"
-                ? "Soluciones de ingeniería y desarrollo backend"
-                : "Engineering focus and backend technical solutions"}
+          <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8750f7] via-[#a855f7] to-white">
+                {language === "es"
+                  ? "Servicios & Soluciones de Ingeniería"
+                  : "My Quality Services"}
+              </span>
             </h2>
-            <p className="text-neutral-400 text-sm sm:text-base max-w-2xl leading-relaxed">
+            <p className="text-neutral-400 text-sm sm:text-base leading-relaxed font-light">
               {language === "es"
-                ? "Construcción pragmática de software: infraestructura cloud contenida, servicios backend tipados, bases de datos relacionales e integración de modelos de IA."
+                ? "Diseño y despliegue de arquitecturas backend robustas, infraestructura cloud contenida, bases de datos relacionales e inteligencia artificial aplicada."
                 : "Pragmatic software delivery: containerized cloud infrastructure, type-safe backend services, relational data, and applied AI integration."}
             </p>
           </div>
 
-          <div className="space-y-4">
-            {whatIDoItems.map((item) => {
-              const Icon = item.icon;
+          <div className="border-t border-white/10">
+            {whatIDoItems.map((item, idx) => {
+              const isActive = activeService === idx;
               return (
                 <div
                   key={item.number}
-                  className="group p-5 sm:p-6 md:p-7 rounded-2xl bg-[#140c1c] border border-white/10 hover:border-[#8750f7]/60 shadow-lg hover:shadow-xl hover:shadow-[#8750f7]/15 transition-all duration-300 flex flex-col md:flex-row md:items-center justify-between gap-5"
+                  onMouseEnter={() => setActiveService(idx)}
+                  className={`group relative flex flex-col lg:flex-row lg:items-center justify-between p-6 sm:p-8 md:py-9 md:px-10 border-b border-white/10 transition-all duration-300 cursor-pointer ${
+                    isActive
+                      ? "bg-gradient-to-r from-[#8750f7] via-[#7435f5] to-[#401280] shadow-xl shadow-purple-950/40"
+                      : "bg-transparent hover:bg-white/[0.02]"
+                  }`}
                 >
-                  <div className="flex items-start sm:items-center gap-4 sm:gap-6 min-w-0 flex-1">
-                    <span className="text-xs sm:text-sm font-mono font-bold text-neutral-500 group-hover:text-purple-400 transition-colors shrink-0 pt-1 sm:pt-0">
+                  {/* Left: Number + Title */}
+                  <div className="flex items-center gap-5 sm:gap-8 lg:w-5/12 shrink-0 mb-3 lg:mb-0">
+                    <span
+                      className={`text-lg sm:text-xl font-mono font-bold transition-colors ${
+                        isActive ? "text-white" : "text-[#8750f7]"
+                      }`}
+                    >
                       {item.number}
                     </span>
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-purple-950/40 border border-purple-500/30 flex items-center justify-center text-purple-300 shrink-0 group-hover:scale-105 group-hover:bg-[#8750f7] group-hover:text-white transition-all shadow-md">
-                      <Icon className="w-5 h-5 stroke-[2]" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-base sm:text-lg font-bold text-white tracking-tight group-hover:text-purple-200 transition-colors mb-1">
-                        {item.title}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-neutral-300 font-normal leading-relaxed">
-                        {item.description}
-                      </p>
-                    </div>
+                    <h3
+                      className={`text-xl sm:text-2xl md:text-3xl font-bold tracking-tight transition-colors ${
+                        isActive ? "text-white" : "text-white group-hover:text-purple-200"
+                      }`}
+                    >
+                      {item.title}
+                    </h3>
                   </div>
 
-                  {/* Badges / Tech Pills on the right */}
-                  <div className="flex flex-wrap items-center gap-1.5 shrink-0 pt-3 md:pt-0 border-t md:border-t-0 border-white/5">
-                    {item.pills.map((pill, pIdx) => (
-                      <span
-                        key={pIdx}
-                        className="px-2.5 py-1 rounded-md text-[11px] font-mono text-neutral-300 bg-[#0d0714] border border-white/10 group-hover:border-purple-500/30 transition-colors"
-                      >
-                        {pill}
-                      </span>
-                    ))}
+                  {/* Middle: Description */}
+                  <div className="lg:w-6/12 lg:px-6 mb-3 lg:mb-0">
+                    <p
+                      className={`text-sm sm:text-base font-light leading-relaxed transition-colors ${
+                        isActive ? "text-white/90" : "text-neutral-400"
+                      }`}
+                    >
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {/* Right: Gerold Dynamic Arrow */}
+                  <div className="flex items-center justify-end lg:w-1/12 shrink-0">
+                    <div
+                      className={`transition-all duration-300 p-2 ${
+                        isActive
+                          ? "text-white -rotate-45 scale-110"
+                          : "text-[#8750f7] rotate-45 group-hover:-rotate-45 group-hover:text-purple-300"
+                      }`}
+                    >
+                      <ArrowUpRight className="w-6 h-6 stroke-[2.2]" />
+                    </div>
                   </div>
                 </div>
               );
@@ -342,65 +361,7 @@ export default function Skills() {
           </div>
         </div>
 
-        {/* ========================================================================= */}
-        {/* BLOQUE 3: EXPANDABLE FULL TECHNOLOGY INVENTORY (FOR ATS AUDITS)           */}
-        {/* ========================================================================= */}
-        <div className="max-w-4xl mx-auto text-center mt-16">
-          <button
-            onClick={() => setShowAllTech(!showAllTech)}
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#18181d] hover:bg-white/[0.08] border border-white/20 hover:border-[#7F1DFF]/50 text-neutral-200 hover:text-white text-xs font-mono font-medium tracking-wide transition-all cursor-pointer shadow-lg"
-          >
-            <span>
-              {showAllTech
-                ? language === "es"
-                  ? "Colapsar Índice de Tecnologías"
-                  : "Collapse Technology Index"
-                : language === "es"
-                ? "Ver Inventario Técnico Completo (40+ Tecnologías)"
-                : "View Full Technology Inventory (40+ Tools)"}
-            </span>
-            <ChevronDown
-              className={`w-4 h-4 transition-transform duration-300 ${
-                showAllTech ? "rotate-180" : ""
-              }`}
-            />
-          </button>
-
-          <AnimatePresence>
-            {showAllTech && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden mt-8 text-left"
-              >
-                <div className="p-6 sm:p-8 rounded-3xl bg-[#18181d]/95 border border-white/15 backdrop-blur-xl shadow-2xl">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                    {fullInventory.map((category, idx) => (
-                      <div key={idx} className="space-y-2.5">
-                        <h4 className="text-xs font-mono font-bold tracking-wider uppercase text-purple-300 flex items-center gap-2">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-[#7F1DFF]" />
-                          <span>{category.category}</span>
-                        </h4>
-                        <div className="flex flex-wrap gap-1.5">
-                          {category.items.map((item, iIdx) => (
-                            <span
-                              key={iIdx}
-                              className="px-2.5 py-1 rounded-md bg-[#131313] border border-white/10 text-neutral-300 text-xs font-mono"
-                            >
-                              {item}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+    
       </div>
     </section>
   );
