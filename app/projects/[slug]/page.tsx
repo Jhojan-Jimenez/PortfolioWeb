@@ -4,13 +4,17 @@ import { use, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { motion } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
   ExternalLink,
   Github,
   Terminal,
+  Cpu,
+  Server,
+  Layers,
+  ShieldCheck,
+  Zap,
 } from "lucide-react";
 import { getLocalizedProject, getLocalizedProjects } from "@/lib/projects-data";
 import { useLanguage } from "@/app/context/LanguageContext";
@@ -39,13 +43,13 @@ export default function ProjectDetailPage({
 
   // Table of Contents Navigation Items
   const tocItems = [
-    { id: "overview", label: language === "es" ? "Overview" : "Overview" },
-    { id: "the-problem", label: language === "es" ? "The Problem" : "The Problem" },
-    { id: "what-i-built", label: language === "es" ? "What I Built" : "What I Built" },
+    { id: "overview", label: language === "es" ? "Resumen" : "Overview" },
+    { id: "the-problem", label: language === "es" ? "El Reto" : "The Problem" },
+    { id: "what-i-built", label: language === "es" ? "Arquitectura" : "What I Built" },
     { id: "tech-stack", label: language === "es" ? "Tech Stack" : "Tech Stack" },
-    { id: "key-features", label: language === "es" ? "Key Features" : "Key Features" },
+    { id: "key-features", label: language === "es" ? "Implementación" : "Key Features" },
     ...(project.metrics && project.metrics.length > 0
-      ? [{ id: "specs-metrics", label: language === "es" ? "Results & Impact" : "Results & Impact" }]
+      ? [{ id: "specs-metrics", label: language === "es" ? "Resultados" : "Results & Impact" }]
       : []),
   ];
 
@@ -85,7 +89,7 @@ export default function ProjectDetailPage({
 
   return (
     <div className="min-h-screen bg-[#0a0512] text-neutral-100 selection:bg-purple-900/50 selection:text-white relative">
-      {/* BACKGROUND DOT GRID ACCENT (AKKILA.DEV AESTHETIC) */}
+      {/* BACKGROUND DOT GRID ACCENT */}
       <div
         className="absolute inset-0 pointer-events-none opacity-20 z-0"
         style={{
@@ -97,125 +101,204 @@ export default function ProjectDetailPage({
         }}
       />
 
-      {/* TWO-COLUMN AKKILA.DEV LAYOUT: MAIN CONTENT (LEFT) + STICKY TOC (RIGHT) */}
-      <main className="relative z-10 max-w-[1240px] mx-auto px-6 sm:px-8 py-8 sm:py-12 pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_220px] gap-12 lg:gap-16 items-start">
-          {/* ========================================================================= */}
-          {/* LEFT COLUMN: MAIN PROJECT CASE STUDY CONTENT                              */}
-          {/* ========================================================================= */}
-          <div className="min-w-0">
-            {/* TOP TERMINAL-STYLE BACK LINK & BILINGUAL SWITCHER */}
-            <div className="flex items-center justify-between gap-4 mb-6">
-              <Link
-                href="/#projects"
-                className="font-mono text-xs text-neutral-400 hover:text-purple-300 transition-colors inline-flex items-center gap-1.5"
-              >
-                <span>← cd ../#projects</span>
-              </Link>
+      <div className="relative z-10 max-w-[1240px] mx-auto px-6 sm:px-8 py-8 sm:py-12 pb-24">
+        {/* ========================================================================= */}
+        {/* TOP BAR: BACK LINK & BILINGUAL SWITCHER                                   */}
+        {/* ========================================================================= */}
+        <div className="flex items-center justify-between gap-4 mb-8 sm:mb-12">
+          <Link
+            href="/#projects"
+            className="font-mono text-xs text-neutral-400 hover:text-purple-300 transition-colors inline-flex items-center gap-1.5"
+          >
+            <span>← cd ../#projects</span>
+          </Link>
 
-              {/* Language Switcher */}
-              <div className="inline-flex p-0.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono">
-                <button
-                  type="button"
-                  onClick={() => setLanguage("en")}
-                  className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
-                    language === "en"
-                      ? "bg-[#8750f7] text-white font-semibold shadow-sm"
-                      : "text-neutral-400 hover:text-white"
-                  }`}
-                >
-                  EN
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setLanguage("es")}
-                  className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
-                    language === "es"
-                      ? "bg-[#8750f7] text-white font-semibold shadow-sm"
-                      : "text-neutral-400 hover:text-white"
-                  }`}
-                >
-                  ES
-                </button>
-              </div>
+          {/* Language Switcher */}
+          <div className="inline-flex p-0.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono">
+            <button
+              type="button"
+              onClick={() => setLanguage("en")}
+              className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
+                language === "en"
+                  ? "bg-[#8750f7] text-white font-semibold shadow-sm"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              EN
+            </button>
+            <button
+              type="button"
+              onClick={() => setLanguage("es")}
+              className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
+                language === "es"
+                  ? "bg-[#8750f7] text-white font-semibold shadow-sm"
+                  : "text-neutral-400 hover:text-white"
+              }`}
+            >
+              ES
+            </button>
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* TOP HERO SECTION (AANAND MADHAV STYLE 2-COLUMN SPLIT)                     */}
+        {/* ========================================================================= */}
+        <header className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-10 sm:mb-14">
+          {/* LEFT: TITLE, SUBTITLE, TECH TAGS & CTAs */}
+          <div className="lg:col-span-6 xl:col-span-5 flex flex-col justify-center">
+            <h1 className="font-mono font-medium text-3xl sm:text-4xl lg:text-[40px] xl:text-[46px] text-white tracking-[-0.03em] leading-[1.08] mb-4 text-balance">
+              {project.title}
+            </h1>
+
+            <p className="font-mono text-sm sm:text-base text-neutral-300 font-light leading-relaxed mb-6">
+              {project.subtitle}
+            </p>
+
+            {/* TECH TAGS ROW */}
+            <div className="flex flex-wrap gap-2 mb-6">
+              {project.technologies.slice(0, 5).map((tech) => (
+                <TechPill key={tech} name={tech} />
+              ))}
+              {project.technologies.length > 5 && (
+                <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-mono text-neutral-400 border border-white/10 bg-white/[0.02]">
+                  +{project.technologies.length - 5}
+                </span>
+              )}
             </div>
 
-            {/* HEADER: TITLE, SUBTITLE & METADATA */}
-            <header className="pb-8 mb-10 border-b border-white/10">
-              <h1 className="font-mono font-medium text-3xl sm:text-4xl lg:text-5xl text-white tracking-[-0.03em] leading-[1.12] mb-4 text-balance">
-                {project.title}
-              </h1>
+            {/* ACTION CTAs: PROD + DEV FOR GAZU, LIVE + SOURCE FOR ALL */}
+            <div className="flex flex-wrap items-center gap-3">
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-medium bg-gradient-to-r from-[#8750f7] to-[#7435f5] text-white hover:shadow-[0_0_20px_rgba(135,80,247,0.4)] hover:scale-[1.02] transition-all cursor-pointer shadow-md"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>
+                    {project.slug === "gazu"
+                      ? language === "es"
+                        ? "Producción (gazu.jhojan.cloud)"
+                        : "Production (gazu.jhojan.cloud)"
+                      : language === "es"
+                      ? "Plataforma en Vivo"
+                      : "Live Demo"}
+                  </span>
+                </a>
+              )}
 
-              <p className="font-mono text-sm sm:text-base text-neutral-300 leading-relaxed mb-5 max-w-3xl">
-                {project.subtitle}
-              </p>
+              {project.devUrl && project.devUrl !== project.liveUrl && (
+                <a
+                  href={project.devUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-medium border border-purple-500/40 bg-purple-950/30 hover:bg-purple-900/50 hover:border-purple-400/60 text-purple-200 transition-all cursor-pointer shadow-sm"
+                >
+                  <Terminal className="w-3.5 h-3.5 text-purple-400" />
+                  <span>
+                    {project.slug === "gazu"
+                      ? language === "es"
+                        ? "Entorno Dev (dev.gazu.jhojan.cloud)"
+                        : "Dev Environment (dev.gazu.jhojan.cloud)"
+                      : language === "es"
+                      ? "Entorno de Prueba"
+                      : "Development"}
+                  </span>
+                </a>
+              )}
 
-              <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-neutral-400 mb-6">
-                <span>{project.role}</span>
-                <span className="text-neutral-600">·</span>
-                <span>{project.date}</span>
-                <span className="text-neutral-600">·</span>
-                <span className="text-purple-300">{project.category}</span>
-              </div>
+              {(project.githubUrl || project.gitlabUrl) && (
+                <a
+                  href={project.githubUrl || project.gitlabUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-medium border border-white/15 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/30 text-neutral-300 hover:text-white transition-all cursor-pointer"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  <span>{language === "es" ? "Código Fuente" : "View Source"}</span>
+                </a>
+              )}
+            </div>
+          </div>
 
-              {/* ACTION CTAs: DUAL ENVIRONMENT FOR GAZU (PROD + DEV) */}
-              <div className="flex flex-wrap items-center gap-3">
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium bg-gradient-to-r from-[#8750f7] to-[#7435f5] text-white hover:shadow-[0_0_20px_rgba(135,80,247,0.4)] hover:scale-[1.02] transition-all cursor-pointer shadow-md"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    <span>
-                      {project.slug === "gazu"
-                        ? language === "es"
-                          ? "Producción (gazu.jhojan.cloud)"
-                          : "Production (gazu.jhojan.cloud)"
-                        : language === "es"
-                        ? "Plataforma en Vivo"
-                        : "Live Demo"}
-                    </span>
-                  </a>
-                )}
+          {/* RIGHT: HERO COVER SCREENSHOT */}
+          <div className="lg:col-span-6 xl:col-span-7">
+            <div className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/15 bg-black/40 shadow-2xl group">
+              {project.heroImage ? (
+                <Image
+                  src={project.heroImage}
+                  alt={project.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 700px"
+                  priority
+                  className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-[#140c1c] text-purple-300 font-mono">
+                  {project.title}
+                </div>
+              )}
+            </div>
+          </div>
+        </header>
 
-                {project.devUrl && project.devUrl !== project.liveUrl && (
-                  <a
-                    href={project.devUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium border border-purple-500/40 bg-purple-950/30 hover:bg-purple-900/50 hover:border-purple-400/60 text-purple-200 transition-all cursor-pointer shadow-sm"
-                  >
-                    <Terminal className="w-3.5 h-3.5 text-purple-400" />
-                    <span>
-                      {project.slug === "gazu"
-                        ? language === "es"
-                          ? "Entorno Dev (dev.gazu.jhojan.cloud)"
-                          : "Dev Environment (dev.gazu.jhojan.cloud)"
-                        : language === "es"
-                        ? "Entorno de Prueba"
-                        : "Development"}
-                    </span>
-                  </a>
-                )}
+        {/* ========================================================================= */}
+        {/* METADATA STRIP: FULL WIDTH BORDER-Y (AANAND MADHAV SPEC)                  */}
+        {/* ========================================================================= */}
+        <section className="border-y border-white/10 py-5 sm:py-6 mb-12 sm:mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
+            {/* 1: YEAR */}
+            <div>
+              <span className="text-[11px] font-mono uppercase tracking-widest text-purple-400 block mb-1.5 font-medium">
+                {language === "es" ? "AÑO" : "YEAR"}
+              </span>
+              <span className="text-sm sm:text-base font-mono text-neutral-200">
+                {project.date}
+              </span>
+            </div>
 
-                {(project.githubUrl || project.gitlabUrl) && (
-                  <a
-                    href={project.githubUrl || project.gitlabUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-medium border border-white/15 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/30 text-neutral-300 hover:text-white transition-all cursor-pointer"
-                  >
-                    <Github className="w-3.5 h-3.5" />
-                    <span>{language === "es" ? "Código Fuente" : "View Source"}</span>
-                  </a>
-                )}
-              </div>
-            </header>
+            {/* 2: CLIENT / CONTEXT */}
+            <div>
+              <span className="text-[11px] font-mono uppercase tracking-widest text-purple-400 block mb-1.5 font-medium">
+                {language === "es" ? "CONTEXTO / PROYECTO" : "CONTEXT / PROJECT"}
+              </span>
+              <span className="text-sm sm:text-base font-mono text-neutral-200 truncate block">
+                {project.teamOrContext || project.category}
+              </span>
+            </div>
 
-            {/* CASE STUDY SECTIONS (AKKILA.DEV ARTICLE STRUCTURE) */}
-            <article className="space-y-12">
+            {/* 3: ROLE */}
+            <div>
+              <span className="text-[11px] font-mono uppercase tracking-widest text-purple-400 block mb-1.5 font-medium">
+                {language === "es" ? "ROL" : "ROLE"}
+              </span>
+              <span className="text-sm sm:text-base font-mono text-neutral-200 truncate block">
+                {project.role}
+              </span>
+            </div>
+
+            {/* 4: CATEGORY / TYPE */}
+            <div>
+              <span className="text-[11px] font-mono uppercase tracking-widest text-purple-400 block mb-1.5 font-medium">
+                {language === "es" ? "CATEGORÍA" : "CATEGORY"}
+              </span>
+              <span className="text-sm sm:text-base font-mono text-neutral-200 truncate block">
+                {project.category}
+              </span>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* BODY CONTENT + STICKY RIGHT SIDEBAR (NAVBAR ONLY STARTS BELOW THE HERO)   */}
+        {/* ========================================================================= */}
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_220px] gap-12 lg:gap-16 items-start">
+          {/* ======================================================================= */}
+          {/* LEFT: CASE STUDY SECTIONS                                               */}
+          {/* ======================================================================= */}
+          <main className="min-w-0">
+            <article className="space-y-14">
               {/* SECTION 1: OVERVIEW */}
               <section id="overview" className="scroll-mt-28 space-y-5">
                 <h2 className="font-mono text-xl sm:text-2xl font-medium text-white flex items-center gap-2.5">
@@ -227,23 +310,31 @@ export default function ProjectDetailPage({
                   {project.shortDescription}
                 </p>
 
-                {/* HERO SCREENSHOT */}
-                <div className="relative aspect-[16/9] w-full rounded-xl overflow-hidden border border-white/15 bg-black/40 shadow-2xl mt-4">
-                  {project.heroImage ? (
-                    <Image
-                      src={project.heroImage}
-                      alt={project.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 1000px"
-                      priority
-                      className="object-cover object-top"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-[#140c1c] text-purple-300 font-mono">
-                      {project.title}
-                    </div>
-                  )}
-                </div>
+                {/* ARCHITECTURAL PILLARS (IF PRESENT) */}
+                {project.pillars && project.pillars.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+                    {project.pillars.map((pillar, idx) => (
+                      <div
+                        key={idx}
+                        className="rounded-xl border border-white/10 bg-white/[0.02] p-4 flex flex-col justify-between hover:border-purple-500/30 transition-colors"
+                      >
+                        <div>
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-sm font-medium text-white">
+                              {pillar.title}
+                            </span>
+                            <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-purple-950/50 text-purple-300 border border-purple-500/30">
+                              {pillar.badge}
+                            </span>
+                          </div>
+                          <p className="text-xs text-neutral-400 font-light leading-relaxed">
+                            {pillar.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </section>
 
               {/* SECTION 2: THE PROBLEM */}
@@ -328,7 +419,6 @@ export default function ProjectDetailPage({
 
                   <div className="space-y-4 text-sm sm:text-base text-neutral-300 font-light leading-relaxed max-w-3xl">
                     {featuresList.map((feat, idx) => {
-                      // Format with bold title before colon if available
                       const parts = feat.split(":");
                       if (parts.length > 1) {
                         return (
@@ -360,7 +450,7 @@ export default function ProjectDetailPage({
                 </section>
               )}
 
-              {/* SECTION 6: RESULTS & IMPACT / SPECS & METRICS */}
+              {/* SECTION 6: RESULTS & IMPACT */}
               {project.metrics && project.metrics.length > 0 && (
                 <section id="specs-metrics" className="scroll-mt-28 space-y-4 pt-2">
                   <div className="flex items-baseline justify-between">
@@ -443,11 +533,11 @@ export default function ProjectDetailPage({
                 </Link>
               )}
             </footer>
-          </div>
+          </main>
 
-          {/* ========================================================================= */}
-          {/* RIGHT COLUMN: STICKY "ON THIS PAGE" TABLE OF CONTENTS (AKKILA.DEV STYLE)  */}
-          {/* ========================================================================= */}
+          {/* ======================================================================= */}
+          {/* RIGHT: STICKY "ON THIS PAGE" TABLE OF CONTENTS (AKKILA.DEV STYLE)       */}
+          {/* ======================================================================= */}
           <aside
             className="sticky top-28 self-start font-mono text-[12.5px] max-h-[calc(100vh-140px)] overflow-y-auto hidden lg:block w-[220px] shrink-0"
             aria-label="Table of contents"
@@ -479,7 +569,7 @@ export default function ProjectDetailPage({
             </ol>
           </aside>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
