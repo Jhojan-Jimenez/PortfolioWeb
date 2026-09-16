@@ -190,8 +190,8 @@ export default function ProjectDetailPage({
             </div>
           </div>
 
-          {/* ACTION CTAs: 1 FILA AL FINALIZAR EL CONTENEDOR DE LA IMAGEN Y EL TEXTO */}
-          <div className="flex flex-wrap items-center gap-3.5 mt-8">
+          {/* ACTION CTAs: 1 FILA AL FINALIZAR EL CONTENEDOR DE LA IMAGEN Y EL TEXTO (ALINEADOS A LA DERECHA) */}
+          <div className="flex flex-wrap items-center justify-end gap-3.5 mt-8">
             {project.liveUrl && (
               <a
                 href={project.liveUrl}
