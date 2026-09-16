@@ -143,103 +143,106 @@ export default function ProjectDetailPage({
         {/* ========================================================================= */}
         {/* TOP HERO SECTION (AANAND MADHAV STYLE 2-COLUMN SPLIT)                     */}
         {/* ========================================================================= */}
-        <header className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-10 sm:mb-14">
-          {/* LEFT: TITLE, SUBTITLE, TECH TAGS & CTAs */}
-          <div className="lg:col-span-6 xl:col-span-5 flex flex-col justify-center">
-            <h1 className="font-mono font-medium text-3xl sm:text-4xl lg:text-[40px] xl:text-[46px] text-white tracking-[-0.03em] leading-[1.08] mb-4 text-balance">
-              {project.title}
-            </h1>
+        <header className="mb-10 sm:mb-14">
+          {/* 2-COLUMN SPLIT: TEXT + HERO COVER */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* LEFT: TITLE, SUBTITLE & TECH TAGS */}
+            <div className="lg:col-span-6 xl:col-span-5 flex flex-col justify-center">
+              <h1 className="font-mono font-medium text-3xl sm:text-4xl lg:text-[40px] xl:text-[46px] text-white tracking-[-0.03em] leading-[1.08] mb-4 text-balance">
+                {project.title}
+              </h1>
 
-            <p className="font-mono text-sm sm:text-base text-neutral-300 font-light leading-relaxed mb-6">
-              {project.subtitle}
-            </p>
+              <p className="font-mono text-sm sm:text-base text-neutral-300 font-light leading-relaxed mb-6">
+                {project.subtitle}
+              </p>
 
-            {/* TECH TAGS ROW */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              {project.technologies.slice(0, 5).map((tech) => (
-                <TechPill key={tech} name={tech} />
-              ))}
-              {project.technologies.length > 5 && (
-                <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-mono text-neutral-400 border border-white/10 bg-white/[0.02]">
-                  +{project.technologies.length - 5}
-                </span>
-              )}
+              {/* TECH TAGS ROW */}
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.slice(0, 6).map((tech) => (
+                  <TechPill key={tech} name={tech} />
+                ))}
+                {project.technologies.length > 6 && (
+                  <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-mono text-neutral-400 border border-white/10 bg-white/[0.02]">
+                    +{project.technologies.length - 6}
+                  </span>
+                )}
+              </div>
             </div>
 
-            {/* ACTION CTAs: PROD + DEV FOR GAZU, LIVE + SOURCE FOR ALL */}
-            <div className="flex flex-wrap items-center gap-3">
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-medium bg-gradient-to-r from-[#8750f7] to-[#7435f5] text-white hover:shadow-[0_0_20px_rgba(135,80,247,0.4)] hover:scale-[1.02] transition-all cursor-pointer shadow-md"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  <span>
-                    {project.slug === "gazu"
-                      ? language === "es"
-                        ? "Producción (gazu.jhojan.cloud)"
-                        : "Production (gazu.jhojan.cloud)"
-                      : language === "es"
-                      ? "Plataforma en Vivo"
-                      : "Live Demo"}
-                  </span>
-                </a>
-              )}
-
-              {project.devUrl && project.devUrl !== project.liveUrl && (
-                <a
-                  href={project.devUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-medium border border-purple-500/40 bg-purple-950/30 hover:bg-purple-900/50 hover:border-purple-400/60 text-purple-200 transition-all cursor-pointer shadow-sm"
-                >
-                  <Terminal className="w-3.5 h-3.5 text-purple-400" />
-                  <span>
-                    {project.slug === "gazu"
-                      ? language === "es"
-                        ? "Entorno Dev (dev.gazu.jhojan.cloud)"
-                        : "Dev Environment (dev.gazu.jhojan.cloud)"
-                      : language === "es"
-                      ? "Entorno de Prueba"
-                      : "Development"}
-                  </span>
-                </a>
-              )}
-
-              {(project.githubUrl || project.gitlabUrl) && (
-                <a
-                  href={project.githubUrl || project.gitlabUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg text-xs sm:text-sm font-medium border border-white/15 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/30 text-neutral-300 hover:text-white transition-all cursor-pointer"
-                >
-                  <Github className="w-3.5 h-3.5" />
-                  <span>{language === "es" ? "Código Fuente" : "View Source"}</span>
-                </a>
-              )}
+            {/* RIGHT: HERO COVER SCREENSHOT */}
+            <div className="lg:col-span-6 xl:col-span-7">
+              <div className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/15 bg-black/40 shadow-2xl group">
+                {project.heroImage ? (
+                  <Image
+                    src={project.heroImage}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 700px"
+                    priority
+                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-[#140c1c] text-purple-300 font-mono">
+                    {project.title}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
-          {/* RIGHT: HERO COVER SCREENSHOT */}
-          <div className="lg:col-span-6 xl:col-span-7">
-            <div className="relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] w-full rounded-2xl overflow-hidden border border-white/15 bg-black/40 shadow-2xl group">
-              {project.heroImage ? (
-                <Image
-                  src={project.heroImage}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 700px"
-                  priority
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center bg-[#140c1c] text-purple-300 font-mono">
-                  {project.title}
-                </div>
-              )}
-            </div>
+          {/* ACTION CTAs: 1 FILA AL FINALIZAR EL CONTENEDOR DE LA IMAGEN Y EL TEXTO */}
+          <div className="flex flex-wrap items-center gap-3.5 mt-8">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-medium bg-[#8750f7] hover:bg-[#773be8] text-white hover:shadow-[0_0_20px_rgba(135,80,247,0.4)] hover:scale-[1.02] transition-all cursor-pointer shadow-md"
+              >
+                <ExternalLink className="w-4 h-4" />
+                <span>
+                  {project.slug === "gazu"
+                    ? language === "es"
+                      ? "Producción (gazu.jhojan.cloud)"
+                      : "Production (gazu.jhojan.cloud)"
+                    : language === "es"
+                    ? "Plataforma en Vivo"
+                    : "Live Demo"}
+                </span>
+              </a>
+            )}
+
+            {project.devUrl && project.devUrl !== project.liveUrl && (
+              <a
+                href={project.devUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-medium border border-purple-500/40 bg-purple-950/30 hover:bg-purple-900/50 hover:border-purple-400/60 text-purple-200 transition-all cursor-pointer shadow-sm"
+              >
+                <Terminal className="w-4 h-4 text-purple-400" />
+                <span>
+                  {project.slug === "gazu"
+                    ? language === "es"
+                      ? "Entorno Dev (dev.gazu.jhojan.cloud)"
+                      : "Dev Environment (dev.gazu.jhojan.cloud)"
+                    : language === "es"
+                    ? "Entorno de Prueba"
+                    : "Development"}
+                </span>
+              </a>
+            )}
+
+            {(project.githubUrl || project.gitlabUrl) && (
+              <a
+                href={project.githubUrl || project.gitlabUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-medium border border-white/15 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/30 text-neutral-300 hover:text-white transition-all cursor-pointer"
+              >
+                <Github className="w-4 h-4" />
+                <span>{language === "es" ? "Código Fuente" : "View Source"}</span>
+              </a>
+            )}
           </div>
         </header>
 
