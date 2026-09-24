@@ -513,12 +513,19 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 
     /* Gallery/embed mode keeps the generated artifact as the source of truth
        while presenting only its diagram surface inside a proof card. */
+    html[data-embed="true"], html[data-embed="true"] body {
+      height: 100%;
+      min-height: 100%;
+    }
     html[data-embed="true"] body {
-      min-height: 0;
       padding: 0;
       overflow: hidden;
       background: var(--bg);
       background-image: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     html[data-embed="true"] .toolbar,
     html[data-embed="true"] .header,
@@ -531,14 +538,34 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
     html[data-embed="true"] .diagram-guide,
     html[data-embed="true"] .node-finder,
     html[data-embed="true"] .guided-views { display: none !important; }
-    html[data-embed="true"] .container { max-width: none; }
+    html[data-embed="true"] .container {
+      max-width: none;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+    }
     html[data-embed="true"] .diagram-container {
       padding: 0.5rem;
       border: 0;
       border-radius: 0;
       box-shadow: none;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    html[data-embed="true"] .diagram-container svg { min-width: 0; }
+    html[data-embed="true"] .diagram-container svg {
+      min-width: 0;
+      max-height: 100%;
+      width: 100%;
+      height: auto;
+    }
 
     /* Share Chapter Cue lives in the HTML viewer layer, not inside the SVG.
        It gives one-shot embeds a title, authored note, truthful stop order,
@@ -5156,7 +5183,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         <rect width="100%" height="100%" fill="url(#grid)" />
 
         <!-- Boundaries (behind everything) -->
-        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="Oracle Cloud (OCI ARM64) · k3s Kubernetes Cluster" x="226" y="256" width="888" height="274" rx="12" class="c-region" stroke-width="1"/>
+        <rect data-graph-role="structural-frame" data-composition-frame-kind="region" data-composition-frame-id="0" data-composition-frame-label="Oracle Cloud (OCI) · k3s Kubernetes Cluster" x="226" y="256" width="888" height="274" rx="12" class="c-region" stroke-width="1"/>
 
         <!-- Connection paths (before components for correct z-order) -->
         <path data-edge-from="clients" data-edge-to="traefik" data-edge-label="HTTPS" data-edge-key="0" data-edge-id="clients-traefik" data-composition-points="170,310;250,310" d="M 170 310 L 250 310" class="a-emphasis" stroke-width="1.8" marker-end="url(#arrowhead-emphasis)"/>
@@ -5376,9 +5403,9 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         </g>
 
         <!-- Boundary labels (foreground masks keep routes out of titles) -->
-        <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="region" data-composition-frame-label="Oracle Cloud (OCI ARM64) · k3s Kubernetes Cluster">
+        <g data-graph-role="structural-frame-label" data-composition-frame-id="0" data-composition-frame-kind="region" data-composition-frame-label="Oracle Cloud (OCI) · k3s Kubernetes Cluster">
           <rect data-graph-role="structural-frame-label-mask" x="230" y="260" width="274.59999999999997" height="16" rx="3" class="c-mask"/>
-          <text data-boundary-label="" x="234" y="273" class="t-cloud" font-size="9" font-weight="600">Oracle Cloud (OCI ARM64) · k3s Kubernetes Cluster</text>
+          <text data-boundary-label="" x="234" y="273" class="t-cloud" font-size="9" font-weight="600">Oracle Cloud (OCI) · k3s Kubernetes Cluster</text>
         </g>
 
         <!-- Legend -->

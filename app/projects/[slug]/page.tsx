@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState, useEffect, useMemo } from "react";
+import { use, useState, useEffect, useMemo, useCallback } from "react";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
@@ -11,12 +11,17 @@ import {
   ExternalLink,
   Github,
   Terminal,
-  Cpu,
   Server,
   Layers,
-  ShieldCheck,
-  Zap,
   X,
+  Copy,
+  Check,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  ChevronUp,
+  Maximize2,
+  Sparkles,
 } from "lucide-react";
 import { getLocalizedProject, getLocalizedProjects } from "@/lib/projects-data";
 import { useLanguage } from "@/app/context/LanguageContext";
@@ -33,13 +38,23 @@ export default function ProjectDetailPage({
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [contentRevealed, setContentRevealed] = useState(false);
   const [activeSection, setActiveSection] = useState("overview");
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [copiedCmdIndex, setCopiedCmdIndex] = useState<number | null>(null);
+  const [endpointsExpanded, setEndpointsExpanded] = useState(true);
+
+  const handleCopyCommand = (cmd: string, idx: number) => {
+    navigator.clipboard.writeText(cmd);
+    setCopiedCmdIndex(idx);
+    setTimeout(() => setCopiedCmdIndex(null), 2000);
+  };
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     setContentRevealed(false);
+    setCurrentSlide(0);
     const timer = setTimeout(() => {
       setContentRevealed(true);
-    }, 420);
+    }, 380);
     return () => clearTimeout(timer);
   }, [slug]);
 
@@ -54,7 +69,7 @@ export default function ProjectDetailPage({
   const project = getLocalizedProject(slug, language);
   const allProjects = getLocalizedProjects(language);
 
-  // Formatted projects list for quick-switching across projects
+  // Formatted projects list for quick-switching in left sidebar
   const projectList = allProjects.map((p) => {
     let status = "COMPLETED";
     let tag = p.category.split("&")[0].trim().toLowerCase();
@@ -79,7 +94,7 @@ export default function ProjectDetailPage({
     let shortTitle = p.title.split("-")[0].trim();
     if (p.slug === "gazu") shortTitle = "Gazu — E-Commerce";
     if (p.slug === "talentmatch") shortTitle = "TalentMatch AI";
-    if (p.slug === "wheelus") shortTitle = "WheelUS — Carpooling";
+    if (p.slug === "wheelus") shortTitle = "WheelUS — Movilidad";
     if (p.slug === "mercedes-gt3") shortTitle = "Mercedes-AMG GT3";
     if (p.slug === "vaccine-cdss") shortTitle = "Vaccine CDSS";
 
@@ -100,29 +115,110 @@ export default function ProjectDetailPage({
   const prevProject =
     allProjects[(currentIndex - 1 + allProjects.length) % allProjects.length];
 
-  // Highlights to display in Key Features
-  const featuresList = [
-    ...(project.solution?.points || []),
-    ...(project.architecture?.decisions?.map(
-      (d) => `${d.title}: ${d.choice}. ${d.why}`
-    ) || []),
-  ].slice(0, 6);
+  // Carousel images for the Hero Showcase Window
+  const carouselImages = useMemo(() => {
+    const imagesFromGallery =
+      project.evidenceGallery?.filter((e) => e.type === "image" && e.src) || [];
+
+    if (imagesFromGallery.length > 0) {
+      return imagesFromGallery;
+    }
+
+    if (project.heroImage) {
+      return [
+        {
+          id: "hero-image",
+          type: "image" as const,
+          tabLabel: project.title,
+          badge: project.category,
+          title: project.title,
+          description: project.subtitle,
+          src: project.heroImage,
+          openUrl: project.liveUrl,
+          openLabel: language === "es" ? "Ver en Vivo" : "Open Live",
+        },
+      ];
+    }
+
+    return [];
+  }, [project, language]);
+
+  const nextSlide = useCallback(() => {
+    if (carouselImages.length > 1) {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }
+  }, [carouselImages.length]);
+
+  const prevSlide = useCallback(() => {
+    if (carouselImages.length > 1) {
+      setCurrentSlide(
+        (prev) => (prev - 1 + carouselImages.length) % carouselImages.length
+      );
+    }
+  }, [carouselImages.length]);
+
+  // Architecture diagram from evidenceGallery
+  const architectureDiagram = project.evidenceGallery?.find(
+    (e) => e.id === "architecture" || e.type === "iframe"
+  );
+
+  // Live endpoints combining liveDemos and telemetry
+  const allLiveEndpoints = useMemo(() => {
+    const list = [...(project.liveDemos || [])];
+    const posthogEvidence = project.evidenceGallery?.find(
+      (e) => e.id === "posthog-telemetry"
+    );
+    if (posthogEvidence && !list.some((d) => d.url.includes("posthog"))) {
+      list.push({
+        label: posthogEvidence.title || "PostHog Analytics Dashboard",
+        url: posthogEvidence.openUrl || posthogEvidence.src || "",
+        badge: posthogEvidence.badge || "PostHog · Live",
+        description:
+          posthogEvidence.description || "Live product analytics dashboard.",
+      });
+    }
+    return list;
+  }, [project.liveDemos, project.evidenceGallery]);
+
+  const hasLiveInspection = useMemo(
+    () =>
+      allLiveEndpoints.length > 0 ||
+      (project.inspectionCommands && project.inspectionCommands.length > 0),
+    [allLiveEndpoints, project.inspectionCommands]
+  );
 
   // Table of contents navigation items
   const tocItems = useMemo(
     () => [
-      { id: "overview", label: language === "es" ? "Resumen" : "Overview" },
-      { id: "the-problem", label: language === "es" ? "El Reto" : "The Problem" },
-      { id: "what-i-built", label: language === "es" ? "Arquitectura" : "What I Built" },
-      { id: "tech-stack", label: language === "es" ? "Tech Stack" : "Tech Stack" },
-      ...(featuresList.length > 0
-        ? [{ id: "key-features", label: language === "es" ? "Implementación" : "Key Features" }]
+      { id: "overview", label: language === "es" ? "01. Resumen" : "01. Overview" },
+      {
+        id: "the-problem",
+        label: language === "es" ? "02. El Reto" : "02. The Problem",
+      },
+      {
+        id: "what-i-built",
+        label: language === "es" ? "03. Arquitectura" : "03. What I Built",
+      },
+      ...(architectureDiagram
+        ? [
+            {
+              id: "architecture-diagram",
+              label:
+                language === "es" ? "Topología del Clúster" : "Cluster Topology",
+            },
+          ]
         : []),
-      ...(project.metrics && project.metrics.length > 0
-        ? [{ id: "specs-metrics", label: language === "es" ? "Resultados" : "Results & Impact" }]
+      ...(hasLiveInspection
+        ? [
+            {
+              id: "live-inspection",
+              label:
+                language === "es" ? "04. Endpoints en Vivo" : "04. Live Endpoints",
+            },
+          ]
         : []),
     ],
-    [language, featuresList.length, project?.metrics]
+    [language, architectureDiagram, hasLiveInspection]
   );
 
   // Scroll spy to update active section in right sidebar
@@ -151,6 +247,16 @@ export default function ProjectDetailPage({
     }
   };
 
+  const activeImage = carouselImages[currentSlide];
+  const activeImageActionUrl =
+    activeImage?.openUrl ||
+    project.devUrl ||
+    project.liveUrl ||
+    project.githubUrl;
+  const activeImageActionLabel =
+    activeImage?.openLabel ||
+    (language === "es" ? "Ver Proyecto" : "View Project");
+
   return (
     <div className="min-h-screen bg-[#0a0512] text-neutral-100 selection:bg-purple-900/50 selection:text-white relative">
       {/* BACKGROUND DOT GRID ACCENT */}
@@ -169,7 +275,7 @@ export default function ProjectDetailPage({
         {/* ======================================================================= */}
         {/* LEFT SIDEBAR: "OTHER PROJECTS" (ZUBAIR MURSHID STYLE)                    */}
         {/* ======================================================================= */}
-        <aside className="w-full lg:w-72 xl:w-80 flex-shrink-0 lg:border-r border-white/10 hidden lg:block px-3 sm:px-4 xl:px-5">
+        <aside className="w-full lg:w-72 flex-shrink-0 lg:border-r border-white/10 hidden lg:block px-3 sm:px-4 xl:px-5">
           <div className="sticky top-0 h-screen flex flex-col justify-between pt-8 pb-8">
             {/* TOP ACTIONS ROW: BACK LINK & BILINGUAL SWITCHER */}
             <div className="flex items-center justify-between gap-2 px-3 shrink-0">
@@ -212,7 +318,7 @@ export default function ProjectDetailPage({
             {/* OTHER PROJECTS SECTION: CENTERED RESPECT TO Y */}
             <div className="my-auto py-4">
               <h3 className="text-xs font-mono uppercase tracking-widest text-neutral-400 mb-3 px-3 font-medium">
-                {language === "es" ? "OTHER PROJECTS" : "OTHER PROJECTS"}
+                OTHER PROJECTS
               </h3>
 
               <nav className="flex flex-col gap-1">
@@ -229,8 +335,10 @@ export default function ProjectDetailPage({
                       }`}
                     >
                       <span
-                        className={`text-sm font-bold truncate transition-colors ${
-                          isCurrent ? "text-white" : "text-neutral-200 group-hover:text-white"
+                        className={`font-mono text-xs sm:text-sm font-medium truncate transition-colors ${
+                          isCurrent
+                            ? "text-white"
+                            : "text-neutral-200 group-hover:text-white"
                         }`}
                       >
                         {p.title}
@@ -247,243 +355,302 @@ export default function ProjectDetailPage({
         </aside>
 
         {/* ======================================================================= */}
-        {/* RIGHT: MAIN CONTENT AREA (FULL REMAINING WIDTH & CENTERED)               */}
+        {/* RIGHT: MAIN CONTENT AREA                                                */}
         {/* ======================================================================= */}
         <div className="flex-1 min-w-0 px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-20 py-8 sm:py-10 pb-24 w-full flex justify-center">
           <div className="w-full max-w-6xl xl:max-w-7xl 2xl:max-w-[1536px]">
             {/* ========================================================================= */}
             {/* MOBILE ONLY TOP BAR: BACK LINK & BILINGUAL SWITCHER (< lg)                */}
             {/* ========================================================================= */}
-          <div
-            className={`lg:hidden flex items-center justify-between gap-4 mb-8 sm:mb-10 transition-all duration-500 ease-out ${
-              contentRevealed
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-2 pointer-events-none"
-            }`}
-          >
-            <Link
-              href="/#projects"
-              onClick={() => setActiveTransitionSlug(slug)}
-              className="font-mono text-xs text-neutral-400 hover:text-purple-300 transition-colors inline-flex items-center gap-1.5"
+            <div
+              className={`lg:hidden flex items-center justify-between gap-4 mb-8 sm:mb-10 transition-all duration-500 ease-out ${
+                contentRevealed
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-2 pointer-events-none"
+              }`}
             >
-              <span>← cd ../#projects</span>
-            </Link>
-
-            <div className="flex items-center gap-3">
-              <button
-                type="button"
-                onClick={() => setMobileDrawerOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-300 hover:text-white"
+              <Link
+                href="/#projects"
+                onClick={() => setActiveTransitionSlug(slug)}
+                className="font-mono text-xs text-neutral-400 hover:text-purple-300 transition-colors inline-flex items-center gap-1.5"
               >
-                <span>{language === "es" ? "Proyectos" : "Projects"} (05)</span>
-              </button>
+                <span>← cd ../#projects</span>
+              </Link>
 
-              {/* Language Switcher */}
-              <div className="inline-flex p-0.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono">
+              <div className="flex items-center gap-3">
                 <button
                   type="button"
-                  onClick={() => setLanguage("en")}
-                  className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
-                    language === "en"
-                      ? "bg-[#8750f7] text-white font-semibold shadow-sm"
-                      : "text-neutral-400 hover:text-white"
-                  }`}
+                  onClick={() => setMobileDrawerOpen(true)}
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono text-neutral-300 hover:text-white cursor-pointer"
                 >
-                  EN
+                  <span>{language === "es" ? "Proyectos" : "Projects"} (05)</span>
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setLanguage("es")}
-                  className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
-                    language === "es"
-                      ? "bg-[#8750f7] text-white font-semibold shadow-sm"
-                      : "text-neutral-400 hover:text-white"
-                  }`}
-                >
-                  ES
-                </button>
-              </div>
-            </div>
-          </div>
 
-          {/* ========================================================================= */}
-          {/* TOP HERO SECTION: MACOS SHOWCASE WINDOW WITH INTEGRATED ACTION DOCK       */}
-          {/* ========================================================================= */}
-          <header className="mb-10 sm:mb-14">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-              {/* LEFT: TITLE, SUBTITLE & TECH TAGS */}
-              <div className="lg:col-span-5 flex flex-col justify-center">
-                <h1
-                  style={{ viewTransitionName: "case-title" }}
-                  className="font-semibold text-3xl sm:text-4xl lg:text-[42px] text-white tracking-[-0.03em] leading-[1.15] mb-4 text-balance"
-                >
-                  {project.title.replace(/E-Commerce/g, "E\u2011Commerce")}
-                </h1>
-
-                <p
-                  style={{ viewTransitionName: "case-desc" }}
-                  className="text-sm sm:text-base text-neutral-300 font-light leading-relaxed mb-6"
-                >
-                  <FormattedText text={project.subtitle} />
-                </p>
-
-                {/* TECH TAGS */}
-                <div
-                  className={`flex flex-wrap gap-2 transition-all duration-500 ease-out ${
-                    contentRevealed
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-3 pointer-events-none"
-                  }`}
-                >
-                  {project.technologies.slice(0, 6).map((tech) => (
-                    <TechPill key={tech} name={tech} />
-                  ))}
-                  {project.technologies.length > 6 && (
-                    <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-mono text-neutral-400 border border-white/10 bg-white/[0.02]">
-                      +{project.technologies.length - 6}
-                    </span>
-                  )}
+                {/* Language Switcher */}
+                <div className="inline-flex p-0.5 rounded-full bg-white/[0.04] border border-white/10 text-xs font-mono">
+                  <button
+                    type="button"
+                    onClick={() => setLanguage("en")}
+                    className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
+                      language === "en"
+                        ? "bg-[#8750f7] text-white font-semibold shadow-sm"
+                        : "text-neutral-400 hover:text-white"
+                    }`}
+                  >
+                    EN
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLanguage("es")}
+                    className={`px-2.5 py-1 rounded-full transition-all cursor-pointer ${
+                      language === "es"
+                        ? "bg-[#8750f7] text-white font-semibold shadow-sm"
+                        : "text-neutral-400 hover:text-white"
+                    }`}
+                  >
+                    ES
+                  </button>
                 </div>
               </div>
+            </div>
 
-              {/* RIGHT: MACOS WINDOW FRAME WITH INTEGRATED ACTION DOCK */}
-              <div
-                className={`lg:col-span-7 transition-all duration-500 ease-out delay-75 ${
-                  contentRevealed
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-4 pointer-events-none"
-                }`}
-              >
-                <div className="rounded-2xl overflow-hidden border border-white/15 bg-black/60 shadow-[0_20px_60px_rgba(0,0,0,0.7)] group">
-                  {/* WINDOW HEADER */}
-                  <div className="flex items-center justify-between px-4 py-2.5 bg-[#120822] border-b border-white/10">
-                    <div className="flex items-center gap-2">
-                      <span className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-                      <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-                      <span className="w-3 h-3 rounded-full bg-[#27c93f]" />
-                    </div>
-                    <div className="font-mono text-[11px] text-neutral-400 bg-white/[0.04] px-4 py-1 rounded-full border border-white/10 flex items-center gap-1.5">
-                      <span className="text-purple-400">🔒</span>
-                      <span>{slug}.jhojan.cloud</span>
-                    </div>
-                  </div>
+            {/* ========================================================================= */}
+            {/* TOP HERO SECTION: 2-COLUMN SPLIT (ORIGINAL POSITIONING + CAROUSEL)        */}
+            {/* ========================================================================= */}
+            <header className="mb-10 sm:mb-14">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                {/* LEFT: TITLE, SUBTITLE, BUTTONS & TECH TAGS */}
+                <div className="lg:col-span-5 flex flex-col justify-center">
+                  {/* PROJECT TITLE */}
+                  <h1
+                    style={{ viewTransitionName: "case-title" }}
+                    className="font-mono font-medium text-3xl sm:text-4xl lg:text-[40px] xl:text-[44px] text-white tracking-[-0.03em] leading-[1.08] mb-4 text-balance"
+                  >
+                    {project.title.replace(/E-Commerce/g, "E\u2011Commerce")}
+                  </h1>
 
-                  {/* WINDOW SCREENSHOT */}
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/40">
-                    {project.heroImage ? (
-                      <Image
-                        src={project.heroImage}
-                        alt={project.title}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 850px"
-                        priority
-                        className="object-cover object-top"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center bg-[#140c1c] text-purple-300 font-mono">
-                        {project.title}
-                      </div>
+                  {/* SUBTITLE */}
+                  <p
+                    style={{ viewTransitionName: "case-desc" }}
+                    className="font-mono text-sm sm:text-base text-neutral-300 font-light leading-relaxed mb-6"
+                  >
+                    <FormattedText text={project.subtitle} />
+                  </p>
+
+                  {/* ACTION PILL BUTTONS */}
+                  <div
+                    className={`flex flex-wrap items-center gap-2.5 mb-6 transition-all duration-500 ease-out delay-75 ${
+                      contentRevealed
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-3 pointer-events-none"
+                    }`}
+                  >
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-white text-black font-semibold text-xs font-mono hover:bg-neutral-200 transition-all shadow-[0_0_15px_rgba(255,255,255,0.15)] hover:scale-[1.02] active:scale-[0.98]"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5" />
+                        <span>{language === "es" ? "Ver Producción" : "Live Demo"}</span>
+                      </a>
+                    )}
+
+                    {(project.githubUrl || project.gitlabUrl) && (
+                      <a
+                        href={project.githubUrl || project.gitlabUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-white/10 hover:bg-white/5 text-neutral-300 hover:text-white text-xs font-mono transition-all hover:scale-[1.02] active:scale-[0.98]"
+                      >
+                        <Github className="w-3.5 h-3.5" />
+                        <span>{language === "es" ? "Repositorio" : "Source Code"}</span>
+                      </a>
+                    )}
+
+                    {architectureDiagram && (
+                      <button
+                        type="button"
+                        onClick={() => scrollTo("architecture-diagram")}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-purple-500/20 bg-purple-950/20 hover:bg-purple-900/30 text-purple-300 text-xs font-mono transition-all cursor-pointer"
+                      >
+                        <Layers className="w-3.5 h-3.5 text-purple-400" />
+                        <span>{language === "es" ? "Topología" : "Architecture"}</span>
+                      </button>
                     )}
                   </div>
 
-                  {/* INTEGRATED ACTION DOCK */}
-                  <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 bg-[#0d0718] border-t border-white/10">
-                    <div className="text-[11px] font-mono text-neutral-400 flex items-center gap-1.5">
-                      <span className="text-purple-400">✦</span>
-                      <span>{project.category}</span>
+                  {/* TECH TAGS */}
+                  <div
+                    className={`flex flex-wrap gap-2 transition-all duration-500 ease-out delay-100 ${
+                      contentRevealed
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-3 pointer-events-none"
+                    }`}
+                  >
+                    {project.technologies.slice(0, 6).map((tech) => (
+                      <TechPill key={tech} name={tech} />
+                    ))}
+                    {project.technologies.length > 6 && (
+                      <span className="inline-flex items-center px-2 py-1 rounded-md text-xs font-mono text-neutral-400 border border-white/10 bg-white/[0.02]">
+                        +{project.technologies.length - 6}
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* RIGHT: MACOS WINDOW FRAME WITH INTERACTIVE IMAGE CAROUSEL */}
+                <div
+                  className={`lg:col-span-7 transition-all duration-500 ease-out delay-75 ${
+                    contentRevealed
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-4 pointer-events-none"
+                  }`}
+                >
+                  <div className="rounded-2xl overflow-hidden border border-white/15 bg-black/60 shadow-[0_20px_60px_rgba(0,0,0,0.7)] group relative">
+                    {/* WINDOW HEADER */}
+                    <div className="flex items-center justify-between px-4 py-2.5 bg-[#120822] border-b border-white/10">
+                      <div className="flex items-center gap-2">
+                        <span className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+                        <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                        <span className="w-3 h-3 rounded-full bg-[#27c93f]" />
+                      </div>
+
+                      <div className="flex items-center gap-2.5">
+                        {/* SLIDE COUNTER (IF > 1) */}
+                        {carouselImages.length > 1 && (
+                          <span className="font-mono text-xs text-neutral-400 bg-white/[0.04] px-2.5 py-0.5 rounded-full border border-white/10">
+                            {String(currentSlide + 1).padStart(2, "0")} /{" "}
+                            {String(carouselImages.length).padStart(2, "0")}
+                          </span>
+                        )}
+
+                        <div className="font-mono text-[11px] text-neutral-400 bg-white/[0.04] px-3 py-1 rounded-full border border-white/10 hidden sm:flex items-center gap-1.5">
+                          <span className="text-purple-400">🔒</span>
+                          <span>{slug}.jhojan.cloud</span>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white text-black font-semibold text-xs font-mono hover:bg-neutral-200 transition-all shadow-[0_0_15px_rgba(255,255,255,0.15)]"
-                        >
-                          <ExternalLink className="w-3 h-3" />
-                          <span>{language === "es" ? "Producción" : "Live"}</span>
-                        </a>
+                    {/* WINDOW SCREENSHOT WITH NAVIGATION ARROWS */}
+                    <div className="relative aspect-[16/10] w-full overflow-hidden bg-black/40">
+                      {activeImage?.src ? (
+                        <Image
+                          src={activeImage.src}
+                          alt={activeImage.title || project.title}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 850px"
+                          priority
+                          className="object-cover object-top transition-opacity duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-[#140c1c] text-purple-300 font-mono">
+                          {project.title}
+                        </div>
                       )}
-                      {project.devUrl && (
-                        <a
-                          href={project.devUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-purple-950/40 border border-purple-500/30 hover:bg-purple-900/40 text-purple-200 text-xs font-mono transition-all"
-                        >
-                          <Server className="w-3 h-3 text-purple-400" />
-                          <span>Dev</span>
-                        </a>
+
+                      {/* CAROUSEL CONTROLS (< & >) */}
+                      {carouselImages.length > 1 && (
+                        <>
+                          <button
+                            type="button"
+                            onClick={prevSlide}
+                            aria-label="Previous slide"
+                            className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-purple-950/80 border border-white/15 text-white flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 cursor-pointer backdrop-blur-sm z-10"
+                          >
+                            <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+                          </button>
+
+                          <button
+                            type="button"
+                            onClick={nextSlide}
+                            aria-label="Next slide"
+                            className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-purple-950/80 border border-white/15 text-white flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 cursor-pointer backdrop-blur-sm z-10"
+                          >
+                            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                          </button>
+
+                          {/* BOTTOM DOT INDICATORS */}
+                          <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 z-10">
+                            {carouselImages.map((_, idx) => (
+                              <button
+                                key={idx}
+                                type="button"
+                                onClick={() => setCurrentSlide(idx)}
+                                aria-label={`Go to slide ${idx + 1}`}
+                                className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                                  currentSlide === idx
+                                    ? "w-5 bg-purple-400"
+                                    : "w-1.5 bg-white/40 hover:bg-white/70"
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </>
                       )}
-                      {project.githubUrl && (
+                    </div>
+
+                    {/* BOTTOM CAPTION & INTERACTIVE ACTIONS */}
+                    <div className="p-3.5 sm:p-4 bg-[#0d0718] border-t border-white/10 flex flex-col sm:flex-row sm:items-stretch justify-between gap-3">
+                      <div className="space-y-0.5 min-w-0 flex-1 flex flex-col justify-center">
+                        <span className="font-mono text-xs sm:text-sm font-medium text-white block truncate">
+                          {activeImage?.tabLabel || activeImage?.title}
+                        </span>
+                        {activeImage?.description && (
+                          <p className="font-mono text-xs text-neutral-400 font-light leading-relaxed line-clamp-1 sm:line-clamp-2">
+                            {activeImage.description}
+                          </p>
+                        )}
+                      </div>
+
+                      {activeImageActionUrl && (
                         <a
-                          href={project.githubUrl}
+                          href={activeImageActionUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg border border-white/10 hover:bg-white/5 text-neutral-300 hover:text-white text-xs font-mono transition-all"
+                          className="self-stretch inline-flex items-center justify-center gap-1.5 px-4 py-2 sm:py-0 rounded-lg border border-purple-500/30 bg-purple-950/30 hover:bg-purple-900/40 text-purple-200 text-xs font-mono transition-all shrink-0 w-fit sm:w-auto hover:border-purple-400/60"
                         >
-                          <Github className="w-3 h-3" />
-                          <span>Code</span>
+                          <ExternalLink className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+                          <span className="whitespace-nowrap">{activeImageActionLabel}</span>
                         </a>
                       )}
                     </div>
+
+                    {/* BREADCRUMB SCREEN NAVIGATION (SOBER & CLEAN) */}
+                    {carouselImages.length > 1 && (
+                      <nav
+                        aria-label="Screen navigation"
+                        className="px-4 py-2 bg-[#090412] border-t border-white/5 flex items-center gap-2 overflow-x-auto scrollbar-none font-mono text-xs justify-center"
+                      >
+                        {carouselImages.map((img, idx) => {
+                          const isActive = currentSlide === idx;
+                          return (
+                            <div key={img.id || idx} className="flex items-center gap-2 shrink-0">
+                              {idx > 0 && (
+                                <span className="text-neutral-600 select-none text-[11px]">/</span>
+                              )}
+                              <button
+                                type="button"
+                                onClick={() => setCurrentSlide(idx)}
+                                className={`transition-all cursor-pointer py-0.5 ${
+                                  isActive
+                                    ? "text-purple-300 font-medium underline underline-offset-4 decoration-purple-400"
+                                    : "text-neutral-400 hover:text-neutral-200"
+                                }`}
+                              >
+                                {img.tabLabel || img.title}
+                              </button>
+                            </div>
+                          );
+                        })}
+                      </nav>
+                    )}
                   </div>
                 </div>
               </div>
-            </div>
-          </header>
+            </header>
 
-          {/* ========================================================================= */}
-          {/* REST OF PROJECT CONTENT (CARDS + CASE STUDY BODY + RIGHT TOC)             */}
-          {/* ========================================================================= */}
-          <div
-            className={`transition-all duration-500 ease-out delay-100 ${
-              contentRevealed
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-4 pointer-events-none"
-            }`}
-          >
-            {/* 4 COMPACT KEY-VALUE CARDS (NO TRUNCATION) */}
-            <section className="mb-14 sm:mb-20">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-purple-400 block mb-1">
-                    {language === "es" ? "AÑO" : "YEAR"}
-                  </span>
-                  <span className="text-sm font-mono text-neutral-200 block font-medium">
-                    {project.date}
-                  </span>
-                </div>
-
-                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-purple-400 block mb-1">
-                    {language === "es" ? "CONTEXTO" : "CONTEXT"}
-                  </span>
-                  <span className="text-sm font-mono text-neutral-200 block font-medium">
-                    {project.teamOrContext || project.category}
-                  </span>
-                </div>
-
-                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-purple-400 block mb-1">
-                    {language === "es" ? "ROL" : "ROLE"}
-                  </span>
-                  <span className="text-sm font-mono text-neutral-200 block font-medium">
-                    {project.role}
-                  </span>
-                </div>
-
-                <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10">
-                  <span className="text-[10px] font-mono uppercase tracking-widest text-purple-400 block mb-1">
-                    {language === "es" ? "CATEGORÍA" : "CATEGORY"}
-                  </span>
-                  <span className="text-sm font-mono text-neutral-200 block font-medium">
-                    {project.category}
-                  </span>
-                </div>
-              </div>
-            </section>
 
             {/* ========================================================================= */}
             {/* BODY CONTENT (CASE STUDY SECTIONS) + RIGHT TOC NAVBAR                     */}
@@ -491,11 +658,11 @@ export default function ProjectDetailPage({
             <div className="flex items-start gap-10 xl:gap-14">
               <main className="flex-1 min-w-0">
                 <article className="space-y-14">
-                  {/* SECTION 1: OVERVIEW */}
-                  <section id="overview" className="scroll-mt-28 space-y-5">
-                    <h2 className="text-xl sm:text-2xl font-semibold text-white flex items-center gap-2.5">
-                      <span className="text-purple-400 font-mono text-sm font-bold">##</span>
-                      <span>{language === "es" ? "Resumen General" : "Overview"}</span>
+                  {/* SECTION 01: OVERVIEW */}
+                  <section id="overview" className="scroll-mt-28 space-y-4">
+                    <h2 className="font-mono text-xl sm:text-2xl font-medium text-white flex items-center gap-2.5">
+                      <span className="text-purple-400 font-mono text-sm font-bold">01.</span>
+                      <span>{language === "es" ? "Resumen General" : "Project Overview"}</span>
                     </h2>
 
                     <p className="font-light text-neutral-300 leading-relaxed text-sm sm:text-base max-w-3xl">
@@ -504,7 +671,7 @@ export default function ProjectDetailPage({
 
                     {/* ARCHITECTURAL PILLARS (IF PRESENT) */}
                     {project.pillars && project.pillars.length > 0 && (
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 pt-2">
                         {project.pillars.map((pillar, idx) => (
                           <div
                             key={idx}
@@ -512,13 +679,13 @@ export default function ProjectDetailPage({
                           >
                             <div>
                               <div className="flex items-center justify-between mb-2">
-                                <span className="text-sm font-medium text-white">
-                                  {pillar.title}
-                                </span>
-                                <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-purple-950/50 text-purple-300 border border-purple-500/30">
+                                <span className="text-xs font-mono uppercase px-2 py-0.5 rounded bg-purple-950/50 text-purple-300 border border-purple-500/30">
                                   {pillar.badge}
                                 </span>
                               </div>
+                              <span className="text-sm font-mono font-medium text-white block mb-1.5">
+                                {pillar.title}
+                              </span>
                               <p className="text-xs text-neutral-400 font-light leading-relaxed">
                                 <FormattedText text={pillar.description} />
                               </p>
@@ -529,169 +696,313 @@ export default function ProjectDetailPage({
                     )}
                   </section>
 
-                  {/* SECTION 2: THE PROBLEM */}
+                  {/* SECTION 02: THE PROBLEM */}
                   <section id="the-problem" className="scroll-mt-28 space-y-4">
-                    <h2 className="text-xl sm:text-2xl font-semibold text-white flex items-center gap-2.5">
-                      <span className="text-purple-400 font-mono text-sm font-bold">##</span>
+                    <h2 className="font-mono text-xl sm:text-2xl font-medium text-white flex items-center gap-2.5">
+                      <span className="text-purple-400 font-mono text-sm font-bold">02.</span>
                       <span>{language === "es" ? "El Reto de Ingeniería" : "The Problem"}</span>
                     </h2>
 
-                    <div className="space-y-3 font-light text-neutral-300 leading-relaxed text-sm sm:text-base max-w-3xl">
-                      <p>
-                        <FormattedText text={project.problem?.summary} />
-                      </p>
+                    <p className="font-light text-neutral-300 leading-relaxed text-sm sm:text-base max-w-3xl">
+                      <FormattedText text={project.problem?.summary} />
+                    </p>
 
-                      {project.problem?.points && project.problem.points.length > 0 && (
-                        <ul className="list-disc pl-5 space-y-2 text-neutral-400 text-sm sm:text-base pt-2">
-                          {project.problem.points.map((point, idx) => (
-                            <li key={idx} className="leading-relaxed">
+                    {project.problem?.points && project.problem.points.length > 0 && (
+                      <ul className="space-y-2.5 pt-1 max-w-3xl">
+                        {project.problem.points.map((point, idx) => (
+                          <li
+                            key={idx}
+                            className="flex items-start gap-3 text-sm sm:text-base text-neutral-300 leading-relaxed"
+                          >
+                            <span className="w-1.5 h-1.5 rounded-full bg-red-400/80 mt-2 shrink-0" />
+                            <span>
                               <FormattedText text={point} />
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </section>
 
-                  {/* SECTION 3: WHAT I BUILT */}
+                  {/* SECTION 03: WHAT I BUILT & ARCHITECTURE */}
                   <section id="what-i-built" className="scroll-mt-28 space-y-4">
-                    <h2 className="text-xl sm:text-2xl font-semibold text-white flex items-center gap-2.5">
-                      <span className="text-purple-400 font-mono text-sm font-bold">##</span>
-                      <span>{language === "es" ? "Lo que Construí & Arquitectura" : "What I Built"}</span>
+                    <h2 className="font-mono text-xl sm:text-2xl font-medium text-white flex items-center gap-2.5">
+                      <span className="text-purple-400 font-mono text-sm font-bold">03.</span>
+                      <span>
+                        {language === "es"
+                          ? "Lo que Construí & Arquitectura"
+                          : "What I Built & Architecture"}
+                      </span>
                     </h2>
 
                     <p className="font-light text-neutral-300 leading-relaxed text-sm sm:text-base max-w-3xl">
                       <FormattedText text={project.solution?.summary} />
                     </p>
 
-                    {/* Architectural Decisions Grid */}
-                    {project.architecture?.decisions && project.architecture.decisions.length > 0 && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-2">
-                        {project.architecture.decisions.map((dec, idx) => (
-                          <div
-                            key={idx}
-                            className="rounded-xl border border-white/10 bg-white/[0.02] p-4 flex flex-col justify-between hover:border-purple-500/30 transition-colors"
-                          >
-                            <div>
-                              <span className="text-[10px] font-mono uppercase tracking-widest text-purple-400 block mb-1">
-                                {dec.title}
-                              </span>
-                              <div className="text-sm font-medium text-white mb-2">
-                                {dec.choice}
-                              </div>
-                            </div>
-                            <p className="text-xs text-neutral-400 font-light leading-relaxed">
-                              <FormattedText text={dec.why} />
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </section>
-
-                  {/* SECTION 4: TECH STACK */}
-                  <section id="tech-stack" className="scroll-mt-28 space-y-4">
-                    <h2 className="text-xl sm:text-2xl font-semibold text-white flex items-center gap-2.5">
-                      <span className="text-purple-400 font-mono text-sm font-bold">##</span>
-                      <span>{language === "es" ? "Stack Tecnológico" : "Tech Stack"}</span>
-                    </h2>
-
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      {project.technologies.map((tech) => (
-                        <TechPill key={tech} name={tech} />
-                      ))}
-                    </div>
-                  </section>
-
-                  {/* SECTION 5: KEY FEATURES */}
-                  {featuresList.length > 0 && (
-                    <section id="key-features" className="scroll-mt-28 space-y-4">
-                      <h2 className="text-xl sm:text-2xl font-semibold text-white flex items-center gap-2.5">
-                        <span className="text-purple-400 font-mono text-sm font-bold">##</span>
-                        <span>{language === "es" ? "Aspectos Clave de Implementación" : "Key Features"}</span>
-                      </h2>
-
-                      <div className="space-y-4 text-sm sm:text-base text-neutral-300 font-light leading-relaxed max-w-3xl">
-                        {featuresList.map((feat, idx) => {
-                          const parts = feat.split(":");
-                          if (parts.length > 1) {
-                            return (
-                              <div
-                                key={idx}
-                                className="border-l-2 border-purple-500/40 pl-4 py-1"
-                              >
-                                <strong className="text-white font-medium block mb-1">
-                                  {parts[0].trim()}.
-                                </strong>
-                                <p className="text-neutral-400 text-sm leading-relaxed">
-                                  <FormattedText text={parts.slice(1).join(":").trim()} />
-                                </p>
-                              </div>
-                            );
-                          }
-                          return (
+                    {/* Architectural Decisions Grid (1-sentence points) */}
+                    {project.architecture?.decisions &&
+                      project.architecture.decisions.length > 0 && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 pt-2">
+                          {project.architecture.decisions.map((dec, idx) => (
                             <div
                               key={idx}
-                              className="border-l-2 border-purple-500/40 pl-4 py-1"
+                              className="rounded-xl border border-white/10 bg-white/[0.02] p-4 flex flex-col justify-between hover:border-purple-500/30 transition-colors"
                             >
-                              <p className="text-neutral-300 text-sm leading-relaxed">
-                                <FormattedText text={feat} />
+                              <div className="font-mono text-sm font-medium text-white mb-2">
+                                {dec.choice}
+                              </div>
+                              <p className="font-mono text-xs text-neutral-400 font-light leading-relaxed">
+                                <FormattedText text={dec.why} />
                               </p>
                             </div>
-                          );
-                        })}
+                          ))}
+                        </div>
+                      )}
+                  </section>
+
+                  {/* CLUSTER TOPOLOGY (ARCHIFY DIAGRAM) */}
+                  {architectureDiagram && (
+                    <section
+                      id="architecture-diagram"
+                      className="scroll-mt-28 space-y-4 pt-2"
+                    >
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <h3 className="font-mono text-lg sm:text-xl font-medium text-white flex items-center gap-2">
+                          <span className="text-purple-400 font-mono text-xs font-bold">✦</span>
+                          <span>
+                            {language === "es"
+                              ? "Topología del Clúster & Flujo de Datos"
+                              : "Cluster Topology & Data Flow"}
+                          </span>
+                        </h3>
+
+                        <a
+                          href={
+                            architectureDiagram.openUrl ||
+                            "/diagrams/gazu-architecture.html"
+                          }
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-purple-500/30 bg-purple-950/30 hover:bg-purple-900/40 text-purple-200 text-xs font-mono transition-all w-fit shadow-sm"
+                        >
+                          <Maximize2 className="w-3.5 h-3.5 text-purple-400" />
+                          <span>
+                            {language === "es"
+                              ? "Abrir pantalla completa"
+                              : "Open full diagram"}
+                          </span>
+                        </a>
+                      </div>
+
+                      <p className="font-light text-neutral-400 leading-relaxed text-xs sm:text-sm max-w-3xl">
+                        {architectureDiagram.description}
+                      </p>
+
+                      {/* Archify Interactive Frame */}
+                      <div className="rounded-2xl overflow-hidden border border-white/15 bg-[#0d0718] shadow-[0_20px_60px_rgba(0,0,0,0.6)] relative">
+                        <div className="flex items-center justify-between px-4 py-2.5 bg-[#140c1c] border-b border-white/10">
+                          <div className="flex items-center gap-2">
+                            <span className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+                            <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+                            <span className="w-3 h-3 rounded-full bg-[#27c93f]" />
+                            <span className="text-xs font-mono text-neutral-400 ml-2">
+                              Archify :: Interactive System Topology
+                            </span>
+                          </div>
+                          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-500/30">
+                            {architectureDiagram.badge || "Live Archify"}
+                          </span>
+                        </div>
+
+                        <div className="relative w-full aspect-[16/10] sm:aspect-auto sm:h-[560px] bg-[#0c0814]">
+                          <iframe
+                            src={
+                              architectureDiagram.src ||
+                              "/diagrams/gazu-architecture.html"
+                            }
+                            title={architectureDiagram.title}
+                            className="w-full h-full border-0"
+                            loading="lazy"
+                            allow="fullscreen"
+                          />
+                        </div>
+
+                        {/* Mobile Quick Action Footer */}
+                        <div className="sm:hidden flex items-center justify-between px-3.5 py-2 bg-[#120a1a] border-t border-white/10 text-[11px] font-mono">
+                          <span className="text-neutral-400">
+                            {language === "es"
+                              ? "Vista móvil optimizada"
+                              : "Optimized mobile view"}
+                          </span>
+                          <a
+                            href={
+                              architectureDiagram.openUrl ||
+                              "/diagrams/gazu-architecture.html"
+                            }
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-purple-300 hover:text-white font-medium"
+                          >
+                            <Maximize2 className="w-3 h-3 text-purple-400" />
+                            <span>
+                              {language === "es"
+                                ? "Abrir interactivo"
+                                : "Open interactive"}
+                            </span>
+                          </a>
+                        </div>
                       </div>
                     </section>
                   )}
 
-                  {/* SECTION 6: RESULTS & IMPACT */}
-                  {project.metrics && project.metrics.length > 0 && (
-                    <section id="specs-metrics" className="scroll-mt-28 space-y-4 pt-2">
-                      <div className="flex items-baseline justify-between">
-                        <h2 className="text-xl sm:text-2xl font-semibold text-white flex items-center gap-2.5">
-                          <span className="text-purple-400 font-mono text-sm font-bold">##</span>
-                          <span>{language === "es" ? "Resultados & Métricas" : "Results & Impact"}</span>
+                  {/* SECTION 04: LIVE INSPECTION & ENDPOINTS (OPTIONAL / COLLAPSIBLE) */}
+                  {hasLiveInspection && (
+                    <section id="live-inspection" className="scroll-mt-28 space-y-4 pt-2">
+                      <div className="flex items-center justify-between">
+                        <h2 className="font-mono text-xl sm:text-2xl font-medium text-white flex items-center gap-2.5">
+                          <span className="text-purple-400 font-mono text-sm font-bold">04.</span>
+                          <span>
+                            {language === "es"
+                              ? "Inspección del Sistema & Endpoints en Vivo"
+                              : "Live Cluster Inspection & Endpoints"}
+                          </span>
                         </h2>
-                        <span className="text-xs font-mono text-purple-300/80">
-                          {project.metrics.length} {language === "es" ? "verificadas" : "verified"}
-                        </span>
+
+                        <button
+                          type="button"
+                          onClick={() => setEndpointsExpanded((prev) => !prev)}
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono bg-white/[0.04] border border-white/10 hover:bg-white/[0.08] text-neutral-300 transition-colors cursor-pointer"
+                        >
+                          <span>
+                            {endpointsExpanded
+                              ? language === "es"
+                                ? "Colapsar"
+                                : "Collapse"
+                              : language === "es"
+                              ? "Explorar"
+                              : "Explore"}
+                          </span>
+                          {endpointsExpanded ? (
+                            <ChevronUp className="w-3.5 h-3.5 text-neutral-400" />
+                          ) : (
+                            <ChevronDown className="w-3.5 h-3.5 text-neutral-400" />
+                          )}
+                        </button>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-1">
-                        {project.metrics.map((metric, mIdx) => {
-                          const isNumeric = /^[\d<+~%]/.test(metric.value.trim());
+                      <p className="font-light text-neutral-400 leading-relaxed text-xs sm:text-sm max-w-3xl">
+                        {language === "es"
+                          ? "Links y comandos para auditoría técnica directa: prueba el GraphQL Playground, métricas en vivo de Prometheus o la analítica en PostHog si deseas profundizar."
+                          : "Direct technical inspection links and terminal commands: test the GraphQL Playground, live Prometheus metrics, or PostHog telemetry."}
+                      </p>
 
-                          return (
-                            <div
-                              key={mIdx}
-                              className="rounded-xl border border-white/10 hover:border-purple-500/40 bg-white/[0.02] hover:bg-purple-950/15 p-4 flex flex-col justify-between transition-all hover:shadow-[0_0_20px_rgba(135,80,247,0.08)]"
-                            >
-                              <div>
-                                <span className="text-[10px] font-mono uppercase tracking-widest text-purple-400 font-medium mb-1.5 block">
-                                  {metric.label}
-                                </span>
-                                <div
-                                  className={`tracking-tight ${
-                                    isNumeric
-                                      ? "text-xl sm:text-2xl font-mono font-semibold text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-white"
-                                      : "text-base font-semibold text-neutral-100"
-                                  }`}
+                      {endpointsExpanded && (
+                        <div className="space-y-4 pt-2 animate-in fade-in duration-200">
+                          {/* Live Endpoint Cards Grid */}
+                          {allLiveEndpoints.length > 0 && (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                              {allLiveEndpoints.map((demo, idx) => (
+                                <a
+                                  key={idx}
+                                  href={demo.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="group p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-purple-500/50 hover:bg-white/[0.04] transition-all flex flex-col justify-between"
                                 >
-                                  {metric.value}
+                                  <div>
+                                    <div className="flex items-center justify-between gap-2 mb-1.5">
+                                      <span className="text-sm font-semibold text-white group-hover:text-purple-300 transition-colors flex items-center gap-1.5">
+                                        <span>{demo.label}</span>
+                                        <ExternalLink className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
+                                      </span>
+                                      <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-purple-950/60 text-purple-300 border border-purple-500/30 shrink-0">
+                                        {demo.badge}
+                                      </span>
+                                    </div>
+                                    <p className="text-xs text-neutral-400 font-light leading-relaxed mb-3">
+                                      {demo.description}
+                                    </p>
+                                  </div>
+                                  <div className="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-neutral-400">
+                                    <span className="truncate max-w-[220px]">
+                                      {demo.url.replace(/^https?:\/\//, "")}
+                                    </span>
+                                    <span className="text-purple-400 group-hover:translate-x-1 transition-transform">
+                                      →
+                                    </span>
+                                  </div>
+                                </a>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Interactive Terminal Inspection Commands */}
+                          {project.inspectionCommands &&
+                            project.inspectionCommands.length > 0 && (
+                              <div className="space-y-3 pt-2">
+                                <div className="flex items-center gap-2 text-xs font-mono text-neutral-400">
+                                  <Terminal className="w-4 h-4 text-purple-400" />
+                                  <span className="uppercase tracking-wider font-semibold text-white">
+                                    {language === "es"
+                                      ? "Auditoría en Terminal (cURL Directo)"
+                                      : "Terminal Verification (Direct cURL)"}
+                                  </span>
+                                </div>
+
+                                <div className="space-y-2.5">
+                                  {project.inspectionCommands.map((cmd, idx) => (
+                                    <div
+                                      key={idx}
+                                      className="rounded-xl border border-white/10 bg-[#08040f] overflow-hidden"
+                                    >
+                                      <div className="flex items-center justify-between px-3.5 py-2 bg-white/[0.03] border-b border-white/10">
+                                        <span className="text-xs font-mono text-neutral-300 font-medium">
+                                          {cmd.title}
+                                        </span>
+                                        <button
+                                          type="button"
+                                          onClick={() =>
+                                            handleCopyCommand(cmd.command, idx)
+                                          }
+                                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-neutral-300 hover:text-white text-xs font-mono transition-colors cursor-pointer"
+                                        >
+                                          {copiedCmdIndex === idx ? (
+                                            <>
+                                              <Check className="w-3.5 h-3.5 text-green-400" />
+                                              <span className="text-green-400">
+                                                {language === "es"
+                                                  ? "Copiado!"
+                                                  : "Copied!"}
+                                              </span>
+                                            </>
+                                          ) : (
+                                            <>
+                                              <Copy className="w-3.5 h-3.5" />
+                                              <span>
+                                                {language === "es" ? "Copiar" : "Copy"}
+                                              </span>
+                                            </>
+                                          )}
+                                        </button>
+                                      </div>
+                                      <div className="p-3.5 overflow-x-auto text-xs font-mono text-purple-300/90 leading-relaxed">
+                                        <pre className="whitespace-pre-wrap">
+                                          {cmd.command}
+                                        </pre>
+                                      </div>
+                                    </div>
+                                  ))}
                                 </div>
                               </div>
-                              <p className="text-xs text-neutral-400 font-light mt-3 leading-relaxed">
-                                <FormattedText text={metric.description} />
-                              </p>
-                            </div>
-                          );
-                        })}
-                      </div>
+                            )}
+                        </div>
+                      )}
                     </section>
                   )}
+
                 </article>
 
-                {/* FOOTER: NAVIGATION PREV & NEXT */}
+                {/* FOOTER: PREV & NEXT PROJECT */}
                 <footer className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
                   {prevProject && (
                     <Link
@@ -703,7 +1014,7 @@ export default function ProjectDetailPage({
                         <span className="block text-[10px] uppercase text-neutral-500 font-mono">
                           {language === "es" ? "Anterior" : "Previous"}
                         </span>
-                        <span className="truncate max-w-[250px] block text-neutral-200 group-hover:text-white">
+                        <span className="truncate max-w-[250px] block text-neutral-200 group-hover:text-white font-medium">
                           {prevProject.title}
                         </span>
                       </div>
@@ -719,7 +1030,7 @@ export default function ProjectDetailPage({
                         <span className="block text-[10px] uppercase text-neutral-500 font-mono">
                           {language === "es" ? "Siguiente" : "Next"}
                         </span>
-                        <span className="truncate max-w-[250px] block text-neutral-200 group-hover:text-white">
+                        <span className="truncate max-w-[250px] block text-neutral-200 group-hover:text-white font-medium">
                           {nextProject.title}
                         </span>
                       </div>
@@ -764,76 +1075,79 @@ export default function ProjectDetailPage({
               </aside>
             </div>
           </div>
-          </div>
         </div>
       </div>
 
-        {/* ========================================================================= */}
-        {/* MOBILE DRAWER FLYOUT (< lg)                                               */}
-        {/* ========================================================================= */}
-        {mobileDrawerOpen && (
-          <div className="fixed inset-0 z-50 flex justify-end lg:hidden">
-            <div
-              className="fixed inset-0 bg-black/70 backdrop-blur-sm"
-              onClick={() => setMobileDrawerOpen(false)}
-            />
-            <div className="relative w-full max-w-[320px] bg-[#0c0517] border-l border-white/10 shadow-2xl h-full flex flex-col p-6 overflow-y-auto z-10 animate-in slide-in-from-right duration-200">
-              <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
-                <div>
-                  <h3 className="text-xs font-mono uppercase tracking-widest text-neutral-400 font-medium">
-                    OTHER PROJECTS
-                  </h3>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setMobileDrawerOpen(false)}
-                  className="p-1.5 rounded-lg border border-white/10 text-neutral-400 hover:text-white hover:bg-white/[0.06] transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+      {/* ========================================================================= */}
+      {/* MOBILE DRAWER FLYOUT (< lg)                                               */}
+      {/* ========================================================================= */}
+      {mobileDrawerOpen && (
+        <div className="fixed inset-0 z-50 flex justify-end lg:hidden">
+          <div
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm"
+            onClick={() => setMobileDrawerOpen(false)}
+          />
+          <div className="relative w-full max-w-[320px] bg-[#0c0517] border-l border-white/10 shadow-2xl h-full flex flex-col p-6 overflow-y-auto z-10 animate-in slide-in-from-right duration-200">
+            <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
+              <div>
+                <h3 className="text-xs font-mono uppercase tracking-widest text-neutral-400 font-medium">
+                  OTHER PROJECTS
+                </h3>
               </div>
+              <button
+                type="button"
+                onClick={() => setMobileDrawerOpen(false)}
+                className="p-1.5 rounded-lg border border-white/10 text-neutral-400 hover:text-white hover:bg-white/[0.06] transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
 
-              <div className="space-y-1.5 flex-1">
-                {projectList.map((p) => {
-                  const isCurrent = p.slug === slug;
-                  return (
-                    <Link
-                      key={p.slug}
-                      href={`/projects/${p.slug}`}
-                      onClick={() => setMobileDrawerOpen(false)}
-                      className={`group flex flex-col gap-1 px-4 py-3 rounded-xl transition-all text-left ${
+            <div className="space-y-1.5 flex-1">
+              {projectList.map((p) => {
+                const isCurrent = p.slug === slug;
+                return (
+                  <Link
+                    key={p.slug}
+                    href={`/projects/${p.slug}`}
+                    onClick={() => setMobileDrawerOpen(false)}
+                    className={`group flex flex-col gap-1 px-4 py-3 rounded-xl transition-all text-left ${
+                      isCurrent
+                        ? "bg-white/10 text-white shadow-sm"
+                        : "hover:bg-white/5 text-neutral-300 hover:text-white"
+                    }`}
+                  >
+                    <span
+                      className={`font-mono text-xs sm:text-sm font-medium truncate transition-colors ${
                         isCurrent
-                          ? "bg-white/10 text-white shadow-sm"
-                          : "hover:bg-white/5 text-neutral-300 hover:text-white"
+                          ? "text-white"
+                          : "text-neutral-200 group-hover:text-white"
                       }`}
                     >
-                      <span
-                        className={`text-sm font-bold truncate transition-colors ${
-                          isCurrent ? "text-white" : "text-neutral-200 group-hover:text-white"
-                        }`}
-                      >
-                        {p.title}
-                      </span>
-                      <span
-                        className={`text-[10px] font-mono uppercase tracking-widest ${
-                          p.status === "LIVE"
-                            ? "text-emerald-400 font-medium"
-                            : "text-neutral-500"
-                        }`}
-                      >
-                        {p.status}
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
+                      {p.title}
+                    </span>
+                    <span
+                      className={`text-[10px] font-mono uppercase tracking-widest ${
+                        p.status === "LIVE"
+                          ? "text-emerald-400 font-medium"
+                          : "text-neutral-500"
+                      }`}
+                    >
+                      {p.status}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
 
-              <div className="pt-6 border-t border-white/10 text-xs font-mono text-neutral-500 text-center">
-                {language === "es" ? "Toca fuera para cerrar" : "Tap outside to close"}
-              </div>
+            <div className="pt-6 border-t border-white/10 text-xs font-mono text-neutral-500 text-center">
+              {language === "es"
+                ? "Toca fuera para cerrar"
+                : "Tap outside to close"}
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+    </div>
   );
 }

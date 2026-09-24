@@ -69,7 +69,7 @@ const TECH_DATABASE: Record<string, TechMeta> = {
 
   // Cloud & DevOps
   kubernetes: { name: "Kubernetes", svg: "/tech-icons/kubernetes.svg", color: "#326CE5", icon: SiKubernetes },
-  k3s: { name: "k3s ARM64", svg: "/tech-icons/kubernetes.svg", color: "#326CE5", icon: SiKubernetes },
+  k3s: { name: "Kubernetes (k3s)", svg: "/tech-icons/kubernetes.svg", color: "#326CE5", icon: SiKubernetes },
   docker: { name: "Docker", svg: "/tech-icons/docker.svg", color: "#2496ED", icon: SiDocker },
   gcp: { name: "Google Cloud", svg: "/tech-icons/googlecloud.svg", color: "#4285F4", icon: SiGooglecloud },
   "google cloud": { name: "Google Cloud", svg: "/tech-icons/googlecloud.svg", color: "#4285F4", icon: SiGooglecloud },

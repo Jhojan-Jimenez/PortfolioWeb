@@ -70,9 +70,9 @@ export default function Skills() {
       title: language === "es" ? "Despliegue Cloud & Contenedores" : "Cloud Deployment & Containers",
       description:
         language === "es"
-          ? "Configuro y despliego aplicaciones usando Docker, clústeres livianos en Kubernetes (k3s ARM64) y servicios gestionados en GCP (Cloud Run, Cloud SQL) o AWS S3, cuidando el consumo de recursos."
-          : "Configuring and deploying services using Docker, lightweight Kubernetes clusters (k3s ARM64), and managed cloud resources on GCP (Cloud Run, Cloud SQL) or AWS S3.",
-      pills: ["k3s ARM64", "Docker", "Cloud Run", "AWS S3"],
+          ? "Configuro y despliego aplicaciones usando Docker, clústeres livianos en Kubernetes (k3s) y servicios gestionados en GCP (Cloud Run, Cloud SQL) o AWS S3, cuidando el consumo de recursos."
+          : "Configuring and deploying services using Docker, lightweight Kubernetes clusters (k3s), and managed cloud resources on GCP (Cloud Run, Cloud SQL) or AWS S3.",
+      pills: ["Kubernetes (k3s)", "Docker", "Cloud Run", "AWS S3"],
     },
     {
       number: "02",
@@ -341,53 +341,93 @@ export default function Skills() {
               return (
                 <div
                   key={item.number}
-                  onMouseEnter={() => setActiveService(idx)}
-                  className={`group relative flex flex-col lg:flex-row lg:items-center justify-between p-6 sm:p-8 md:py-9 md:px-10 border-b border-white/10 transition-all duration-300 cursor-pointer ${
+                  onClick={() => {
+                    setActiveService((prev) => (prev === idx ? null : idx));
+                  }}
+                  onMouseEnter={() => {
+                    // Only trigger hover on larger screens
+                    if (typeof window !== "undefined" && window.innerWidth >= 1024) {
+                      setActiveService(idx);
+                    }
+                  }}
+                  className={`group relative p-5 sm:p-7 lg:py-8 lg:px-10 border-b border-white/10 transition-all duration-300 cursor-pointer ${
                     isActive
                       ? "bg-gradient-to-r from-[#8750f7] via-[#7435f5] to-[#401280] shadow-xl shadow-purple-950/40"
                       : "bg-transparent hover:bg-white/[0.02]"
                   }`}
                 >
-                  {/* Left: Number + Title */}
-                  <div className="flex items-center gap-5 sm:gap-8 lg:w-5/12 shrink-0 mb-3 lg:mb-0">
-                    <span
-                      className={`text-lg sm:text-xl font-mono font-bold transition-colors ${
-                        isActive ? "text-white" : "text-[#8750f7]"
-                      }`}
-                    >
-                      {item.number}
-                    </span>
-                    <h3
-                      className={`text-xl sm:text-2xl md:text-3xl font-bold tracking-tight transition-colors ${
-                        isActive ? "text-white" : "text-white group-hover:text-purple-200"
-                      }`}
-                    >
-                      {item.title}
-                    </h3>
-                  </div>
-
-                  {/* Middle: Description */}
-                  <div className="lg:w-6/12 lg:px-6 mb-3 lg:mb-0">
-                    <p
-                      className={`text-sm sm:text-base font-light leading-relaxed transition-colors ${
-                        isActive ? "text-white/90" : "text-neutral-400"
-                      }`}
-                    >
-                      {item.description}
-                    </p>
-                  </div>
-
-                  {/* Right: Gerold Dynamic Arrow */}
-                  <div className="flex items-center justify-end lg:w-1/12 shrink-0">
-                    <div
-                      className={`transition-all duration-300 p-2 ${
-                        isActive
-                          ? "text-white -rotate-45 scale-110"
-                          : "text-[#8750f7] rotate-45 group-hover:-rotate-45 group-hover:text-purple-300"
-                      }`}
-                    >
-                      <ArrowUpRight className="w-6 h-6 stroke-[2.2]" />
+                  {/* Top / Main Row: Title + Desktop Description + Arrow */}
+                  <div className="flex items-center justify-between">
+                    {/* Left: Number + Title */}
+                    <div className="flex items-center gap-4 sm:gap-6 lg:gap-8 lg:w-5/12 shrink-0">
+                      <span
+                        className={`text-base sm:text-lg lg:text-xl font-mono font-bold transition-colors ${
+                          isActive ? "text-white" : "text-[#8750f7]"
+                        }`}
+                      >
+                        {item.number}
+                      </span>
+                      <h3
+                        className={`text-lg sm:text-xl lg:text-2xl font-bold tracking-tight transition-colors ${
+                          isActive ? "text-white" : "text-white group-hover:text-purple-200"
+                        }`}
+                      >
+                        {item.title}
+                      </h3>
                     </div>
+
+                    {/* Middle (Desktop only): Description */}
+                    <div className="hidden lg:block lg:w-6/12 lg:px-6">
+                      <p
+                        className={`text-sm sm:text-base font-light leading-relaxed transition-colors ${
+                          isActive ? "text-white/90" : "text-neutral-400"
+                        }`}
+                      >
+                        {item.description}
+                      </p>
+                    </div>
+
+                    {/* Right: Gerold Dynamic Arrow / Indicator */}
+                    <div className="flex items-center justify-end lg:w-1/12 shrink-0 pl-3">
+                      <div
+                        className={`transition-all duration-300 p-1.5 sm:p-2 rounded-full ${
+                          isActive
+                            ? "text-white -rotate-45 scale-110 bg-white/15 lg:bg-transparent"
+                            : "text-[#8750f7] rotate-45 group-hover:-rotate-45 group-hover:text-purple-300 bg-white/5 lg:bg-transparent"
+                        }`}
+                      >
+                        <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.2]" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Mobile Collapsible Body (<lg) */}
+                  <div className="lg:hidden">
+                    <AnimatePresence initial={false}>
+                      {isActive && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                          className="overflow-hidden pt-3 sm:pt-4"
+                        >
+                          <p className="text-xs sm:text-sm font-light leading-relaxed text-white/95 mb-3">
+                            {item.description}
+                          </p>
+                          <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/10">
+                            {item.pills.map((pill) => (
+                              <span
+                                key={pill}
+                                className="px-2 py-0.5 rounded-md bg-white/15 text-white text-[11px] font-mono"
+                              >
+                                {pill}
+                              </span>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </div>
               );

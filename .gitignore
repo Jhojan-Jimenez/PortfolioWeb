@@ -27,5 +27,8 @@ yarn-error.log*
 next-env.d.ts
 
 .claude
+.impeccable/
 # LinkedIn & private drafts
 linkedln/
+Postulaciones/
+public/linkedin_banner*

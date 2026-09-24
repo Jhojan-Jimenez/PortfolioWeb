@@ -101,7 +101,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     slug: "gazu",
     title: "Gazu — Cloud-Native Headless E-Commerce",
     subtitle:
-      "Enterprise decoupled commerce engine with **Next.js 15 (App Router)**, **React 19**, **Vendure/NestJS** GraphQL core, **k3s GitOps via ArgoCD**, multi-arch **ARM64 CI/CD**, **Traefik anti-CORS ingress**, and **full-stack observability**.",
+      "Enterprise decoupled commerce engine with **Next.js 15 (App Router)**, **React 19**, **Vendure/NestJS** GraphQL core, **k3s GitOps via ArgoCD**, automated **Docker CI/CD**, **Traefik anti-CORS ingress**, and **full-stack observability**.",
     category: "Cloud Native & E-Commerce",
     categories: ["cloud", "backend", "frontend"],
     badge: "Flagship Architecture",
@@ -110,43 +110,70 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     role: "Full Stack & Cloud Architect",
     teamOrContext: "Cloud-Native Commerce Platform",
     shortDescription:
-      "Enterprise decoupled commerce engine on **Kubernetes (k3s)**. Features **Next.js 15 App Router**, **Vendure GraphQL APIs**, declarative GitOps with **ArgoCD & Kustomize**, multi-arch **ARM64 pipelines on Oracle Cloud**, **Traefik anti-CORS routing**, and production observability (**OTel, Prometheus, PostHog**).",
+      "Enterprise decoupled commerce engine on **Kubernetes (k3s)**. Features **Next.js 15 App Router**, **Vendure GraphQL APIs**, declarative GitOps with **ArgoCD & Kustomize**, automated CI/CD pipelines, **Traefik anti-CORS routing**, and production observability (**OTel, Prometheus, PostHog**).",
     heroImage: "/projects/gazu-ecommerce.png",
-    liveUrl: "https://gazu.jhojan.cloud/",
-    devUrl: "https://dev.gazu.jhojan.cloud/",
-    gitlabUrl: "https://gitlab.com/portfolio-dev3/ecommerce",
+    liveUrl: "https://gazu.jhojan.cloud",
+    devUrl: "https://dev.gazu.jhojan.cloud",
     clusterStatus: {
       indicator: "live",
       badgeText: "Cluster Status: Live on Kubernetes (k3s) | GitOps Synced",
     },
     liveDemos: [
       {
-        label: "Storefront Editorial (Frontend)",
-        url: "https://dev.gazu.jhojan.cloud/",
-        badge: "Next.js 15 · React 19",
+        label: "Storefront (Production)",
+        url: "https://gazu.jhojan.cloud",
+        badge: "Next.js 15 · Production",
         description:
-          "High-performance editorial storefront with App Router, reactive local persistence, and strict a11y accessibility.",
+          "High-performance luxury editorial storefront with App Router, reactive local persistence, and strict a11y accessibility.",
       },
       {
-        label: "GraphQL Shop API (Interactive Playground)",
-        url: "https://dev.gazu.jhojan.cloud/shop-api",
-        badge: "GraphQL · Interactive",
+        label: "Garment Catalog & Filters",
+        url: "https://gazu.jhojan.cloud/shop",
+        badge: "Shop Catalog",
         description:
-          "Live interactive query playground executing real requests against the decoupled commerce engine.",
+          "Product catalog with dynamic variants, reactive facet filters, and instant SSR rendering.",
       },
       {
-        label: "Back-Office / Admin Dashboard",
-        url: "https://dev.gazu.jhojan.cloud/dashboard",
+        label: "Product Detail (PDP)",
+        url: "https://gazu.jhojan.cloud/product/gazu-01",
+        badge: "PDP · High-Res",
+        description:
+          "Technical garment sheet with size selector and high-resolution asset delivery.",
+      },
+      {
+        label: "Decoupled Checkout Pipeline",
+        url: "https://gazu.jhojan.cloud/checkout",
+        badge: "7-Stage Checkout",
+        description:
+          "Decoupled 7-stage state machine handling transactional purchasing, tax computation, and order placement.",
+      },
+      {
+        label: "Admin Dashboard (Vendure)",
+        url: "https://gazu.jhojan.cloud/dashboard",
         badge: "Vendure Admin",
         description:
-          "Administrative control plane for real-time catalog management, inventory tracking, and customer orders.",
+          "Administrative control plane for catalog, inventory, and orders. (User: superadmin / Pass: superadmin123).",
       },
       {
-        label: "Real-Time Observability (Prometheus Metrics)",
-        url: "https://dev.gazu.jhojan.cloud/metrics",
+        label: "GraphiQL IDE (Shop API)",
+        url: "https://gazu.jhojan.cloud/graphiql/shop",
+        badge: "GraphQL · Playground",
+        description:
+          "Interactive query playground to inspect the commerce catalog schema and mutations.",
+      },
+      {
+        label: "Real-Time Observability (Prometheus)",
+        url: "https://gazu.jhojan.cloud/metrics",
         badge: "Prometheus · Live",
         description:
-          "Real-time operational metrics showing Node.js runtime health, query latencies, and backend memory allocation.",
+          "Real-time operational metrics showing Node.js runtime health, event loop latency, and database query timings.",
+      },
+      {
+        label: "Staging Environment (Develop)",
+        url: "https://dev.gazu.jhojan.cloud",
+        badge: "k3s Staging",
+        description:
+          "Isolated testing environment with dedicated database for pre-release validation before production rollout.",
       },
     ],
     inspectionCommands: [
@@ -155,19 +182,19 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         description:
           "Executes an active channel query to verify multi-currency and localization settings directly from the cluster:",
         command:
-          "curl -X POST https://dev.gazu.jhojan.cloud/shop-api \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"query\": \"{ activeChannel { id code defaultLanguageCode currencyCode } }\"}'",
+          "curl -X POST https://gazu.jhojan.cloud/shop-api \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"query\": \"{ activeChannel { id code defaultLanguageCode currencyCode } }\"}'",
       },
       {
         title: "Audit Ingress SSL Certificate & HTTP Headers",
         description:
           "Inspects HTTP/2 negotiation, automatic TLS certificate issued by Cert-Manager, and cache headers:",
-        command: "curl -I https://dev.gazu.jhojan.cloud/",
+        command: "curl -I https://gazu.jhojan.cloud/",
       },
       {
         title: "Inspect Prometheus Runtime Metrics",
         description:
           "Pulls raw operational telemetry and Node.js runtime gauges exposed by the backend:",
-        command: "curl https://dev.gazu.jhojan.cloud/metrics | grep vendure",
+        command: "curl https://gazu.jhojan.cloud/metrics | grep vendure",
       },
     ],
     technologies: [
@@ -179,7 +206,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
       "ArgoCD",
       "Kustomize",
       "Docker Buildx",
-      "Oracle Cloud (ARM64)",
+      "Oracle Cloud (OCI)",
       "Traefik Ingress",
       "PostgreSQL (StatefulSet)",
       "GraphQL APIs",
@@ -195,9 +222,9 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         description: "Self-healing Kubernetes cluster state synchronized declaratively from Git",
       },
       {
-        label: "MULTI-ARCH PIPELINE",
-        value: "Linux ARM64",
-        description: "Docker Buildx + QEMU on Oracle Cloud Ampere A1 for zero-cost efficiency",
+        label: "CONTAINER ENGINE",
+        value: "Docker Buildx",
+        description: "Optimized immutable container images and automated deployment with zero downtime",
       },
       {
         label: "INGRESS ARCHITECTURE",
@@ -211,57 +238,57 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
       },
     ],
     problem: {
-      title: "The Challenge: Monolithic Bottlenecks & Brittle Operations",
+      title: "The Challenge: Monolithic Coupling & Operational Fragility",
       summary:
-        "Traditional monolithic e-commerce platforms couple storefront UI with transactional processing, introduce **cross-domain CORS frictions**, depend on **fragile manual deployments**, and risk **data loss on stateful persistence**.",
+        "Monoliths couple catalog browsing with transactional logic, while decoupling services introduces CORS friction, persistence risks, and operational fragility under manual deployments.",
       points: [
-        "Storefront rendering competing directly with **transaction processing** on the same runtime, degrading performance.",
-        "Manual `kubectl apply` operations in production clusters leading to **configuration drift** and operational downtime.",
-        "Cross-domain frontend-backend architectures generating **CORS overhead** and insecure cross-site cookie workarounds.",
-        "Browser adblockers distorting **critical conversion funnels, product analytics, and customer retention metrics**.",
+        "Storefront rendering competes with transactional checkout for CPU and database connections, degrading conversion during traffic surges.",
+        "Decoupling frontend and backend across separate domains creates recurring CORS preflight latency and fragile cookie handling.",
+        "Deploying changes manually via kubectl apply without GitOps causes configuration drift and lack of auditability during outages.",
+        "Running relational databases as disposable stateless pods risks data loss and volume detachment during rolling updates.",
       ],
     },
     solution: {
-      title: "The Solution: Decoupled Cloud-Native Commerce Architecture",
+      title: "The Solution: Decoupled Cloud-Native Commerce Ecosystem",
       summary:
-        "Engineered an enterprise-grade cloud-native **headless commerce ecosystem on Kubernetes (k3s)** with **declarative GitOps delivery**, multi-arch **ARM64 compilation**, and **production-grade distributed telemetry**.",
+        "Engineered a decoupled headless commerce engine on Kubernetes (k3s) with declarative GitOps delivery, immutable containers, and production observability.",
       points: [
-        "Decoupled **Next.js 15 App Router** storefront communicating with a high-throughput **Vendure/NestJS GraphQL core**.",
-        "Declarative GitOps continuous deployment using **ArgoCD and Kustomize overlays**, strictly banning manual cluster changes.",
-        "**Traefik Ingress** routing storefront (`/`), API (`/shop-api`), and back-office (`/dashboard`) under a **single host without CORS**.",
-        "**Stateless application pods** scaled horizontally while **PostgreSQL is isolated in a StatefulSet** with dedicated PVCs.",
-        "End-to-end observability combining **OpenTelemetry** distributed tracing, **Prometheus** metrics, and **PostHog** product analytics.",
+        "Decoupled Next.js 15 App Router storefront connected to a high-throughput Vendure/NestJS GraphQL core.",
+        "Declarative GitOps deployment with ArgoCD and Kustomize overlays, eliminating manual cluster changes.",
+        "Traefik Ingress routing storefront, GraphQL API, and admin dashboard under a single domain without CORS.",
+        "Horizontally scalable stateless application pods with PostgreSQL isolated in a StatefulSet with dedicated PVCs.",
+        "Distributed observability combining OpenTelemetry tracing, Prometheus metrics, and adblock-resistant PostHog analytics.",
       ],
     },
     architecture: {
       title: "The Senior Factor: 5 Architectural Engineering Decisions",
       summary:
-        "Key engineering tradeoffs and decisions resolved to guarantee high availability, zero-cost cloud efficiency, immunity to configuration drift, and enterprise security.",
+        "Core tradeoffs resolved to guarantee high availability, zero infrastructure cost, immunity to configuration drift, and enterprise security.",
       decisions: [
         {
           title: "Declarative GitOps with ArgoCD & Kustomize",
-          choice: "ArgoCD Controller + Kustomize Overlays (dev vs prod)",
-          why: "Manual `kubectl apply` is banned. All desired state is declared in Git; **ArgoCD enforces automated deployment, drift correction, and self-healing** if pods diverge.",
+          choice: "ArgoCD Controller + Kustomize Overlays",
+          why: "Eliminates configuration drift with automated reconciliation and self-healing from Git.",
         },
         {
-          title: "Multi-Arch CI/CD Pipeline (Linux ARM64)",
-          choice: "Docker Buildx + QEMU Emulation in GitLab CI",
-          why: "Specifically targeted **Ampere A1 ARM64 processors on Oracle Cloud**, reducing **infrastructure costs to near zero** while maximizing instruction throughput.",
+          title: "Automated Container CI/CD Pipeline",
+          choice: "Docker Buildx + GitLab CI / GitHub Actions",
+          why: "Builds immutable cached container images, guaranteeing fast, reproducible rollouts with zero service downtime.",
         },
         {
-          title: "Single Domain & Anti-CORS Architecture via Traefik",
-          choice: "Traefik Ingress + Automated Cert-Manager (Let's Encrypt)",
-          why: "Routes `/` to Next.js, and `/shop-api` & `/dashboard` to Vendure on the same host. **Completely eliminates CORS issues**, allows secure `SameSite=Lax/Strict` session cookies, and reuses **one auto-renewed TLS certificate**.",
+          title: "Single-Domain Anti-CORS Ingress via Traefik",
+          choice: "Traefik Ingress + Let's Encrypt Cert-Manager",
+          why: "Consolidates storefront, API, and back-office under one domain with automatic TLS, eliminating CORS.",
         },
         {
           title: "Lifecycle Separation (Stateful vs Stateless)",
-          choice: "Stateless App Pods + PostgreSQL StatefulSet with dedicated PVCs",
-          why: "Frontend and backend pods scale horizontally **without data loss**. PostgreSQL is isolated in a **StatefulSet with dedicated PVCs** to safeguard transactions.",
+          choice: "Stateless App Pods + PostgreSQL StatefulSet",
+          why: "Scales stateless application pods independently while isolating PostgreSQL with dedicated PVCs to safeguard transactions.",
         },
         {
-          title: "Production-Grade Observability & Analytics",
-          choice: "OpenTelemetry (OTel gRPC) + Prometheus (prom-client) + PostHog Proxy",
-          why: "Combines **OTel distributed tracing**, live **Prometheus gauges**, and **privacy-first PostHog analytics routed via Next.js proxy** to bypass adblockers.",
+          title: "Production Observability & Product Analytics",
+          choice: "OpenTelemetry + Prometheus + PostHog Proxy",
+          why: "Combines OTel distributed tracing, live Prometheus gauges, and privacy-compliant PostHog analytics routed through Next.js.",
         },
       ],
     },
@@ -298,7 +325,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         description:
           "Experiencia de aterrizaje editorial y catálogo con tipografía de alto impacto, fotografía de alta costura y renderizado SSR instantáneo en Next.js 15 App Router.",
         src: "/projects/gazu-ecommerce.png",
-        openUrl: "https://dev.gazu.jhojan.cloud/",
+        openUrl: "https://gazu.jhojan.cloud",
         openLabel: "Abrir Storefront en Vivo",
       },
       {
@@ -306,9 +333,9 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         type: "iframe",
         tabLabel: "Topología k3s & GitOps",
         badge: "Topología k3s",
-        title: "Diagrama de Arquitectura Cloud-Native en Oracle Cloud ARM64",
+        title: "Diagrama de Arquitectura Cloud-Native en Kubernetes (k3s)",
         description:
-          "Diagrama interactivo ilustrando Traefik Ingress, pods de Next.js, APIs de Vendure, StatefulSet de PostgreSQL, ArgoCD y OpenTelemetry.",
+          "Diagrama interactivo ilustrando Traefik Ingress, pods de Next.js, APIs de Vendure, StatefulSet de PostgreSQL y OpenTelemetry.",
         src: "/diagrams/gazu-architecture.html?embed=1&theme=dark",
         openUrl: "/diagrams/gazu-architecture.html",
         openLabel: "Abrir Diagrama Interactivo",
@@ -334,8 +361,8 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         description:
           "Navegación fluida por colecciones de moda y catálogo interactivo con filtros reactivos y renderizado optimizado en Next.js 15.",
         src: "/projects/gazu-collection.png",
-        openUrl: "https://dev.gazu.jhojan.cloud/",
-        openLabel: "Abrir Colección en Vivo",
+        openUrl: "https://gazu.jhojan.cloud/shop",
+        openLabel: "Abrir Catálogo en Vivo",
       },
       {
         id: "checkout-ui",
@@ -346,7 +373,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         description:
           "Proceso de compra en tiempo real con validación de inventario, cálculo de impuestos, métodos de envío y pasarela de pago.",
         src: "/projects/gazu-checkout.png",
-        openUrl: "https://dev.gazu.jhojan.cloud/",
+        openUrl: "https://gazu.jhojan.cloud/checkout",
         openLabel: "Probar Flujo de Compra",
       },
       {
@@ -358,7 +385,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         description:
           "Pantalla de confirmación de orden y persistencia transaccional en PostgreSQL con emisión de código de seguimiento y resumen.",
         src: "/projects/gazu-order-success.png",
-        openUrl: "https://dev.gazu.jhojan.cloud/",
+        openUrl: "https://gazu.jhojan.cloud",
         openLabel: "Ver Plataforma en Vivo",
       },
     ],
@@ -377,27 +404,40 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     shortDescription:
       "Enterprise multimodal casting platform. Discovers talent through **natural language descriptions or reference photo uploads** using **CLIP ViT-B/32 (512d)**, automated biometric attribute extraction via **GPT-4o-mini Vision**, and two-stage retrieval with **pgvector cosine similarity** and SQL trait filtering.",
     heroImage: "/projects/TalentMatchAI.png",
-    liveUrl: "https://models.jhojan.cloud/",
-    devUrl: "https://models.jhojan.cloud/",
-    githubUrl: "https://github.com/Jhojan-Jimenez/Models",
+    liveUrl: "https://models.jhojan.cloud/admin/search",
+    devUrl: "https://models.jhojan.cloud",
     clusterStatus: {
       indicator: "live",
       badgeText: "Production Live | VPS Coolify & Docker Compose",
     },
     liveDemos: [
       {
-        label: "Talent Discovery Studio (Frontend)",
-        url: "https://models.jhojan.cloud/",
-        badge: "React · Vite · Live",
+        label: "Multimodal Talent Search (Demo Mode)",
+        url: "https://models.jhojan.cloud/admin/search",
+        badge: "Demo · No Login Required",
         description:
-          "Interactive talent scouting interface with real-time biometric filters, semantic search bar, and dynamic comp-cards.",
+          "Recommended link for evaluators and recruiters. Enables full natural language searches and visual similarity matching without credentials.",
       },
       {
-        label: "Semantic Search & Computer Vision API",
-        url: "https://models.jhojan.cloud/api/docs",
-        badge: "FastAPI · Swagger",
+        label: "Main Portal & Login",
+        url: "https://models.jhojan.cloud",
+        badge: "Admin & Talent Portal",
         description:
-          "Production OpenAPI documentation for multimodal query endpoints, CLIP embeddings, and background attribute workers.",
+          "Administrative control dashboard and comprehensive talent profile intake management.",
+      },
+      {
+        label: "Interactive OpenAPI Docs (Swagger)",
+        url: "https://models.jhojan.cloud/docs",
+        badge: "FastAPI · Swagger UI",
+        description:
+          "Interactive documentation covering all multimodal embedding, vector search, and biometric extraction endpoints.",
+      },
+      {
+        label: "Health & Engine Diagnostic Status",
+        url: "https://models.jhojan.cloud/api/health",
+        badge: "Health Check · Live",
+        description:
+          "Real-time diagnostic health check endpoint reporting active service runtime and CLIP ViT-B/32 model status.",
       },
     ],
     inspectionCommands: [
@@ -533,8 +573,8 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         description:
           "Search interface allowing casting directors to describe desired aesthetics or match by reference photos.",
         src: "/projects/TalentMatchAI.png",
-        openUrl: "https://models.jhojan.cloud/",
-        openLabel: "Live Studio",
+        openUrl: "https://models.jhojan.cloud/admin/search",
+        openLabel: "Open Search Demo",
       },
       {
         id: "model-comp-card",
@@ -545,6 +585,8 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         description:
           "Talent profile detailing attributes extracted automatically via GPT-4o Vision.",
         src: "/projects/talentmatch-comp-card.png",
+        openUrl: "https://models.jhojan.cloud/admin/search",
+        openLabel: "Test Demo Search",
       },
       {
         id: "mobile-scouting",
@@ -555,6 +597,8 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         description:
           "Public intake portal for aspiring talent to submit polaroid photographs, body measurements, and division preferences with automated validation.",
         src: "/projects/talentmatch-scouting.png",
+        openUrl: "https://models.jhojan.cloud",
+        openLabel: "Open Main Portal",
         technicalNotes: [
           "FastAPI asynchronous image processing pipeline hosted on Coolify VPS",
           "Structured intake schema validating physical measurements and polaroid specifications",
@@ -617,7 +661,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
       {
         label: "CAMPUS USERS",
         value: "100+ Rides",
-        description: "Coordinated carpool routes across university community corridors",
+        description: "Coordinated shared mobility routes across university community corridors",
       },
     ],
     problem: {
@@ -688,7 +732,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         badge: "Leaflet · OSM",
         title: "Geospatial Corridor Routing & Ride Creation",
         description:
-          "Driver portal allowing verified university community members to publish campus carpool routes, select pickup waypoints on OpenStreetMap, configure seat capacity, and launch synchronized ride rooms.",
+          "Driver portal allowing verified university community members to publish campus shared routes, select pickup waypoints on OpenStreetMap, configure seat capacity, and launch synchronized ride rooms.",
         src: "/projects/WheelUSCreateRidePage.png",
         openUrl: "https://wheelus.jhojan.cloud",
         openLabel: "Visit WheelUS Web",
@@ -704,10 +748,10 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         badge: "Race-Condition Safe",
         title: "Atomic Reservation Mutex & State Machine",
         description:
-          "Distributed concurrency barrier designed to eliminate double-booking race conditions when multiple students tap 'Reserve' on the final remaining carpool seat simultaneously.",
+          "Distributed concurrency barrier designed to eliminate double-booking race conditions when multiple students tap 'Reserve' on the final remaining vehicle seat simultaneously.",
         technicalNotes: [
           "Atomic transactional state machine resolving competing bookings deterministically in <15ms",
-          "Zero overbooking incidents recorded across 100+ production university carpool trips",
+          "Zero overbooking incidents recorded across 100+ production university shared trips",
           "Instant rejection payload delivered over WebSockets with alternative driver suggestions",
         ],
         telemetrySpecs: {
@@ -732,7 +776,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
     shortDescription:
       "High-performance interactive 3D WebGL showcase built with **Next.js, Three.js, and React Three Fiber**. Features scroll-driven dynamic camera transitions, real-time physically-based rendering (**PBR materials**), and **Draco geometry compression (-72% payload)**.",
     heroImage: "/projects/mercedes-amg-hd.png",
-    liveUrl: "https://productexperience.vercel.app/",
+    liveUrl: "https://mercedes.jhojan.cloud",
     technologies: [
       "Three.js",
       "React Three Fiber (R3F)",
@@ -830,7 +874,7 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         description:
           "High-performance interactive 3D WebGL showroom rendering physically-based materials (metallic clearcoat, carbon fiber weave, glass refraction) with responsive racing telemetry.",
         src: "/projects/mercedes-amg-hd.png",
-        openUrl: "https://productexperience.vercel.app/",
+        openUrl: "https://mercedes.jhojan.cloud",
         openLabel: "Experience 3D Showroom",
         technicalNotes: [
           "Stable 60 FPS rendering achieved via geometry instancing and draw-call batching",
@@ -838,19 +882,35 @@ export const PROJECTS_DATA: ProjectCaseStudy[] = [
         ],
       },
       {
-        id: "showroom-experience",
+        id: "v8-powertrain",
         type: "image",
-        tabLabel: "Showroom Interface",
-        badge: "Next.js · Shaders",
-        title: "Scroll-Driven Camera Choreography & Customizer",
+        tabLabel: "V8 Powertrain",
+        badge: "Engine & Chassis",
+        title: "AMG 6.3L M159 V8 Atmospheric Powertrain Inspection",
         description:
-          "Cinematic camera trajectories scrubbed directly to viewport scroll progress, enabling detailed inspection from the front splitter to the high-downforce rear wing.",
-        src: "/projects/3DCarPage.png",
-        openUrl: "https://productexperience.vercel.app/",
-        openLabel: "Launch Live Demo",
+          "Camera trajectory focusing on the naturally aspirated V8 with dry sump lubrication, front mid-engine layout, and 8,500 RPM rev limit.",
+        src: "/projects/mercedes-powertrain-v8.png",
+        openUrl: "https://mercedes.jhojan.cloud",
+        openLabel: "Experience 3D Showroom",
         technicalNotes: [
-          "Draco 3D mesh compression cutting network payload by over 75% for sub-2s loads",
-          "Declarative Three.js component tree running alongside imperative WebGL render loops",
+          "Smooth cubic-bezier camera spline interpolation synchronized to scroll",
+          "High-detail carbon fiber and polished aluminum shaders rendered at 60 FPS",
+        ],
+      },
+      {
+        id: "aero-downforce",
+        type: "image",
+        tabLabel: "Aero & Downforce",
+        badge: "Track Record",
+        title: "Multi-Stage Carbon Wing & Venturi Diffusers",
+        description:
+          "Detailed rear perspective featuring the adjustable carbon fiber rear wing and underfloor venturi diffusers engineered for extreme endurance apex grip.",
+        src: "/projects/mercedes-aero-downforce.png",
+        openUrl: "https://mercedes.jhojan.cloud",
+        openLabel: "Experience 3D Showroom",
+        technicalNotes: [
+          "PBR texture mapping with metallic, roughness, and ambient occlusion channels",
+          "Complex geometries optimized via Draco compression for fast asset loading",
         ],
       },
     ],

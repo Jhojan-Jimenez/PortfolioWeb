@@ -2,46 +2,74 @@ export const PROJECTS_ES: Record<string, any> = {
   gazu: {
     title: "Gazu — E-Commerce Headless Cloud-Native",
     subtitle:
-      "Motor de comercio desacoplado empresarial con **Next.js 15 (App Router)**, **React 19**, núcleo GraphQL en **Vendure/NestJS**, GitOps en **k3s vía ArgoCD**, CI/CD multi-arquitectura **ARM64**, **Traefik anti-CORS** y **observabilidad integral**.",
+      "Motor de comercio desacoplado empresarial con **Next.js 15 (App Router)**, **React 19**, núcleo GraphQL en **Vendure/NestJS**, GitOps en **k3s vía ArgoCD**, CI/CD automatizado con **Docker**, **Traefik anti-CORS** y **observabilidad integral**.",
     category: "Cloud Native & E-Commerce",
     badge: "Arquitectura Flagship",
-    date: "2025 – Presente",
+    date: "2026",
     role: "Arquitecto Cloud & Ingeniero Full Stack",
     teamOrContext: "Plataforma de Comercio Cloud-Native",
     shortDescription:
-      "Motor de comercio empresarial desacoplado en **Kubernetes (k3s)**. Incluye **Next.js 15 App Router**, APIs GraphQL de **Vendure**, GitOps declarativo con **ArgoCD y Kustomize**, pipelines multi-arch **ARM64 en Oracle Cloud**, enrutamiento **Traefik anti-CORS** y observabilidad con **OTel, Prometheus y PostHog**.",
+      "Motor de comercio empresarial desacoplado en **Kubernetes (k3s)**. Incluye **Next.js 15 App Router**, APIs GraphQL de **Vendure**, GitOps declarativo con **ArgoCD y Kustomize**, pipelines de CI/CD automatizados, enrutamiento **Traefik anti-CORS** y observabilidad con **OTel, Prometheus y PostHog**.",
     clusterStatus: {
       indicator: "live",
       badgeText: "Estado del Clúster: En Vivo en Kubernetes (k3s) | GitOps Sincronizado",
     },
     liveDemos: [
       {
-        label: "Storefront Editorial (Frontend)",
-        url: "https://dev.gazu.jhojan.cloud/",
-        badge: "Next.js 15 · React 19",
+        label: "Storefront Principal (Producción)",
+        url: "https://gazu.jhojan.cloud",
+        badge: "Next.js 15 · Producción",
         description:
-          "Tienda editorial de alto rendimiento con App Router, persistencia reactiva en cliente y estándares de accesibilidad a11y.",
+          "Tienda editorial de alto rendimiento con App Router, experiencia de lujo, persistencia reactiva en cliente y a11y.",
       },
       {
-        label: "GraphQL Shop API (Playground Interactivo)",
-        url: "https://dev.gazu.jhojan.cloud/shop-api",
-        badge: "GraphQL · Interactivo",
+        label: "Catálogo de Prendas & Filtros",
+        url: "https://gazu.jhojan.cloud/shop",
+        badge: "Catálogo",
         description:
-          "Playground interactivo para ejecutar queries reales de catálogo y pedidos directamente contra el motor de comercio.",
+          "Listado de productos con variantes dinámicas, filtrado reactivo por facetas y renderizado SSR instantáneo.",
+      },
+      {
+        label: "Ficha de Producto (PDP)",
+        url: "https://gazu.jhojan.cloud/product/gazu-01",
+        badge: "PDP · Alta Resolución",
+        description:
+          "Ficha técnica con selector de tallas y renderizado de imágenes de alta resolución.",
+      },
+      {
+        label: "Pipeline de Checkout",
+        url: "https://gazu.jhojan.cloud/checkout",
+        badge: "Checkout en 7 Fases",
+        description:
+          "Máquina de estados de compra desacoplada en 7 fases transaccionales para carritos y órdenes.",
       },
       {
         label: "Back-Office / Panel Administrativo",
-        url: "https://dev.gazu.jhojan.cloud/dashboard",
+        url: "https://gazu.jhojan.cloud/dashboard",
         badge: "Vendure Admin",
         description:
-          "Panel administrativo para gestión de catálogo, inventario en tiempo real, canales de venta y procesamiento de órdenes.",
+          "Panel visual de control de tienda, stock, promociones y órdenes. (Usuario: superadmin / Clave: superadmin123).",
+      },
+      {
+        label: "GraphiQL IDE (Shop API)",
+        url: "https://gazu.jhojan.cloud/graphiql/shop",
+        badge: "GraphQL · Playground",
+        description:
+          "Playground interactivo para explorar y ejecutar queries reales del schema de catálogo y carrito.",
       },
       {
         label: "Observabilidad en Tiempo Real (Métricas Prometheus)",
-        url: "https://dev.gazu.jhojan.cloud/metrics",
+        url: "https://gazu.jhojan.cloud/metrics",
         badge: "Prometheus · En Vivo",
         description:
-          "Muestra de métricas vivas del runtime de Node.js, latencias de consultas y consumo de memoria del backend.",
+          "Telemetría en vivo del runtime de Node.js, event loop y tiempos de respuesta de consultas a la base de datos.",
+      },
+      {
+        label: "Ambiente de Staging (Develop)",
+        url: "https://dev.gazu.jhojan.cloud",
+        badge: "Staging k3s",
+        description:
+          "Ambiente completamente aislado con base de datos propia para validación de nuevas características antes de producción.",
       },
     ],
     inspectionCommands: [
@@ -68,9 +96,9 @@ export const PROJECTS_ES: Record<string, any> = {
         description: "Estado del clúster sincronizado declarativamente desde Git con auto-reparación",
       },
       {
-        label: "PIPELINE MULTI-ARCH",
-        value: "Linux ARM64",
-        description: "Docker Buildx + QEMU en Oracle Cloud Ampere A1 para eficiencia de costo cero",
+        label: "CONTENERIZACIÓN",
+        value: "Docker Buildx",
+        description: "Imágenes inmutables optimizadas y entrega continua sin tiempo de inactividad",
       },
       {
         label: "ARQUITECTURA INGRESS",
@@ -84,57 +112,57 @@ export const PROJECTS_ES: Record<string, any> = {
       },
     ],
     problem: {
-      title: "El Desafío: Cuellos de Botella Monolíticos y Operaciones Frágiles",
+      title: "El Desafío: Monolitos Acoplados y Fragilidad Operativa",
       summary:
-        "Las plataformas monolíticas tradicionales acoplan la interfaz visual con la lógica transaccional, generan **fricciones de CORS**, dependen de **despliegues manuales propensos a error** y arriesgan la **persistencia con estado**.",
+        "Los monolitos acoplan la navegación con la lógica transaccional, mientras que desacoplar servicios introduce fricciones de CORS, riesgos de persistencia y fragilidad operativa ante despliegues manuales.",
       points: [
-        "Renderizado de catálogo compitiendo directamente con la **base de datos transaccional**, degradando la conversión de compra.",
-        "Comandos manuales `kubectl apply` en clústeres de producción provocando **desvío de configuración (drift)** y caídas.",
-        "Arquitecturas desacopladas multi-dominio que originan **bloqueos de CORS** y mecanismos vulnerables de cookies.",
-        "Bloqueadores de anuncios de clientes que distorsionan los **embudos críticos de conversión y analítica**.",
+        "El renderizado de catálogo compite por CPU y conexiones con el checkout transaccional, degradando la conversión en picos de tráfico.",
+        "Desacoplar frontend y backend en dominios distintos genera bloqueos recurrentes de CORS, latencia por preflights OPTIONS y fallos en cookies de sesión.",
+        "Desplegar con comandos manuales kubectl apply en el clúster provoca desvíos de configuración (drift) y falta de trazabilidad ante caídas.",
+        "Ejecutar bases de datos relacionales como pods stateless desechables arriesga pérdida o corrupción de datos durante despliegues continuos.",
       ],
     },
     solution: {
-      title: "La Solución: Arquitectura de Comercio Cloud-Native Desacoplada",
+      title: "La Solución: Ecosistema Headless Cloud-Native en Kubernetes",
       summary:
-        "Diseño e implementación de un ecosistema **headless en Kubernetes (k3s)**, con entrega continua mediante **GitOps declarativo**, compilación **multi-arquitectura ARM64** y **telemetría distribuida** de producción.",
+        "Motor de comercio desacoplado en Kubernetes (k3s) con entrega continua mediante GitOps, contenedores inmutables y observabilidad distribuida.",
       points: [
-        "Storefront desacoplado en **Next.js 15 App Router** comunicándose con el núcleo GraphQL de **Vendure/NestJS**.",
-        "Pipeline de GitOps declarativo con **ArgoCD y Kustomize**, eliminando modificaciones manuales en el clúster.",
-        "Ingress **Traefik** que consolida storefront (`/`), API (`/shop-api`) y panel (`/dashboard`) bajo un **único host sin CORS**.",
-        "Separación estricta: pods de aplicación **stateless escalables** y **PostgreSQL aislado en StatefulSet** con PVCs dedicados.",
-        "Observabilidad de extremo a extremo integrando trazas distribuidas con **OpenTelemetry**, métricas con **Prometheus** y analítica con **PostHog**.",
+        "Storefront editorial desacoplado en Next.js 15 App Router conectado al núcleo modular Vendure/NestJS GraphQL.",
+        "Entrega continua declarativa con ArgoCD y Kustomize, eliminando cualquier modificación manual en el clúster.",
+        "Ingress Traefik que unifica storefront, API y panel administrativo bajo un solo host HTTPS sin problemas de CORS.",
+        "Pods de aplicación stateless escalables horizontalmente con base de datos PostgreSQL aislada en StatefulSet.",
+        "Observabilidad integral con trazas de OpenTelemetry, métricas en Prometheus y analítica con PostHog.",
       ],
     },
     architecture: {
       title: "The Senior Factor: 5 Decisiones Clave de Ingeniería",
       summary:
-        "Decisiones arquitectónicas y compromisos de ingeniería resueltos para garantizar alta disponibilidad, costo cero de infraestructura, inmunidad ante desvíos de configuración y seguridad empresarial.",
+        "Compromisos arquitectónicos resueltos para garantizar alta disponibilidad, costo cero de infraestructura, inmunidad a desvíos y seguridad empresarial.",
       decisions: [
         {
           title: "GitOps Declarativo con ArgoCD y Kustomize",
-          choice: "Controlador ArgoCD + Overlays de Kustomize (dev vs prod)",
-          why: "El clúster no se modifica con `kubectl apply`; todo el estado deseado reside en Git. **ArgoCD provee auto-reparación (self-healing)** si un pod se desvía y **separación estricta de entornos**.",
+          choice: "Controlador ArgoCD + Overlays de Kustomize",
+          why: "Elimina el desvío de configuración con sincronización continua y auto-reparación desde Git.",
         },
         {
-          title: "Pipeline CI/CD Multi-Arch (Linux ARM64)",
-          choice: "Docker Buildx + Emulación QEMU en GitLab CI",
-          why: "Optimizado específicamente para procesadores **ARM64 (Ampere A1 en Oracle Cloud)**, reduciendo los **costos de infraestructura a cero** mientras maximiza el **throughput por ciclo**.",
+          title: "Pipeline CI/CD Automatizado con Docker",
+          choice: "Docker Buildx + GitLab CI / GitHub Actions",
+          why: "Compilación de imágenes inmutables con capas en caché, garantizando despliegues repetibles y cero caídas de servicio.",
         },
         {
           title: "Dominio Único y Arquitectura Anti-CORS vía Traefik",
-          choice: "Traefik Ingress + Cert-Manager (Let's Encrypt automático)",
-          why: "Enruta en un solo dominio: `/` hacia Next.js, y `/shop-api` & `/dashboard` hacia Vendure. **Elimina problemas de CORS**, permite cookies seguras `SameSite=Lax/Strict` y reutiliza un **solo certificado TLS**.",
+          choice: "Traefik Ingress + Let's Encrypt Cert-Manager",
+          why: "Consolida storefront, API y panel bajo un único dominio con TLS automático, eliminando problemas de CORS.",
         },
         {
-          title: "Separación de Ciclos de Vida (Stateful vs Stateless)",
-          choice: "Pods Stateless + PostgreSQL en StatefulSet con PVCs dedicados",
-          why: "El frontend y backend se escalan horizontalmente **sin riesgo**. La base de datos PostgreSQL está blindada en **volúmenes persistentes dedicados (PVC)** ante cualquier fallo de despliegue.",
+          title: "Separación Stateless vs Stateful",
+          choice: "Pods Stateless + PostgreSQL en StatefulSet",
+          why: "Escala los pods de aplicación horizontalmente mientras blinda PostgreSQL con almacenamiento persistente dedicado.",
         },
         {
           title: "Observabilidad de Grado de Producción",
-          choice: "OpenTelemetry (OTel gRPC) + Prometheus (prom-client) + Proxy PostHog",
-          why: "**Trazas distribuidas con OTel**, métricas operativas vivas en **Prometheus** y analítica de producto con **PostHog vía proxy inverso** en Next.js para resistir bloqueadores y cumplir **GDPR**.",
+          choice: "OpenTelemetry + Prometheus + Proxy PostHog",
+          why: "Combina trazas distribuidas con OTel, métricas vivas en Prometheus y analítica PostHog resistente a bloqueadores.",
         },
       ],
     },
@@ -170,9 +198,9 @@ export const PROJECTS_ES: Record<string, any> = {
       {
         tabLabel: "Topología k3s & GitOps",
         badge: "Topología k3s",
-        title: "Diagrama de Arquitectura Cloud-Native en Oracle Cloud ARM64",
+        title: "Diagrama de Arquitectura Cloud-Native en Kubernetes (k3s)",
         description:
-          "Diagrama interactivo ilustrando Traefik Ingress, pods de Next.js, APIs de Vendure, StatefulSet de PostgreSQL, ArgoCD y OpenTelemetry.",
+          "Diagrama interactivo ilustrando Traefik Ingress, pods de Next.js, APIs de Vendure, StatefulSet de PostgreSQL y OpenTelemetry.",
         openLabel: "Abrir Diagrama Interactivo",
       },
       {
@@ -227,18 +255,32 @@ export const PROJECTS_ES: Record<string, any> = {
     },
     liveDemos: [
       {
-        label: "Talent Discovery Studio (Frontend)",
-        url: "https://models.jhojan.cloud/",
-        badge: "React · Vite · En Vivo",
+        label: "Buscador Multimodal (Modo Demo)",
+        url: "https://models.jhojan.cloud/admin/search",
+        badge: "Demo Sin Login · Recomendado",
         description:
-          "Interfaz interactiva de scouting con filtros biométricos en tiempo real, barra de búsqueda semántica y comp-cards dinámicas.",
+          "Enlace recomendado para reclutadores. Permite probar búsquedas en lenguaje natural y similitud visual sin necesidad de iniciar sesión.",
       },
       {
-        label: "API de Búsqueda Semántica & Computer Vision",
-        url: "https://models.jhojan.cloud/api/docs",
+        label: "Portal Principal & Login",
+        url: "https://models.jhojan.cloud",
+        badge: "Portal · Login",
+        description:
+          "Acceso al portal principal, panel administrativo y gestión integral de perfiles de modelos.",
+      },
+      {
+        label: "API Docs (Swagger UI)",
+        url: "https://models.jhojan.cloud/docs",
         badge: "FastAPI · Swagger",
         description:
-          "Documentación interactiva OpenAPI para endpoints de consulta multimodal, embeddings CLIP y workers de atributos en background.",
+          "Documentación interactiva OpenAPI de todos los endpoints de embedding CLIP, matching y extracción biométrica.",
+      },
+      {
+        label: "Health & Engine Diagnostic Status",
+        url: "https://models.jhojan.cloud/api/health",
+        badge: "Health · En Vivo",
+        description:
+          "Endpoint de diagnóstico en tiempo real del estado del servicio y modelo activo (CLIP ViT-B/32).",
       },
     ],
     inspectionCommands: [
@@ -352,7 +394,7 @@ export const PROJECTS_ES: Record<string, any> = {
         title: "Casting de Talentos por Lenguaje Natural e Imagen",
         description:
           "Interfaz de búsqueda que permite describir estéticas deseadas o buscar por fotos de referencia.",
-        openLabel: "Abrir Live Studio",
+        openLabel: "Abrir Buscador Demo",
       },
       {
         tabLabel: "Comp-Card con GPT-4o",
@@ -360,6 +402,7 @@ export const PROJECTS_ES: Record<string, any> = {
         title: "Comp-Card Automatizada y Desglose de Atributos",
         description:
           "Perfil de talento detallando atributos extraídos automáticamente mediante GPT-4o Vision.",
+        openLabel: "Probar Buscador Demo",
       },
       {
         tabLabel: "Portal de Scouting",
@@ -367,6 +410,7 @@ export const PROJECTS_ES: Record<string, any> = {
         title: "Portal Público de Postulación y Scouting de Talentos",
         description:
           "Interfaz de registro para nuevos aspirantes donde suben sus fotografías polaroids y medidas corporales para evaluación automatizada.",
+        openLabel: "Abrir Portal Principal",
       },
       {
         tabLabel: "Regla Fenotípica",
@@ -379,7 +423,7 @@ export const PROJECTS_ES: Record<string, any> = {
   },
 
   wheelus: {
-    title: "WheelUS — Plataforma de Carpooling Universitario en Tiempo Real",
+    title: "WheelUS — Plataforma de Movilidad Universitaria en Tiempo Real",
     subtitle:
       "Sistema de transporte universitario seguro y distribuido con **geolocalización en tiempo real**, **reserva de asientos atómica (0 sobreventas)** y **verificación institucional**.",
     category: "Sistemas Distribuidos & Geolocalización",
@@ -481,7 +525,7 @@ export const PROJECTS_ES: Record<string, any> = {
         title: "Trazado y Asignación de Rutas en Tiempo Real",
         description:
           "Mapa interactivo para definir rutas entre campus y municipios aledaños con cálculo de paradas estratégicas seguras.",
-        openLabel: "Ver Repositorio",
+        openLabel: "Ver Proyecto",
         technicalNotes: [
           "Cálculo de polilíneas y puntos de parada optimizados para transporte compartido",
           "Renderizado vectorizado en el navegador con Leaflet a 60 FPS",
@@ -493,7 +537,7 @@ export const PROJECTS_ES: Record<string, any> = {
         title: "Arquitectura de Bloqueo de Asientos Sin Carreras",
         description:
           "Implementación de transacciones aisladas para garantizar que dos usuarios simultáneos nunca puedan reservar el mismo asiento en un vehículo.",
-        openLabel: "Ver Repositorio",
+        openLabel: "Ver Proyecto",
         technicalNotes: [
           "Uso de bloqueos pesimistas SELECT FOR UPDATE en PostgreSQL",
           "Tiempos de confirmación transaccional inferiores a 45ms",
@@ -526,7 +570,7 @@ export const PROJECTS_ES: Record<string, any> = {
       },
       {
         label: "MATERIALES PBR",
-        value: "Realistas",
+        value: "PBR 4K",
         description: "Mapas de rugosidad, metalicidad y reflejos ambientales IBL",
       },
       {
@@ -605,6 +649,30 @@ export const PROJECTS_ES: Record<string, any> = {
         technicalNotes: [
           "Compresión Draco aplicada a todas las mallas de la carrocería e interiores",
           "Iluminación basada en imágenes (IBL) para reflejos realistas de estudio",
+        ],
+      },
+      {
+        tabLabel: "Motor V8 M159",
+        badge: "Tren Motriz",
+        title: "Inspección del Motor AMG 6.3L M159 V8 Atmosférico",
+        description:
+          "Choreografía de cámara hacia el vano motor detallando el V8 atmosférico con lubricación por cárter seco y corte a 8,500 RPM.",
+        openLabel: "Ver Proyecto",
+        technicalNotes: [
+          "Interpolación fluida de cámara con splines sincronizadas al progreso del scroll",
+          "Fibras de carbono y materiales metálicos renderizados en tiempo real a 60 FPS",
+        ],
+      },
+      {
+        tabLabel: "Aerodinámica & Downforce",
+        badge: "Carga Aerodinámica",
+        title: "Alerón de Carbono Ajustable y Difusores Venturi",
+        description:
+          "Vista trasera detallada del alerón multietapa y difusores inferiores diseñados para máxima carga aerodinámica en circuitos de resistencia.",
+        openLabel: "Ver Proyecto",
+        technicalNotes: [
+          "Mapas PBR con canales de rugosidad, metalicidad y oclusión ambiental en tiempo real",
+          "Compresión de geometrías complejas con Draco para una carga inferior a 2 segundos",
         ],
       },
     ],
@@ -709,7 +777,7 @@ export const PROJECTS_ES: Record<string, any> = {
         title: "Motor de Evaluación y Matriz de Recomendación",
         description:
           "Interfaz clínica que calcula el esquema pendiente del paciente y alerta sobre intervalos mínimos requeridos entre dosis según lineamientos PAI.",
-        openLabel: "Ver Repositorio",
+        openLabel: "Ver Proyecto",
         technicalNotes: [
           "100% Determinista: lógica formal basada en reglas sanitarias oficiales",
           "Evaluación instantánea en menos de 15ms sin latencia de red",
@@ -721,7 +789,7 @@ export const PROJECTS_ES: Record<string, any> = {
         title: "Fundamento Normativo y Registro de Decisiones",
         description:
           "Generación de reportes clínicos con la justificación legal y epidemiológica de cada dosis sugerida para el expediente del paciente.",
-        openLabel: "Ver Repositorio",
+        openLabel: "Ver Proyecto",
         technicalNotes: [
           "Exportación estructurada de recomendaciones en formatos estándar de salud",
           "Respaldado con citas de circulares epidemiológicas del Ministerio de Salud",

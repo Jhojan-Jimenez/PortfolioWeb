@@ -60,11 +60,6 @@ export default function Hero() {
       labelLine1: language === "es" ? "Beca de Excelencia" : "Academic Honors",
       labelLine2: language === "es" ? "80% de Mérito" : "80% Merit Scholar",
     },
-    {
-      number: "99.9%",
-      labelLine1: language === "es" ? "Disponibilidad" : "System",
-      labelLine2: language === "es" ? "& Fiabilidad" : "Reliability",
-    },
   ];
 
   const containerVariants = {
@@ -241,24 +236,24 @@ export default function Hero() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 pt-10 border-t border-white/10 text-left"
+          className="grid grid-cols-3 gap-2 sm:gap-6 lg:gap-8 pt-8 sm:pt-10 border-t border-white/10"
         >
           {stats.map((st, i) => (
             <div
               key={i}
-              className="flex items-center gap-3.5 sm:gap-4 p-4 rounded-2xl bg-[#140c1c]/60 border border-white/5 hover:border-[#8750f7]/40 transition-all duration-300"
+              className="flex flex-col sm:flex-row items-center justify-center text-center sm:text-left gap-1 sm:gap-4 p-2.5 sm:p-5 rounded-xl sm:rounded-2xl bg-[#140c1c]/60 border border-white/5 hover:border-[#8750f7]/40 transition-all duration-300"
             >
-              <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white font-mono shrink-0">
+              <div className="text-xl sm:text-4xl lg:text-5xl font-extrabold text-white font-mono shrink-0">
                 <span>{st.number}</span>
                 {st.suffix && (
-                  <span className="text-lg sm:text-xl text-[#8750f7] font-semibold">
+                  <span className="text-xs sm:text-xl text-[#8750f7] font-semibold">
                     {st.suffix}
                   </span>
                 )}
               </div>
-              <div className="text-xs sm:text-sm text-neutral-300 font-medium leading-snug">
+              <div className="text-[10px] sm:text-sm text-neutral-300 font-medium leading-tight sm:leading-snug">
                 <span>{st.labelLine1}</span>
-                <br />
+                <br className="hidden sm:inline" />{" "}
                 <span className="text-neutral-400">{st.labelLine2}</span>
               </div>
             </div>

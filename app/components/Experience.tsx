@@ -76,8 +76,8 @@ export default function Experience() {
           tag: language === "es" ? "Proyecto Aplicado / Capstone" : "Applied Capstone",
           description:
             language === "es"
-              ? "Diseño e implementación de la arquitectura central y flujos de reserva de WheelUS, plataforma de carpooling universitario."
-              : "Designed and implemented the core architecture and booking dispatch flows for the WheelUS university carpooling platform.",
+              ? "Diseño e implementación de la arquitectura central y flujos de reserva de WheelUS, plataforma de movilidad universitaria colaborativa."
+              : "Designed and implemented the core architecture and booking dispatch flows for the WheelUS university shared mobility platform.",
         },
       ],
       technologies: [
@@ -267,7 +267,7 @@ export default function Experience() {
                   </div>
 
                   {/* 5. Summary Description */}
-                  <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed max-w-3xl">
+                  <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed w-full">
                     {job.description}
                   </p>
 
@@ -292,9 +292,9 @@ export default function Experience() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                        className="overflow-hidden"
+                        className="overflow-hidden w-full"
                       >
-                        <div className="pt-4 mt-3 border-t border-white/10 space-y-3 max-w-3xl">
+                        <div className="pt-4 mt-3 border-t border-white/10 space-y-3 w-full">
                           {/* Star Metric */}
                           <div className="flex items-center gap-2 text-xs font-mono text-purple-300 bg-purple-950/30 px-3 py-1.5 rounded-lg border border-purple-500/20 w-fit">
                             <span>✦</span>
@@ -390,7 +390,7 @@ export default function Experience() {
                   </div>
 
                   {/* 5. Summary Description */}
-                  <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed max-w-3xl">
+                  <p className="text-xs sm:text-sm text-neutral-300 font-light leading-relaxed w-full">
                     {edu.description}
                   </p>
 
@@ -415,9 +415,9 @@ export default function Experience() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                        className="overflow-hidden"
+                        className="overflow-hidden w-full"
                       >
-                        <div className="pt-4 mt-3 border-t border-white/10 space-y-3 max-w-3xl">
+                        <div className="pt-4 mt-3 border-t border-white/10 space-y-3 w-full">
                           {/* Badge Metric */}
                           <div className="flex items-center gap-2 text-xs font-mono text-purple-300 bg-purple-950/30 px-3 py-1.5 rounded-lg border border-purple-500/20 w-fit">
                             <span>✦</span>
