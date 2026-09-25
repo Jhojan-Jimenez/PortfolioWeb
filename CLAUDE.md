@@ -55,3 +55,24 @@ Todos los documentos de hoja de vida / CV y Resume se gestionan **exclusivamente
 * **Español:** `public/resume/Jhojan_JimenezCV.docx` y `public/resume/Jhojan_JimenezCV.pdf`
 * **Inglés:** `public/resume/Jhojan_Jimenez_Resume.docx` y `public/resume/Jhojan_Jimenez_Resume.pdf`
 * **Regla:** Cualquier modificación futura a la hoja de vida debe realizarse directamente sobre los archivos de `public/resume/` (tanto en español como en inglés). La carpeta `linkedln/` está en `.gitignore` y solo contiene `main.md` para el perfil de LinkedIn.
+
+---
+
+## ☁️ Infraestructura Cloud & Servicios Activos (Coolify v4 en Oracle Cloud)
+
+* **Servidor OCI (ARM64):** `150.136.63.103` (4 OCPU, 24 GB RAM, Ubuntu 24.04).
+* **Acceso SSH:** `ssh -i ~/.ssh/oracle-key ubuntu@150.136.63.103`.
+* **Orquestador:** Coolify v4 + Traefik Proxy (SSL automático vía Let's Encrypt / Cloudflare).
+* **Servicios desplegados y operativos:**
+  - **Vaultwarden (Password Manager):** `https://vault.jhojan.cloud` (SQLite, `SIGNUPS_ALLOWED=false`).
+  - **Actual Budget (Personal Finance):** `https://budget.jhojan.cloud` (Node.js/React + SQLite).
+  - **Actual Bridge (Microservice):** `http://actual-bridge:5008` (Ingesta interna HTTP para n8n con `@actual-app/api`).
+  - **n8n Automation (Workflows):** `https://n8n.jhojan.cloud` (Node.js + Task Runners + Workflow `BancolombiaSync1` activo para ingesta de alertas bancarias hacia Actual Budget).
+  - **TalentMatch AI:** `https://models.jhojan.cloud` (FastAPI + pgvector + CLIP).
+  - **Gazu E-commerce (Prod):** `https://gazu.jhojan.cloud` (Vendure NestJS + Postgres).
+  - **Gazu E-commerce (Dev):** `https://dev.gazu.jhojan.cloud` (Playground GraphiQL).
+  - **Portfolio Web:** `https://dev.jhojan.cloud` (Next.js en Vercel).
+* **Automatización Bancolombia ➔ Actual Budget:** Flujo activo que monitorea correos de `alertasynotificaciones@an.notificacionesbancolombia.com`, parsea transferencias de ahorros (*4412) y compras con tarjeta de crédito (*6874), y las sincroniza en tiempo real en Actual Budget.
+* **Diseño UI/UX con IA (Penpot MCP & n8n MCP):** Conexión activa en tiempo real vía `~/.gemini/config/mcp_config.json`.
+* *Para especificaciones detalladas, variables y comandos de API, ver sección correspondiente en `AGENTS.md`.*
+
