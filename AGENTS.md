@@ -250,13 +250,18 @@ Esta sección consolida la arquitectura de servidores, red y servicios en produc
        - `*3013453853` ➔ Payee: `Daniel`
        - `*3114457098` ➔ Payee: `Esteban`
        - `PILA` ➔ Payee: `PILA`
-  8. **Cuentas en Dólares (USD) y Sincronizador Automático de TRM:**
+  8. **Cuentas en Dólares (USD), Spread DólarApp (-$30 COP) y Scheduler Automático:**
      - **Cuentas configuradas:** `Deel (USD)` y `DólarApp (USD)` (Tracking / Off-budget para no contaminar el presupuesto mensual en COP y reflejar el Patrimonio Neto real).
-     - **Saldos iniciales calibrados:**
-       - `Deel (USD)`: $657 USD.
-       - `DólarApp (USD)`: $2,316 USD.
-       - Total: $2,973 USD.
-     - **Motor de TRM Automático en `actual-bridge`:** Consulta diariamente la API pública oficial de la Superintendencia Financiera de Colombia (`ceyp-9c7c.json` en `datos.gov.co`) y calcula el valor equivalente en COP. Si la TRM cambia, genera automáticamente un ajuste por diferencia en cambio (*«Ajuste TRM»*) cada 6 horas o mediante `GET /api/sync-trm`.
+     - **Saldos calibrados:**
+       - `Deel (USD)`: $657 USD (Saldo actual: ~$2.167.844 COP).
+       - `DólarApp (USD)`: $2,316 USD (Saldo actual: ~$7.641.897 COP).
+       - Total: $2,973 USD (Patrimonio neto actual: ~$9.809.741 COP).
+     - **Spread Real DólarApp:** Al valor oficial de la TRM de la Superfinanciera se le resta automáticamente **$30 COP** (`effectiveTRM = officialTRM - 30`) para igualar exactamente la cotización real de liquidación / venta de DólarApp al transferir a cuentas colombianas.
+     - **Scheduler Automático en Background (`actual-bridge`):**
+       - **Horario activo:** Corre **cada 2 horas** entre las **8:00 AM y las 5:00 PM** (Hora de Colombia / COT, `America/Bogota`).
+       - **Comportamiento:** Consulta la API de la Superfinanciera (`datos.gov.co`), aplica el spread de -$30 COP, evalúa los saldos de Deel y DólarApp, y si hay variación registra el ajuste y sincroniza con Actual Server automáticamente.
+       - **Cero intervención manual:** 100% automático, transparente y desatendido.
+     - **Endpoint API Manual (Opcional):** `POST /api/sync-trm` en la red privada de Docker.
 
 ---
 
