@@ -250,6 +250,13 @@ Esta sección consolida la arquitectura de servidores, red y servicios en produc
        - `*3013453853` ➔ Payee: `Daniel`
        - `*3114457098` ➔ Payee: `Esteban`
        - `PILA` ➔ Payee: `PILA`
+  8. **Cuentas en Dólares (USD) y Sincronizador Automático de TRM:**
+     - **Cuentas configuradas:** `Deel (USD)` y `DólarApp (USD)` (Tracking / Off-budget para no contaminar el presupuesto mensual en COP y reflejar el Patrimonio Neto real).
+     - **Saldos iniciales calibrados:**
+       - `Deel (USD)`: $657 USD.
+       - `DólarApp (USD)`: $2,316 USD.
+       - Total: $2,973 USD.
+     - **Motor de TRM Automático en `actual-bridge`:** Consulta diariamente la API pública oficial de la Superintendencia Financiera de Colombia (`ceyp-9c7c.json` en `datos.gov.co`) y calcula el valor equivalente en COP. Si la TRM cambia, genera automáticamente un ajuste por diferencia en cambio (*«Ajuste TRM»*) cada 6 horas o mediante `GET /api/sync-trm`.
 
 ---
 
