@@ -237,6 +237,17 @@ Esta sección consolida la arquitectura de servidores, red y servicios en produc
      - **Instalación en iOS (Safari):** Abrir `https://budget.jhojan.cloud`, presionar icono *Compartir* -> *Añadir a pantalla de inicio*.
      - **Instalación en Android (Chrome):** Abrir `https://budget.jhojan.cloud`, presionar menú 3 puntos -> *Instalar aplicación* o *Añadir a pantalla principal*.
      - Se ejecuta a pantalla completa como una app nativa, con icono oficial y rendimiento instantáneo.
+  7. **Reglas y Mapeos Oficiales Configurados:**
+     - **Categorías activas:** `Food`, `Despensa`, `Salud`, `Pagos`, `Suscripciones`, `Compra Random`, `Transporte`, `Universidad & Campus`, `Bills`, `Otros / Desconocidos`.
+     - **Diferenciación Food vs. Despensa:** Tiendas de abarrotes y supermercados (`D1`, `Ara`, `Éxito`, `Carulla`) ➔ Categoría `Despensa`. Restaurantes externos (Presto, Mimos, La Wafflería, etc.) ➔ Categoría `Food`.
+     - **Universidad de La Sabana:** Todos los movimientos de la Sabana ➔ Categoría `Food`.
+     - **Mapeo de Transferencias / Contactos Personales:**
+       - `*3203282014` ➔ Payee: `Nequi Personal`
+       - `*3225206523` ➔ Payee: `Pago parqueadero Cicla`
+       - `*3224788002` ➔ Payee: `Juliana`
+       - `*3135276319` ➔ Payee: `Julian`
+       - `*3222024082` ➔ Payee: `Santiago`
+       - `*3013453853` ➔ Payee: `Daniel`
 
 ---
 
