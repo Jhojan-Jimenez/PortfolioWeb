@@ -203,6 +203,7 @@ Esta sección consolida la arquitectura de servidores, red y servicios en produc
 
 | Servicio | Subdominio Oficial | Tipo / Stack | Contenedor Docker / Identificadores | Estado & Endpoints Clave |
 | :--- | :--- | :--- | :--- | :--- |
+| **Vocero CRM** | `https://crm.jhojan.cloud` | Next.js 15 + React 19 + PostgreSQL 16 + Drizzle | Contenedores: `vocero-crm-app-1`, `vocero-crm-vocero-db-1`<br>Path: `/opt/vocero-crm` | **Desplegado y activo (Port 3000).**<br>Health: `/api/health` (HTTP 200)<br>Canales: WhatsApp, Instagram, Messenger.<br>Requiere DNS A `crm` -> `150.136.63.103`. |
 | **Vaultwarden** | `https://vault.jhojan.cloud` | Rust (Bitwarden API) + SQLite | Contenedor: `vaultwarden-80u6tznp6qg7nahrpbxnmmuo`<br>Service UUID: `80u6tznp6qg7nahrpbxnmmuo`<br>App UUID: `cffq6jsrid3qr2ucxcwrelwr` | **Producción activa.**<br>Admin: `/admin`<br>Health: HTTP 200.<br>`SIGNUPS_ALLOWED=false` (Blindado). |
 | **Actual Budget** | `https://budget.jhojan.cloud` | Node.js / React (Local-First) + SQLite | Contenedor: `emursazvdsphob5jhsmp1zfm-*`<br>Project UUID: `tbgwta7ym6nukwsa9uejqpst`<br>App UUID: `emursazvdsphob5jhsmp1zfm` | **Desplegado y activo (Port 5006).**<br>Volumen: `/data`<br>Requiere DNS A `budget` -> `150.136.63.103`. |
 | **Actual Bridge** | `http://actual-bridge:5008` (Interno) | Node.js (`@actual-app/api`) Microservice | Contenedor: `actual-bridge`<br>Red: `coolify` + `ooayufs5gbx88mkfeiqbahvo` | **Producción activa.**<br>Endpoints: `/health`, `/accounts`, `/api/transaction`<br>Mapea cuentas ahorros/crédito y convierte pesos a centavos automáticamente. |
@@ -277,7 +278,30 @@ Esta sección consolida la arquitectura de servidores, red y servicios en produc
 
 ---
 
-### 🛠️ 6. Cheat Sheet de Comandos Operativos para Agentes
+### 🤖 6. Configuración Específica de Vocero CRM (WhatsApp & Omnichannel Sales AI)
+
+* **Subdominio Oficial:** `https://crm.jhojan.cloud`
+* **Directorio en Servidor:** `/opt/vocero-crm`
+* **Versión instalada:** `1.4.0` (Git commit `b3469f9`)
+* **Stack:** Next.js 15 (standalone) + React 19 + PostgreSQL 16 + Drizzle ORM + Better Auth + SSE.
+* **Contenedores:**
+  - `vocero-crm-app-1`: Aplicación Next.js expuesta en puerto 3000 interno, enlazada a Traefik con TLS automático.
+  - `vocero-crm-vocero-db-1`: PostgreSQL 16 con base de datos `vocero` y volumen persistente `vocero-crm_vocero_pg`.
+* **Volúmenes Persistentes:**
+  - `vocero-crm_vocero_app_data`: Montado en `/data` para adjuntos multimedia, audios y branding.
+  - `vocero-crm_vocero_pg`: Base de datos PostgreSQL.
+* **Canales Habilitados:**
+  - `CHANNELS=whatsapp,instagram,messenger`
+  - `AGENDA=true` (Integración con Google Meet / Zoom).
+* **Registro de Usuario Inicial:**
+  - El primer usuario que se registre en `https://crm.jhojan.cloud/register` creará la organización principal y se convertirá en propietario.
+  - El registro público se cierra automáticamente tras la primera organización (controlado por `isPublicSignupAllowed`).
+* **DNS Requerido en Cloudflare:**
+  - Registro tipo `A`: `crm` apuntando a `150.136.63.103`.
+
+---
+
+### 🛠️ 7. Cheat Sheet de Comandos Operativos para Agentes
 
 Para cualquier futuro agente que necesite consultar, reiniciar o diagnosticar servicios en el servidor:
 
