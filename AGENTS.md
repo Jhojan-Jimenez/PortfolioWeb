@@ -163,173 +163,31 @@ Para añadir o editar proyectos en el portfolio web, consultar la guía detallad
 
 ---
 
-## ☁️ Infraestructura Cloud & Servicios Autohospedados (Coolify v4 en Oracle Cloud ARM64)
+## ☁️ Infraestructura Cloud & Servicios Autohospedados (Oracle Cloud ARM64)
 
-Esta sección consolida la arquitectura de servidores, red y servicios en producción para que cualquier agente de IA en futuras sesiones pueda operar, diagnosticar o desplegar nuevas aplicaciones sin fricción.
+> 📖 **DOCUMENTACIÓN MODULAR COMPLETA:** La memoria técnica detallada y los manuales operativos de cada servicio han sido modularizados en el directorio [`infra/`](file:///home/claude/Workspace/Portafolio/CV/PortfolioWeb/infra/).
+> * **Entrada General:** Consulta [`infra/README.md`](file:///home/claude/Workspace/Portafolio/CV/PortfolioWeb/infra/README.md) para topología de red, Coolify v4, Traefik Reverse Proxy, Let's Encrypt TLS y Cloudflare DNS.
 
-### 🖥️ 1. Servidor Físico / VM (Oracle Cloud Infrastructure)
+### 🗺️ Directorio de Servicios & Guías Especializadas (`AGENTS.md`):
 
-* **Proveedor:** Oracle Cloud Infrastructure (OCI) — Free Tier Always On.
-* **Instancia:** VM.Standard.A1.Flex (Arquitectura **ARM64 / aarch64**).
-* **Especificaciones:** 4 OCPUs, 24 GB de memoria RAM, disco NVMe de 200 GB.
-* **Sistema Operativo:** Ubuntu 24.04 LTS.
-* **IP Pública:** `150.136.63.103`
-* **Acceso SSH desde el entorno local (WSL):**
-  ```bash
-  ssh -o StrictHostKeyChecking=no -i ~/.ssh/oracle-key ubuntu@150.136.63.103
-  ```
-* **DNS & CDN:** Gestionado a través de **Cloudflare** para el dominio raíz `jhojan.cloud`.
-  - Registros de tipo `A` apuntando a `150.136.63.103`.
-
----
-
-### 🕹️ 2. Orquestador Coolify v4 & Traefik Proxy
-
-* **Plataforma:** Coolify v4 autohospedado en Docker.
-* **Panel Web Interno:** `http://localhost:8000` (accesible mediante túnel SSH o API).
-* **Reverse Proxy:** **Traefik** (contenedor `coolify-proxy`).
-  - Gestiona automáticamente la terminación SSL/TLS con certificados de Let's Encrypt para todos los subdominios `*.jhojan.cloud`.
-  - Enrutamiento por cabeceras `Host` hacia los contenedores de aplicación en la red interna de Docker (`coolify`).
-* **API REST de Coolify:** `http://localhost:8000/api/v1`
-* **Token de Autenticación de la API:**
-  ```text
-  1|coolify-antigravity-token-xyz123
-  ```
-* **Cabecera requerida:** `Authorization: Bearer 1|coolify-antigravity-token-xyz123`
+| Servicio | Subdominio Oficial | Guía Especializada | Estado & Stack |
+| :--- | :--- | :--- | :--- |
+| **Vocero CRM** | `https://crm.jhojan.cloud` | [vocero-crm/AGENTS.md](file:///home/claude/Workspace/Portafolio/CV/PortfolioWeb/infra/vocero-crm/AGENTS.md) | **Producción activa.** Next.js 15 + PostgreSQL 16 + Meta Cloud API (WhatsApp línea `+57 313 4289397` conectada). |
+| **Actual Budget & Bridge** | `https://budget.jhojan.cloud` | [actual-budget/AGENTS.md](file:///home/claude/Workspace/Portafolio/CV/PortfolioWeb/infra/actual-budget/AGENTS.md) | **Producción activa.** Node.js / React Local-First + `@actual-app/api` Bridge + Ingesta Bancolombia + TRM Spread (-$30 COP). |
+| **n8n Automation** | `https://n8n.jhojan.cloud` | [n8n/AGENTS.md](file:///home/claude/Workspace/Portafolio/CV/PortfolioWeb/infra/n8n/AGENTS.md) | **Producción activa.** Node.js n8n v2.40.6 + IMAP Alertas Bancolombia + MCP Server HTTP (`/mcp-server/http`). |
+| **Vaultwarden** | `https://vault.jhojan.cloud` | [vaultwarden/AGENTS.md](file:///home/claude/Workspace/Portafolio/CV/PortfolioWeb/infra/vaultwarden/AGENTS.md) | **Producción activa.** Rust (Bitwarden API) + SQLite. `SIGNUPS_ALLOWED=false` (Blindado). |
+| **TalentMatch AI** | `https://models.jhojan.cloud` | [talentmatch-ai/AGENTS.md](file:///home/claude/Workspace/Portafolio/CV/PortfolioWeb/infra/talentmatch-ai/AGENTS.md) | **Producción activa.** FastAPI + CLIP ViT-B/32 + PostgreSQL 16 pgvector. |
+| **Gazu E-commerce** | `https://gazu.jhojan.cloud` | [gazu-ecommerce/AGENTS.md](file:///home/claude/Workspace/Portafolio/CV/PortfolioWeb/infra/gazu-ecommerce/AGENTS.md) | **Producción activa.** Vendure (NestJS) + GraphQL + PostgreSQL 16 StatefulSet. Staging: `dev.gazu.jhojan.cloud`. |
+| **Portfolio Web** | `https://dev.jhojan.cloud` | [AGENTS.md (Raíz)](file:///home/claude/Workspace/Portafolio/CV/PortfolioWeb/AGENTS.md) | **Producción activa.** Next.js 16 + React 19 + Tailwind CSS en Vercel Edge. |
 
 ---
 
-### 📦 3. Registro Central de Servicios Desplegados
-
-| Servicio | Subdominio Oficial | Tipo / Stack | Contenedor Docker / Identificadores | Estado & Endpoints Clave |
-| :--- | :--- | :--- | :--- | :--- |
-| **Vocero CRM** | `https://crm.jhojan.cloud` | Next.js 15 + React 19 + PostgreSQL 16 + Drizzle | Contenedores: `vocero-crm-app-1`, `vocero-crm-vocero-db-1`<br>Path: `/opt/vocero-crm` | **Desplegado y activo (Port 3000).**<br>Health: `/api/health` (HTTP 200)<br>Canales: WhatsApp, Instagram, Messenger.<br>Requiere DNS A `crm` -> `150.136.63.103`. |
-| **Vaultwarden** | `https://vault.jhojan.cloud` | Rust (Bitwarden API) + SQLite | Contenedor: `vaultwarden-80u6tznp6qg7nahrpbxnmmuo`<br>Service UUID: `80u6tznp6qg7nahrpbxnmmuo`<br>App UUID: `cffq6jsrid3qr2ucxcwrelwr` | **Producción activa.**<br>Admin: `/admin`<br>Health: HTTP 200.<br>`SIGNUPS_ALLOWED=false` (Blindado). |
-| **Actual Budget** | `https://budget.jhojan.cloud` | Node.js / React (Local-First) + SQLite | Contenedor: `emursazvdsphob5jhsmp1zfm-*`<br>Project UUID: `tbgwta7ym6nukwsa9uejqpst`<br>App UUID: `emursazvdsphob5jhsmp1zfm` | **Desplegado y activo (Port 5006).**<br>Volumen: `/data`<br>Requiere DNS A `budget` -> `150.136.63.103`. |
-| **Actual Bridge** | `http://actual-bridge:5008` (Interno) | Node.js (`@actual-app/api`) Microservice | Contenedor: `actual-bridge`<br>Red: `coolify` + `ooayufs5gbx88mkfeiqbahvo` | **Producción activa.**<br>Endpoints: `/health`, `/accounts`, `/api/transaction`<br>Mapea cuentas ahorros/crédito y convierte pesos a centavos automáticamente. |
-| **n8n Automation** | `https://n8n.jhojan.cloud` | Node.js (n8n v2.40.6 latest) + Task Runners + SQLite | Contenedor: `n8n-ooayufs5gbx88mkfeiqbahvo`<br>Project UUID: `fcw3szspldgurwd8jdg063y8`<br>Service UUID: `ooayufs5gbx88mkfeiqbahvo` | **Desplegado y activo (Port 5678).**<br>MCP Server: `https://n8n.jhojan.cloud/mcp-server/http`<br>Workflow activo: `Bancolombia to Actual Budget Ingestion`. |
-| **TalentMatch AI** | `https://models.jhojan.cloud` | FastAPI + CLIP ViT-B/32 + PostgreSQL 16 pgvector | Docker App gestionada por Coolify | **Producción activa.**<br>Health: `/api/health`<br>Demo Search: `/admin/search?demo=true` |
-| **Gazu E-commerce (Prod)** | `https://gazu.jhojan.cloud` | Vendure (NestJS) + PostgreSQL 16 StatefulSet | K3s / Coolify Docker stack | **Producción activa.**<br>Tienda: `/shop`<br>API: `/shop-api`<br>Admin: `/dashboard`<br>Métricas: `/metrics` |
-| **Gazu E-commerce (Dev)** | `https://dev.gazu.jhojan.cloud` | Vendure (NestJS) + GraphiQL Playground | Coolify Docker stack | **Staging activo.**<br>GraphiQL: `/graphiql/shop`<br>Dashboard: `/dashboard`<br>Métricas: `/metrics` |
-| **Portfolio Web** | `https://dev.jhojan.cloud` | Next.js 16 + React 19 + Tailwind CSS | Vercel Edge Network | **Producción activa.**<br>Repositorio local: `PortfolioWeb/` |
+### 🖥️ Datos de Conexión a la VM (OCI):
+* **IP:** `150.136.63.103` (Oracle Cloud Always On — ARM64 Ampere Altra 4 OCPUs / 24 GB RAM).
+* **Acceso SSH:** `ssh -o StrictHostKeyChecking=no -i ~/.ssh/oracle-key ubuntu@150.136.63.103`
+* **Coolify API:** `http://localhost:8000/api/v1` (Token: `1|coolify-antigravity-token-xyz123`).
 
 ---
-
-### 💳 4. Pipeline de Automatización Bancolombia ➔ Actual Budget
-
-* **Objetivo:** Ingesta automática de movimientos bancarios (Transferencias de Cuenta de Ahorros y Compras con Tarjeta de Crédito) desde correos de alertas de Bancolombia hacia Actual Budget.
-* **Remitente Monitoreado:** `alertasynotificaciones@an.notificacionesbancolombia.com`
-* **Workflow en n8n:** `Bancolombia to Actual Budget Ingestion` (ID: `BancolombiaSync1`)
-* **Arquitectura del Flujo:**
-  1. **Email Trigger (IMAP):** Conexión con Gmail vía App Password (`s3AllFKmktIHF0yZ`). Monitorea correos `UNSEEN` del remitente oficial de Bancolombia y marca como leídos tras procesar.
-  2. **Parse Bancolombia Email (Code Node):** Regex multiformato en JavaScript puro. Extrae:
-     - Transferencias (`Transferiste $X desde tu cuenta *4412 a la cuenta *Y...`): Mapea a `Bancolombia Ahorros`, genera monto negativo en pesos y centavos, fecha ISO y notas detalladas.
-     - Compras TC (`Compraste COP X en COMERCIO con tu T.Cred *6874...`): Mapea a `Bancolombia Tarjeta Credito (*6874)`, extrae el comercio como Payee, monto negativo y fecha ISO.
-     - Pagos Código QR (`pagaste $X por codigo QR desde tu cuenta *4412 a la llave Y...`): Mapea a `Bancolombia Ahorros`, Payee `Pago QR (Llave Y)`, y categoría inicial `Otros / Desconocidos`.
-  3. **Send to Actual Budget (HTTP Request):** Invoca `POST http://actual-bridge:5008/api/transaction` en la red privada de Docker.
-  4. **Actual Bridge Microservice:** Servicio ultraligero Node.js (`/opt/actual-bridge` en la VM) usando `@actual-app/api` con sesión permanente autenticada. Resuelve cuentas por alias o crea la tarjeta de crédito automáticamente, convierte pesos a centavos y ejecuta la sincronización CRDT contra Actual Server.
-     - **Regla Fallback:** Si una transacción entra de un comercio desconocido sin reglas previas, se le asigna automáticamente la categoría `Otros / Desconocidos` para mantener los balances e informes 100% íntegros sin registros huérfanos.
-     - **Motor de Auto-Aprendizaje (`autoLearnRules`):** Monitorea transacciones modificadas en la UI de Actual Budget. Si el usuario reasigna la categoría de una compra (ej. de *Otros / Desconocidos* a *Food* o *Transporte*), el bridge detecta el cambio automáticamente, genera la regla en Actual Budget y la sincroniza. Las futuras compras en ese comercio heredan la nueva categoría en automático sin intervención manual. Corre en cada inserción de transacción y cada 5 minutos en background (o vía `GET /api/learn`).
-  5. **Informes Nativos Creados en Actual Budget:**
-     - **Gastos por Lugar / Beneficiario:** Vista de barras agrupada por `Payee` para comparar gastos en cada comercio individualmente.
-     - **Gastos por Categoría:** Vista Donut / Torta agrupada por `Category` para control macro del presupuesto.
-  6. **PWA & Acceso Móvil (Progressive Web App):**
-     - Actual Budget es una **PWA nativa** Local-First con soporte offline y base de datos SQLite sincronizada por CRDT.
-     - **Instalación en iOS (Safari):** Abrir `https://budget.jhojan.cloud`, presionar icono *Compartir* -> *Añadir a pantalla de inicio*.
-     - **Instalación en Android (Chrome):** Abrir `https://budget.jhojan.cloud`, presionar menú 3 puntos -> *Instalar aplicación* o *Añadir a pantalla principal*.
-     - Se ejecuta a pantalla completa como una app nativa, con icono oficial y rendimiento instantáneo.
-  7. **Reglas y Mapeos Oficiales Configurados:**
-     - **Categorías activas:** `Food`, `Despensa`, `Salud`, `Pagos`, `Suscripciones`, `Compra Random`, `Transporte`, `Universidad & Campus`, `Bills`, `Otros / Desconocidos`.
-     - **Diferenciación Food vs. Despensa:** Tiendas de abarrotes y supermercados (`D1`, `Ara`, `Éxito`, `Carulla`) ➔ Categoría `Despensa`. Restaurantes externos (Presto, Mimos, La Wafflería, etc.) ➔ Categoría `Food`.
-     - **Universidad de La Sabana:** Todos los movimientos de la Sabana ➔ Categoría `Food`.
-     - **Mapeo de Transferencias / Contactos Personales:**
-       - `*3203282014` ➔ Payee: `Nequi Personal`
-       - `*3225206523` ➔ Payee: `Pago parqueadero Cicla`
-       - `*3224788002` ➔ Payee: `Juliana`
-       - `*3135276319` ➔ Payee: `Julian`
-       - `*3222024082` ➔ Payee: `Santiago`
-       - `*3013453853` ➔ Payee: `Daniel`
-       - `*3114457098` ➔ Payee: `Esteban`
-       - `PILA` ➔ Payee: `PILA`
-  8. **Cuentas en Dólares (USD), Spread DólarApp (-$30 COP) y Scheduler Automático:**
-     - **Cuentas configuradas:** `Deel (USD)` y `DólarApp (USD)` (Tracking / Off-budget para no contaminar el presupuesto mensual en COP y reflejar el Patrimonio Neto real).
-     - **Saldos calibrados:**
-       - `Deel (USD)`: $657 USD (Saldo actual: ~$2.167.844 COP).
-       - `DólarApp (USD)`: $2,316 USD (Saldo actual: ~$7.641.897 COP).
-       - Total: $2,973 USD (Patrimonio neto actual: ~$9.809.741 COP).
-     - **Spread Real DólarApp:** Al valor oficial de la TRM de la Superfinanciera se le resta automáticamente **$30 COP** (`effectiveTRM = officialTRM - 30`) para igualar exactamente la cotización real de liquidación / venta de DólarApp al transferir a cuentas colombianas.
-     - **Scheduler Automático en Background (`actual-bridge`):**
-       - **Horario activo:** Corre **cada 2 horas** entre las **8:00 AM y las 5:00 PM** (Hora de Colombia / COT, `America/Bogota`).
-       - **Comportamiento:** Consulta la API de la Superfinanciera (`datos.gov.co`), aplica el spread de -$30 COP, evalúa los saldos de Deel y DólarApp, y si hay variación registra el ajuste y sincroniza con Actual Server automáticamente.
-       - **Cero intervención manual:** 100% automático, transparente y desatendido.
-     - **Endpoint API Manual (Opcional):** `POST /api/sync-trm` en la red privada de Docker.
-
----
-
-### 🛡️ 5. Configuración Específica de Vaultwarden
-
-* **Subdominio:** `https://vault.jhojan.cloud`
-* **Base de datos:** SQLite en `/data/db.sqlite3` montada en volumen persistente de Docker.
-  - Variable crítica en Coolify: `VAULTWARDEN_DB_URL=sqlite:///data/db.sqlite3`
-* **Políticas de Seguridad Activas:**
-  - `SIGNUPS_ALLOWED=false`: Registro público desactivado; cualquier intento devuelve `404 Not Found`. Solo la cuenta maestra de Jhojan tiene acceso.
-  - `ADMIN_TOKEN`: Token de 64 caracteres generado automáticamente por Coolify para `/admin`.
-* **Clientes:** Compatible con las apps oficiales de Bitwarden (Android, iOS, extensión de navegadores y Desktop) configurando el servidor como *Self-hosted* con la URL `https://vault.jhojan.cloud`.
-
----
-
-### 🤖 6. Configuración Específica de Vocero CRM (WhatsApp & Omnichannel Sales AI)
-
-* **Subdominio Oficial:** `https://crm.jhojan.cloud`
-* **Directorio en Servidor:** `/opt/vocero-crm`
-* **Versión instalada:** `1.4.0` (Git commit `b3469f9`)
-* **Stack:** Next.js 15 (standalone) + React 19 + PostgreSQL 16 + Drizzle ORM + Better Auth + SSE.
-* **Contenedores:**
-  - `vocero-crm-app-1`: Aplicación Next.js expuesta en puerto 3000 interno, enlazada a Traefik con TLS automático.
-  - `vocero-crm-vocero-db-1`: PostgreSQL 16 con base de datos `vocero` y volumen persistente `vocero-crm_vocero_pg`.
-* **Volúmenes Persistentes:**
-  - `vocero-crm_vocero_app_data`: Montado en `/data` para adjuntos multimedia, audios y branding.
-  - `vocero-crm_vocero_pg`: Base de datos PostgreSQL.
-* **Canales Habilitados:**
-  - `CHANNELS=whatsapp,instagram,messenger`
-  - `AGENDA=true` (Integración con Google Meet / Zoom).
-* **Registro de Usuario Inicial:**
-  - El primer usuario que se registre en `https://crm.jhojan.cloud/register` creará la organización principal y se convertirá en propietario.
-  - El registro público se cierra automáticamente tras la primera organización (controlado por `isPublicSignupAllowed`).
-* **DNS Requerido en Cloudflare:**
-  - Registro tipo `A`: `crm` apuntando a `150.136.63.103`.
-
----
-
-### 🛠️ 7. Cheat Sheet de Comandos Operativos para Agentes
-
-Para cualquier futuro agente que necesite consultar, reiniciar o diagnosticar servicios en el servidor:
-
-```bash
-# 1. Listar todos los servicios configurados en Coolify
-ssh -o StrictHostKeyChecking=no -i ~/.ssh/oracle-key ubuntu@150.136.63.103 \
-  "curl -s -H 'Authorization: Bearer 1|coolify-antigravity-token-xyz123' http://localhost:8000/api/v1/services"
-
-# 2. Consultar variables de entorno de un servicio por su UUID
-ssh -o StrictHostKeyChecking=no -i ~/.ssh/oracle-key ubuntu@150.136.63.103 \
-  "curl -s -H 'Authorization: Bearer 1|coolify-antigravity-token-xyz123' http://localhost:8000/api/v1/services/<SERVICE_UUID>/envs"
-
-# 3. Reiniciar un servicio de Coolify vía API
-ssh -o StrictHostKeyChecking=no -i ~/.ssh/oracle-key ubuntu@150.136.63.103 \
-  "curl -s -X POST -H 'Authorization: Bearer 1|coolify-antigravity-token-xyz123' http://localhost:8000/api/v1/services/<SERVICE_UUID>/restart"
-
-# 4. Ver contenedores Docker activos y consumo de memoria/CPU
-ssh -o StrictHostKeyChecking=no -i ~/.ssh/oracle-key ubuntu@150.136.63.103 \
-  "sudo docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'"
-
-# 5. Ver logs en tiempo real de cualquier contenedor
-ssh -o StrictHostKeyChecking=no -i ~/.ssh/oracle-key ubuntu@150.136.63.103 \
-  "sudo docker logs --tail 50 -f <CONTAINER_NAME>"
-
-# 6. Regla crítica de compilación Docker en este servidor:
-# La arquitectura del procesador es ARM64 (aarch64). Si se compilan imágenes custom,
-# deben soportar linux/arm64 o usar bases multi-arch (ej. python:3.11-slim, node:20-alpine).
-```
 
 ---
 
