@@ -211,3 +211,12 @@ Este repositorio y entorno de desarrollo cuentan con integración en tiempo real
 2. **Generación de Prototipos:** El agente puede maquetar interfaces desktop y mobile completas, carruseles, tablas, tipografías y sistemas de color desde un prompt o a partir de capturas de pantalla de referencia.
 3. **Conversión 1:1 a Producción:** Dado que Penpot almacena las geometrías en SVG y CSS nativos, el agente puede inspeccionar las capas generadas en Penpot y traducirlas con fidelidad exacta a componentes de **React 19 / Next.js + Tailwind CSS** dentro de `PortfolioWeb/` o cualquier proyecto futuro.
 
+---
+
+## 🎬 Producción de Presentaciones, Diagramas y Videos
+
+Para conocer todo el catálogo de herramientas y flujos de trabajo disponibles en este entorno (Remotion con React, Manim para matemáticas y algoritmos, Archify para diagramas de arquitectura interactivos, HeyGen para avatares, modelos de video generativo como Seedance/MiniMax y el stack de audio con ElevenLabs), consultar:
+
+👉 **[PRESENTACIONES_Y_VIDEOS.md](file:///home/claude/Workspace/Portafolio/CV/PortfolioWeb/PRESENTACIONES_Y_VIDEOS.md)**
+
+
