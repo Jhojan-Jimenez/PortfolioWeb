@@ -32,6 +32,7 @@ Este documento sirve como memoria y guía arquitectónica para Antigravity y otr
 * **Animaciones:** Framer Motion (`useInView`, transiciones y variantes).
 * **Gestor de Paquetes:** `pnpm` (Node v24 en WSL Ubuntu).
 * **Formulario de Contacto:** Formspree (`/f/xzzgyber`) + Toastify / Sonner.
+* **Analítica & Telemetría:** Microsoft Clarity (`ytwe0d4uv7` - grabaciones de sesión y mapas de calor) + Google Analytics 4 (`G-WWLTJ9JJZ5` - métricas de tráfico y fuentes de adquisición) cargados asíncronamente vía `next/script` (`strategy="afterInteractive"`) en `app/layout.tsx`.
 * **Despliegue:** Vercel (`https://dev.jhojan.cloud`).
 
 ---
